@@ -8,8 +8,8 @@ drv=dbDriver("MySQL")
 con = dbConnect(drv, user="UVC.reader", dbname="Underwater Visual Census",password="Mayfish976",host="162.38.198.139")
 
 # liste les differentes tables disponibles
-dbListTables(con)
+tabdbListTables(con)
 
 
 # load the tables UVC
-Abiotic=dbReadTable(con, dbListTables(con)[1])
+Webfish_annotation=dbReadTable(con, dbListTables(con)[17])
