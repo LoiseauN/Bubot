@@ -1,0 +1,267 @@
+"X.Sampling_code";"Field_code";"Technique";"Substrat_type";"Topography";"Complexity";"Community";"Coral_biota";"Sponge";"Non_scleratinian_coral";"Scleratinian_coral";"Fish_diversity";"Fish_abundance";"Remarks"
+"1";"MAEURUV001";"ES1";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"2";"MAEURUV002";"ES2";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"3";"MAEURUV003";"ES3";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"1";"3";NA;NA;NA
+"4";"MAEURUV006";"ES6";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"5";"MAEURUV007";"ES7";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"6";"MAEURUV008";"ES8";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"7";"MAEURUV009";"ES9";"RUV";"hard";"3";"2";"coral";"scleratinian_plurispecific";"0";"1";"3";NA;NA;NA
+"8";"MAEURUV011";"ES11";"RUV";"mix";"1";"1";"mixed";"other";"0";"1";"1";NA;NA;NA
+"9";"MAEURUV012";"ES12";"RUV";"soft";"1";"1";"pebbled_sediment";"other";"0";"1";"0";NA;NA;NA
+"10";"MAEURUV015";"ES15";"RUV";"soft";"0";"1";"pebbled_sediment";"other";"0";"0";"1";NA;NA;NA
+"11";"MAEURUV017";"ES17";"RUV";"hard";"1";"1";"coral";"scleratinian_plurispecific";"0";"1";"2";NA;NA;NA
+"12";"MAEURUV018";"ES18";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"13";"MAEURUV019";"ES19";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"14";"MAEURUV020";"ES20";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"15";"MAEURUV022";"ES22";"RUV";"hard";"1";"2";"coral";"scleratinian_plurispecific";"0";"0";"2";NA;NA;NA
+"16";"MAEURUV029";"ES29";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"17";"MAEURUV030";"ES30";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"1";"3";NA;NA;NA
+"18";"MAEURUV031";"ES31";"RUV";"hard";"3";"2";"mixed";"mix_anthozoan";"0";"1";"2";NA;NA;NA
+"19";"MAEURUV032";"ES32";"RUV";"hard";"1";"2";"mixed";"mix_anthozoan";"0";"2";"1";NA;NA;NA
+"20";"MAEURUV034";"ES34";"RUV";"hard";"1";"2";"coral";"scleratinian_plurispecific";"0";"0";"2";NA;NA;NA
+"21";"MAEURUV035";"ES35";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"22";"MAEURUV036";"ES36";"RUV";"hard";"1";"2";"mixed";"other";"0";"2";"1";NA;NA;NA
+"23";"MAEURUV037";"ES37";"RUV";"hard";"1";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"24";"MAEURUV038";"ES38";"RUV";"hard";"1";"2";"coral";"scleratinian_plurispecific";"0";"0";"2";NA;NA;NA
+"25";"MAEURUV039";"ES39";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"26";"MAEURUV040";"ES40";"RUV";"hard";"2";"2";"coral";"scleratinian_plurispecific";"0";"1";"3";NA;NA;NA
+"27";"MAEURUV041";"ES41";"RUV";"hard";"1";"2";"coral";"scleratinian_plurispecific";"0";"0";"2";NA;NA;NA
+"28";"MAEURUV042";"ES42";"RUV";"hard";"1";"2";"mixed";"mix_anthozoan";"0";"1";"1";NA;NA;NA
+"29";"MAEURUV043";"ES43";"RUV";"hard";"1";"2";"mixed";"mix_anthozoan";"0";"1";"1";NA;NA;NA
+"30";"MAJURUV025";"JNS25";"RUV";"mix";"0";"2";"mixed";"mix_anthozoan";"0";"0";"2";NA;NA;NA
+"31";"MAJURUV026";"JNS26";"RUV";"hard";"0";"1";"mixed";"mix_anthozoan";"0";"2";"1";NA;NA;NA
+"32";"MAJURUV027";"JNS27";"RUV";"mix";"1";"0";"pebbled_sediment";"other";"0";"0";"1";NA;NA;NA
+"33";"MAJURUV028";"JNS28";"RUV";"hard";"1";"2";"mixed";"other";"0";"2";"1";NA;NA;NA
+"34";"MAJURUV029";"JNS29";"RUV";"hard";"2";"2";"coral";"scleratinian_plurispecific";"0";"0";"3";NA;NA;NA
+"35";"MAJURUV030";"JNS30";"RUV";"hard";"1";"1";"mixed";"other";"0";"1";"1";NA;NA;NA
+"36";"MAJURUV031";"JNS31";"RUV";"hard";"1";"2";"coral";"mix_anthozoan";"0";"2";"1";NA;NA;NA
+"37";"MAJURUV032";"JNS32";"RUV";"mix";"1";"2";"mixed";"mix_anthozoan";"0";"2";"1";NA;NA;NA
+"38";"MAJURUV033";"JNS33";"RUV";"hard";"1";"2";"mixed";"mix_anthozoan";"0";"2";"1";NA;NA;NA
+"39";"MAJURUV034";"JNS34";"RUV";"hard";"1";"2";"coral";"scleratinian_plurispecific";"0";"0";"2";NA;NA;NA
+"40";"MA_CMB_025";"M25";"rosette";"hard";"0";"3";"coral";NA;NA;NA;NA;"2";"3";"Corail dur avec de la mortalité"
+"41";"MA_CMB_026";"M26";"rosette";"hard";"1";"3";"coral";NA;NA;NA;NA;"3";"3";"Corail dur recouvrement 100%. diversité et abondance ++"
+"42";"MA_CMB_027";"M27";"rosette";"hard";"1";"3";"coral";NA;NA;NA;NA;"2";"3";"Beaucoup de coraux tabulaires"
+"43";"MA_CMB_028";"M28";"rosette";"soft";"1";"1";"pebbled_sediment";NA;NA;NA;NA;"0";"0";"Nombreux débris de corail mort. pas de poissons"
+"44";"MA_CMB_029";"M29";"rosette";"soft";"1";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"1";"Fonds sableux avec débris. très peu de poissons"
+"45";"MA_CMB_030";"M30";"rosette";"hard";"4";"2";NA;NA;NA;NA;NA;"1";"1";"Tombant vertical nu. présence de grottes mais pas de poissons. le tombant descend encore à la verticale en dessous"
+"46";"MA_CTJ_063";"M63";"rosette";"hard";"0";"3";"coral";NA;NA;NA;NA;"3";"3";"Corail dur. poissons avec diversité et abondance ++"
+"47";"MA_CTJ_064";"M64";"rosette";"hard";"3";"3";"coral";NA;NA;NA;NA;"2";"3";"Tombant abrupte. corail dur et algues. bancs de carangues bleues et chirurgiens longent le tombant. Caméra bloquée contre le tombant à la remontée"
+"48";"MA_CTJ_065";"M65";"rosette";"soft";"1";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"2";"Limite avant le début d'un tombant vertical. peu de vie"
+"49";"MA_CTJ_066";"M66";"rosette";"soft";"1";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"1";"Faible luminosité. un poisson aperçu. un requin marteau qui vient suivre le dispositif"
+"50";"MA_DJO_044";"M44";"rosette";"hard";"2";"3";"coral";NA;NA;NA;NA;"2";"3";"Très riches en poissons. chirurgiens etc.. pente relativement douce d'apparence"
+"51";"MA_DJO_045";"M45";"rosette";"mix";"2";"2";"mixed";NA;NA;NA;NA;"1";"3";"Présence de petits poissons essentiellement"
+"52";"MA_DJO_046";"M46";"rosette";"soft";"0";"0";"bare_sediment";NA;NA;NA;NA;"1";"2";"Présence de poissons durant le début de la remontée du dispositif"
+"53";"MA_DJO_047";"M47";"rosette";"mix";"3";"1";"mixed";NA;NA;NA;NA;"0";"0";"Zone très sombre. pas mal de débris"
+"54";"MA_GMO_040";"M40";"rosette";"hard";"2";"3";"coral";NA;NA;NA;NA;"2";"3";"Gros bancs de chirurgiens de différentes espèces. perroquets"
+"55";"MA_GMO_041";"M41";"rosette";"mix";"1";"2";"mixed";NA;NA;NA;NA;"2";"3";"Au pied du tombant limite plaine sableuse/tombant corail dur. Assez poissonneux (chirurgiens. carangues)"
+"56";"MA_GMO_042";"M42";"rosette";"mix";"4";"3";"mixed";NA;NA;NA;NA;"2";"3";"Mauvaise visibilité. présence de grottes. au niveau d'une marche. gorgones au niveau du haut de la marche"
+"57";"MA_GMO_043";"M43";"rosette";"soft";"0";"0";"pebbled_sediment";NA;NA;NA;NA;"1";"1";"Pas de construction coralienne. très peu de poissons"
+"58";"MA_GMO_130";"R8.4";"RUV";"hard";"1";"1";"mixed";"other";"1";"0";"0";"";"";NA
+"59";"MA_GMO_131";"R8.3";"RUV";"mix";"2";"2";"mixed";"other";"1";"2";"1";"";"";NA
+"60";"MA_GMO_132";"R8.2";"RUV";"mix";"3";"3";"mixed";"scleratinian_plurispecific";"0";"1";"2";"";"";"Bas de tombant"
+"61";"MA_GMO_133";"R8.1";"RUV";"hard";"3";"3";"mixed";"other";"0";"1";"0";"";"";"Présence de turf"
+"62";"MA_GMO_152";"R8.5";"RUV";"mix";"0";"1";"algae";"other";"0";"0";"0";"";"";NA
+"63";"MA_GMO_153";"R8.6";"RUV";"mix";"2";"3";"mixed";"other";"1";"1";"1";"";"";NA
+"64";"MA_GMO_154";"R8.7";"RUV";"hard";"3";"3";"mixed";"scleratinian_monospecific";"0";"0";"2";"";"";"Bas de tombant"
+"65";"MA_GMO_155";"R8.8";"RUV";"hard";"2";"3";"algae";"other";"0";"1";"0";"";"";"Présence de turf"
+"66";"MA_GMO_169";"R8.12";"RUV";"hard";"2";"3";"algae";"other";"0";"0";"1";"";"";"Présence de turf"
+"67";"MA_GMO_170";"R8.11";"RUV";"mix";"2";"3";"mixed";"other";"0";"1";"1";"";"";"Présence d'algues"
+"68";"MA_GMO_171";"R8.10";"RUV";"mix";"2";"2";"mixed";"other";"1";"2";"1";"";"";"Présence d'algues"
+"69";"MA_GMO_172";"R8.9";"RUV";"soft";"1";"1";"algae";"other";"1";"0";"0";"";"";NA
+"70";"MA_GMO_199";"R8.13";"RUV";"hard";"1";"3";"algae";"other";"0";"1";"0";"";"";"Présence de turf"
+"71";"MA_GMO_200";"R8.14";"RUV";"hard";"";"";"";"";"";"";"";"";"";"Présence d'algues, pas bon angle de vue pour décrire l'habitat"
+"72";"MA_GMO_201";"R8.15";"RUV";"mix";"1";"2";"mixed";"other";"0";"2";"1";"";"";"Présence d'algues"
+"73";"MA_GMO_202";"R8.16";"RUV";"soft";"1";"2";"algae";"other";"0";"1";"0";"";"";NA
+"74";"MA_JOS_058";"M58";"rosette";"hard";"0";"3";"coral";NA;NA;NA;NA;"3";"3";"Corail dur vivant. poissons avec diversité et abondance ++. Pas d'espèces commerciales"
+"75";"MA_JOS_059";"M59";"rosette";"mix";"1";"2";"mixed";NA;NA;NA;NA;"1";"2";"Corail dur/sable. peu de poissons"
+"76";"MA_JOS_060";"M60";"rosette";"mix";"0";"2";"mixed";NA;NA;NA;NA;"3";"3";"Corail dur/sable. beaucoup de poissons et haute diversité (Chirurgiens. balistes. carangue)"
+"77";"MA_JOS_061";"M61";"rosette";"soft";"0";"0";"bare_sediment";NA;NA;NA;NA;"1";"1";"Fond sableux. très pauvre (une carangue)"
+"78";"MA_JOS_062";"M62";"rosette";"soft";"1";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"2";"Fond sableux/débris. quelques chirurgiens. faible luminosité"
+"79";"MA_JOS_096";"R12.1";"RUV";"soft";"0";"0";"bare_sediment";"other";"0";"0";"0";"";"";"Plaine de sable"
+"80";"MA_JOS_097";"R12.2";"RUV";"hard";"2";"3";"algae";"other";"0";"0";"0";"";"";NA
+"81";"MA_JOS_098";"R12.3";"RUV";"hard";"3";"3";"algae";"other";"0";"1";"0";"";"";"Glog n'a pas fonctionné"
+"82";"MA_JOS_099";"R12.4";"RUV";"soft";"0";"1";"pebbled_sediment";"other";"1";"1";"0";"";"";NA
+"83";"MA_JOS_122";"R12.5";"RUV";"hard";"3";"3";"algae";"other";"0";"0";"0";"";"";NA
+"84";"MA_JOS_123";"R12.6";"RUV";"hard";"3";"3";"algae";"other";"0";"0";"0";"";"";NA
+"85";"MA_JOS_124";"R12.7";"RUV";"mix";"2";"2";"mixed";"other";"1";"1";"0";"";"";NA
+"86";"MA_JOS_125";"R12.8";"RUV";"";"";"";"";"";"";"";"";"";"";NA
+"87";"MA_JOS_156";"R12.9";"RUV";"hard";"1";"3";"algae";"other";"0";"0";"1";"";"";"Présence de turf"
+"88";"MA_JOS_157";"R12.10";"RUV";"hard";"2";"3";"algae";"other";"0";"1";"0";"";"";"Présence de turf"
+"89";"MA_JOS_158";"R12.11";"RUV";"soft";"1";"1";"mixed";"non_scleratinian";"1";"2";"0";"";"";"Présence d'algues"
+"90";"MA_JOS_159";"R12.12";"RUV";"soft";"0";"0";"pebbled_sediment";"other";"1";"0";"0";"";"";"Bas de tombant face a n mur"
+"91";"MA_JOS_173";"R12.13";"RUV";"hard";"2";"3";"algae";"other";"0";"0";"1";"";"";"Présence de turf"
+"92";"MA_JOS_174";"R12.14";"RUV";"mix";"1";"2";"mixed";"other";"0";"0";"0";"";"";NA
+"93";"MA_JOS_175";"R12.15";"RUV";"mix";"1";"2";"mixed";"other";"1";"1";"0";"";"";"Présence d'algues"
+"94";"MA_JOS_176";"R12.16";"RUV";"soft";"1";"1";"algae";"other";"0";"1";"0";"";"";NA
+"95";"MA_JOS_195";"R12.20";"RUV";"hard";"3";"3";"algae";"other";"0";"1";"0";"";"";"Présence de turf"
+"96";"MA_JOS_196";"R12.19";"RUV";"hard";"2";"3";"algae";"other";"0";"0";"1";"";"";NA
+"97";"MA_JOS_197";"R12.18";"RUV";"soft";"0";"1";"mixed";"other";"1";"1";"0";"";"";"Présence d'algues"
+"98";"MA_JOS_198";"R12.17";"RUV";"soft";"0";"1";"pebbled_sediment";"other";"0";"0";"0";"";"";"Présence de quelques algues"
+"99";"MA_MDZ_053";"M53";"rosette";"hard";"3";"3";"coral";NA;NA;NA;NA;"3";"3";"Juste sur une pente. zone riche en poissons"
+"100";"MA_MDZ_054";"M54";"rosette";"hard";"3";"3";"coral";NA;NA;NA;NA;"3";"3";"Sur une pente. zone riche en poissons"
+"101";"MA_MDZ_055";"M55";"rosette";"mix";"0";"1";"mixed";NA;NA;NA;NA;"1";"2";"Plaine sableuse/peu de corail dur. peu de poissons (4 carangues)"
+"102";"MA_MDZ_056";"M56";"rosette";"soft";"4";"1";"coral";NA;NA;NA;NA;"1";"1";"Substrat meuble au pied d'un tombant vertical"
+"103";"MA_MDZ_057";"M57";"rosette";"soft";"2";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"1";"Substrat meuble. pas de corail et peu de vie"
+"104";"MA_MFO2_012";"M12";"rosette";"hard";"2";"3";"coral";NA;NA;NA;NA;"2";"3";"Zone juste avant le tombant. présence de banc de fusiliers. possiblement pas mal de diversité mais on reste trop peu au fond"
+"105";"MA_MFO2_013";"M13";"rosette";"hard";"3";"3";"coral";NA;NA;NA;NA;"2";"3";"Présence de banc de fusiliers. juste avant un grand tombant et en pente"
+"106";"MA_MFO2_014";"M14";"rosette";"mix";"0";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"1";"Présence d'un baracuda. bas juste après un tombant où l'habitat est plus complexe. peu de visibilité"
+"107";"MA_MFO2_015";"M15";"rosette";"soft";"0";"0";"bare_sediment";NA;NA;NA;NA;"0";"0";NA
+"108";"MA_MFO2_016";"M16";"rosette";"mix";"2";"2";"mixed";NA;NA;NA;NA;"2";"3";"Présence bancs de beaucpup de fusiliers et balistes bleus (moins). présence de petites gorgones"
+"109";"MA_MFO2_017";"M17";"rosette";"mix";"4";"1";"mixed";NA;NA;NA;NA;"1";"1";"Tomber en bas d'un mur avec de nombreuses gorgones. présence de poissons durant la remontée du dispositif. bon endroit mais plus haut"
+"110";"MA_MFO2_018";"M18";"rosette";"mix";"1";"2";"mixed";NA;NA;NA;NA;"2";"3";"Tomber juste à côté d'une espèce de patate. présence de petits poissons et de fusiliers. plaine de sable avec présence de petites patates et de monticules"
+"111";"MA_MFO2_019";"M19";"rosette";"mix";"4";"2";"pebbled_sediment";NA;NA;NA;NA;"1";"3";"Tombant à substrat mixte. pas mal d'éponges. bancs de fusillers"
+"112";"MA_MFO2_020";"M20";"rosette";"hard";"0";"3";"coral";NA;NA;NA;NA;"2";"3";"Corail dur vivant 90%. bonne diversité et abondance ++ notamment balistes"
+"113";"MA_MFO2_021";"M21";"rosette";"hard";"2";"3";"coral";NA;NA;NA;NA;"2";"3";"Corail dur 70%. banc de fusillers. chirurgiens"
+"114";"MA_MFO2_022";"M22";"rosette";"soft";"0";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"1";"Au pied d'un tombant vertical. un thonidé vient voir la caméra. plus de poissons en remontant sur le tombant"
+"115";"MA_MFO2_023";"M23";"rosette";"mix";"2";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"2";"Fond sableux avec nombreuses gorgones. peu de poissons"
+"116";"MA_MFO2_024";"M24";"rosette";"soft";"1";"1";"bare_sediment";NA;NA;NA;NA;"1";"1";"Fond sableux nu. une carangue noire et 2 thons"
+"117";"MA_MHA_031";"M31";"rosette";"hard";"1";"3";"coral";NA;NA;NA;NA;"3";"3";"Corail du recouvrement 90%. abondance et diversité ++ (chirurgiens. fusillers)"
+"118";"MA_MHA_032";"M32";"rosette";"mix";"0";"2";"mixed";NA;NA;NA;NA;"1";"2";"Plaine sableuse au pied du tombant. peu de poissons"
+"119";"MA_MHA_033";"M33";"rosette";"mix";"1";"3";"coral";NA;NA;NA;NA;"2";"3";"Corail du recouvrement 80%. pas mal de poissons"
+"120";"MA_MHA_034";"M34";"rosette";"mix";"1";"2";"pebbled_sediment";NA;NA;NA;NA;"1";"3";"Début du tombant. présence de gorgones et d'éponges. Peu de poissons mais un banc de fusillers et un petit banc de thons"
+"121";"MA_MHA_067";"M67";"rosette";NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+"122";"MA_MHA_068";"M68";"rosette";NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+"123";"MA_MHA_069";"M69";"rosette";NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+"124";"MA_MHA_070";"M70";"rosette";NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+"125";"MA_MHA_071";"M71";"rosette";NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+"126";"MA_MHA_072";"M72";"rosette";NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+"127";"MA_MHA_073";"M73";"rosette";NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+"128";"MA_MHA_074";"M74";"rosette";NA;NA;NA;NA;NA;NA;NA;NA;NA;NA;NA
+"129";"MA_MHA_075";"C1";"RUV";"hard";"2";"3";"coral";"other";"0";"1";"1";"";"";"corail mort en majorité"
+"130";"MA_MHA_076";"C2";"RUV";"mix";"1";"3";"mixed";"mix_anthozoan";"1";"1";"1";"";"";NA
+"131";"MA_MHA_077";"C3";"RUV";"soft";"0";"0";"bare_sediment";"other";"0";"0";"0";"";"";"plaine de sable"
+"132";"MA_MHA_078";"C4";"RUV";"soft";"1";"2";"algae";"other";"1";"1";"0";"";"";NA
+"133";"MA_MHA_079";"C5";"RUV";"hard";"2";"3";"coral";"mix_anthozoan";"1";"2";"2";"";"";NA
+"134";"MA_MHA_080";"C6";"RUV";"mix";"1";"3";"mixed";"mix_anthozoan";"1";"1";"1";"";"";NA
+"135";"MA_MHA_081";"C7";"RUV";"soft";"0";"0";"bare_sediment";"other";"0";"0";"0";"";"";"plaine de sable"
+"136";"MA_MHA_082";"C8";"RUV";"soft";"1";"1";"algae";"other";"0";"1";"0";"";"";NA
+"137";"MA_MHA_083";"C9";"RUV";"soft";"1";"1";"mixed";"other";"1";"1";"0";"";"";NA
+"138";"MA_MHA_084";"C10";"RUV";"mix";"1";"3";"mixed";"scleratinian_monospecific";"0";"1";"2";"";"";"Substrat dur avec petites zones de sable"
+"139";"MA_MHA_085";"C11";"RUV";"mix";"0";"2";"pebbled_sediment";"other";"0";"0";"1";"";"";"Limite plaine de sable/tombant"
+"140";"MA_MHA_086";"C12";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";"";"";NA
+"141";"MA_MHA_087";"C13";"RUV";"soft";"0";"1";"algae";"non_scleratinian";"1";"2";"0";"";"";NA
+"142";"MA_MHA_088";"C14";"RUV";"soft";"0";"0";"bare_sediment";"other";"0";"0";"0";"";"";"Au pied du tombant sur le sable"
+"143";"MA_MHA_089";"C15";"RUV";"mix";"1";"2";"mixed";"other";"0";"1";"1";"";"";"Limite récif / sable"
+"144";"MA_MHA_090";"C16";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"1";"0";"3";"";"";NA
+"145";"MA_MHA_091";"C17";"RUV";"soft";"1";"1";"mixed";"other";"1";"1";"0";"";"";NA
+"146";"MA_MHA_092";"C18";"RUV";"mix";"1";"2";"mixed";"mix_anthozoan";"0";"1";"2";"";"";NA
+"147";"MA_MHA_093";"C19";"RUV";"hard";"1";"3";"coral";"mix_anthozoan";"1";"2";"1";"";"";NA
+"148";"MA_MHA_094";"C20";"RUV";"hard";"1";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";"";"";NA
+"149";"MA_MHA_095";"C17bis";"RUV";"";"";"";"";"";"";"";"";"";"";"Pas de vidéos"
+"150";"MA_MHA_100";"C21";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";"";"";NA
+"151";"MA_MHA_101";"C22";"RUV";"soft";"0";"1";"pebbled_sediment";"other";"1";"0";"0";"";"";NA
+"152";"MA_MHA_102";"C23";"RUV";"mix";"1";"3";"mixed";"mix_anthozoan";"0";"2";"2";"";"";NA
+"153";"MA_MHA_103";"C24";"RUV";"";"";"";"";"";"";"";"";"";"";"Pas de vidéos"
+"154";"MA_MHA_104";"C25";"RUV";"soft";"0";"1";"mixed";"other";"1";"1";"0";"";"";NA
+"155";"MA_MHA_105";"C26";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"0";"2";"";"";NA
+"156";"MA_MHA_106";"C27";"RUV";"mix";"0";"3";"mixed";"mix_anthozoan";"0";"1";"2";"";"";"Limite récif / sable"
+"157";"MA_MHA_107";"C28";"RUV";"mix";"1";"3";"mixed";"scleratinian_monospecific";"0";"1";"2";"";"";NA
+"158";"MA_MHA_108";"C29";"RUV";"soft";"0";"1";"algae";"other";"1";"1";"0";"";"";NA
+"159";"MA_MHA_109";"C30";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"0";"2";"";"";NA
+"160";"MA_MHA_110";"C31";"RUV";"soft";"0";"2";"mixed";"mix_anthozoan";"0";"2";"1";"";"";"Sur le sable, avec vue sur le récif"
+"161";"MA_MHA_111";"C32";"RUV";"soft";"0";"0";"bare_sediment";"other";"0";"0";"0";"";"";"Sur le sable au pied du tombant"
+"162";"MA_MHA_112";"C33";"RUV";"soft";"0";"1";"algae";"other";"1";"1";"0";"";"";NA
+"163";"MA_MHA_113";"C34";"RUV";"soft";"1";"2";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"164";"MA_MHA_114";"C35";"RUV";"mix";"1";"2";"mixed";"mix_anthozoan";"0";"2";"1";"";"";NA
+"165";"MA_MHA_115";"C36";"RUV";"soft";"0";"1";"pebbled_sediment";"other";"0";"0";"1";"";"";"Au pied du tombant sur le sable"
+"166";"MA_MHA_116";"C37";"RUV";"hard";"1";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";"";"";NA
+"167";"MA_MHA_117";"C38";"RUV";"mix";"2";"2";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"168";"MA_MHA_118";"C39";"RUV";"mix";"1";"1";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"169";"MA_MHA_119";"C40";"RUV";"mix";"2";"2";"mixed";"mix_anthozoan";"0";"1";"1";"";"";NA
+"170";"MA_MHA_120";"C41";"RUV";"soft";"0";"1";"pebbled_sediment";"other";"0";"0";"1";"";"";"Au pied du tombant sur le sable"
+"171";"MA_MHA_121";"C42";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"1";"2";"";"";NA
+"172";"MA_MHA_134";"C43";"RUV";"soft";"1";"3";"mixed";"non_scleratinian";"2";"3";"0";"";"";NA
+"173";"MA_MHA_135";"C44";"RUV";"soft";"0";"0";"bare_sediment";"other";"0";"0";"0";"";"";"Au pied du tombant sur le sable nu"
+"174";"MA_MHA_136";"C45";"RUV";"hard";"1";"3";"coral";"scleratinian_monospecific";"0";"0";"3";"";"";NA
+"175";"MA_MHA_137";"C46";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"0";"2";"";"";NA
+"176";"MA_MHA_138";"C47";"RUV";"mix";"1";"2";"mixed";"mix_anthozoan";"0";"1";"2";"";"";NA
+"177";"MA_MHA_139";"C48";"RUV";"soft";"1";"1";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"178";"MA_MHA_140";"C49";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"0";"2";"";"";NA
+"179";"MA_MHA_141";"C50";"RUV";"hard";"1";"3";"coral";"mix_anthozoan";"0";"2";"2";"";"";NA
+"180";"MA_MHA_142";"C51";"RUV";"soft";"1";"2";"mixed";"mix_anthozoan";"0";"2";"1";"";"";NA
+"181";"MA_MHA_143";"C52";"RUV";"soft";"1";"1";"algae";"other";"2";"1";"0";"";"";NA
+"182";"MA_MHA_203";"C56";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"1";"0";"2";"";"";NA
+"183";"MA_MHA_204";"C55";"RUV";"hard";"1";"2";"mixed";"other";"0";"0";"1";"";"";NA
+"184";"MA_MHA_205";"C54";"RUV";"mix";"1";"2";"mixed";"mix_anthozoan";"0";"2";"2";"";"";NA
+"185";"MA_MHA_206";"C53";"RUV";"mix";"1";"2";"mixed";"non_scleratinian";"2";"2";"0";"";"";NA
+"186";"MA_MHA_207";"C57";"RUV";"mix";"2";"2";"mixed";"non_scleratinian";"2";"2";"0";"";"";NA
+"187";"MA_MHA_208";"C58";"RUV";"mix";"1";"2";"mixed";"mix_anthozoan";"0";"1";"2";"";"";NA
+"188";"MA_MHA_209";"C59";"RUV";"hard";"1";"3";"coral";"mix_anthozoan";"0";"1";"2";"";"";NA
+"189";"MA_MHA_210";"C60";"RUV";"hard";"0";"3";"algae";"other";"0";"0";"1";"";"";NA
+"190";"MA_MHA_211";"C61";"RUV";"mix";"1";"2";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"191";"MA_MHA_212";"C62";"RUV";"mix";"1";"3";"mixed";"mix_anthozoan";"0";"2";"1";"";"";NA
+"192";"MA_MHA_213";"C63";"RUV";"hard";"0";"3";"coral";"mix_anthozoan";"0";"2";"1";"";"";NA
+"193";"MA_MHA_214";"C64";"RUV";"hard";"0";"3";"algae";"other";"0";"0";"2";"";"";NA
+"194";"MA_MHA_215";"C65";"RUV";"mix";"0";"2";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"195";"MA_MHA_216";"C66";"RUV";"mix";"1";"2";"mixed";"other";"1";"1";"0";"";"";NA
+"196";"MA_MHA_217";"C67";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";"";"";NA
+"197";"MA_MHA_218";"C68";"RUV";"hard";"1";"3";"coral";"scleratinian_monospecific";"1";"0";"2";"";"";NA
+"198";"MA_MHA_219";"C69";"RUV";"mix";"0";"3";"mixed";"mix_anthozoan";"0";"2";"2";"";"";NA
+"199";"MA_MHA_220";"C70";"RUV";"hard";"0";"3";"algae";"other";"0";"0";"2";"";"";"Quelques coraux morts"
+"200";"MA_MHA_221";"C71";"RUV";"hard";"1";"3";"coral";"scleratinian_monospecific";"0";"0";"3";"";"";NA
+"201";"MA_MHA_222";"C72";"RUV";"mix";"1";"2";"mixed";"mix_anthozoan";"0";"1";"2";"";"";NA
+"202";"MA_MHA_223";"C73";"RUV";"soft";"1";"2";"mixed";"non_scleratinian";"1";"1";"0";"";"";NA
+"203";"MA_MHA_224";"C74";"RUV";"hard";"0";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";"";"";NA
+"204";"MA_MHA_225";"C75";"RUV";"hard";"1";"3";"coral";"mix_anthozoan";"0";"1";"2";"";"";NA
+"205";"MA_MHA_226";"C76";"RUV";"mix";"0";"2";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"206";"MA_MHA_227";"C77";"RUV";"soft";"0";"2";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"207";"MA_MKO_035";"M35";"rosette";"hard";"0";"3";"coral";NA;NA;NA;NA;"3";"3";"Corail dur recouvrement quasi 100%. abondance et diversité ++"
+"208";"MA_MKO_036";"M36";"rosette";"hard";"2";"3";"coral";NA;NA;NA;NA;"1";"3";"Corail dur et mou recouvrement 90%. gros banc de fusillers sinon peu de poissons"
+"209";"MA_MKO_037";"M37";"rosette";"soft";"2";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"1";"Fond sableux en bas d'un tombant vertical. pas de poissons sauf 2 thons qui suivent la caméra"
+"210";"MA_MKO_038";"M38";"rosette";"hard";"4";"3";"coral";NA;NA;NA;NA;"2";"3";"Sur le rebord du tombant vertical. de grosses gorgones. des grottes"
+"211";"MA_MKO_039";"M39";"rosette";"soft";"0";"1";"bare_sediment";NA;NA;NA;NA;"1";"3";"Test caissons gopro 4. fonds meubles lagon. beaucoup de poissons (vivaneau job. carangues. rougets barberins...)"
+"212";"MA_MMA_001";"M01";"rosette";"hard";"0";"3";"coral";NA;NA;NA;NA;"2";"3";"Présence de petits poissons essentiellement. mais présence de bancs. zone assez riche en poissons. sur du plat juste avant le tombant"
+"213";"MA_MMA_002";"M02";"rosette";"mix";"3";"2";"mixed";NA;NA;NA;NA;"2";"3";"Présence de gorgones. zone de transition avec une plaine de sable. sur une pente. présence de petits bancs de poissons. zone relativement riche en poissons"
+"214";"MA_MMA_003";"M03";"rosette";"mix";"0";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"1";"Pas très bonne visibilité. ressemble à une plaine de sable avec de nombreux débris"
+"215";"MA_MMA_004";"M04";"rosette";"mix";"0";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"3";"Présence de gorgones. zone de plat juste avant le tombant. présence de poissons au début de la remontée. surtout des balistes bleus"
+"216";"MA_MMA_005";"M05";"rosette";"mix";"1";"1";"pebbled_sediment";NA;NA;NA;NA;"0";"0";"Pente très douce. ressemble à une plaine de sable. présence d'une petite marche"
+"217";"MA_MMA_006";"M06";"rosette";"mix";"4";"1";"mixed";NA;NA;NA;NA;"1";"2";"Quasi mur à la verticale. présence de très peu de poissons qui suivent le dispositif. et poissons qui fuient"
+"218";"MA_MMA_007";"M07";"rosette";"hard";"0";"3";"coral";NA;NA;NA;NA;"2";"3";"Riche en petits poissons "
+"219";"MA_MMA_008";"M08";"rosette";"mix";"1";"1";"mixed";NA;NA;NA;NA;"1";"2";"Présence de bancs poissons durant la remontée du dispositifs. présence de petits poissons sur le fond. mais présence d'habitats plus complexes autour"
+"220";"MA_MMA_009";"M09";"rosette";"mix";"0";"1";"pebbled_sediment";NA;NA;NA;NA;"1";"3";"Présence de gorgones. zone plate juste avant le tombant. banc balistes bleus"
+"221";"MA_MMA_010";"M10";"rosette";"mix";"1";"2";"mixed";NA;NA;NA;NA;"2";"3";"Présence de nombreuses gorgones assez grandes. zone plate juste avant le tombant. présence de petits poissons au niveau des gorgones. présence de poissons durant la remontée du dispositifs"
+"222";"MA_MMA_011";"M11";"rosette";"mix";"2";"1";"mixed";NA;NA;NA;NA;"1";"3";"Zone plate juste avant le tombant. zone relativement homogène. présence de petits poissons essentiellement. présence de thonidés. présence de deux raies aigles"
+"223";"MA_MMA_144";"R2.1";"RUV";"hard";"1";"1";"mixed";"other";"1";"0";"0";"";"";NA
+"224";"MA_MMA_145";"R2.2";"RUV";"";"";"";"";"";"";"";"";"";"";NA
+"225";"MA_MMA_146";"R2.3";"RUV";"soft";"1";"1";"pebbled_sediment";"other";"0";"1";"0";"";"";"Bas de tombant face a un mur, présence d'algues"
+"226";"MA_MMA_147";"R2.4";"RUV";"hard";"1";"3";"mixed";"other";"0";"1";"0";"";"";"Présence de turf"
+"227";"MA_MMA_148";"R3.1";"RUV";"hard";"2";"3";"coral";"scleratinian_plurispecific";"0";"0";"3";"";"";NA
+"228";"MA_MMA_149";"R3.2";"RUV";"mix";"2";"2";"mixed";"mix_anthozoan";"0";"2";"2";"";"";NA
+"229";"MA_MMA_150";"R3.3";"RUV";"mix";"1";"2";"mixed";"non_scleratinian";"0";"2";"0";"";"";"foret de gorgones"
+"230";"MA_MMA_151";"R3.4";"RUV";"soft";"0";"0";"bare_sediment";"other";"0";"0";"0";"";"";NA
+"231";"MA_MMA_160";"R2.8";"RUV";"hard";"";"3";"";"";"";"";"";"";"";"Pas un bon angle de vue pour décrire l'habitat"
+"232";"MA_MMA_161";"R2.7";"RUV";"hard";"2";"3";"mixed";"other";"0";"2";"1";"";"";"Présence d'algues"
+"233";"MA_MMA_162";"R2.6";"RUV";"mix";"1";"2";"mixed";"non_scleratinian";"0";"2";"0";"";"";"foret de gorgones"
+"234";"MA_MMA_163";"R2.5";"RUV";"soft";"1";"1";"algae";"other";"0";"1";"0";"";"";NA
+"235";"MA_MMA_164";"R3.8";"RUV";"";"";"";"";"";"";"";"";"";"";NA
+"236";"MA_MMA_165";"R3.7";"RUV";"mix";"1";"2";"mixed";"other";"2";"2";"0";"";"";NA
+"237";"MA_MMA_166";"R3.6";"RUV";"mix";"2";"2";"mixed";"other";"0";"1";"1";"";"";"Présence d'algues"
+"238";"MA_MMA_167";"R3.5";"RUV";"hard";"";"3";"";"";"";"";"";"";"";"Pas un bon angle de vue pour décrire l'habitat"
+"239";"MA_MMA_168";"R3.9";"RUV";"soft";"0";"1";"algae";"other";"0";"1";"0";"";"";NA
+"240";"MA_MMA_177";"R2.9";"RUV";"soft";"0";"1";"pebbled_sediment";"other";"0";"0";"0";"";"";"Bas de tombant"
+"241";"MA_MMA_178";"R2.10";"RUV";"mix";"1";"2";"mixed";"non_scleratinian";"1";"2";"0";"";"";NA
+"242";"MA_MMA_179";"R2.11";"RUV";"mix";"1";"3";"mixed";"other";"1";"2";"0";"";"";"Beaucoup de gorgones, présence d'algues"
+"243";"MA_MMA_180";"R2.12";"RUV";"hard";"2";"3";"algae";"other";"0";"1";"1";"";"";"Présence de turf"
+"244";"MA_MMA_181";"R3.10";"RUV";"hard";"2";"3";"algae";"other";"0";"0";"0";"";"";"Présence de turf"
+"245";"MA_MMA_182";"R3.11";"RUV";"mix";"2";"3";"mixed";"other";"0";"1";"1";"";"";"Pas mal de structure, bas de tombant, présence d'algues"
+"246";"MA_MMA_183";"R3.12";"RUV";"mix";"1";"2";"mixed";"other";"1";"2";"0";"";"";"Présence d'algues"
+"247";"MA_MMA_184";"R3.13";"RUV";"soft";"1";"1";"mixed";"other";"1";"2";"0";"";"";"Peu de gorgone, présence d'algues"
+"248";"MA_MMB_048";"M48";"rosette";"mix";"1";"2";"mixed";NA;NA;NA;NA;"1";"3";"Banc balistes bleus. pas mal de corail malgré présence de sable et de débris"
+"249";"MA_MMB_049";"M49";"rosette";"mix";"3";"2";"mixed";NA;NA;NA;NA;"3";"3";"Banc balistes bleus et de fusiliers. zone HYPER riche en poissons. pente assez sèche"
+"250";"MA_MMB_050";"M50";"rosette";"mix";"3";"2";"mixed";NA;NA;NA;NA;"1";"3";"Pente assez sèche. zone de transition avec une espèce de plaine de sable. présence de gorgones. zone assez riche en poissons"
+"251";"MA_MMB_051";"M51";"rosette";"soft";"0";"0";"bare_sediment";NA;NA;NA;NA;"0";"0";"Habitat peu intéressant. plaine de sable"
+"252";"MA_MMB_052";"M52";"rosette";"mix";"3";"1";"mixed";NA;NA;NA;NA;"1";"3";"Zone très sombre. présence de petits poissons. banc de poissons au début de la remontée. présence de gorgones. quasi un mur"
+"253";"MA_VVM_126";"R14.1";"RUV";"";"";"";"";"";"";"";"";"";"";NA
+"254";"MA_VVM_127";"R14.2";"RUV";"mix";"1";"1";"algae";"other";"1";"0";"0";"";"";NA
+"255";"MA_VVM_128";"R14.3";"RUV";"mix";"3";"3";"mixed";"other";"0";"0";"1";"";"";"Bas de tombant"
+"256";"MA_VVM_129";"R14.4";"RUV";"hard";"3";"3";"mixed";"non_scleratinian";"0";"2";"0";"";"";"Présence de turf"
+"257";"MA_VVM_185";"R14.5";"RUV";"soft";"0";"1";"algae";"other";"0";"0";"0";"";"";NA
+"258";"MA_VVM_186";"R14.6";"RUV";"mix";"3";"2";"mixed";"other";"0";"0";"0";"";"";NA
+"259";"MA_VVM_187";"R14.7";"RUV";"";"";"";"";"";"";"";"";"";"";"Pas un bon angle de vue pour décrire l'habitat"
+"260";"MA_VVM_188";"R14.8";"RUV";"hard";"1";"3";"algae";"other";"0";"0";"0";"";"";"Présence de turf"
+"261";"MA_VVM_189";"R14.9";"RUV";"hard";"3";"3";"mixed";"non_scleratinian";"0";"2";"0";"";"";"Présence de turf"
+"262";"MA_VVM_190";"R14.10";"RUV";"hard";"3";"3";"algae";"other";"0";"1";"0";"";"";"Présence de turf"
+"263";"MA_VVM_191";"R14.11";"RUV";"soft";"0";"0";"";"";"";"";"";"";"";"Face a un mur, pas un bon angle de vue pour décrire l'habitat"
+"264";"MA_VVM_192";"R14.12";"RUV";"";"";"";"";"";"";"";"";"";"";NA
+"265";"MA_VVM_193";"R14.13";"RUV";"mix";"1";"1";"algae";"other";"1";"1";"0";"";"";NA
+"266";"MA_VVM_194";"R14.14";"RUV";"";"";"";"";"";"";"";"";"";"";NA
