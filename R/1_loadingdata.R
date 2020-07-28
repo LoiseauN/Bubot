@@ -6,6 +6,8 @@
 # load the functions to collect the data
 source("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/0_Function.R")
 
+
+
 # open library Vegan
 library(vegan)
 
@@ -17,7 +19,8 @@ library(vegan)
 # first set a working directory. whatch out a new folder "Data_dump" will be created 
 # to save locally the table from the MySQL database
 work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data"
-
+#If working from home
+work.folder="~/Documents/Bubot/Analyses/data"
 
 # run the first function to select the data that are wanted
 selected.event=Event.list(DB.connection="yes",work.folder=work.folder,measurement.method=c("wave","webfish"),
@@ -166,12 +169,26 @@ new.number.dat$Island
 
 
 ############### do LMM or GLMM ########################
+library(nlme)
+
+hist(new.number.dat$number.ind)
+hist(log10(new.number.dat$number.ind))
 
 #create a model with all effects and interaction
-individuals.full=lmer(number.ind~depth*Island*habitat.substrat*habitat.bicenose+(1|site/replicate),data=new.number.dat,REML=F)
+individuals.full=lme(log10(number.ind)~depth*Island*habitat.substrat*habitat.bicenose, random= ~1|site/replicate,data=new.number.dat)
 
 #create a model without interactions
-individuals.full.no.inter=lmer(number.ind~Island*habitat.substrat*habitat.bicenose+(1|site/replicate),data=new.number.dat,REML=F)
+individuals.full.no.inter=lme(log10(number.ind)~depth+Island+habitat.substrat+habitat.bicenose, random= ~1|site/replicate,data=new.number.dat)
+
+# plot residuals of full model
+plot(individuals.full.no.inter)
+
+# plot qqplot
+qqnorm(residuals(individuals.full.no.inter))
+qqline(residuals(individuals.full.no.inter))
+
+# plot hist of residuals
+hist(residuals(individuals.full.no.inter))
 
 # collect AIC
 sort(c(full.inter=summary(individuals.full)$AICtab[1],
@@ -183,16 +200,6 @@ anova(individuals.full,individuals.full.no.inter)
 ## do some plotting to check assumptions
 # plot residuals of full model
 plot(fitted(individuals.full),residuals(individuals.full))
-
-# plot qqplot
-qqnorm(residuals(individuals.full))
-qqline(residuals(individuals.full))
-
-# plot hist of residuals
-hist(residuals(individuals.full))
-
-
-
 
 
 
