@@ -120,7 +120,7 @@ plot(habit.mca$ind$coord[,1],species.site.matrix$site.data$depth)
 
 
 
-
+habit.score
 data(varespec)
 data(varechem)
 ## Basic Analysis
