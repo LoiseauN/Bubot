@@ -4,7 +4,7 @@
 #########################################################################################
 
 # load the functions to collect the data
-source("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/0_Function.R")
+
 
 
 
@@ -123,15 +123,6 @@ plot(habit.mca$ind$coord[,1],species.site.matrix$site.data$depth)
 
 
 
-habit.score
-data(varespec)
-data(varechem)
-## Basic Analysis
-vare.cap <- capscale(varespec ~ N + P + K + Condition(Al), varechem,
-                     dist="bray")
-
-vare.cap <- capscale(varespec ~ N + P + K + Condition(Al), varechem,
-                     dist="bray")
 ###########################################################################################
 #################### start to do some mix model analyses ##################################
 ###########################################################################################

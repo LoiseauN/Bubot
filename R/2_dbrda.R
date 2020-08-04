@@ -1,10 +1,10 @@
 # libraries
+pkgs <- c('ade4','ggplot2','vegan','harrypotter','dplyr','ggalt')
+nip <- pkgs[!(pkgs %in% installed.packages())]
+nip <- lapply(nip, install.packages, dependencies = TRUE)
+ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
-library(vegan)
 
-library(dplyr)
-
-library(ggplot2)
 
 
 #--- At the video scale 
@@ -129,14 +129,6 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
         panel.grid.major = element_blank(),panel.grid.minor = element_blank(),
         
         panel.border = element_blank(),panel.background = element_blank())
-
-
-
-
-
-
-
-
 
 
 
@@ -279,14 +271,4 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
 
 
 
-library(ggtern)
-library(ggalt)     #<<< Install this if it isn't installed!
-data("Fragments")
-base = ggtern(Fragments,aes(Qm,Qp,Rf+M,fill=GrainSize,shape=GrainSize)) + 
-  theme_bw() + 
-  theme_legend_position('tr') + 
-  geom_encircle(alpha=0.5,size=1) + 
-  geom_point() +
-  labs(title    = "Example Plot",
-       subtitle = "using geom_encircle")
-print(base)
+
