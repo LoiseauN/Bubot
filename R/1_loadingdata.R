@@ -127,7 +127,7 @@ plot(habit.mca$ind$coord[,1],species.site.matrix$site.data$depth)
 #################### start to do some mix model analyses ##################################
 ###########################################################################################
 
-library("lme4")
+library("lme4")e
 library("plyr")
 ############################### GLM mixte #######################################
 
