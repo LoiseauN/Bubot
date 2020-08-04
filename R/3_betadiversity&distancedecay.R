@@ -1,7 +1,8 @@
 library(betapart)
 
 #--- All region
-
+deth.dist.all<-dist(data.frame(row.names=rownames(hab_pc),depth=hab_pc$depth))
+all_beta<-beta.pair(species,index.family = "jaccard")
 
 
 #--- Subset Mayotte
@@ -27,7 +28,10 @@ library(betapart)
     Europa_beta<-beta.pair(species_Europa,index.family = "jaccard")
    
     
-dist.decaY.mat <- data.frame(beta.value = c(dist2list(mayotte_beta$beta.jac,tri = T)[,3],
+dist.decay.mat <- data.frame(beta.value = c(dist2list(all_beta$beta.jac,tri = T)[,3],
+                                            dist2list(all_beta$beta.jtu,tri = T)[,3],
+                                            dist2list(all_beta$beta.jne,tri = T)[,3],
+                                            dist2list(mayotte_beta$beta.jac,tri = T)[,3],
                                             dist2list(mayotte_beta$beta.jtu,tri = T)[,3],
                                             dist2list(mayotte_beta$beta.jne,tri = T)[,3],
                                             dist2list(Juan_de_nova_beta$beta.jac,tri = T)[,3],
@@ -37,7 +41,10 @@ dist.decaY.mat <- data.frame(beta.value = c(dist2list(mayotte_beta$beta.jac,tri 
                                             dist2list(Europa_beta$beta.jtu,tri = T)[,3],
                                             dist2list(Europa_beta$beta.jne,tri = T)[,3]),
                              
-                             components = c(rep("Total",length(mayotte_beta$beta.jac)),
+                             components = c(rep("Total",length(all_beta$beta.jac)),
+                                            rep("Turnover",length(all_beta$beta.jac)),
+                                            rep("Nestedness",length(all_beta$beta.jac)),
+                                            rep("Total",length(mayotte_beta$beta.jac)),
                                             rep("Turnover",length(mayotte_beta$beta.jac)),
                                             rep("Nestedness",length(mayotte_beta$beta.jac)),
                                             rep("Total",length(Juan_de_nova_beta$beta.jac)),
@@ -47,28 +54,33 @@ dist.decaY.mat <- data.frame(beta.value = c(dist2list(mayotte_beta$beta.jac,tri 
                                             rep("Turnover",length(Europa_beta$beta.jac)),
                                             rep("Nestedness",length(Europa_beta$beta.jac))),
                              
-                             island   = c(rep("Mayotte",length(mayotte_beta$beta.jac)*3),
-                                            rep("Juan_de_nova_beta",length(Juan_de_nova_beta$beta.jac)*3),
-                                            rep("Europa",length(Juan_de_nova_beta$beta.jac)*3)),
+                             island   = c(rep("All Islands",length(all_beta$beta.jac)*3),
+                                          rep("Mayotte",length(mayotte_beta$beta.jac)*3),
+                                            rep("Juan de Nova",length(Juan_de_nova_beta$beta.jac)*3),
+                                            rep("Europa",length(Europa_beta$beta.jac)*3)),
                              
-                             dist.depth = c(rep(dist2list(deth.dist.mayotte,tri = T)[,3],3),
+                             dist.depth = c(rep(dist2list(deth.dist.all,tri = T)[,3],3),
+                                            rep(dist2list(deth.dist.mayotte,tri = T)[,3],3),
                                             rep(dist2list(deth.dist.Juan_de_nova,tri = T)[,3],3),
                                             rep(dist2list(deth.dist.Europa,tri = T)[,3],3)))
                              
-    y <- as.vector(dissim.mayotte_turnover$beta.jac)
-    x <- as.vector(deth.dist)
-    
+ 
+dist.decay.mat$components<-factor(dist.decay.mat$components, levels = c("Nestedness","Turnover","Total"),order=TRUE)
+ggplot(dist.decay.mat, aes(x=dist.depth, y=beta.value, color=components)) +
+  geom_point() + 
+  scale_color_hp(discrete = TRUE, option = "Slytherin", name = "Components beta",
+                               labels = c("Nestedness","Turnover","Total")) +
+ stat_smooth(method = "lm", formula = y ~ x + I(x^2), size = 1)+
+  theme_bw() + facet_wrap(~island)+ theme(strip.background = element_rect(fill="white"))
 
 plot(deth.dist, dissim.mayotte_turnover$beta.jac, ylim=c(0,1), xlim=c(0, max(deth.dist)))
 
 
-
-plt <- ggplot(dissim.mayotte_turnover, aes(deth.dist)) + 
-  geom_point(size = 2) + 
-  geom_smooth(method = "glm", , se = F, 
-              method.args = list(family = "poisson"))
-
-print(plt)
+ggplot(data = dist.decay.mat, 
+       aes(x = dist.depth, y = log(beta.value + 1), color = components)) +
+  geom_point() +
+  geom_smooth(se = T, method = "gam", formula = y ~ s(log(x)))+
+  facet_wrap(~island)
 
 
 
