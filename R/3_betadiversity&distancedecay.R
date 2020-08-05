@@ -1,5 +1,5 @@
 
-pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr')
+pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
@@ -72,11 +72,11 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           dist.decay.mat$components<-factor(dist.decay.mat$components, levels = c("Nestedness","Turnover","Total"),order=TRUE)
           
           ggplot(dist.decay.mat, aes(x=dist.depth, y=beta.value, color=components)) +
-           geom_point() + 
-           scale_color_hp(discrete = TRUE, option = "Slytherin", name = "Components beta",
+          geom_point() + 
+          scale_color_hp(discrete = TRUE, option = "Slytherin", name = "Components beta",
                                          labels = c("Nestedness","Turnover","Total")) +
-           stat_smooth(method = "lm", formula = y ~ x + I(x^2), size = 1)+
-           theme_bw() + facet_wrap(~island)+ theme(strip.background = element_rect(fill="white"))
+          stat_smooth(method = "lm", formula = y ~ x + I(x^2), size = 1)+
+          theme_bw() + facet_wrap(~island)+ theme(strip.background = element_rect(fill="white"))
 
 
 
@@ -84,10 +84,28 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 # Functional diversity 
+          # remove species with only NA
+          fish_traits <- fish_traits[rowSums(is.na(fish_traits)) < 6, ]
+      
+          
+          # A discuter avec THOMAS ON SUPPRIME TROP D'ESPECE, FAIRE UN EXTRACT FISHBASE? PROBLE ORTHOGRAPH
+          species_funct <- species[,colnames(species) %in% rownames(fish_traits)]
+          fish_traits <- fish_traits[rownames(fish_traits)  %in% colnames(species), ]
+          
+          #Minimum 5 esp 
+          species_funct <- species_funct[apply(species_funct,1,sum)>6,]
+          
+          # computing PCoA ----
+          trait.dist <- daisy(fish_traits,metric ="gower")
+          pco.traits <- ape::pcoa(trait.dist)
+
+          # Work with 4 dimensions
+          sp_pc_coord <- pco.traits$vectors[, 1:4]
+          colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
           
           #--- All region
           deth.dist.all<-dist(data.frame(row.names=rownames(hab_pc),depth=hab_pc$depth))
-          all_beta<-beta.pair(species,index.family = "jaccard")
+          all_beta_func<-functional.beta.pair(species_funct,sp_pc_coord,index.family = "jaccard")
           
           #--- Subset Mayotte
           

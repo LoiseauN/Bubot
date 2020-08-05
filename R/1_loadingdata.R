@@ -8,9 +8,11 @@
 
 
 
-# open library Vegan
-library(vegan)
-
+#  library 
+pkgs <- c('ade4','ggplot2','vegan','DBI','dplyr','RMySQL')
+nip <- pkgs[!(pkgs %in% installed.packages())]
+nip <- lapply(nip, install.packages, dependencies = TRUE)
+ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 #########################################################################################
 ################################ work on fish numbers ###################################
@@ -86,139 +88,49 @@ boxplot(number.ind.carang[island.name=="Juan_de_nova"]~depth.class[island.name==
 
 
 
-##########################
-##### Habitat ############
-##########################
-#install.packages("PCAmixdata")
-library(PCAmixdata)
-
-# collect the habitat data
-habitat=species.site.matrix$site.data[,c(10:17)]
-# give the row name
-row.names(habitat)=species.site.matrix$site.data$Sample.name
-
-# do a PCA on categorical data
-habit.mca=PCAmix(X.quali=apply(habitat,2,as.character),rename.level = T)
-
-habit.score=habit.mca$ind$coord
-
-# get the row name so it get ploted on the MCA graph
-r.names=species.site.matrix$site.data$H.community # change the last $ by H.substrat.type, Community,... to get an idea of habitat
-
-# get the variance of axes
-names=list(r.names,c("PC1","PC2","PC3","PC4","PC5"))
-dimnames(habit.score)=names
-
-vars=apply(habit.score,2,var)
-perc.axes=(vars/sum(vars))*100
-barplot(perc.axes)
-
-plot(habit.mca$ind$coord[,1],habit.mca$ind$coord[,2],cex=0)#,xlim=c(-3,-2),ylim=c(0,1))
-text(habit.mca$ind$coord[,1],habit.mca$ind$coord[,2],names[[1]])
-
-# just to check that axis 1 seems to match depth related habitat
-plot(habit.mca$ind$coord[,1],species.site.matrix$site.data$depth)
+###########################################################################################################
+##################################### get the functional traits ###########################################
+###########################################################################################################
 
 
 
+# load MySQL drivers
+drv=dbDriver("MySQL")
 
+# get connection to the database
+con = dbConnect(drv, user="UVC.reader", dbname="Underwater Visual Census",password="Mayfish976",host="162.38.198.139")
 
-###########################################################################################
-#################### start to do some mix model analyses ##################################
-###########################################################################################
+# just check tables availables
+dbListTables(con)
 
-library("lme4")e
-library("plyr")
-############################### GLM mixte #######################################
+# load the table
+Species_info=dbReadTable(con, "Species_info")
 
-# combine the data in a dataframe to make it easier
-number.dat=data.frame(number.ind,
-                      depth=as.numeric(species.site.matrix$site.data$depth),
-                      habitat.substrat=habit.mca$ind$coord[,2],
-                      habitat.bicenose=habit.mca$ind$coord[,1],
-                      Island=island.name,
-                      site=site.name,
-                      replicate=species.site.matrix$site.data$Sample.code,
-                      subreplicate=species.site.matrix$site.data$Sample.name)
+# set working directory
+setwd(work.folder)
 
-#################################################################
-############### cleaning dataset ################################
-#################################################################
+# save the data locally in case of offline work
+setwd(paste(work.folder,"/Data_dump",sep=""))
+# write the table
+write.table(Species_info,"Species_info.txt",sep=";")
 
-####### check replication with count function
-# summary number of replicates
-repl=count(number.dat$replicate)
-# get a list of sample with replication
-to.select=repl[!repl$freq==1,1]
+# set the dump directory
+setwd(paste(work.folder,"/Data_dump",sep=""))
 
-# remove sample without replication
-new.number.dat=number.dat[!is.na(match(number.dat$replicate,to.select)),]
+# reopen this file
+Species_info=read.table("Species_info.txt",sep=";",header = T)
 
-# remove juan de nova data
-new.number.dat=new.number.dat[!new.number.dat$Island=="Juan_de_nova",]
-new.number.dat$Island
+#############################################################################
 
+# collect only functional trait data
+fish_traits <- Species_info[,c(1,10:15)]
+rownames(fish_traits) <- fish_traits[,1]
+fish_traits <- fish_traits[,-1]
 
-############### do LMM or GLMM ########################
-library(nlme)
-
-hist(new.number.dat$number.ind)
-hist(log10(new.number.dat$number.ind))
-
-#create a model with all effects and interaction
-individuals.full=lme(log10(number.ind)~depth*Island*habitat.substrat*habitat.bicenose, random= ~1|site/replicate,data=new.number.dat)
-
-#create a model without interactions
-individuals.full.no.inter=lme(log10(number.ind)~depth+Island+habitat.substrat+habitat.bicenose, random= ~1|site/replicate,data=new.number.dat)
-
-# plot residuals of full model
-plot(individuals.full.no.inter)
-
-# plot qqplot
-qqnorm(residuals(individuals.full.no.inter))
-qqline(residuals(individuals.full.no.inter))
-
-# plot hist of residuals
-hist(residuals(individuals.full.no.inter))
-
-# collect AIC
-sort(c(full.inter=summary(individuals.full)$AICtab[1],
-       full=summary(individuals.full.no.inter)$AICtab[1]))
-
-# test for significance for interaction
-anova(individuals.full,individuals.full.no.inter)
-
-## do some plotting to check assumptions
-# plot residuals of full model
-plot(fitted(individuals.full),residuals(individuals.full))
-
-
-
-
-
-############### DBRDA ########################
-hab_tot <- species.site.matrix$site.data
-hab_tot <- na.omit(hab_tot)
-hab_tot <- hab_tot[,-1]
-hab_tot <- aggregate(. ~ Sample.code,FUN=mean, data= hab_tot)
-
-
-
-mat_esp <- as.data.frame.matrix(xtabs(Max.N ~ Sampling_code + Species, data = Max.N))
-mat_esp <- mat_esp[rownames(mat_esp) %in% hab_tot$Sample.code]
-
-mat_esp <- mat_esp[,apply(mat_esp,2,sum)>5]
-
-vare.cap <- capscale(mat_esp ~ depth, hab_tot,
-                     dist="jaccard")
-
-
-data(varespec)
-data(varechem)
-## Basic Analysis
-vare.cap <- capscale(varespec ~ N + P + K + Condition(Al), varechem,
-                     dist="bray")
-
+for (i in 1:5) {
+  fish_traits[,i]<- factor(fish_traits[,i],order=T)
+}
+fish_traits[,6]<- factor(fish_traits[,6])
 
 
 
@@ -292,6 +204,7 @@ boxplot(tot.biomass.fam[island.name=="Juan_de_nova"]~depth.class[island.name=="J
 
 
 
+
 ##########################
 ##### Habitat ############
 ##########################
@@ -324,5 +237,4 @@ text(habit.mca$ind$coord[,1],habit.mca$ind$coord[,2],names[[1]])
 
 # just to check that axis 1 seems to match depth related habitat
 plot(habit.mca$ind$coord[,1],species.site.matrix$site.data$depth)
-
 
