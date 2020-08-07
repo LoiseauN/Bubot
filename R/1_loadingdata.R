@@ -207,13 +207,10 @@ trait_fishbase <- do.call(rbind,pbmclapply(1:2, function(i){   #nrow(Species_inf
   diet_data <- data.frame(Species=sp,t(data.frame(sapply(c("FoodI","FoodII","FoodIII"), function(i)
     names(sort(table(diet_data[,i]),decreasing = TRUE)[1])))))
   
-  
-
   #taxonomy <- taxize::tax_name(query = sp, get = c("genus","family"), db = "ncbi")  %>%
   #Selecting the column that are of interest
   # select(c("query","genus","family"))
   #colnames(taxonomy)[1] <- "Species"
-  
   
   data <- join_all(list(traits_level,species_info,length_weight_data, growth_data), by = 'Species', type = 'full')
   
