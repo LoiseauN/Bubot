@@ -133,6 +133,93 @@ for (i in 1:5) {
 fish_traits[,6]<- factor(fish_traits[,6])
 
 
+################################################################################
+#' Extract Trait in Rfishbase
+#' 
+#' Authors: ---------
+#' 
+#' @function  TODO 
+#' 
+#' @param sp_distrib a data frame with lat, lot and presence absence of species
+#' Data from OBIS extracted by Albouy, Camille, et al. "The marine fish food web is globally connected." Nature ecology & evolution 3.8 (2019): 1153-1161.
+#' @param cores number of core to use to decrease computing time
+#'              
+#'@param 
+#' 
+#' @return a list of dataframe with species in element  and a data fra
+#' 
+#################################################################################
+
+pkgs <- c('rfishbase','leaflet','pbmcapply','parallel','tidyverse',
+          'effects','lme4','lmerTest','broom','broom.mixed','cowplot','gridExtra')
+nip <- pkgs[!(pkgs %in% installed.packages())]
+nip <- lapply(nip, install.packages, dependencies = TRUE)
+ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
+
+nb_cores <- 1
+trait_fishbase <- do.call(rbind,pbmclapply(1:2, function(i){   #nrow(Species_info)
+  
+  #sp <- "Siganus luridus"
+  sp<-as.character(gsub("_", " ", Species_info$ID[i]))
+  #Loading growth data from Fishbase
+  growth_data <- popgrowth(sp) %>%
+    #Selecting the column that are of interest
+    select(c("Species",'Loo',
+             'K',"GrowthEnviron")) 
+  #average variables and select the most frequent item
+  if(nrow(growth_data)>1){ 
+    growth_data <-  data.frame(
+    t(data.frame(sapply(c("Species","GrowthEnviron"), function(i)
+      names(sort(table(growth_data[,i]),decreasing = TRUE)[1])))),
+    t(data.frame(apply(growth_data[,-c(1,4)],2,mean,na.rm=T))))}
+  
+  species_info <- species(sp) %>%
+    #Selecting the column that are of interest
+    select(c("BodyShapeI"))
+  species_info <- cbind(Species=sp, species_info)
+  
+  traits_level <- ecology(sp) %>%
+    #Selecting the column that are of interest
+    select(c("Species","FeedingType","FoodTroph","Schooling","Solitary","Shoaling",
+             "Benthic","Sessile","Mobile","Demersal","Endofauna","Pelagic","Megabenthos",
+             "Level")) 
+  
+  #average variables and select the most frequent item
+  traits_level <-  data.frame(
+    t(data.frame(sapply(c("Species","FeedingType"), function(i)
+    names(sort(table(traits_level[,i]),decreasing = TRUE)[1])))),
+  t(data.frame(apply(traits_level[,-c(1,2)],2,max,na.rm=T))))
+  
+  
+  length_weight_data <-length_weight(sp)%>%
+    #Selecting the column that are of interest
+    select(c("Species","a","b","LengthMin","LengthMax"))
+  
+  #average variables
+  length_weight_data <- data.frame(Species=sp, t(data.frame(apply(length_weight_data[,-1],2,mean,na.rm=T))))
+
+  
+  diet_data <- diet_items(sp)%>%
+    #Selecting the column that are of interest
+    select(c("FoodI","FoodII","FoodIII"))
+  
+  #choose the most frequent item
+  diet_data <- data.frame(Species=sp,t(data.frame(sapply(c("FoodI","FoodII","FoodIII"), function(i)
+    names(sort(table(diet_data[,i]),decreasing = TRUE)[1])))))
+  
+  
+
+  #taxonomy <- taxize::tax_name(query = sp, get = c("genus","family"), db = "ncbi")  %>%
+  #Selecting the column that are of interest
+  # select(c("query","genus","family"))
+  #colnames(taxonomy)[1] <- "Species"
+  
+  
+  data <- join_all(list(traits_level,species_info,length_weight_data, growth_data), by = 'Species', type = 'full')
+  
+  return(data)
+  
+},mc.cores = nb_cores))
 
 
 
