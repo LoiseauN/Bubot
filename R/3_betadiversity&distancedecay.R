@@ -207,3 +207,229 @@ base = ggtern(beta.test,aes(Tur+Nes,Tur,Nes,color=classDepth.dist,fill=classDept
        subtitle = "using geom_encircle")
 print(base)
 
+
+
+
+
+
+# Gsad
+#The first distribution (green) is the observed number of observations per species for all species found in ecological plots.
+#Each data point represents the total number of individuals observed for a given species
+species_site_scale0_1 <- species_site_scale 
+species_site_scale0_1[species_site_scale0_1>0] <- 1
+NbS <- apply(species_site_scale0_1,1,sum)
+NbObs_perSpecies <- apply(species_site_scale0_1,2,sum)
+Abu_perSpecies <- apply(species_site_scale,2,sum)
+
+plot(NbS~NbObs_perSpecies)
+
+
+library(ggplot2)
+library(cowplot)
+library(grid)
+library(gridExtra)
+library(ggpubr)
+library(scales)
+library(plyr)
+library(dplyr)
+library(conflicted)
+library(gambin)
+library(sads)
+library(vegan)
+library(bbmle)
+library(nlreg)
+library(MASS)
+library(fitdistrplus)
+
+# repertoire David
+
+setwd("/Users/davidmouillot/Documents/articles/en cours/Global eDNA")
+
+
+# fit log-log models
+
+load("rarete_motu_station.rdata")
+tab=as.data.frame(motu_station)
+
+logn=log10(tab$n)
+logmotus=log10(tab$n_motus)
+mlogn=-log10(tab$n)
+
+tab=cbind(tab,logn,logmotus,mlogn)
+
+head(tab)
+
+load("rarete_species_transects.rdata")
+tab2 <- species_transects
+
+logocc=log10(tab2$occ_RLS)
+logfreq=log10(tab2$Freq)
+mlogocc=-log10(tab2$occ_RLS)
+
+tab2=cbind(tab2,logocc,logfreq,mlogocc)
+
+head(tab2)
+
+# distribution
+
+hist(tab$n_motus)
+
+motus.poisson=fitdist(tab$n_motus, "pois")
+
+motus.nb=fitdist(tab$n_motus, "nbinom")
+
+gofstat(list(motus.poisson, motus.nb),fitnames = c("Poisson", "Negative Binomial"))
+
+
+
+hist(tab2$Freq)
+
+rls.poisson=fitdist(tab2$Freq, "pois")
+
+rls.nb=fitdist(tab2$Freq, "nbinom")
+
+gofstat(list(rls.poisson, rls.nb),fitnames = c("Poisson", "Negative Binomial"))
+
+
+# fit non linear regression by maximum likelihood
+
+# power law
+
+# initial parameters
+
+linmod.motus <- lm(log10(n_motus) ~ log10(n), data = tab)
+
+coef(linmod.motus)
+
+edna.po <- mle2(n_motus ~ dnbinom(mu=b0*n^b1, size=exp(logdisp)),data=tab,
+                start=list(b0 = 10^(coef(linmod.motus)[1]), b1 = coef(linmod.motus)[2],logdisp=0))
+
+confint(edna.po,method="quad")
+
+plot(log10(n_motus) ~ log10(n), tab)
+lines(log10(tab$n), log10(predict(edna.po)), col = 'blue')
+
+
+
+linmod.rls <- lm(log10(Freq) ~ log10(occ_RLS), data = tab2)
+
+coef(linmod.rls)
+
+rls.po <- mle2(Freq ~ dnbinom(mu=b0*occ_RLS^b1, size=exp(logdisp)),data=tab2,
+               start=list(b0 = 10^(coef(linmod.rls)[1]), b1 = coef(linmod.rls)[2],logdisp=0))
+
+confint(rls.po,method="quad")
+
+plot(log10(Freq) ~ log10(occ_RLS), tab2)
+lines(log10(tab2$occ_RLS), log10(predict(rls.po)), col = 'blue')
+
+
+# log series
+
+edna.ls <- mle2(n_motus ~ dnbinom(mu=b0*(1/n)*exp(-b2*n), size=exp(logdisp)),data=tab,control=list(maxit=1E5,trace=0),
+                start=list(b0 = 426, b2 = 0,logdisp=0))
+
+plot(log10(n_motus) ~ log10(n), tab)
+lines(log10(tab$n), log10(predict(edna.ls)), col = 'red')
+
+confint(edna.ls,method="quad")
+
+rls.ls <- mle2(Freq ~ dnbinom(mu=b0*(1/occ_RLS)*exp(-b2*occ_RLS), size=exp(logdisp)),data=tab2,
+               start=list(b0 = 256, b2 = 0,logdisp=0))
+
+plot(log10(Freq) ~ log10(occ_RLS), tab2)
+lines(log10(tab2$occ_RLS), log10(predict(rls.ls )), col = 'red')
+
+confint(rls.ls,method="quad")
+
+
+
+# power bended
+
+edna.pb <- mle2(n_motus ~ dnbinom(mu=b0*(n^b1)*exp(-b2*n), size=exp(logdisp)),data=tab,control=list(maxit=1E5,trace=0),
+                start=list(b0 = 10^(coef(linmod.motus)[1]), b1=coef(linmod.motus)[2],b2 = 0,logdisp=0))
+
+
+confint(edna.pb,method="quad")
+
+plot(log10(n_motus) ~ log10(n), tab)
+lines(log10(tab$n), log10(predict(edna.pb)), col = 'green')
+
+
+rls.pb <- mle2(Freq ~ dnbinom(mu=b0*(occ_RLS^b1)*exp(-b2*occ_RLS), size=exp(logdisp)),data=tab2,
+               start=list(b0 = 10^(coef(linmod.rls)[1]), b1=coef(linmod.rls)[2],b2 = 0,logdisp=0))
+
+confint(rls.pb,method="quad")
+
+plot(log10(Freq) ~ log10(occ_RLS), tab2)
+lines(log10(tab2$occ_RLS), log10(predict(rls.pb )), col = 'green')
+
+
+# model comparisons
+
+AICtab(edna.po, edna.ls, edna.pb, weights=TRUE)
+
+anova(edna.ls,edna.pb)
+anova(edna.po,edna.pb)
+
+AICtab(rls.po, rls.ls, rls.pb, weights=TRUE)
+
+anova(rls.po,rls.pb)
+anova(rls.ls,rls.pb)
+
+
+# Figures
+
+# predict for each model
+tab$pb <- predict(edna.pb)
+tab$po <- predict(edna.po)
+tab$ls <- predict(edna.ls)
+
+tab2$pb <- predict(rls.pb)
+tab2$po <- predict(rls.po)
+tab2$ls <- predict(rls.ls)
+
+
+
+# plot figure 4a edna
+ggplot(tab, aes(x=log10(n), y=log10(n_motus)))+
+  geom_point(colour="#d2981a", size=2, show.legend = TRUE)+
+  geom_line(aes(x=log10(n), y=log10(po)), linetype = "dashed", size = 0.8)+
+  geom_line(aes(x=log10(n), y=log10(pb)), linetype = "solid", size = 0.8)+
+  geom_line(aes(x=log10(n), y=log10(ls)), linetype = "dotted", size = 0.8)+
+  xlim(0,2)+
+  ylim(0,3)+
+  annotate(geom="text", x=2, y=3, label="eDNA MOTUs ~ stations", hjust=1, size=4, colour="#d2981a") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        panel.border = element_rect(fill = NA),
+        axis.title.y = element_text(size = 10, face = "bold"),
+        axis.title.x = element_text(size = 10, face = "bold"),
+        plot.title = element_text(size=12, face = "bold"))+
+  labs(x="log10(Number of station)",y="log10(Number of MOTUs)")
+
+ggsave("Figure4a.png")
+
+
+
+# plot figure 4b rls
+ggplot(tab2, aes(x=log10(occ_RLS), y=log10(Freq)))+
+  geom_point(colour = "darkgrey", size=2, show.legend = TRUE)+
+  geom_line(aes(x=log10(occ_RLS), y=log10(po)), linetype = "dashed", size = 0.8)+
+  geom_line(aes(x=log10(occ_RLS), y=log10(pb)), linetype = "solid", size = 0.8)+
+  geom_line(aes(x=log10(occ_RLS), y=log10(ls)), linetype = "dotted", size = 0.8)+
+  xlim(0,3)+
+  ylim(0,3)+
+  annotate(geom="text", x=3, y=3, label="RLS species ~ transects", hjust=1, size=4) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_blank(), 
+        panel.border = element_rect(fill = NA),
+        axis.title.y = element_text(size = 10, face = "bold"),
+        axis.title.x = element_text(size = 10, face = "bold"),
+        plot.title = element_text(size=12, face = "bold"))+
+  labs(x="log10(Number of transect)",y="log10(Number of species)")
+
+ggsave("Figure4b.png")
+
