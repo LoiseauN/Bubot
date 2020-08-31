@@ -6,7 +6,6 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 
-
 #--- At the video scale 
 species_video_scale <- species.site.matrix$species.matrix
 species_video_scale <- species_video_scale[,which(colnames(species_video_scale)!="unknown_fish")]
@@ -45,13 +44,13 @@ dbrda.depth.pc <- capscale(species_video_scale ~ classDepth + Condition(PC1 + PC
 
 summary(dbrda.tot.pc)
 
-aov <- anova(dbrda.tot.pc, permutations = 100 )#9999
+#aov <- anova(dbrda.tot.pc, permutations = 100 )#9999
 
 RsquareAdj(dbrda.tot.pc)
 
-aov.axe <- anova(dbrda.tot.pc, by = "axis", permutations = 100)#9999
+#aov.axe <- anova(dbrda.tot.pc, by = "axis", permutations = 100)#9999
 
-aov.merg <- anova(dbrda.tot.pc, by = "margin", permutations = 100)#9999
+#aov.merg <- anova(dbrda.tot.pc, by = "margin", permutations = 100)#9999
 
 
 
@@ -184,13 +183,13 @@ dbrda.depth.pc <- capscale(species_site_scale ~ classDepth + Condition(PC1 + PC2
 
 summary(dbrda.tot.pc)
 
-aov <- anova(dbrda.tot.pc, permutations = 100 )#9999
+#aov <- anova(dbrda.tot.pc, permutations = 100 )#9999
 
 RsquareAdj(dbrda.tot.pc)
 
-aov.axe <- anova(dbrda.tot.pc, by = "axis", permutations = 100)#9999
+#aov.axe <- anova(dbrda.tot.pc, by = "axis", permutations = 100)#9999
 
-aov.merg <- anova(dbrda.tot.pc, by = "margin", permutations = 100)#9999
+#aov.merg <- anova(dbrda.tot.pc, by = "margin", permutations = 100)#9999
 
 
 

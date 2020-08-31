@@ -1,5 +1,5 @@
 
-pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape')
+pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
@@ -333,3 +333,21 @@ ggplot(res, aes(x=log10(Abu), y=log10(Freq),color=Depth))+
   #annotate(geom="text", x=2, y=3, label="eDNA MOTUs ~ stations", hjust=1, size=4, colour="#d2981a") +
   theme_bw()+
   labs(x="log10(Abundance)",y="log10(Number of species)")
+
+
+
+# Plot 
+ggplot(res, aes(x=log10(Abu), y=log10(Freq),color=Depth))+
+  geom_point(size=2, show.legend = TRUE)+
+  scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
+  geom_line(aes(x=log10(Abu), y=log10(pb),color=Depth), linetype = "solid", size = 0.8)+
+  annotate(geom="text", x=2, y=2, label="gSAD", hjust=1, size=5) +
+  xlim(0,2)+ylim(0,2)+
+  #annotate(geom="text", x=2, y=3, label="eDNA MOTUs ~ stations", hjust=1, size=4, colour="#d2981a") +
+  theme_bw()+
+  labs(x="log10(Abundance)",y="log10(Number of species)")
+
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+  geom_violin()
+p
