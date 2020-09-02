@@ -1,0 +1,45 @@
+
+tab <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,9)],by.x="row.names",by.y="Row.names")
+rownames(tab) <- tab[,1]
+tab <- tab[,-1]
+
+tab0_20   <- tab[tab$classDepth %in% "[0-20[",-319]
+tab20_40  <- tab[tab$classDepth %in% "[20-40[",-319]
+tab40_60  <- tab[tab$classDepth %in% "[40-60[",-319]
+tab60_80  <- tab[tab$classDepth %in% "[60-80[",-319]
+tab_sup80 <- tab[tab$classDepth %in% ">80",-319]
+
+
+abu0_20   <- data.frame(abu=apply(tab0_20[,apply(tab0_20,2,sum)>0],2,sum))
+trait_abu0_20  <- data.frame(merge(abu0_20,trait_fishbase,by.x="row.names",by.y="Species",all.x=T))
+
+
+abu20_40  <-data.frame(abu=apply(tab20_40[,apply(tab20_40,2,sum)>0],2,sum))
+trait_abu20_40  <- data.frame(merge(abu20_40,trait_fishbase,by.x="row.names",by.y="Species",all.x=T))
+
+
+abu40_60  <- data.frame(abu=apply(tab40_60[,apply(tab40_60,2,sum)>0],2,sum))
+trait_abu40_60  <- data.frame(merge(abu40_60,trait_fishbase,by.x="row.names",by.y="Species",all.x=T))
+
+
+abu60_80  <- data.frame(abu=apply(tab60_80[,apply(tab60_80,2,sum)>0],2,sum))
+trait_abu60_80  <- data.frame(merge(abu60_80,trait_fishbase,by.x="row.names",by.y="Species",all.x=T))
+
+
+abu_sup80 <- data.frame(abu=apply(tab_sup80[,apply(tab_sup80,2,sum)>0],2,sum))
+trait_abu_sup80  <- data.frame(merge(abu_sup80,trait_fishbase,by.x="row.names",by.y="Species",all.x=T))
+
+res<-rbind(trait_abu0_20,trait_abu20_40,trait_abu40_60,
+           trait_abu60_80,trait_abu_sup80)
+
+res<- cbind(res,c(rep("[0-20[",nrow(trait_abu0_20)),
+                  rep("[20-40[",nrow(trait_abu20_40)),
+                  rep("[40-60[",nrow(trait_abu40_60)),
+                  rep("[60-80[",nrow(trait_abu60_80)),
+                  rep(">80",nrow(trait_abu_sup80)))) 
+colnames(res)[c(1,17)]   <- c("Species","Depth")
+
+
+
+
+troph <- data.frame(res

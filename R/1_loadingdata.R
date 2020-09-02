@@ -12,7 +12,7 @@
 
 
 
-pkgs <- c('rfishbase','leaflet','pbmcapply','parallel','tidyverse',
+pkgs <- c('rfishbase','leaflet','pbmcapply','parallel','tidyverse','plyr',
           'effects','lme4','lmerTest','broom','broom.mixed','cowplot','gridExtra','ade4','ggplot2','vegan','DBI','dplyr','RMySQL')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
@@ -155,10 +155,11 @@ fish_traits[,6]<- factor(fish_traits[,6])
 #' 
 #################################################################################
 
-nb_cores <- 4
+nb_cores <- 5
 trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   #
   
-  #sp <- "Siganus luridus"
+  #sp <- "Abudefduf sparoides"
+  #sp<-as.character(gsub("_", " ", sp))
   sp<-as.character(gsub("_", " ", Species_info$ID[i]))
   #Loading growth data from Fishbase
   estimate_growth_data <- estimate(sp) %>%
@@ -184,15 +185,18 @@ trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   
   #  names(sort(table(traits_level[,i]),decreasing = TRUE)[1])))),
   #t(data.frame(apply(traits_level[,-c(1,2)],2,min,na.rm=T))))
   
-  diet_data <- diet_items(sp)%>%
+  diet_data <- fooditems(sp)%>%
     #Selecting the column that are of interest
-    #FOOD III NE ME SEMBLE PAS FOU
-    select(c("FoodI","FoodII","FoodIII"))
+      select(c("FoodI","FoodII","FoodIII"))
   
-  #choose the most frequent item
+  if(nrow(diet_data)==1) { diet_data <- data.frame(Species = sp,diet_data) 
+  
+  }else{ 
+    
+    #choose the most frequent item
   diet_data <- data.frame(Species=sp,t(data.frame(sapply(c("FoodI","FoodII","FoodIII"), function(i)
     names(sort(table(diet_data[,i]),decreasing = TRUE)[1])))))
-  
+  }
   
   swim_data  <-  data.frame(swimming(sp))%>%
     #Selecting the column that are of interest
@@ -204,7 +208,7 @@ trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   
   # select(c("query","genus","family"))
   #colnames(taxonomy)[1] <- "Species"
   
-  data <- join_all(list(species_info,diet_data,swim_data, estimate_growth_data), by = 'Species', type = 'full')
+  data <- plyr::join_all(list(species_info,diet_data,swim_data, estimate_growth_data), by = 'Species', type = 'full')
   
   return(data)
   
@@ -220,7 +224,7 @@ fish_traits <- merge(fish_traits,trait_fishbase,by.x="row.names",by.y="Species",
 
 # first set a working directory. whatch out a new folder "Data_dump" will be created 
 # to save locally the table from the MySQL database
-work.folder="D:/Dropbox/work/research_projects/MAPOR/R_analyses"
+work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data"
 
 
 # run the first function to select the data that are wanted

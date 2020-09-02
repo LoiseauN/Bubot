@@ -223,6 +223,15 @@ tab40_60  <- tab[tab$classDepth %in% "[40-60[",-319]
 tab60_80  <- tab[tab$classDepth %in% "[60-80[",-319]
 tab_sup80 <- tab[tab$classDepth %in% ">80",-319]
 
+
+abu0_20   <- data.frame(abu=apply(tab0_20[,apply(tab0_20,2,sum)>0],2,sum))
+abu20_40  <-data.frame(abu=apply(tab20_40[,apply(tab20_40,2,sum)>0],2,sum))
+abu40_60  <- data.frame(abu=apply(tab40_60[,apply(tab40_60,2,sum)>0],2,sum))
+abu60_80  <- data.frame(abu=apply(tab60_80[,apply(tab60_80,2,sum)>0],2,sum))
+abu_sup80 <- data.frame(abu=apply(tab_sup80[,apply(tab_sup80,2,sum)>0],2,sum))
+
+
+
 tab0_20   <- data.frame(abu = apply(tab0_20,2,sum))
 tab20_40  <- data.frame(abu = apply(tab20_40,2,sum))
 tab40_60  <- data.frame(abu = apply(tab40_60,2,sum))
@@ -347,7 +356,26 @@ ggplot(res, aes(x=log10(Abu), y=log10(Freq),color=Depth))+
   theme_bw()+
   labs(x="log10(Abundance)",y="log10(Number of species)")
 
+res<-rbind(abu0_20,abu20_40,
+           abu40_60,abu60_80,
+           abu_sup80)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
-  geom_violin()
-p
+res<- cbind(res,c(rep("[0-20[",nrow(abu0_20)),
+                  rep("[20-40[",nrow(abu20_40)),
+                  rep("[40-60[",nrow(abu40_60)),
+                  rep("[60-80[",nrow(abu60_80)),
+                  rep(">80",nrow(abu_sup80)))) 
+colnames(res)[2]   <- "Depth"
+
+  
+ 
+ggplot(res, aes(x=Depth, y=log10(abu),color=Depth)) + 
+  geom_violin()+ scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1)+
+  theme_bw()+ geom_jitter(position=position_jitter(0.2), cex=0.5,alpha=0.5,type=1)+
+  theme(legend.position="none") + 
+  ylab("Abundance") + xlab("Depth")
+
+
+
+
+#violinplot des abondances pour chaque tranche de profondeur 
