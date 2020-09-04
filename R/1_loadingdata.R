@@ -128,7 +128,7 @@ Species_info=read.table("Species_info.txt",sep=";",header = T)
 #############################################################################
 
 # collect only functional trait data
-fish_traits <- Species_info[,c(1,10:15)]
+fish_traits <- Species_info[,c(1,2,3,10:15)]
 rownames(fish_traits) <- fish_traits[,1]
 fish_traits <- fish_traits[,-1]
 
@@ -217,7 +217,7 @@ trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   
 trait_fishbase$Species <- as.character(gsub(" ", "_", trait_fishbase$Species))
 
 fish_traits <- merge(fish_traits,trait_fishbase,by.x="row.names",by.y="Species",all.x=T)
-
+colnames(fish_traits)[1] <- "Species"
 ###########################################################################################################
 ######################################## get the biomass ##################################################
 ###########################################################################################################
