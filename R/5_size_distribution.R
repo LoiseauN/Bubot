@@ -1,5 +1,5 @@
 
-tab <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,8:9)],by.x="row.names",by.y="Row.names")
+tab <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
 rownames(tab) <- tab[,1]
 tab <- tab[,-1]
 
@@ -113,30 +113,29 @@ tab <- tab[,-1]
 
 
 library(reshape2)
-Test<-melt(tab, id.vars = 319:321)
-Test <- Test[Test$value >0,]
-Test  <- data.frame(merge(Test,fish_traits,by.x="variable",by.y="Species",all.x=T))
+dat_complet<-melt(tab, id.vars = 319:321)
+dat_complet <- dat_complet[dat_complet$value >0,]
+dat_complet  <- data.frame(merge(dat_complet,fish_traits,by.x="variable",by.y="Species",all.x=T))
 
-Test$clean_diet <- NA
-for (i in 1:nrow(Test)){
+dat_complet$clean_diet <- NA
+for (i in 1:nrow(dat_complet)){
   
   print(i)
-  if       (is.na(Test$Diet[i])) { Test$clean_diet[i] <- NA }
-  else if  (Test$Diet[i]=="HD")  { Test$clean_diet[i] <- "Herbivore-Detritivore" }
-  else if  (Test$Diet[i]=="PK")  { Test$clean_diet[i] <- "Planktivore" }
-  else if  (Test$Diet[i]=="FC")  { Test$clean_diet[i] <- "Piscivore" }
-  else if  (Test$Diet[i]=="IM")  { Test$clean_diet[i] <- "Invertivore" }
-  else if  (Test$Diet[i]=="IS")  { Test$clean_diet[i] <- "Invertivore" }
-  else if  (Test$Diet[i]=="OM")   { Test$clean_diet[i] <- "Omnivore" }
-  else     (Test$Diet[i]=="HM")  { Test$clean_diet[i] <- "Herbivore-Detritivore" }
+  if(is.na(dat_complet$Diet[i])) { dat_complet$clean_diet[i] <- NA }
+  else if(dat_complet$Diet[i]=="HD")  { dat_complet$clean_diet[i] <- "Herbivore-Detritivore" }
+  else if(dat_complet$Diet[i]=="PK")  { dat_complet$clean_diet[i] <- "Planktivore" }
+  else if(dat_complet$Diet[i]=="FC")  { dat_complet$clean_diet[i] <- "Piscivore" }
+  else if(dat_complet$Diet[i]=="IM")  { dat_complet$clean_diet[i] <- "Invertivore" }
+  else if(dat_complet$Diet[i]=="IS")  { dat_complet$clean_diet[i] <- "Invertivore" }
+  else if(dat_complet$Diet[i]=="OM")   { dat_complet$clean_diet[i] <- "Omnivore" }
+  else { dat_complet$clean_diet[i] <- "Herbivore-Detritivore" }
 
-  
 }
 
 
-ggplot(Test, aes(x=Troph, y=log10(abu),color=Depth))+
+ggplot(dat_complet, aes(x=depth, y=(value),color=clean_diet))+
   geom_point(size=2, show.legend = TRUE)+
   scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
-  geom_smooth(method ="lm")+theme_bw()+ ylim(0,4)+
-  facet_wrap(~ Depth,ncol = 3)  +
+  geom_smooth(method ="lm")+theme_bw()+ #ylim(0,4)+
+  facet_wrap(~ island,nrow = 3)  +
   labs(x="Troph",y="log10(abu)")

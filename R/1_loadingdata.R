@@ -155,7 +155,7 @@ fish_traits[,6]<- factor(fish_traits[,6])
 #' 
 #################################################################################
 
-nb_cores <- 5
+nb_cores <- 2
 trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   #
   
   #sp <- "Abudefduf sparoides"
