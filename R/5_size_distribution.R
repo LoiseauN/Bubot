@@ -9,11 +9,11 @@ tab40_60  <- tab[tab$classDepth %in% "[40-60[",]
 tab60_80  <- tab[tab$classDepth %in% "[60-80[",]
 tab_sup80 <- tab[tab$classDepth %in% ">80",]
 
-abu0_20   <- tab0_20[,-c(319,320)]
-abu20_40  <- tab20_40[,-c(319,320)]
-abu40_60  <- tab40_60[,-c(319,320)]
-abu60_80  <- tab60_80[,-c(319,320)]
-abu_sup80 <- tab_sup80[,-c(319,320)]
+abu0_20   <- tab0_20[,-c(319:321)]
+abu20_40  <- tab20_40[,-c(319:321)]
+abu40_60  <- tab40_60[,-c(319:321)]
+abu60_80  <- tab60_80[,-c(319:321)]
+abu_sup80 <- tab_sup80[,-c(319:321)]
 
 abu0_20   <- data.frame(abu=apply(abu0_20[,apply(abu0_20,2,sum)>0,],2,sum))
 trait_abu0_20  <- data.frame(merge(abu0_20,fish_traits,by.x="row.names",by.y="Species",all.x=T))
@@ -39,11 +39,6 @@ res<- cbind(res,c(rep("[0-20[",nrow(trait_abu0_20)),
                   rep("[60-80[",nrow(trait_abu60_80)),
                   rep(">80",nrow(trait_abu_sup80)))) 
 
-res<- cbind(res,c(tab0_20[,c(319,320)],
-                  tab20_40[,c(319,320)],
-                  tab40_60[,c(319,320)],
-                  tab60_80[,c(319,320)],
-                  tab_sup80[,c(319,320)]))
 
 colnames(res)[c(1,25)]   <- c("Species","Depth")
 
@@ -103,17 +98,14 @@ p <- ggplot(data = res_diet_relative, aes(x = clean_diet, y = Freq,
   theme_bw()
 p + facet_wrap(~ Depth, ncol = 2)
 
-
-
-
-
-tab <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
-rownames(tab) <- tab[,1]
-tab <- tab[,-1]
+#####################
+tab2 <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
+rownames(tab2) <- tab2[,1]
+tab2 <- tab2[,-1]
 
 
 library(reshape2)
-dat_complet<-melt(tab, id.vars = 319:321)
+dat_complet<-melt(tab2, id.vars = 319:321)
 dat_complet <- dat_complet[dat_complet$value >0,]
 dat_complet  <- data.frame(merge(dat_complet,fish_traits,by.x="variable",by.y="Species",all.x=T))
 
@@ -132,10 +124,9 @@ for (i in 1:nrow(dat_complet)){
 
 }
 
-
-ggplot(dat_complet, aes(x=depth, y=(value),color=clean_diet))+
+ggplot(dat_complet, aes(x=depth, y=log10(value),color=clean_diet))+
   geom_point(size=2, show.legend = TRUE)+
   scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
-  geom_smooth(method ="lm")+theme_bw()+ #ylim(0,4)+
+  geom_smooth()+theme_bw()+ ylim(0,4)+
   facet_wrap(~ island,nrow = 3)  +
   labs(x="Troph",y="log10(abu)")
