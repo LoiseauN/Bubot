@@ -101,11 +101,11 @@ p + facet_wrap(~ Depth, ncol = 2)
 #####################
 tab2 <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
 rownames(tab2) <- tab2[,1]
-tab2 <- tab2[,-1]
+
 
 
 library(reshape2)
-dat_complet<-melt(tab2, id.vars = 319:321)
+dat_complet<-melt(tab2, id.vars = c(1,320:322))
 dat_complet <- dat_complet[dat_complet$value >0,]
 dat_complet  <- data.frame(merge(dat_complet,fish_traits,by.x="variable",by.y="Species",all.x=T))
 

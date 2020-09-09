@@ -4,26 +4,26 @@ nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
-cov=unique(dat_complet[,c("variable","Genus","Familly")])
+taxo_correct=unique(dat_complet[,c("variable","Genus","Familly")])
 
-for (i in 1:nrow(cov)){
+for (i in 1:nrow(taxo_correct)){
   print(i)
   
-  if(!grepl("_",as.character(cov$variable[i]), fixed = TRUE)){
+  if(!grepl("_",as.character(taxo_correct$variable[i]), fixed = TRUE)){
     
-    classif <- classification(as.character(cov$variable[i]),db= 'itis')
+    classif <- classification(as.character(taxo_correct$variable[i]),db= 'itis')
 
     if(sum(classif[[1]]$rank=="genus")>0){  
       
-      cov$Genus[i] <- classif[[1]][classif[[1]]$rank=="genus",]$name
+      taxo_correct$Genus[i] <- classif[[1]][classif[[1]]$rank=="genus",]$name
       
-      if(is.na(cov$Familly[i])){cov$Familly[i] <- classif[[1]][classif[[1]]$rank=="family",]$name}
+      if(is.na(taxo_correct$Familly[i])){taxo_correct$Familly[i] <- classif[[1]][classif[[1]]$rank=="family",]$name}
       
     }
     
     if(sum(classif[[1]]$rank=="family")>0){  
       
-      cov$Familly[i] <- classif[[1]][classif[[1]]$rank=="family",]$name
+      taxo_correct$Familly[i] <- classif[[1]][classif[[1]]$rank=="family",]$name
       
     }
   }
@@ -37,34 +37,105 @@ addLevel <- function(x, newlevel=NULL) {
   return(x)
 }
 
-cov$variable <- addLevel(cov$variable, "Blenniidae")
-cov$Familly <- addLevel(cov$Familly, "Blenniidae")
+taxo_correct$variable <- addLevel(taxo_correct$variable, "Blenniidae")
+taxo_correct$Familly <- addLevel(taxo_correct$Familly, "Blenniidae")
 
 
-cov[cov$variable=="Bleniidae",]$variable<- "Blenniidae"
-cov[cov$variable=="Blenniidae",]$Familly<- "Blenniidae"
+taxo_correct[taxo_correct$variable=="Bleniidae",]$variable<- "Blenniidae"
+taxo_correct[taxo_correct$variable=="Blenniidae",]$Familly<- "Blenniidae"
 
-#COMBLE LES NA!!!!
+#Finish hand:
+taxo_correct[taxo_correct$variable=="Acanthurus",]$Genus<- "Acanthurus"
+taxo_correct[taxo_correct$variable=="Acanthurus",]$Familly<- "Acanthuridae"
 
-dat_complet <- merge(dat_complet,cov, by="variable",all.x= T)
-dat_complet <- dat_complet[,-c(6,7)]
-colnames(dat_complet)[27:28] <- c("Genus","Familly")
+taxo_correct[taxo_correct$variable=="Cheilinus",]$Genus<- "Cheilinus"
+taxo_correct[taxo_correct$variable=="Cheilinus",]$Familly<- "Labridae"
+
+taxo_correct[taxo_correct$variable=="Lutjanus",]$Genus<- "Lutjanus"
+taxo_correct[taxo_correct$variable=="Lutjanus",]$Familly<- "Lutjanidae"
+
+taxo_correct[taxo_correct$variable=="Lethrinus",]$Genus<- "Lethrinus"
+taxo_correct[taxo_correct$variable=="Lethrinus",]$Familly<- "Lethrinidae"
+
+taxo_correct[taxo_correct$variable=="Siganus",]$Genus<- "Siganus"
+taxo_correct[taxo_correct$variable=="Siganus",]$Familly<- "Siganidae"
+
+taxo_correct[taxo_correct$variable=="Macropharyngodon",]$Genus<- "Macropharyngodon"
+taxo_correct[taxo_correct$variable=="Macropharyngodon",]$Familly<- "Labridae"
+
+taxo_correct[taxo_correct$variable=="Pomacentrus",]$Genus<- "Pomacentrus"
+
+taxo_correct[taxo_correct$variable=="Pomacentrus",]$Familly<- "Pomacentridae"
+
+taxo_correct[taxo_correct$variable=="Ostracion",]$Genus<- "Ostracion"
+taxo_correct[taxo_correct$variable=="Ostracion",]$Familly<- "Ostraciidae"
+
+taxo_correct[taxo_correct$variable=="Pomacanthus",]$Genus<- "Pomacanthus"
+taxo_correct[taxo_correct$variable=="Pomacanthus",]$Familly<- "Pomacanthidae"
+
+taxo_correct[taxo_correct$variable=="Rhinecanthus",]$Genus<- "Rhinecanthus"
+taxo_correct[taxo_correct$variable=="Rhinecanthus",]$Familly<- "Balistidae"
+
+taxo_correct[taxo_correct$variable=="Pseudochromis",]$Genus<- "Pseudochromis"
+taxo_correct[taxo_correct$variable=="Pseudochromis",]$Familly<- "Pseudochromidae"
+
+taxo_correct[taxo_correct$variable=="Sargocentron",]$Genus<- "Sargocentron"
+taxo_correct[taxo_correct$variable=="Sargocentron",]$Familly<- "Holocentridae"
+
+taxo_correct[taxo_correct$variable=="Coris",]$Genus<- "Coris"
+taxo_correct[taxo_correct$variable=="Coris",]$Familly<- "Labridae"
+
+taxo_correct[taxo_correct$variable=="Aphareus",]$Genus<- "Aphareus"
+taxo_correct[taxo_correct$variable=="Aphareus",]$Familly<- "Lutjanidae"
+
+taxo_correct[taxo_correct$variable=="Halichoeres",]$Genus<- "Halichoeres"
+taxo_correct[taxo_correct$variable=="Halichoeres",]$Familly<- "Labridae"
+
+taxo_correct[taxo_correct$variable=="Cheilodipterus",]$Genus<- "Cheilodipterus"
+taxo_correct[taxo_correct$variable=="Cheilodipterus",]$Familly<- "Apogonidae"
+
+taxo_correct[taxo_correct$variable=="Anampses",]$Genus<- "Anampses"
+taxo_correct[taxo_correct$variable=="Anampses",]$Familly<- "Labridae"
+
+taxo_correct$Genus <- addLevel(taxo_correct$Genus, "Apogon")
+taxo_correct[taxo_correct$variable=="Apogon",]$Genus<- "Apogon"
+taxo_correct[taxo_correct$variable=="Apogon",]$Familly<- "Apogonidae"
+
+taxo_correct[taxo_correct$variable=="Cirrhilabrus",]$Genus<- "Cirrhilabrus"
+taxo_correct[taxo_correct$variable=="Cirrhilabrus",]$Familly<- "Labridae"
+
+taxo_correct[taxo_correct$variable=="Sphyraena",]$Genus<- "Sphyraena"
+taxo_correct[taxo_correct$variable=="Sphyraena",]$Familly<- "Scombridae"
+
+taxo_correct[taxo_correct$variable=="Muraenidae",]$Familly<- "Muraenidae"
+taxo_correct[taxo_correct$variable=="Siganidae",]$Familly<- "Siganidae"
+taxo_correct[taxo_correct$variable=="Diodontidae",]$Familly<- "Diodontidae"
+taxo_correct[taxo_correct$variable=="Gobiidae",]$Familly<- "Gobiidae"
+taxo_correct[taxo_correct$variable=="Scorpaenidae",]$Familly<- "Scorpaenidae"
+taxo_correct[taxo_correct$variable=="Apogonidae",]$Familly<- "Apogonidae"
+taxo_correct[taxo_correct$variable=="Congridae",]$Familly<- "Congridae"
+taxo_correct[taxo_correct$variable=="Nemipteridae",]$Familly<- "Nemipteridae"
+
+
+dat_complet <- merge(dat_complet,taxo_correct, by="variable",all.x= T)
+dat_complet <- dat_complet[,-c(7,8)]
+colnames(dat_complet)[c(2,28:29)] <- c("VideoID","Genus","Familly")
 
 save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
 
 # Test with random forest, values are false
-cov=dat_complet[,c("variable","Genus","Familly","Size","Mobility","Activity","Schooling","Position",
+#cov=dat_complet[,c("variable","Genus","Familly","Size","Mobility","Activity","Schooling","Position",
                    "MaxLengthTL","Troph","clean_diet")]
-cov= unique(cov)
-rownames(cov) <- cov[,1]
-cov <- cov[,-1]
+#cov= unique(cov)
+#rownames(cov) <- cov[,1]
+#cov <- cov[,-1]
 
 
-registerDoParallel(cores = 4)
-cov.test <- cov[!is.na(cov$Genus),]
-cov.test[cov.test == "<NA>"] = "NA"  
-cov.test$clean_diet <-as.factor(as.character(cov.test$clean_diet))
-cov.imp = missForest(cov.test,parallelize = "forests", ntree = 100)
+#registerDoParallel(cores = 4)
+#cov.test <- cov[!is.na(cov$Genus),]
+#cov.test[cov.test == "<NA>"] = "NA"  
+#cov.test$clean_diet <-as.factor(as.character(cov.test$clean_diet))
+#cov.imp = missForest(cov.test,parallelize = "forests", ntree = 100)
 #cov.imp <- cov.imp$ximp
 
 # Based on PCOA 
@@ -88,9 +159,6 @@ colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
 
 
 dat_complet <- merge(dat_complet,sp_pc_coord,by.x="variable",by.y="row.names",all.x=T)
-
-dat_complet[is.na(dat_complet$Familly),]
-
 
 for (i in 1:nrow(dat_complet)) {
   
@@ -158,12 +226,104 @@ for (i in 1:nrow(dat_complet)) {
   
   }
 
+
 #Add some info for scaridae
+dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
+totalabun_classDepth <- dat_complet_mayotte[,c("value","classDepth")]
+totalabun_classDepth <- aggregate(. ~ classDepth, data = totalabun_classDepth, sum)
+colnames(totalabun_classDepth)[2]<-"totalabun_classDepth"
+
+totalabun_video <- dat_complet_mayotte[,c("VideoID","value")]
+totalabun_video <- aggregate(. ~ VideoID, data = totalabun_video, sum)
+colnames(totalabun_video)[2]<-"totalabun_video"
+
+dat_complet_mayotte<- merge(dat_complet_mayotte,totalabun_video,by="VideoID",all.x=T)
+dat_complet_mayotte<- merge(dat_complet_mayotte,totalabun_classDepth,by="classDepth",all.x=T)
+
+dat_complet_mayotte$aburelatif <- dat_complet_mayotte$value/dat_complet_mayotte$totalabun_video
+#dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$clean_diet),]
+
+abun_classDepth <- dat_complet_mayotte[,c("value","classDepth","clean_diet")]
+abun_classDepth <- aggregate(. ~ classDepth + clean_diet, data = abun_classDepth, sum)
+abun_classDepth$clean_diet <- factor(abun_classDepth$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
 
 
-ggplot(dat_complet, aes(x=depth, y=log10(value),color=clean_diet))+
+pyramidGH <- ggplot(popGHcens, aes(x = Age, y = Population, fill = Gender)) + 
+  geom_bar(data = subset(popGHcens, Gender == "Female"), stat = "identity") + 
+  geom_bar(data = subset(popGHcens, Gender == "Male"), stat = "identity") + 
+  scale_y_continuous(labels = paste0(as.character(c(seq(2, 0, -1), seq(1, 2, 1))), "m")) + 
+  coord_flip()
+pyramidGH
+
+
+
+
+dat_complet_withoutNA$clean_diet <- factor(dat_complet_withoutNA$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+
+
+main.plot <- ggplot(dat_complet_withoutNA, aes(x=depth, y=log10(value),color=clean_diet))+
   geom_point(size=2, show.legend = TRUE)+
-  scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
-  geom_smooth()+theme_bw()+ ylim(0,4)+
-  facet_wrap(~ island,nrow = 3)  +
-  labs(x="Troph",y="log10(abu)")
+  scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4"))+
+  #scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
+  geom_smooth(method = "loess")+
+  theme_bw()+ 
+  ylim(0,4)+
+  labs(x="Depth",y="log10(abu)")+
+  scale_x_continuous(breaks = round(seq(min(dat_complet_withoutNA$depth), max(dat_complet_withoutNA$depth), by = 20),1)) +
+  geom_vline(xintercept=20,  linetype="dotted",size=1)+
+  geom_vline(xintercept=40,  linetype="dotted",size=1)+
+  geom_vline(xintercept=60,  linetype="dotted",size=1)+
+  geom_vline(xintercept=80,  linetype="dotted",size=1)+
+  geom_label(label = "[0-20[", y = 4, x=10, vjust = 1)+
+  geom_label(label = "[20-40[", y = 4, x=60, vjust = 1)+
+  geom_label(label = "[40-60[", y = 4, x=60, vjust = 1)+
+  geom_label(label = "[60-80[", y = 4, x=60, vjust = 1)+
+  geom_label(label = ">80", y = 4, x=60, vjust = 1)
+  
+    geom_text(data=d, mapping=aes(x=date, y=0, label=event), size=4, angle=90, vjust=-0.4, hjust=0)
+
+
+
+  
+  
+  abun_classDepth<- with(abun_classDepth, abun_classDepth[order(clean_diet,classDepth),])
+  ## pyramid charts are two barcharts with axes flipped
+  abun_classDepth<- with(abun_classDepth, abun_classDepth[order(clean_diet,classDepth),])
+  #("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+  
+  
+  
+  test <- subset(abun_classDepth , abun_classDepth$classDepth=="[0-20[")
+  test$alpha <- test$value/2
+  test <- rbind(test,test) 
+  test$alpha[c(6:10)] <- - test$alpha[c(6:10)] 
+  test$direction <-c(rep("pos",5),rep("neg",5))
+  
+  
+  inset.plot <- ggplot(test, aes(x = clean_diet, y = alpha, fill = clean_diet)) + 
+    geom_bar(data = subset(test, direction == "pos"), stat = "identity", width=1) + 
+    geom_bar(data = subset(test, direction == "neg"), stat = "identity", width=1) + 
+    scale_fill_manual(values=c("chartreuse3","gold","blue","red","brown4"))+
+    coord_flip()+
+    theme(
+      panel.background = element_rect(fill = "transparent",colour = NA),
+      #plot.margin = unit(c(0.1,0.1,0.1,0.1), "cm"),
+      plot.title = element_text(size = 14, hjust = 0.5, vjust = 1),
+      plot.background = element_rect(fill = "transparent", colour = NA),
+      axis.title=element_blank(),
+      axis.text = element_blank(),
+      axis.ticks = element_blank(),
+      legend.position = 'none',
+      legend.title=element_text(size=15),
+      legend.text=element_text(size=15),
+      legend.background = element_rect(fill = "transparent")
+    )
+  
+  
+  library(cowplot)
+  
+  plot.with.inset <-
+    ggdraw() +
+    draw_plot(main.plot) +
+    draw_plot(inset.plot, x = 60, y = 2, width = 13, height = 13)
+  
