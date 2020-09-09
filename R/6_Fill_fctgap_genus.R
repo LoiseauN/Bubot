@@ -1,5 +1,5 @@
 
-pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle','doParallel','missForest')
+pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle','doParallel','missForest','cowplot')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
@@ -241,63 +241,47 @@ dat_complet_mayotte<- merge(dat_complet_mayotte,totalabun_video,by="VideoID",all
 dat_complet_mayotte<- merge(dat_complet_mayotte,totalabun_classDepth,by="classDepth",all.x=T)
 
 dat_complet_mayotte$aburelatif <- dat_complet_mayotte$value/dat_complet_mayotte$totalabun_video
-#dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$clean_diet),]
-
-abun_classDepth <- dat_complet_mayotte[,c("value","classDepth","clean_diet")]
-abun_classDepth <- aggregate(. ~ classDepth + clean_diet, data = abun_classDepth, sum)
-abun_classDepth$clean_diet <- factor(abun_classDepth$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
-
-
-pyramidGH <- ggplot(popGHcens, aes(x = Age, y = Population, fill = Gender)) + 
-  geom_bar(data = subset(popGHcens, Gender == "Female"), stat = "identity") + 
-  geom_bar(data = subset(popGHcens, Gender == "Male"), stat = "identity") + 
-  scale_y_continuous(labels = paste0(as.character(c(seq(2, 0, -1), seq(1, 2, 1))), "m")) + 
-  coord_flip()
-pyramidGH
 
 
 
+dat_complet_mayotte$clean_diet <- factor(dat_complet_mayotte$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$clean_diet),]
 
-dat_complet_withoutNA$clean_diet <- factor(dat_complet_withoutNA$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
-
-
-main.plot <- ggplot(dat_complet_withoutNA, aes(x=depth, y=log10(value),color=clean_diet))+
+main.plot <- ggplot(dat_complet_mayotte, aes(x=depth, y=log10(value),color=clean_diet))+
   geom_point(size=2, show.legend = TRUE)+
   scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4"))+
   #scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
   geom_smooth(method = "loess")+
   theme_bw()+ 
+  theme(legend.position = "none")+
   ylim(0,4)+
   labs(x="Depth",y="log10(abu)")+
-  scale_x_continuous(breaks = round(seq(min(dat_complet_withoutNA$depth), max(dat_complet_withoutNA$depth), by = 20),1)) +
   geom_vline(xintercept=20,  linetype="dotted",size=1)+
   geom_vline(xintercept=40,  linetype="dotted",size=1)+
   geom_vline(xintercept=60,  linetype="dotted",size=1)+
-  geom_vline(xintercept=80,  linetype="dotted",size=1)+
-  geom_label(label = "[0-20[", y = 4, x=10, vjust = 1)+
-  geom_label(label = "[20-40[", y = 4, x=60, vjust = 1)+
-  geom_label(label = "[40-60[", y = 4, x=60, vjust = 1)+
-  geom_label(label = "[60-80[", y = 4, x=60, vjust = 1)+
-  geom_label(label = ">80", y = 4, x=60, vjust = 1)
-  
-    geom_text(data=d, mapping=aes(x=date, y=0, label=event), size=4, angle=90, vjust=-0.4, hjust=0)
-
-
+  geom_vline(xintercept=80,  linetype="dotted",size=1)#+
+  #geom_label(label="0-20m", x=8, y=4, size=3, hjust=0,color="black")+
+  #geom_label(label="20-40m",x=30, y=4, size=3, hjust=0,color="black")+
+  #geom_label(label="40-60m", x=52, y=4, size=3, hjust=0,color="black")+
+  #geom_label(label="60-80m", x=74, y=4, size=3, hjust=0,color="black")+
+  #geom_label(label=">80m", x=10, y=4, size=3, hjust=0,color="black")
 
   
+    abun_classDepth <- dat_complet_mayotte[,c("value","classDepth","clean_diet")]
+    abun_classDepth <- aggregate(. ~ classDepth + clean_diet, data = abun_classDepth, sum)
+    abun_classDepth$clean_diet <- factor(abun_classDepth$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+    
+    ## pyramid charts are two barcharts with axes flipped
+    abun_classDepth<- with(abun_classDepth, abun_classDepth[order(clean_diet,classDepth),])
+    #("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+    
+for (i in 1:unique(abun_classDepth$classDepth)){
   
-  abun_classDepth<- with(abun_classDepth, abun_classDepth[order(clean_diet,classDepth),])
-  ## pyramid charts are two barcharts with axes flipped
-  abun_classDepth<- with(abun_classDepth, abun_classDepth[order(clean_diet,classDepth),])
-  #("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
-  
-  
-  
-  test <- subset(abun_classDepth , abun_classDepth$classDepth=="[0-20[")
-  test$alpha <- test$value/2
-  test <- rbind(test,test) 
-  test$alpha[c(6:10)] <- - test$alpha[c(6:10)] 
-  test$direction <-c(rep("pos",5),rep("neg",5))
+  sub <- subset(abun_classDepth , abun_classDepth$classDepth==unique(abun_classDepth$classDepth)[i])
+  sub$alpha <- sub$value/2
+  sub2 <- rbind(sub,sub) 
+  sub2$alpha[c(nrow(sub):nrow(sub2))] <- -  sub2$alpha[c(nrow(sub):nrow(sub2))] 
+  sub2$direction <-c(rep("pos",nrow(sub)),rep("neg",nrow(sub)))
   
   
   inset.plot <- ggplot(test, aes(x = clean_diet, y = alpha, fill = clean_diet)) + 
@@ -319,11 +303,16 @@ main.plot <- ggplot(dat_complet_withoutNA, aes(x=depth, y=log10(value),color=cle
       legend.background = element_rect(fill = "transparent")
     )
   
-  
-  library(cowplot)
-  
-  plot.with.inset <-
+  main.plot <-
     ggdraw() +
     draw_plot(main.plot) +
     draw_plot(inset.plot, x = 60, y = 2, width = 13, height = 13)
+  
+  
+}
+
+
+
+  
+ 
   
