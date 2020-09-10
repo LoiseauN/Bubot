@@ -1,10 +1,12 @@
 
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle',
-          'doParallel','missForest','cowplot','grid','gridExtra','grid')
+          'doParallel','missForest','cowplot','grid','gridExtra','grid',
+          "ggalt","GGally","tidyverse")
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
+#Fill gap ---
 taxo_correct=unique(dat_complet[,c("variable","Genus","Familly")])
 
 for (i in 1:nrow(taxo_correct)){
@@ -228,7 +230,10 @@ for (i in 1:nrow(dat_complet)) {
   }
 
 
-#Add some info for scaridae
+
+
+
+# Start Working on Mayotte.
 dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
 totalabun_classDepth <- dat_complet_mayotte[,c("value","classDepth")]
 totalabun_classDepth <- aggregate(. ~ classDepth, data = totalabun_classDepth, sum)
@@ -242,9 +247,6 @@ dat_complet_mayotte<- merge(dat_complet_mayotte,totalabun_video,by="VideoID",all
 dat_complet_mayotte<- merge(dat_complet_mayotte,totalabun_classDepth,by="classDepth",all.x=T)
 
 dat_complet_mayotte$aburelatif <- dat_complet_mayotte$value/dat_complet_mayotte$totalabun_video
-
-
-
 dat_complet_mayotte$clean_diet <- factor(dat_complet_mayotte$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
 dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$clean_diet),]
 
@@ -384,4 +386,27 @@ ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Diet.pdf",
        height = 210, 
        units = "mm")
 
+
+
+#Functional space
+# PROBLEM SUR DES PC A 0,0, 0
+# cluster_core = 1 === singleton
+ggplot(dat_complet_mayotte, aes(x=PC1, y=PC2)) + 
+  geom_point(size=0.7)+ #
+  scale_shape_manual(values=c(4, 16))+
+  scale_alpha_manual(values=c(0.3, 0.8))+
+  geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                alpha = 0.7, show.legend = FALSE)+
+  theme_bw()+labs(x = "PCOA 1")+labs(y = "PCOA 2") +
+  #facet_wrap(~ classDepth,ncol = 6, scales = "free")  +
+  scale_colour_hp_d(option = "LunaLovegood",direction = 1)+
+  theme(strip.background = element_blank(),
+        strip.text.x = element_blank(),
+        panel.grid.major = element_blank(), 
+        panel.background = element_blank(),
+        legend.position = "none",
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()
+  )
 
