@@ -1,5 +1,6 @@
 
-pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle','doParallel','missForest','cowplot')
+pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle',
+          'doParallel','missForest','cowplot','grid','gridExtra','grid')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
@@ -247,72 +248,140 @@ dat_complet_mayotte$aburelatif <- dat_complet_mayotte$value/dat_complet_mayotte$
 dat_complet_mayotte$clean_diet <- factor(dat_complet_mayotte$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
 dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$clean_diet),]
 
-main.plot <- ggplot(dat_complet_mayotte, aes(x=depth, y=log10(value),color=clean_diet))+
+var <- c("Activity","Schooling","Position","clean_diet")
+
+for(j in 1:length(var)){
+  
+main.plot <- ggplot(dat_complet_mayotte, aes(x=depth, y=log10(value),color=dat_complet_mayotte[,var[j]]))+
   geom_point(size=2, show.legend = TRUE)+
   scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4"))+
   #scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
   geom_smooth(method = "loess")+
   theme_bw()+ 
-  theme(legend.position = "none")+
+  labs(colour = var[j]) + 
+  theme(legend.position = "right")+
   ylim(0,4)+
-  labs(x="Depth",y="log10(abu)")+
+  labs(x="Depth",y="Abundance (log)")+
   geom_vline(xintercept=20,  linetype="dotted",size=1)+
   geom_vline(xintercept=40,  linetype="dotted",size=1)+
   geom_vline(xintercept=60,  linetype="dotted",size=1)+
-  geom_vline(xintercept=80,  linetype="dotted",size=1)#+
+  geom_vline(xintercept=80,  linetype="dotted",size=1)
+  
+  #+
   #geom_label(label="0-20m", x=8, y=4, size=3, hjust=0,color="black")+
   #geom_label(label="20-40m",x=30, y=4, size=3, hjust=0,color="black")+
   #geom_label(label="40-60m", x=52, y=4, size=3, hjust=0,color="black")+
   #geom_label(label="60-80m", x=74, y=4, size=3, hjust=0,color="black")+
   #geom_label(label=">80m", x=10, y=4, size=3, hjust=0,color="black")
 
-  
-    abun_classDepth <- dat_complet_mayotte[,c("value","classDepth","clean_diet")]
-    abun_classDepth <- aggregate(. ~ classDepth + clean_diet, data = abun_classDepth, sum)
-    abun_classDepth$clean_diet <- factor(abun_classDepth$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+    abun_classDepth <- dat_complet_mayotte[,c("value","classDepth",var[j])]
+    colnames(abun_classDepth)[3] <- "trait"
+    abun_classDepth <- aggregate(. ~ classDepth + trait, data = abun_classDepth, sum)
+    if(var[j]=="clean_diet"){ 
+    abun_classDepth$trait <- factor(abun_classDepth$trait, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+    }else{
+    abun_classDepth$trait <- factor(abun_classDepth$trait, levels=c("1","2","3","4","5")) }
+      
+   
     
     ## pyramid charts are two barcharts with axes flipped
-    abun_classDepth<- with(abun_classDepth, abun_classDepth[order(clean_diet,classDepth),])
+    abun_classDepth<- with(abun_classDepth, abun_classDepth[order(trait,classDepth),])
     #("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
     
-for (i in 1:unique(abun_classDepth$classDepth)){
-  
+for (i in 1:length(unique(abun_classDepth$classDepth))){
+  print(i)
   sub <- subset(abun_classDepth , abun_classDepth$classDepth==unique(abun_classDepth$classDepth)[i])
-  sub$alpha <- sub$value/2
+  sub$perc <- round((sub$value/sum(sub$value))*100)
+  sub$alpha <- sub$perc/2
   sub2 <- rbind(sub,sub) 
-  sub2$alpha[c(nrow(sub):nrow(sub2))] <- -  sub2$alpha[c(nrow(sub):nrow(sub2))] 
+  sub2$alpha[c((nrow(sub)+1):nrow(sub2))] <- -sub2$alpha[c((nrow(sub)+1):nrow(sub2))] 
   sub2$direction <-c(rep("pos",nrow(sub)),rep("neg",nrow(sub)))
   
-  
-  inset.plot <- ggplot(test, aes(x = clean_diet, y = alpha, fill = clean_diet)) + 
-    geom_bar(data = subset(test, direction == "pos"), stat = "identity", width=1) + 
-    geom_bar(data = subset(test, direction == "neg"), stat = "identity", width=1) + 
+  assign(paste0("inset.plot",i), ggplot(sub2, aes(x = trait, y = alpha, fill = trait)) + 
+    geom_bar(data = subset(sub2, direction == "pos"), stat = "identity", width=1) + 
+    geom_bar(data = subset(sub2, direction == "neg"), stat = "identity", width=1) + 
     scale_fill_manual(values=c("chartreuse3","gold","blue","red","brown4"))+
     coord_flip()+
     theme(
-      panel.background = element_rect(fill = "transparent",colour = NA),
-      #plot.margin = unit(c(0.1,0.1,0.1,0.1), "cm"),
-      plot.title = element_text(size = 14, hjust = 0.5, vjust = 1),
-      plot.background = element_rect(fill = "transparent", colour = NA),
-      axis.title=element_blank(),
-      axis.text = element_blank(),
-      axis.ticks = element_blank(),
-      legend.position = 'none',
-      legend.title=element_text(size=15),
-      legend.text=element_text(size=15),
-      legend.background = element_rect(fill = "transparent")
-    )
-  
-  main.plot <-
-    ggdraw() +
-    draw_plot(main.plot) +
-    draw_plot(inset.plot, x = 60, y = 2, width = 13, height = 13)
-  
-  
+    panel.background = element_rect(fill = "transparent",colour = NA),
+    #plot.margin = unit(c(0.1,0.1,0.1,0.1), "cm"),
+    plot.title = element_text(size = 14, hjust = 0.5, vjust = 1),
+    plot.background = element_rect(fill = "transparent", colour = NA),
+    axis.title=element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position = 'none',
+    legend.title=element_text(size=15),
+    legend.text=element_text(size=15),
+    legend.background = element_rect(fill = "transparent")))
+}
+  #main.plot<- 
+    if (j==1){ 
+      assign(paste0("main.plot",j), ggdraw() +
+               draw_plot(main.plot) +
+               draw_plot(inset.plot1, x = 0.04, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot2, x = 0.20, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot3, x = 0.35, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot4, x = 0.52, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot5, x = 0.72, y = 0.81, width = 0.12, height = 0.12))
+      }
+    
+    if (j==2){ 
+      assign(paste0("main.plot",j), ggdraw() +
+               draw_plot(main.plot) +
+               draw_plot(inset.plot1, x = 0.04, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot2, x = 0.19, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot3, x = 0.35, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot4, x = 0.51, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot5, x = 0.7, y = 0.81, width = 0.12, height = 0.12)
+      )}
+    
+    if (j==3){ 
+      assign(paste0("main.plot",j), ggdraw() +
+               draw_plot(main.plot) +
+               draw_plot(inset.plot1, x = 0.04, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot2, x = 0.195, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot3, x = 0.35, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot4, x = 0.51, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot5, x = 0.71, y = 0.81, width = 0.12, height = 0.12)
+      )}
+    
+    if (j==4){ 
+      assign(paste0("main.plot",j), ggdraw() +
+               draw_plot(main.plot) +
+               draw_plot(inset.plot1, x = 0.04, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot2, x = 0.17, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot3, x = 0.32, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot4, x = 0.46, y = 0.81, width = 0.12, height = 0.12)+
+               draw_plot(inset.plot5, x = 0.65, y = 0.81, width = 0.12, height = 0.12)
+      )}
+
 }
 
 
 
-  
- 
-  
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Activity.pdf", 
+       plot = main.plot1, 
+       width = 297, 
+       height = 210, 
+       units = "mm")
+
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Schooling.pdf", 
+       plot = main.plot2, 
+       width = 297, 
+       height = 210, 
+       units = "mm")
+
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Position.pdf", 
+       plot = main.plot3, 
+       width = 297, 
+       height = 210, 
+       units = "mm")
+
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Diet.pdf", 
+       plot = main.plot4, 
+       width = 297, 
+       height = 210, 
+       units = "mm")
+
+
