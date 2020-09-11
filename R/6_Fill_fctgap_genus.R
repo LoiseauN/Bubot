@@ -141,26 +141,9 @@ save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_
 #cov.imp <- cov.imp$ximp
 
 # Based on PCOA 
-cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
-                   "Troph","clean_diet")] #maxLength
-cov= unique(cov)
-rownames(cov) <- cov[,1]
-cov <- cov[,-1]
-cov.pcoa <- na.omit(cov)
-cov.pcoa$Position  <- factor(cov.pcoa$Position,order=T)
-cov.pcoa$Schooling <- factor(cov.pcoa$Position,order=T)
-cov.pcoa$clean_diet <- as.factor(as.character(cov.pcoa$clean_diet))
 
-# computing PCoA ----
-trait.dist <- daisy(cov.pcoa,metric ="gower")
-pco.traits <- ape::pcoa(trait.dist)
+load(file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
 
-# Work with 4 dimensions
-sp_pc_coord <- pco.traits$vectors[, 1:4]
-colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
-
-
-dat_complet <- merge(dat_complet,sp_pc_coord,by.x="variable",by.y="row.names",all.x=T)
 
 for (i in 1:nrow(dat_complet)) {
   
@@ -172,31 +155,46 @@ for (i in 1:nrow(dat_complet)) {
     if(!is.na(dat_complet$Genus[i])){
     
       #Trait 
+      #ICI ATTENTION IL FAUT REMPLIR TOUT LES AUTRES AVEC LE MM
        trait_selec <- dat_complet[dat_complet$Genus==dat_complet$Genus[i],]
        trait_selec <- trait_selec[rowSums(is.na(trait_selec)) != ncol(trait_selec), ]
        trait_selec <- trait_selec[!is.na(trait_selec$clean_diet),]
               if(nrow(trait_selec)==0) {next}
        
       trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet",'Size',
-                                  "MaxLengthTL","Troph","Diet")])
+                                  "MaxLengthTL","Troph","Diet")])#,"PC1","PC2","PC3","PC4")])
       rownames(trait_selec) <- trait_selec[,1]
       trait_selec <- trait_selec[,-1]
           
-      dat_complet[i,"Mobility"]    <- names(sort(table(trait_selec[,"Mobility"]),decreasing = T)[1])
-      dat_complet[i,"Activity"]    <- names(sort(table(trait_selec[,"Activity"]),decreasing = T)[1])
-      dat_complet[i,"Schooling"]   <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
-      dat_complet[i,"Position"]    <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
-      dat_complet[i,"clean_diet"]  <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
-      dat_complet[i,"Size"]        <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
-      dat_complet[i,"Diet"]        <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
-      dat_complet[i,"MaxLengthTL"] <- mean(trait_selec$MaxLengthTL,na.rm=T)
-      dat_complet[i,"Troph"]       <- mean(trait_selec$Troph,na.rm=T)
+      #dat_complet[i,"Mobility"]    <- names(sort(table(trait_selec[,"Mobility"]),decreasing = T)[1])
+      #dat_complet[i,"Activity"]    <- names(sort(table(trait_selec[,"Activity"]),decreasing = T)[1])
+      #dat_complet[i,"Schooling"]   <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
+      #dat_complet[i,"Position"]    <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
+      #dat_complet[i,"clean_diet"]  <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
+      #dat_complet[i,"Size"]        <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
+      #dat_complet[i,"Diet"]        <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
+      #dat_complet[i,"MaxLengthTL"] <- mean(trait_selec$MaxLengthTL,na.rm=T)
+      #dat_complet[i,"Troph"]       <- mean(trait_selec$Troph,na.rm=T)
              
-         
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Mobility"]  <- names(sort(table(trait_selec[,"Mobility"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Activity"] <- names(sort(table(trait_selec[,"Activity"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Schooling"] <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Position"] <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"clean_diet"] <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Size"] <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Diet"] <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"MaxLengthTL"] <- mean(trait_selec$MaxLengthTL,na.rm=T)
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Troph"] <- mean(trait_selec$Troph,na.rm=T)
+            
+            
       #PC
-      bary <- na.omit(dat_complet[dat_complet$Genus==dat_complet$Genus[i],]) 
-      bary <- unique(bary[,c("variable","PC1","PC2","PC3","PC4")])
-      dat_complet[i,c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(2:5)],2,mean)  }
+      #bary <- na.omit(dat_complet[dat_complet$Genus=="Thalassoma",]) 
+      
+      #bary <- trait_selec
+      #bary <- unique(bary[,c("PC1","PC2","PC3","PC4")])
+      #dat_complet[i,c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(1:4)],2,mean,na.rm=T)  
+      #dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$PC1),c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(1:4)],2,mean,na.rm=T)  
+      }
     
       
       #If scale of genus impossible, family level
@@ -209,33 +207,76 @@ for (i in 1:nrow(dat_complet)) {
       trait_selec <- trait_selec[!is.na(trait_selec$clean_diet),]
   
       if(nrow(trait_selec)==0) {next}
-      trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet","Size",
-                                           "MaxLengthTL","Troph","Diet")])
+      trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet",'Size',
+                                           "MaxLengthTL","Troph","Diet","PC1","PC2","PC3","PC4")])
       rownames(trait_selec) <- trait_selec[,1]
       trait_selec <- trait_selec[,-1]
       
-      dat_complet[i,"Mobility"]    <- names(sort(table(trait_selec[,"Mobility"]),decreasing = T)[1])
-      dat_complet[i,"Activity"]    <- names(sort(table(trait_selec[,"Activity"]),decreasing = T)[1])
-      dat_complet[i,"Schooling"]   <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
-      dat_complet[i,"Position"]    <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
-      dat_complet[i,"clean_diet"]  <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
-      dat_complet[i,"Size"]        <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
-      dat_complet[i,"Diet"]        <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
-      dat_complet[i,"MaxLengthTL"] <- mean(trait_selec$MaxLengthTL,na.rm=T)
-      dat_complet[i,"Troph"]       <- mean(trait_selec$Troph,na.rm=T)
+      #dat_complet[i,"Mobility"]    <- names(sort(table(trait_selec[,"Mobility"]),decreasing = T)[1])
+      #dat_complet[i,"Activity"]    <- names(sort(table(trait_selec[,"Activity"]),decreasing = T)[1])
+      #dat_complet[i,"Schooling"]   <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
+      #dat_complet[i,"Position"]    <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
+      #dat_complet[i,"clean_diet"]  <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
+      #dat_complet[i,"Size"]        <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
+      #dat_complet[i,"Diet"]        <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
+      #dat_complet[i,"MaxLengthTL"] <- mean(trait_selec$MaxLengthTL,na.rm=T)
+      #dat_complet[i,"Troph"]       <- mean(trait_selec$Troph,na.rm=T)
+      
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Mobility"]   <- names(sort(table(trait_selec[,"Mobility"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Activity"]   <- names(sort(table(trait_selec[,"Activity"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Schooling"]  <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Position"]   <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"clean_diet"] <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Size"]       <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Diet"]       <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"MaxLengthTL"]<- mean(trait_selec$MaxLengthTL,na.rm=T)
+      dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$Troph),"Troph"]      <- mean(trait_selec$Troph,na.rm=T)
+      
       
       #PC
-      bary <- na.omit(dat_complet[dat_complet$Family==dat_complet$Family[i],]) 
-      bary <- unique(bary[,c("variable","PC1","PC2","PC3","PC4")])
-      dat_complet[i,c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(2:5)],2,mean)  }
+      #bary <- trait_selec
+      #bary <- unique(bary[,c("PC1","PC2","PC3","PC4")])
+      #dat_complet[i,c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(1:4)],2,mean,na.rm=T)  
+      #dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$clean_diet),c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(1:4)],2,mean,na.rm=T)  
+      
+      }
   }
   
-  }
+}
 
 
 
 dat_complet$FE <- paste0(dat_complet$Size,dat_complet$Mobility,dat_complet$Activity,dat_complet$Schooling,
                          dat_complet$Position,dat_complet$Diet) 
+
+dat_complet[dat_complet$Size==1,]
+
+dat_complet$Position <- factor(as.character(dat_complet$Position), 
+                            order=T)
+dat_complet$Schooling <- factor(as.character(dat_complet$Schooling), 
+                             order=T)
+dat_complet$Diet <- factor(as.character(dat_complet$Diet), 
+                        levels=c("HM","HD","OM","PK","IS","IM","FC"),order=T)
+
+dat_complet_mayotte$clean_diet <- factor(as.character(dat_complet_mayotte$clean_diet), levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+                        
+# Based on PCOA 
+cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
+                   "Diet")] #maxLength ,"clean_diet"
+cov= unique(cov)
+rownames(cov) <- cov[,1]
+cov <- cov[,-1]
+cov.pcoa <- na.omit(cov)
+
+
+# computing PCoA ----
+trait.dist <- daisy(cov.pcoa,metric ="gower")
+pco.traits <- ape::pcoa(trait.dist)
+
+# Work with 4 dimensions
+sp_pc_coord <- pco.traits$vectors[, 1:4]
+colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
+dat_complet <- merge(dat_complet,sp_pc_coord,by.x="variable",by.y="row.names",all.x=T)
 
 # Start Working on Mayotte.
 dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
@@ -251,8 +292,6 @@ dat_complet_mayotte<- merge(dat_complet_mayotte,totalabun_video,by="VideoID",all
 dat_complet_mayotte<- merge(dat_complet_mayotte,totalabun_classDepth,by="classDepth",all.x=T)
 
 dat_complet_mayotte$aburelatif <- dat_complet_mayotte$value/dat_complet_mayotte$totalabun_video
-dat_complet_mayotte$clean_diet <- factor(dat_complet_mayotte$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
-dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$clean_diet),]
 
 
 '%!in%' <- function(x,y)!('%in%'(x,y))
@@ -286,20 +325,6 @@ main.plot <- ggplot(dat_complet_mayotte, aes(x=depth, y=log10(value),color=dat_c
     colnames(abun_classDepth)[3] <- "trait"
     abun_classDepth <- aggregate(. ~ classDepth + trait, data = abun_classDepth, sum)
    
-    if(var[j]=="clean_diet"){ 
-        abun_classDepth$trait <- factor(abun_classDepth$trait, 
-                    levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"),order=T)
-    }else if(var[j]=="Diet"){ 
-        abun_classDepth$trait <- factor(abun_classDepth$trait, 
-                                      levels=c("HM","HD","OM","PK","IS","IM","FC"),order=T)
-    }else{
-      
-        abun_classDepth$trait <- factor(abun_classDepth$trait, levels=c("1","2","3","4","5","6"),order=T) 
-    
-    }
-      
-   
-    
     ## pyramid charts are two barcharts with axes flipped
     abun_classDepth<- with(abun_classDepth, abun_classDepth[order(trait,classDepth),])
     #("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
@@ -322,8 +347,6 @@ for (i in 1:length(unique(abun_classDepth$classDepth))){
     sub<-rbind(sub,notin)
   }
   
-    
-    
     
   sub2 <- rbind(sub,sub) 
   sub2$alpha[c((nrow(sub)+1):nrow(sub2))] <- -sub2$alpha[c((nrow(sub)+1):nrow(sub2))] 
@@ -433,26 +456,55 @@ ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Diet.png",
 #Functional space
 # PROBLEM SUR DES PC A 0,0, 0
 # cluster_core = 1 === singleton
-ggplot(dat_complet_mayotte, aes(x=PC1, y=PC2)) + 
-  geom_point(size=0.7)+ #
+plotPCOA <- dat_complet_mayotte[,c("FE","value","classDepth","PC1","PC2")]
+plotPCOA <- aggregate(. ~ classDepth + FE, data = plotPCOA, sum)
+
+plotPCOA_1 <- merge(aggregate(value ~ FE + classDepth, plotPCOA, sum), 
+                 aggregate(PC1 ~ FE , plotPCOA, mean),by="FE")
+
+plotPCOA <- merge(plotPCOA_1, 
+                    aggregate(PC2 ~ FE , plotPCOA, mean),by="FE")
+
+plotPCOA <- plotPCOA[plotPCOA$PC1>-100,]
+
+FunctSpace<- ggplot(plotPCOA, aes(x=PC1, y=PC2)) + 
+  geom_point(aes(size=log10(value),colour= classDepth))+ #
   scale_shape_manual(values=c(4, 16))+
   scale_alpha_manual(values=c(0.3, 0.8))+
   geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                 alpha = 0.7, show.legend = FALSE)+
   theme_bw()+labs(x = "PCOA 1")+labs(y = "PCOA 2") +
-  facet_wrap(~ classDepth,ncol = 6, scales = "free")  +
+  facet_wrap(~ classDepth,ncol = 6)  +
   scale_colour_hp_d(option = "LunaLovegood",direction = 1)+
   theme(strip.background = element_blank(),
-        strip.text.x = element_blank(),
+        #strip.text.x = element_blank(),
         panel.grid.major = element_blank(), 
         panel.background = element_blank(),
-        #legend.position = "none",
-        axis.text.x = element_blank(),
-        axis.text.y = element_blank(),
-        axis.ticks = element_blank()
-  )
+        legend.position = "none",
+        #axis.text.x = element_blank(),
+        #axis.text.y = element_blank(),
+        #axis.ticks = element_blank()
+        )
+  
 
+df <- nomissing
+find_hull <- function(df) df[chull(df$PC1, df$PC2), ]
+hulls <- ddply(plotPCOA, "FE", find_hull)
 
+# Overlay the convex hull
+ FunctSpace + geom_point(data = hull, alpha = 0.5,size=1,color="black",fill = NA, 
+                      show.legend = FALSE,shape=4) +geom_polygon(data = hull, alpha = 0.2,size=0.8,color="black",fill = NA, 
+                                                                 show.legend = FALSE) 
+ plot <-
+   
+   
+   FunctSpace +  ggplot(data = hulls, aes(x = PC1, y = PC2)) +
+   geom_point(color="grey",alpha=0.5,size=0.8) + 
+   geom_polygon(data = hulls, alpha = 0.5) 
+ plot
 
-
-
+ plotPCOA2 <- plotPCOA[,c(4,5)]
+ 
+ FunctSpace + geom_point(data = plotPCOA2, aes(x = PC1, y = PC2),size=1,color="grey",alpha=0.2) +
+   stat_chull(data = plotPCOA2,aes(x = PC1, y = PC2), 
+              alpha = 0.1, geom = "polygon")
