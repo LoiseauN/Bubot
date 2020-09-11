@@ -213,7 +213,7 @@ print(base)
 
  
 # Gsad --- 
-tab <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,9)],by.x="row.names",by.y="Row.names")
+tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,9)],by.x="row.names",by.y="Row.names")
 rownames(tab) <- tab[,1]
 tab <- tab[,-1]
 

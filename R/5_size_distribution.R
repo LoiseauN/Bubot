@@ -1,5 +1,5 @@
 
-tab <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
+tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
 rownames(tab) <- tab[,1]
 tab <- tab[,-1]
 
@@ -99,7 +99,7 @@ p <- ggplot(data = res_diet_relative, aes(x = clean_diet, y = Freq,
 p + facet_wrap(~ Depth, ncol = 2)
 
 #####################
-tab2 <- merge(species_video_scale,hab_pc_video_scale_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
+tab2 <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
 rownames(tab2) <- tab2[,1]
 
 

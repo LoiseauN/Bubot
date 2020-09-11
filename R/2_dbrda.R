@@ -27,7 +27,7 @@ for (i in 1: nrow(hab_pc_video_scale)){
   
 }
 
-hab_pc_video_scale_video_scale <- merge(hab_pc_video_scale,sites,by.x="Sample.code",by.y="Sample_code")
+hab_pc_video_scale <- merge(hab_pc_video_scale,sites,by.x="Sample.code",by.y="Sample_code")
 
 
 ### dbrda

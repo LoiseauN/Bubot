@@ -1,6 +1,6 @@
 
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle',
-          'doParallel','missForest','cowplot','grid','gridExtra','grid',
+          'doParallel','missForest','cowplot','grid','gridExtra','grid','taxize',
           "ggalt","GGally","tidyverse")
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
@@ -119,16 +119,15 @@ taxo_correct[taxo_correct$variable=="Apogonidae",]$Familly<- "Apogonidae"
 taxo_correct[taxo_correct$variable=="Congridae",]$Familly<- "Congridae"
 taxo_correct[taxo_correct$variable=="Nemipteridae",]$Familly<- "Nemipteridae"
 
-
-dat_complet <- merge(dat_complet,taxo_correct, by="variable",all.x= T)
 dat_complet <- dat_complet[,-c(7,8)]
-colnames(dat_complet)[c(2,28:29)] <- c("VideoID","Genus","Familly")
+dat_complet <- merge(dat_complet,taxo_correct, by="variable",all.x= T)
+colnames(dat_complet)[c(2,28:29)] <- c("VideoID","Genus","Family")
 
 save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
 
 # Test with random forest, values are false
 #cov=dat_complet[,c("variable","Genus","Familly","Size","Mobility","Activity","Schooling","Position",
-                   "MaxLengthTL","Troph","clean_diet")]
+#                   "MaxLengthTL","Troph","clean_diet")]
 #cov= unique(cov)
 #rownames(cov) <- cov[,1]
 #cov <- cov[,-1]
@@ -142,8 +141,8 @@ save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_
 #cov.imp <- cov.imp$ximp
 
 # Based on PCOA 
-cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",
-                   "MaxLengthTL","Troph","clean_diet")]
+cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
+                   "Troph","clean_diet")] #maxLength
 cov= unique(cov)
 rownames(cov) <- cov[,1]
 cov <- cov[,-1]
@@ -178,8 +177,8 @@ for (i in 1:nrow(dat_complet)) {
        trait_selec <- trait_selec[!is.na(trait_selec$clean_diet),]
               if(nrow(trait_selec)==0) {next}
        
-      trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet",
-                                  "MaxLengthTL","Troph")])
+      trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet",'Size',
+                                  "MaxLengthTL","Troph","Diet")])
       rownames(trait_selec) <- trait_selec[,1]
       trait_selec <- trait_selec[,-1]
           
@@ -188,6 +187,8 @@ for (i in 1:nrow(dat_complet)) {
       dat_complet[i,"Schooling"]   <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
       dat_complet[i,"Position"]    <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
       dat_complet[i,"clean_diet"]  <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
+      dat_complet[i,"Size"]        <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
+      dat_complet[i,"Diet"]        <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
       dat_complet[i,"MaxLengthTL"] <- mean(trait_selec$MaxLengthTL,na.rm=T)
       dat_complet[i,"Troph"]       <- mean(trait_selec$Troph,na.rm=T)
              
@@ -195,7 +196,7 @@ for (i in 1:nrow(dat_complet)) {
       #PC
       bary <- na.omit(dat_complet[dat_complet$Genus==dat_complet$Genus[i],]) 
       bary <- unique(bary[,c("variable","PC1","PC2","PC3","PC4")])
-      dat_complet[i,29:32] <- apply(bary[,c(2:5)],2,sum)  }
+      dat_complet[i,c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(2:5)],2,mean)  }
     
       
       #If scale of genus impossible, family level
@@ -203,13 +204,13 @@ for (i in 1:nrow(dat_complet)) {
       
       #Trait
       #Scaridae
-      trait_selec <- dat_complet[dat_complet$Familly==dat_complet$Familly[i],]
+      trait_selec <- dat_complet[dat_complet$Family==dat_complet$Family[i],]
       trait_selec <- trait_selec[rowSums(is.na(trait_selec)) != ncol(trait_selec), ]
       trait_selec <- trait_selec[!is.na(trait_selec$clean_diet),]
   
       if(nrow(trait_selec)==0) {next}
-      trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet",
-                                           "MaxLengthTL","Troph")])
+      trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet","Size",
+                                           "MaxLengthTL","Troph","Diet")])
       rownames(trait_selec) <- trait_selec[,1]
       trait_selec <- trait_selec[,-1]
       
@@ -218,20 +219,23 @@ for (i in 1:nrow(dat_complet)) {
       dat_complet[i,"Schooling"]   <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
       dat_complet[i,"Position"]    <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
       dat_complet[i,"clean_diet"]  <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
+      dat_complet[i,"Size"]        <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
+      dat_complet[i,"Diet"]        <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
       dat_complet[i,"MaxLengthTL"] <- mean(trait_selec$MaxLengthTL,na.rm=T)
       dat_complet[i,"Troph"]       <- mean(trait_selec$Troph,na.rm=T)
       
       #PC
-      bary <- na.omit(dat_complet[dat_complet$Familly==dat_complet$Familly[i],]) 
+      bary <- na.omit(dat_complet[dat_complet$Family==dat_complet$Family[i],]) 
       bary <- unique(bary[,c("variable","PC1","PC2","PC3","PC4")])
-      dat_complet[i,29:32] <- apply(bary[,c(2:5)],2,sum)  }
+      dat_complet[i,c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(2:5)],2,mean)  }
   }
   
   }
 
 
 
-
+dat_complet$FE <- paste0(dat_complet$Size,dat_complet$Mobility,dat_complet$Activity,dat_complet$Schooling,
+                         dat_complet$Position,dat_complet$Diet) 
 
 # Start Working on Mayotte.
 dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
@@ -250,13 +254,15 @@ dat_complet_mayotte$aburelatif <- dat_complet_mayotte$value/dat_complet_mayotte$
 dat_complet_mayotte$clean_diet <- factor(dat_complet_mayotte$clean_diet, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
 dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$clean_diet),]
 
-var <- c("Activity","Schooling","Position","clean_diet")
+
+'%!in%' <- function(x,y)!('%in%'(x,y))
+var <- c("Activity","Schooling","Position","clean_diet","Size","Diet")
 
 for(j in 1:length(var)){
   
 main.plot <- ggplot(dat_complet_mayotte, aes(x=depth, y=log10(value),color=dat_complet_mayotte[,var[j]]))+
   geom_point(size=2, show.legend = TRUE)+
-  scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4"))+
+  scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
   #scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
   geom_smooth(method = "loess")+
   theme_bw()+ 
@@ -279,10 +285,18 @@ main.plot <- ggplot(dat_complet_mayotte, aes(x=depth, y=log10(value),color=dat_c
     abun_classDepth <- dat_complet_mayotte[,c("value","classDepth",var[j])]
     colnames(abun_classDepth)[3] <- "trait"
     abun_classDepth <- aggregate(. ~ classDepth + trait, data = abun_classDepth, sum)
+   
     if(var[j]=="clean_diet"){ 
-    abun_classDepth$trait <- factor(abun_classDepth$trait, levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+        abun_classDepth$trait <- factor(abun_classDepth$trait, 
+                    levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"),order=T)
+    }else if(var[j]=="Diet"){ 
+        abun_classDepth$trait <- factor(abun_classDepth$trait, 
+                                      levels=c("HM","HD","OM","PK","IS","IM","FC"),order=T)
     }else{
-    abun_classDepth$trait <- factor(abun_classDepth$trait, levels=c("1","2","3","4","5")) }
+      
+        abun_classDepth$trait <- factor(abun_classDepth$trait, levels=c("1","2","3","4","5","6"),order=T) 
+    
+    }
       
    
     
@@ -295,14 +309,31 @@ for (i in 1:length(unique(abun_classDepth$classDepth))){
   sub <- subset(abun_classDepth , abun_classDepth$classDepth==unique(abun_classDepth$classDepth)[i])
   sub$perc <- round((sub$value/sum(sub$value))*100)
   sub$alpha <- sub$perc/2
+  
+  #Add modality that are absent with 0
+  if(length(sub$trait %in% unique(abun_classDepth$trait)) < length(unique(abun_classDepth$trait))){
+    notin <- abun_classDepth$trait
+    notin <- data.frame(unique(notin[notin %!in% sub$trait]))
+    notin <- data.frame(classDepth=rep(unique(abun_classDepth$classDepth)[i],nrow(notin)),
+               trait=notin[,1],
+               value=rep(0,nrow(notin)),
+               perc=rep(0,nrow(notin)),
+               alpha=rep(0,nrow(notin)))
+    sub<-rbind(sub,notin)
+  }
+  
+    
+    
+    
   sub2 <- rbind(sub,sub) 
   sub2$alpha[c((nrow(sub)+1):nrow(sub2))] <- -sub2$alpha[c((nrow(sub)+1):nrow(sub2))] 
   sub2$direction <-c(rep("pos",nrow(sub)),rep("neg",nrow(sub)))
   
+  
   assign(paste0("inset.plot",i), ggplot(sub2, aes(x = trait, y = alpha, fill = trait)) + 
     geom_bar(data = subset(sub2, direction == "pos"), stat = "identity", width=1) + 
     geom_bar(data = subset(sub2, direction == "neg"), stat = "identity", width=1) + 
-    scale_fill_manual(values=c("chartreuse3","gold","blue","red","brown4"))+
+    scale_fill_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
     coord_flip()+
     theme(
     panel.background = element_rect(fill = "transparent",colour = NA),
@@ -318,7 +349,7 @@ for (i in 1:length(unique(abun_classDepth$classDepth))){
     legend.background = element_rect(fill = "transparent")))
 }
   #main.plot<- 
-    if (j==1){ 
+    if (j==1 || j==5 || j==6){ 
       assign(paste0("main.plot",j), ggdraw() +
                draw_plot(main.plot) +
                draw_plot(inset.plot1, x = 0.04, y = 0.81, width = 0.12, height = 0.12)+
@@ -362,30 +393,41 @@ for (i in 1:length(unique(abun_classDepth$classDepth))){
 
 
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Activity.pdf", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Activity.png", 
        plot = main.plot1, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Schooling.pdf", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Schooling.png", 
        plot = main.plot2, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Position.pdf", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Position.png", 
        plot = main.plot3, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Diet.pdf", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/clean_diet.png", 
        plot = main.plot4, 
        width = 297, 
        height = 210, 
        units = "mm")
 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Size.png", 
+       plot = main.plot5, 
+       width = 297, 
+       height = 210, 
+       units = "mm")
+
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Diet.png", 
+       plot = main.plot6, 
+       width = 297, 
+       height = 210, 
+       units = "mm")
 
 
 #Functional space
@@ -398,15 +440,19 @@ ggplot(dat_complet_mayotte, aes(x=PC1, y=PC2)) +
   geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                 alpha = 0.7, show.legend = FALSE)+
   theme_bw()+labs(x = "PCOA 1")+labs(y = "PCOA 2") +
-  #facet_wrap(~ classDepth,ncol = 6, scales = "free")  +
+  facet_wrap(~ classDepth,ncol = 6, scales = "free")  +
   scale_colour_hp_d(option = "LunaLovegood",direction = 1)+
   theme(strip.background = element_blank(),
         strip.text.x = element_blank(),
         panel.grid.major = element_blank(), 
         panel.background = element_blank(),
-        legend.position = "none",
+        #legend.position = "none",
         axis.text.x = element_blank(),
         axis.text.y = element_blank(),
         axis.ticks = element_blank()
   )
+
+
+
+
 
