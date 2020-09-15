@@ -201,9 +201,10 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
               BetaFCTtur[i,j]<-BETA$funct.beta.jtu  
               BetaFCTnes[i,j]<-BETA$funct.beta.jne
               
-              #save(BetaFCTtot,file="BetaFCTtot.RData")
-              #save(BetaFCTtur,file="BetaFCTtur.RData")
-              #save(BetaFCTnes,file="BetaFCTnes.RData")
+              save(BetaFCTtot,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtot.RData")
+              save(BetaFCTtur,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtur.RData")
+              save(BetaFCTnes,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTnes.RData")
+              
               
             }
           }
