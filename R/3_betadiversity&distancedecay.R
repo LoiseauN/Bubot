@@ -16,7 +16,10 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           pco.jac_all<- ape::pcoa(all_beta$beta.jac)$vectors[,c(1:2)]
           pco.jac_all<- cbind(pco.jac_all,hab_pc_site_scale) 
 
-        
+          all_beta_bray<-beta.pair.abund(species_site_scale,index.family = "bray")
+          pco.bray_all<- ape::pcoa(all_beta_bray$beta.bray)$vectors[,c(1:2)]
+          pco.bray_all<- cbind(pco.bray_all,hab_pc_site_scale) 
+          
           pco.plot_all <- ggplot(pco.jac_all, aes(x=Axis.1, y=Axis.2,color=classDepth))+
             geom_point(size=2, show.legend = TRUE)+
             #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
@@ -27,6 +30,15 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
             geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                           alpha = 0.7, show.legend = FALSE)
           
+        ggplot(pco.bray_all, aes(x=Axis.1, y=Axis.2,color=classDepth))+
+            geom_point(size=2, show.legend = TRUE)+
+            #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
+            scale_color_hp(discrete = TRUE, option = "Ravenclaw", name = "Depth",direction = -1) +
+            theme_bw()+ 
+            theme(legend.position = "right")+
+            labs(x="PCoA1",y="PCoA2") +
+            geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                          alpha = 0.7, show.legend = FALSE)
           
           #video Scale n'a pas de sens ici! Données trop bruité         
      
@@ -145,30 +157,59 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 # Functional diversity 
-          # remove species_site_scale0_1 with only NA
-          fish_traits <- fish_traits[rowSums(is.na(fish_traits)) < 6, ]
-          rownames(fish_traits) <- fish_traits[,1]
-          fish_traits<- fish_traits[,-1]
-          fish_traits<- fish_traits[,c(2:6,12,13,14)]
           
-          # A discuter avec THOMAS ON SUPPRIME TROP D'ESPECE, FAIRE UN EXTRACT FISHBASE? PROBLE ORTHOGRAPH
-          species_site_scale0_1_funct <- species_site_scale0_1[,colnames(species_site_scale0_1) %in% rownames(fish_traits)]
-          fish_traits <- fish_traits[rownames(fish_traits)  %in% colnames(species_site_scale0_1), ]
+          vecpco <- unique(dat_complet[,c("variable","PC1","PC2","PC3","PC4")])
+          rownames(vecpco) <- vecpco[,1]
+          vecpco <- vecpco[,-1]
           
           #Minimum 5 esp 
-          species_site_scale0_1_funct <- species_site_scale0_1_funct[apply(species_site_scale0_1_funct,1,sum)>6,]
-          
-          # computing PCoA ----
-          trait.dist <- daisy(fish_traits,metric ="gower")
-          pco.traits <- ape::pcoa(trait.dist)
-
-          # Work with 4 dimensions
-          sp_pc_coord <- pco.traits$vectors[, 1:4]
-          colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
+          species_site_scale0_1_funct <- species_site_scale0_1
+          species_site_scale0_1_funct <- species_site_scale0_1_funct[apply(species_site_scale0_1_funct,1,sum)>4,]
           
           #--- All region
           deth.dist.all<-dist(data.frame(row.names=rownames(hab_pc_site_scale),depth=hab_pc_site_scale$depth))
-          all_beta_func<-functional.beta.pair(species_site_scale0_1_funct,sp_pc_coord,index.family = "jaccard")
+        
+          
+          BetaFCTtot<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
+          BetaFCTtur<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
+          BetaFCTnes<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
+          
+          for (i in 1:nrow(species_site_scale0_1_funct)){
+            
+            print(paste0("i = ",i ))
+            
+            for (j in 1:nrow(species_site_scale0_1_funct)){
+              
+              print(paste0("j = ",j ))
+              
+              mat<-rbind(species_site_scale0_1_funct[i,],species_site_scale0_1_funct[j,])
+              mat<-mat[,apply(mat,2,sum)>0]
+              
+              tr  <- vecpco[rownames(vecpco) %in% colnames(mat),]
+              mat <- mat[,colnames(mat) %in% rownames(tr)]
+              
+              mat <- mat[ , order(names(mat))]
+              tr <- tr[order(rownames(tr)) , ]
+              
+              result<-tryCatch(
+                BETA<-functional.beta.pair(x=mat, traits=tr, index.family="jaccard"),
+                error=function(err){result="NA"}
+                )
+              if((is(result)[1]=="character")=="TRUE") next
+              
+              BetaFCTtot[i,j]<-BETA$funct.beta.jac
+              BetaFCTtur[i,j]<-BETA$funct.beta.jtu  
+              BetaFCTnes[i,j]<-BETA$funct.beta.jne
+              
+              #save(BetaFCTtot,file="BetaFCTtot.RData")
+              #save(BetaFCTtur,file="BetaFCTtur.RData")
+              #save(BetaFCTnes,file="BetaFCTnes.RData")
+              
+            }
+          }
+          
+          
+          all_beta_func<-functional.beta.pair(species_site_scale0_1_funct,vecpco,index.family = "jaccard")
           
           #--- Subset Mayotte
        

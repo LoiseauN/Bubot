@@ -12,7 +12,6 @@ tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:10)],by.x="row.names"
 rownames(tab) <- tab[,1]
 
 
-
 library(reshape2)
 dat_complet<-melt(tab, id.vars = c(1,320:322))
 dat_complet <- dat_complet[dat_complet$value >0,]
@@ -149,7 +148,7 @@ dat_complet <- dat_complet[,-c(7,8)]
 dat_complet <- merge(dat_complet,taxo_correct, by="variable",all.x= T)
 colnames(dat_complet)[c(2,28:29)] <- c("VideoID","Genus","Family")
 
-save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
+#save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
 
 # Test with random forest, values are false
 #cov=dat_complet[,c("variable","Genus","Familly","Size","Mobility","Activity","Schooling","Position",
@@ -284,8 +283,8 @@ dat_complet$Schooling <- factor(as.character(dat_complet$Schooling),
 dat_complet$Diet <- factor(as.character(dat_complet$Diet), 
                         levels=c("HM","HD","OM","PK","IS","IM","FC"),order=T)
 
-dat_complet_mayotte$clean_diet <- factor(as.character(dat_complet_mayotte$clean_diet), levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
-                        
+dat_complet$clean_diet <- factor(as.character(dat_complet$clean_diet), levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+
 # Based on PCOA 
 cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
                    "Diet")] #maxLength ,"clean_diet"

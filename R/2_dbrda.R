@@ -166,7 +166,7 @@ species_site_scale <- species_site_scale[,-1]
 species_site_scale <- aggregate(. ~ Sample.code, data = species_site_scale, sum)
 rownames(species_site_scale) <- species_site_scale[,1]
 species_site_scale <- species_site_scale[,-1]
-
+species_site_scale <- species_site_scale[,which(colnames(species_site_scale)!="unknown_fish")]
 #species_site_scale[species_site_scale>1]<- 1
 
 ### dbrda
