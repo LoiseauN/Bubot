@@ -6,31 +6,96 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 # Taxonomique diversity 
-          
+ 
+#Site Scale         
           #--- All region
-          deth.dist.all<-dist(data.frame(row.names=rownames(hab_pc),depth=hab_pc$depth))
-          all_beta<-beta.pair(species,index.family = "jaccard")
+          deth.dist.all<-dist(data.frame(row.names=rownames(hab_pc_site_scale),depth=hab_pc_site_scale$depth))
+          species_site_scale0_1 <- species_site_scale
+          species_site_scale0_1[species_site_scale0_1>1] <- 1
+          all_beta<-beta.pair(species_site_scale0_1,index.family = "jaccard")
+          pco.jac_all<- ape::pcoa(all_beta$beta.jac)$vectors[,c(1:2)]
+          pco.jac_all<- cbind(pco.jac_all,hab_pc_site_scale) 
 
+        
+          pco.plot_all <- ggplot(pco.jac_all, aes(x=Axis.1, y=Axis.2,color=classDepth))+
+            geom_point(size=2, show.legend = TRUE)+
+            #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
+            scale_color_hp(discrete = TRUE, option = "Ravenclaw", name = "Depth",direction = -1) +
+            theme_bw()+ 
+            theme(legend.position = "right")+
+            labs(x="PCoA1",y="PCoA2") +
+            geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                          alpha = 0.7, show.legend = FALSE)
+          
+          
+          #video Scale n'a pas de sens ici! Données trop bruité         
+     
+          
           #--- Subset Mayotte
           
-              depth_mayotte <- hab_pc[hab_pc$island %in% "Mayotte",]
-              species_mayotte <- species[rownames(species) %in% rownames(depth_mayotte),]
+              depth_mayotte <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Mayotte",]
+              species_site_scale0_1_mayotte <- species_site_scale0_1[rownames(species_site_scale0_1) %in% rownames(depth_mayotte),]
               deth.dist.mayotte<-dist(data.frame(row.names=rownames(depth_mayotte),depth=depth_mayotte$depth))
-              mayotte_beta<-beta.pair(species_mayotte,index.family = "jaccard")
-
-          #--- Subset Juan_de_nova
+              mayotte_beta<-beta.pair(species_site_scale0_1_mayotte,index.family = "jaccard")
+             
+              pco.jac_mayotte<- ape::pcoa(mayotte_beta$beta.jac)$vectors[,c(1:2)]
+              pco.jac_mayotte<- cbind(pco.jac_mayotte,depth_mayotte) 
               
-              depth_Juan_de_nova <- hab_pc[hab_pc$island %in% "Juan_de_nova",]
-              species_Juan_de_nova <- species[rownames(species) %in% rownames(depth_Juan_de_nova),]
+              
+              pco.plot_mayotte <- ggplot(pco.jac_mayotte, aes(x=Axis.1, y=Axis.2,color=classDepth))+
+                geom_point(size=2, show.legend = TRUE)+
+                #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
+                scale_color_hp(discrete = TRUE, option = "Ravenclaw", name = "Depth",direction = -1) +
+                theme_bw()+ 
+                theme(legend.position = "right")+
+                labs(x="PCoA1",y="PCoA2") +
+                geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                              alpha = 0.7, show.legend = FALSE)
+         
+              #--- Subset Juan_de_nova
+              
+              depth_Juan_de_nova <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Juan_de_nova",]
+              species_site_scale0_1_Juan_de_nova <- species_site_scale0_1[rownames(species_site_scale0_1) %in% rownames(depth_Juan_de_nova),]
               deth.dist.Juan_de_nova<-dist(data.frame(row.names=rownames(depth_Juan_de_nova),depth=depth_Juan_de_nova$depth))
-              Juan_de_nova_beta<-beta.pair(species_Juan_de_nova,index.family = "jaccard")
+              Juan_de_nova_beta<-beta.pair(species_site_scale0_1_Juan_de_nova,index.family = "jaccard")
+              
+              
+              pco.jac_Juan_de_nova<- ape::pcoa(Juan_de_nova_beta$beta.jac)$vectors[,c(1:2)]
+              pco.jac_Juan_de_nova<- cbind(pco.jac_Juan_de_nova,depth_Juan_de_nova) 
+              
+              
+              pco.plot_Juan_de_nova <- ggplot(pco.jac_Juan_de_nova, aes(x=Axis.1, y=Axis.2,color=classDepth))+
+                geom_point(size=2, show.legend = TRUE)+
+                #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
+                scale_color_hp(discrete = TRUE, option = "Ravenclaw", name = "Depth",direction = -1) +
+                theme_bw()+ 
+                theme(legend.position = "right")+
+                labs(x="PCoA1",y="PCoA2") +
+                geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                              alpha = 0.7, show.legend = FALSE)
   
           #--- Subset Europa
               
-              depth_Europa <- hab_pc[hab_pc$island %in% "Europa",]
-              species_Europa <- species[rownames(species) %in% rownames(depth_Europa),]
+              depth_Europa <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Europa",]
+              species_site_scale0_1_Europa <- species_site_scale0_1[rownames(species_site_scale0_1) %in% rownames(depth_Europa),]
               deth.dist.Europa<-dist(data.frame(row.names=rownames(depth_Europa),depth=depth_Europa$depth))
-              Europa_beta<-beta.pair(species_Europa,index.family = "jaccard")
+              Europa_beta<-beta.pair(species_site_scale0_1_Europa,index.family = "jaccard")
+              
+              
+              pco.jac_Europa<- ape::pcoa(Europa_beta$beta.jac)$vectors[,c(1:2)]
+              pco.jac_Europa<- cbind(pco.jac_Europa,depth_Europa) 
+              
+              
+              pco.plot_Europa <- ggplot(pco.jac_Europa, aes(x=Axis.1, y=Axis.2,color=classDepth))+
+                geom_point(size=2, show.legend = TRUE)+
+                #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
+                scale_color_hp(discrete = TRUE, option = "Ravenclaw", name = "Depth",direction = -1) +
+                theme_bw()+ 
+                theme(legend.position = "right")+
+                labs(x="PCoA1",y="PCoA2") +
+                geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                              alpha = 0.7, show.legend = FALSE)
+              
 
           dist.decay.mat <- data.frame(beta.value = c(dist2list(all_beta$beta.jac,tri = T)[,3],
                                                       dist2list(all_beta$beta.jtu,tri = T)[,3],
@@ -79,23 +144,19 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           theme_bw() + facet_wrap(~island)+ theme(strip.background = element_rect(fill="white"))
 
 
-
-
-
-
 # Functional diversity 
-          # remove species with only NA
+          # remove species_site_scale0_1 with only NA
           fish_traits <- fish_traits[rowSums(is.na(fish_traits)) < 6, ]
           rownames(fish_traits) <- fish_traits[,1]
           fish_traits<- fish_traits[,-1]
           fish_traits<- fish_traits[,c(2:6,12,13,14)]
           
           # A discuter avec THOMAS ON SUPPRIME TROP D'ESPECE, FAIRE UN EXTRACT FISHBASE? PROBLE ORTHOGRAPH
-          species_funct <- species[,colnames(species) %in% rownames(fish_traits)]
-          fish_traits <- fish_traits[rownames(fish_traits)  %in% colnames(species), ]
+          species_site_scale0_1_funct <- species_site_scale0_1[,colnames(species_site_scale0_1) %in% rownames(fish_traits)]
+          fish_traits <- fish_traits[rownames(fish_traits)  %in% colnames(species_site_scale0_1), ]
           
           #Minimum 5 esp 
-          species_funct <- species_funct[apply(species_funct,1,sum)>6,]
+          species_site_scale0_1_funct <- species_site_scale0_1_funct[apply(species_site_scale0_1_funct,1,sum)>6,]
           
           # computing PCoA ----
           trait.dist <- daisy(fish_traits,metric ="gower")
@@ -106,32 +167,32 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
           
           #--- All region
-          deth.dist.all<-dist(data.frame(row.names=rownames(hab_pc),depth=hab_pc$depth))
-          all_beta_func<-functional.beta.pair(species_funct,sp_pc_coord,index.family = "jaccard")
+          deth.dist.all<-dist(data.frame(row.names=rownames(hab_pc_site_scale),depth=hab_pc_site_scale$depth))
+          all_beta_func<-functional.beta.pair(species_site_scale0_1_funct,sp_pc_coord,index.family = "jaccard")
           
           #--- Subset Mayotte
        
-          depth_mayotte <- hab_pc[hab_pc$island %in% "Mayotte",]
-          species_funct_mayotte <- species_funct[rownames(species_funct) %in% rownames(depth_mayotte),]
-          sp_pc_coord_mayotte <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_funct_mayotte),]
+          depth_mayotte <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Mayotte",]
+          species_site_scale0_1_funct_mayotte <- species_site_scale0_1_funct[rownames(species_site_scale0_1_funct) %in% rownames(depth_mayotte),]
+          sp_pc_coord_mayotte <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_site_scale0_1_funct_mayotte),]
           deth.dist.mayotte<-dist(data.frame(row.names=rownames(depth_mayotte),depth=depth_mayotte$depth))
-          mayotte_beta_func<-functional.beta.pair(species_funct,sp_pc_coord_mayotte,index.family = "jaccard")
+          mayotte_beta_func<-functional.beta.pair(species_site_scale0_1_funct,sp_pc_coord_mayotte,index.family = "jaccard")
           
           #--- Subset Juan_de_nova
           
-          depth_juan_de_nova <- hab_pc[hab_pc$island %in% "Juan_de_nova",]
-          species_funct_juan_de_nova <- species_funct[rownames(species_funct) %in% rownames(depth_juan_de_nova),]
-          sp_pc_coord_juan_de_nova <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_funct_juan_de_nova),]
+          depth_juan_de_nova <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Juan_de_nova",]
+          species_site_scale0_1_funct_juan_de_nova <- species_site_scale0_1_funct[rownames(species_site_scale0_1_funct) %in% rownames(depth_juan_de_nova),]
+          sp_pc_coord_juan_de_nova <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_site_scale0_1_funct_juan_de_nova),]
           deth.dist.juan_de_nova<-dist(data.frame(row.names=rownames(depth_juan_de_nova),depth=depth_juan_de_nova$depth))
-          juan_de_nova_beta_func<-functional.beta.pair(species_funct,sp_pc_coord_juan_de_nova,index.family = "jaccard")
+          juan_de_nova_beta_func<-functional.beta.pair(species_site_scale0_1_funct,sp_pc_coord_juan_de_nova,index.family = "jaccard")
           
           #--- Subset Europa
           
-          depth_europa <- hab_pc[hab_pc$island %in% "Europa",]
-          species_funct_europa <- species_funct[rownames(species_funct) %in% rownames(depth_europa),]
-          sp_pc_coord_europa <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_funct_europa),]
+          depth_europa <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Europa",]
+          species_site_scale0_1_funct_europa <- species_site_scale0_1_funct[rownames(species_site_scale0_1_funct) %in% rownames(depth_europa),]
+          sp_pc_coord_europa <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_site_scale0_1_funct_europa),]
           deth.dist.europa<-dist(data.frame(row.names=rownames(depth_europa),depth=depth_europa$depth))
-          europa_beta_func<-functional.beta.pair(species_funct,sp_pc_coord_europa,index.family = "jaccard")
+          europa_beta_func<-functional.beta.pair(species_site_scale0_1_funct,sp_pc_coord_europa,index.family = "jaccard")
           
           
           dist.decay.mat <- data.frame(beta.value = c(dist2list(all_beta_func$beta.jac,tri = T)[,3],
@@ -213,7 +274,7 @@ print(base)
 
  
 # Gsad --- 
-tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,9)],by.x="row.names",by.y="Row.names")
+tab <- merge(species_site_scale0_1_video_scale,hab_pc_site_scale_video_scale[,c(2,9)],by.x="row.names",by.y="Row.names")
 rownames(tab) <- tab[,1]
 tab <- tab[,-1]
 
@@ -341,7 +402,7 @@ ggplot(res, aes(x=log10(Abu), y=log10(Freq),color=Depth))+
   xlim(0,2)+ylim(0,2)+
   #annotate(geom="text", x=2, y=3, label="eDNA MOTUs ~ stations", hjust=1, size=4, colour="#d2981a") +
   theme_bw()+
-  labs(x="log10(Abundance)",y="log10(Number of species)")
+  labs(x="log10(Abundance)",y="log10(Number of species_site_scale0_1)")
 
 
 
@@ -354,7 +415,7 @@ ggplot(res, aes(x=log10(Abu), y=log10(Freq),color=Depth))+
   xlim(0,2)+ylim(0,2)+
   #annotate(geom="text", x=2, y=3, label="eDNA MOTUs ~ stations", hjust=1, size=4, colour="#d2981a") +
   theme_bw()+
-  labs(x="log10(Abundance)",y="log10(Number of species)")
+  labs(x="log10(Abundance)",y="log10(Number of species_site_scale0_1)")
 
 res<-rbind(abu0_20,abu20_40,
            abu40_60,abu60_80,

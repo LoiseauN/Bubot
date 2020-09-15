@@ -7,6 +7,32 @@ nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 #Fill gap ---
+#####################
+tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
+rownames(tab) <- tab[,1]
+
+
+
+library(reshape2)
+dat_complet<-melt(tab, id.vars = c(1,320:322))
+dat_complet <- dat_complet[dat_complet$value >0,]
+dat_complet  <- data.frame(merge(dat_complet,fish_traits,by.x="variable",by.y="Species",all.x=T))
+
+dat_complet$clean_diet <- NA
+for (i in 1:nrow(dat_complet)){
+  
+  print(i)
+  if(is.na(dat_complet$Diet[i])) { dat_complet$clean_diet[i] <- NA }
+  else if(dat_complet$Diet[i]=="HD")  { dat_complet$clean_diet[i] <- "Herbivore-Detritivore" }
+  else if(dat_complet$Diet[i]=="PK")  { dat_complet$clean_diet[i] <- "Planktivore" }
+  else if(dat_complet$Diet[i]=="FC")  { dat_complet$clean_diet[i] <- "Piscivore" }
+  else if(dat_complet$Diet[i]=="IM")  { dat_complet$clean_diet[i] <- "Invertivore" }
+  else if(dat_complet$Diet[i]=="IS")  { dat_complet$clean_diet[i] <- "Invertivore" }
+  else if(dat_complet$Diet[i]=="OM")   { dat_complet$clean_diet[i] <- "Omnivore" }
+  else { dat_complet$clean_diet[i] <- "Herbivore-Detritivore" }
+  
+}
+
 taxo_correct=unique(dat_complet[,c("variable","Genus","Familly")])
 
 for (i in 1:nrow(taxo_correct)){
@@ -142,7 +168,7 @@ save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_
 
 # Based on PCOA 
 
-load(file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
+#load(file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
 
 
 for (i in 1:nrow(dat_complet)) {
