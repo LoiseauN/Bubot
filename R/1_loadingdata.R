@@ -30,14 +30,14 @@ work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data"
 #work.folder="~/Documents/Bubot/Analyses/data"
 
 # run the first function to select the data that are wanted
-selected.event=Event.list(DB.connection="no",work.folder=work.folder,measurement.method=c("wave","webfish"),
+selected.event=Event.list(DB.connection="yes",work.folder=work.folder,measurement.method=c("wave","webfish"),
                           island=c("Europa","Juan_de_Nova","Mayotte"))
 
 # calculate the Max N table
-Max.N=MaxN.calculation(DB.connection="no",work.folder=work.folder,selected.event=selected.event,max.dist=7)
+Max.N=MaxN.calculation(DB.connection="yes",work.folder=work.folder,selected.event=selected.event,max.dist=7)
 
 # compute the species matrix. this function is particularly slow, I made it fast, so take your time...
-species.site.matrix=species.matrix(DB.connection="no",work.folder=work.folder,Max.N=Max.N,biomass.calc="no") 
+species.site.matrix=species.matrix(DB.connection="yes",work.folder=work.folder,Max.N=Max.N,biomass.calc="no") 
 
 # get a list of species
 sp.list=colnames(species.site.matrix$species.matrix)
@@ -228,15 +228,15 @@ work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data"
 
 
 # run the first function to select the data that are wanted
-selected.event=Event.list(DB.connection="no",work.folder=work.folder,measurement.method=c("vidsync"),
+selected.event=Event.list(DB.connection="yes",work.folder=work.folder,measurement.method=c("vidsync"),
                           island=c("Europa","Juan_de_Nova","Mayotte"))
 
 
 # calculate the Max N table
-Max.N=MaxN.calculation(DB.connection="no",work.folder=work.folder,selected.event=selected.event,max.dist=7)
+Max.N=MaxN.calculation(DB.connection="yes",work.folder=work.folder,selected.event=selected.event,max.dist=7)
 
 # compute the species matrix. this function is particularly slow, I made it fast, so take your time...
-species.site.matrix=species.matrix(DB.connection="no",work.folder=work.folder,Max.N=Max.N,biomass.calc="yes") 
+species.site.matrix=species.matrix(DB.connection="yes",work.folder=work.folder,Max.N=Max.N,biomass.calc="yes") 
 
 # get a list of species
 sp.list=colnames(species.site.matrix$species.matrix)
