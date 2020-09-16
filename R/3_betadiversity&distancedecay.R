@@ -155,8 +155,42 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           stat_smooth(method = "lm", formula = y ~ x + I(x^2), size = 1)+
           theme_bw() + facet_wrap(~island)+ theme(strip.background = element_rect(fill="white"))
 
-
-# Functional diversity 
+#  Functional betadiversity with FE
+          tab <- merge(dat_complet,hab_pc_video_scale[,c(1:2)],by.x="VideoID",by.y="Row.names",all.x=T)
+          species_site_scale_FE<-as.data.frame.matrix(xtabs(value~Sample.code+FE,data= tab))
+          species_site_scale_FE0_1 <- species_site_scale_FE
+          species_site_scale_FE0_1[species_site_scale_FE0_1>1] <- 1
+          all_FE_beta<-beta.pair(species_site_scale_FE0_1,index.family = "jaccard")
+          pco.jac_all_FE<- ape::pcoa(all_FE_beta$beta.jac)$vectors[,c(1:2)]
+          
+          #ATTENTION VERIFIER POURQUOI DES SITES N Y SONT PLUS!!!!
+          pco.jac_all_FE<- merge(pco.jac_all_FE,hab_pc_site_scale,by="row.names",all.x=T) 
+          
+          all_FE_beta_bray<-beta.pair.abund(species_site_scale_FE,index.family = "bray")
+          pco.bray_all_FE<- ape::pcoa(all_FE_beta_bray$beta.bray)$vectors[,c(1:2)]
+          #ATTENTION VERIFIER POURQUOI DES SITES N Y SONT PLUS!!!!
+          pco.bray_all_FE<- merge(pco.bray_all_FE,hab_pc_site_scale,by="row.names",all.x=T) 
+          
+          pco.plot_all_FE <- ggplot(pco.jac_all_FE, aes(x=Axis.1, y=Axis.2,color=classDepth))+
+            geom_point(size=2, show.legend = TRUE)+
+            #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
+            scale_color_hp(discrete = TRUE, option = "Ravenclaw", name = "Depth",direction = -1) +
+            theme_bw()+ 
+            theme(legend.position = "right")+
+            labs(x="PCoA1",y="PCoA2") +
+            geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                          alpha = 0.7, show.legend = FALSE)
+          
+          ggplot(pco.bray_all_FE, aes(x=Axis.1, y=Axis.2,color=classDepth))+
+            geom_point(size=2, show.legend = TRUE)+
+            #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
+            scale_color_hp(discrete = TRUE, option = "Ravenclaw", name = "Depth",direction = -1) +
+            theme_bw()+ 
+            theme(legend.position = "right")+
+            labs(x="PCoA1",y="PCoA2") +
+            geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                          alpha = 0.7, show.legend = FALSE)
+# TRUE Functional betadiversity 
           
           vecpco <- unique(dat_complet[,c("variable","PC1","PC2","PC3","PC4")])
           rownames(vecpco) <- vecpco[,1]
@@ -167,7 +201,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           species_site_scale0_1_funct <- species_site_scale0_1_funct[apply(species_site_scale0_1_funct,1,sum)>4,]
           
           #--- All region
-          deth.dist.all<-dist(data.frame(row.names=rownames(hab_pc_site_scale),depth=hab_pc_site_scale$depth))
+          deth.dist.all <- dist(data.frame(row.names=rownames(hab_pc_site_scale),depth=hab_pc_site_scale$depth))
         
           
           BetaFCTtot<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
@@ -201,6 +235,14 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
               BetaFCTtur[i,j]<-BETA$funct.beta.jtu  
               BetaFCTnes[i,j]<-BETA$funct.beta.jne
               
+              colnames(BetaFCTtot) <- rownames(species_site_scale0_1_funct)
+              colnames(BetaFCTtur) <- colnames(BetaFCTtot)
+              colnames(BetaFCTnes) <- colnames(BetaFCTtot)
+              
+              rownames(BetaFCTtot) <- colnames(BetaFCTtot)
+              rownames(BetaFCTtur) <- colnames(BetaFCTtot)
+              rownames(BetaFCTnes) <- colnames(BetaFCTtot)
+              
               save(BetaFCTtot,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtot.RData")
               save(BetaFCTtur,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtur.RData")
               save(BetaFCTnes,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTnes.RData")
@@ -209,33 +251,28 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
             }
           }
           
+          test <- BetaFCTtot[,colSums(is.na(BetaFCTtot)) < ncol(BetaFCTtot)/2 ]
+          test <-na.omit(test)
+          
+          pco.jac_all_fct<- ape::pcoa(as.dist(test))$vectors[,c(1:2)]
+          pco.jac_all_fct<- cbind(pco.jac_all_fct,hab_pc_site_scale) 
+      
+          pco.plot_all_fct <- ggplot(pco.jac_all_fct, aes(x=Axis.1, y=Axis.2,color=classDepth))+
+            geom_point(size=2, show.legend = TRUE)+
+            #scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
+            scale_color_hp(discrete = TRUE, option = "Ravenclaw", name = "Depth",direction = -1) +
+            theme_bw()+ 
+            theme(legend.position = "right")+
+            labs(x="PCoA1",y="PCoA2") +
+            geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
+                          alpha = 0.7, show.legend = FALSE)
+          
+          
           
           all_beta_func<-functional.beta.pair(species_site_scale0_1_funct,vecpco,index.family = "jaccard")
           
           #--- Subset Mayotte
        
-          depth_mayotte <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Mayotte",]
-          species_site_scale0_1_funct_mayotte <- species_site_scale0_1_funct[rownames(species_site_scale0_1_funct) %in% rownames(depth_mayotte),]
-          sp_pc_coord_mayotte <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_site_scale0_1_funct_mayotte),]
-          deth.dist.mayotte<-dist(data.frame(row.names=rownames(depth_mayotte),depth=depth_mayotte$depth))
-          mayotte_beta_func<-functional.beta.pair(species_site_scale0_1_funct,sp_pc_coord_mayotte,index.family = "jaccard")
-          
-          #--- Subset Juan_de_nova
-          
-          depth_juan_de_nova <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Juan_de_nova",]
-          species_site_scale0_1_funct_juan_de_nova <- species_site_scale0_1_funct[rownames(species_site_scale0_1_funct) %in% rownames(depth_juan_de_nova),]
-          sp_pc_coord_juan_de_nova <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_site_scale0_1_funct_juan_de_nova),]
-          deth.dist.juan_de_nova<-dist(data.frame(row.names=rownames(depth_juan_de_nova),depth=depth_juan_de_nova$depth))
-          juan_de_nova_beta_func<-functional.beta.pair(species_site_scale0_1_funct,sp_pc_coord_juan_de_nova,index.family = "jaccard")
-          
-          #--- Subset Europa
-          
-          depth_europa <- hab_pc_site_scale[hab_pc_site_scale$island %in% "Europa",]
-          species_site_scale0_1_funct_europa <- species_site_scale0_1_funct[rownames(species_site_scale0_1_funct) %in% rownames(depth_europa),]
-          sp_pc_coord_europa <- sp_pc_coord[rownames(sp_pc_coord) %in% colnames(species_site_scale0_1_funct_europa),]
-          deth.dist.europa<-dist(data.frame(row.names=rownames(depth_europa),depth=depth_europa$depth))
-          europa_beta_func<-functional.beta.pair(species_site_scale0_1_funct,sp_pc_coord_europa,index.family = "jaccard")
-          
           
           dist.decay.mat <- data.frame(beta.value = c(dist2list(all_beta_func$beta.jac,tri = T)[,3],
                                                       dist2list(all_beta_func$beta.jtu,tri = T)[,3],
