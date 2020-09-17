@@ -29,6 +29,15 @@ for(i in 1:nrow(dat)){
   
 }
 
+dat <- merge(dat,aggregate(. ~ variable, data = dat_complet[,c("variable","depth")],mean),by.x="label",by.y="variable",all.x=TRUE)
+colnames(dat)[8] <- "meanDepth"
+#' ---------------------------------------------------------------------------- @Parameters
+
+n        <-  1                         # ID of first plot
+n_lines  <- 10                         # Number of family per column (in legend)
+plots    <- list()                     # Subplots storage
+color_meandepth <- RColorBrewer::brewer.pal(name = "YlGnBu", n = 9)
+color_meandepth <- colorRampPalette(color_meandepth)(255)
 
 #' ---------------------------------------------------------------------------- @AddData2PhyloObj
 dat <- dat[dat$label %in% set_fish$tip.label,]
@@ -42,12 +51,16 @@ new_phylo <- tidytree::as.treedata(new_phylo)
 
 ## Add Phylogenetic Tree ----
 
-tree_plot <- ggtree::ggtree(new_phylo, layout = "circular", #aes(color = din),
-                            ladderize = FALSE, right = TRUE, size = 0.1) #+
+tree_plot <- ggtree::ggtree(new_phylo, aes(color = meanDepth), layout = "circular",
+                            ladderize = FALSE, right = TRUE, size = 0.4) +
+
+  theme(plot.margin = unit(rep(-2,  4), "cm")) +
   
-  #theme(plot.margin = unit(c(1,1,1,1), "cm")) +
-  
-  #scale_colour_gradientn(colours = color_distinctiveness)
+  scale_colour_gradientn(colours = color_meandepth)+
+  theme(legend.position="none")
+
+
+
 
 # Compute Taxa Segments Coordinates ----
 
@@ -120,12 +133,12 @@ tree_plot <- tree_plot +
 tree_plot <- tree_plot +
   
   geom_text(aes(x = x, y = y_mid, hjust = h_just, label = id_gr), coord_groups,
-            vjust = 0.55, size = 3.0, nudge_x = 1.35, color = "grey50")
+            vjust = 0.55, size = 5, nudge_x = 1.35, color = "grey50")
 
 
 ## Add point per depth  ----
 pal <- hp(n = 5, house = "Ravenclaw",direction = -1)
-
+#pal <-musculus_palette("Bmlunge",n = 5)
 ## Add depth0_20 Points ----
 cols <- ifelse(is.na(tree_dt$"depth0_20"), NA, pal[1])
 
@@ -183,94 +196,94 @@ tree_plot <- tree_plot +
 
 ## Add Central Histogram ----
 
-hist_plot <- ggplot(species_d, aes(x = estimated_d, color = dr_class, 
-                                   fill = dr_class)) +
+#hist_plot <- ggplot(species_d, aes(x = estimated_d, color = dr_class, 
+#                                   fill = dr_class)) +
   
-  geom_density(adjust = 1.5) +
+#  geom_density(adjust = 1.5) +
   
-  scale_x_continuous(limits = c(0, 1)) +
+#  scale_x_continuous(limits = c(0, 1)) +
   
-  scale_color_manual(values = c(color_avg, color_common, color_rare)) +
+#  scale_color_manual(values = c(color_avg, color_common, color_rare)) +
   
-  scale_fill_manual(values = paste0(c(color_avg, color_common, color_rare), 
-                                    alpha)) +
+#  scale_fill_manual(values = paste0(c(color_avg, color_common, color_rare), 
+#                                    alpha)) +
   
-  theme_light() +
+#  theme_light() +
   
-  theme(
-    axis.title       = element_blank(),
-    axis.text        = element_text(size = 12, colour = dark_grey),
-    legend.position  = "None"
-  ) +
+#  theme(
+#    axis.title       = element_blank(),
+#    axis.text        = element_text(size = 12, colour = "grey50"),
+#    legend.position  = "None"
+#  ) +
   
-  annotate(
-    geom    = "text",
-    x       = 0.30,
-    y       = 47.5,
-    label   = "bold(\"Index D\")",
-    color   = dark_grey,
-    size    = 6,
-    family  = "serif",
-    parse = TRUE
-  )
+#  annotate(
+#    geom    = "text",
+#    x       = 0.30,
+#    y       = 47.5,
+#    label   = "bold(\"Index D\")",
+#    color   = "grey50",
+#    size    = 4,
+#    family  = "serif",
+#    parse = TRUE
+#  )
 
-hist_plot <- ggplotGrob(hist_plot)
+#hist_plot <- ggplotGrob(hist_plot)
 
-tree_plot <- tree_plot +
-  
-  annotation_custom(
-    grob = hist_plot,
-    xmin = 0.365,
-    xmax = 0.565,
-    ymin = 0.40,
-    ymax = 0.60
-  )
+#tree_plot <- tree_plot +
+#  
+#  annotation_custom(
+#    grob = hist_plot,
+#    xmin = 0.365,
+#    xmax = 0.565,
+#    ymin = 0.40,
+#    ymax = 0.60
+#  )
 
 
 ## Add Sub-Plot Label ----
 
-label <- ifelse(taxa == "mammals", "a", "b")
+#label <- ifelse(taxa == "mammals", "a", "b")
 
-coords <- data.frame(x = -.35, y = 0, text = label)
+#coords <- data.frame(x = -.35, y = 0, text = label)
 
-tree_label <- ggplot() +
+#tree_label <- ggplot() +
   
-  theme_bw() +
+# theme_bw() +
   
-  theme(
-    panel.border      = element_blank(),
-    panel.grid.major  = element_blank(),
-    panel.grid.minor  = element_blank(),
-    line              = element_blank(),
-    text              = element_blank(),
-    title             = element_blank(),
-    rect              = element_blank()
-  ) +
+#  theme(
+#    panel.border      = element_blank(),
+#    panel.grid.major  = element_blank(),
+#    panel.grid.minor  = element_blank(),
+#    line              = element_blank(),
+#    text              = element_blank(),
+#    title             = element_blank(),
+#    rect              = element_blank()
+#  ) +
   
-  geom_text(
-    data     = coords,
-    mapping  = aes(
-      x      = x,
-      y      = y,
-      label  = text
-    ),
-    size     = 12.0,
-    fontface = 2, 
-    color    = dark_grey,
-    family   = "serif"
-  )
+#  geom_text(
+#    data     = coords,
+#    mapping  = aes(
+#      x      = x,
+#      y      = y,
+#      label  = text
+#    ),
+#    size     = 12.0,
+#    fontface = 2, 
+#    color    = "grey50",
+#    family   = "serif"
+#  )
 
-tree_label <- ggplotGrob(tree_label)
+#tree_label <- ggplotGrob(tree_label)
 
-tree_plot <- tree_plot +
+#tree_plot <- tree_plot +
   
-  annotation_custom(
-    grob = tree_label,
-    xmin = 0.0,
-    xmax = 0.1,
-    ymin = 0.0,
-    ymax = 0.1
-  )
+#  annotation_custom(
+#    grob = tree_label,
+#    xmin = 0.0,
+#    xmax = 0.1,
+#    ymin = 0.0,
+#    ymax = 0.1
+#  )
 
 
 plots[[n]] <- tree_plot
@@ -290,15 +303,16 @@ tree_legend <- ggplot() +
     panel.grid.minor  = element_blank(),
     line              = element_blank(),
     text              = element_blank(),
-    title             = element_blank()
+    title             = element_blank(),
+    
   )
 
 
-## Add Order Legend ----
+## Add family Legend ----
 
 n_columns <- ceiling(nrow(coord_groups) / n_lines)
 
-xx    <- ifelse(taxa == "mammals", 8, 1)
+xx    <- 8
 pos   <- 0
 
 for (j in 1:n_columns) {
@@ -323,17 +337,17 @@ for (j in 1:n_columns) {
         annotate(
           geom    = "text",
           x       = xx,
-          y       = yy - 0.35,
-          size    = 6.5,
+          y       = yy - 0.25,
+          size    = 4.5,
           label   = texte,
           hjust   = "left",
-          color   = dark_grey,
+          color   = "grey50",
           family  = "serif"
         )
     }
   }
   
-  xx <- xx + ifelse(taxa == "mammals", 7.00, 7.00)
+  xx <- xx + 5
 }
 
 
@@ -341,22 +355,22 @@ tree_legend <- tree_legend +
   
   scale_x_continuous(limits = c(0, 30)) +
   
-  scale_y_continuous(limits = c(1 - 0.35, n_lines - 0.35))
+  scale_y_continuous(limits = c(1 - 0.25, n_lines - 0.25))
+
+
 
 
 ## Add Colors Legend ----
 
-if (taxa == "mammals") {
-  
-  coords <- data.frame(
-    x       = rep(1.0, 3),
-    x_text  = rep(1.5, 3),
-    y       = seq(n_lines - 1, n_lines - 3.4, by = -1.2),
-    text    = c("Rare species", "Average", "Common species")
+coords <- data.frame(
+    x       = rep(1.0,5),
+    x_text  = rep(1.3, 5),
+    y       = seq(n_lines - 1, n_lines - 6.4, by = -1.2),
+    text    = c("[0-20m[", "[20-40m[", "[40-60m[", "[60-80m[", ">80m")
   )
   
-  yctr <- 2.85
-  xs <- seq(0.9, 6.1, length.out = length(color_distinctiveness) + 1)
+  yctr <- 2
+  xs <- seq(0.9, 4, length.out = length(color_meandepth) + 1)
   
   gradient <- data.frame(
     x1 = xs[-length(xs)],
@@ -373,7 +387,7 @@ if (taxa == "mammals") {
         x      = x,
         y      = y
       ),
-      fill     = c(color_rare, color_avg, color_common),
+      fill     = c(pal[1], pal[2], pal[3],pal[4],pal[5]),
       color    = "transparent",
       shape    = 21,
       size     = 4
@@ -388,8 +402,8 @@ if (taxa == "mammals") {
         label  = text
       ),
       hjust    = "left",
-      size     = 6.5,
-      color    = dark_grey,
+      size     = 4,
+      color    = "grey50",
       family   = "serif"
     ) +
     
@@ -401,7 +415,7 @@ if (taxa == "mammals") {
         ymin = y1,
         ymax = y2
       ),
-      fill   = color_distinctiveness
+      fill   = color_meandepth
     ) +
     
     geom_rect(
@@ -409,7 +423,7 @@ if (taxa == "mammals") {
         xmin = min(xs), xmax = max(xs), ymin = yctr - .5, ymax = yctr + .5
       ),
       fill     = "transparent",
-      color    = dark_grey,
+      color    = "grey50",
       size     = 0.25
     ) +
     
@@ -418,8 +432,8 @@ if (taxa == "mammals") {
       x       = xs[1],
       y       = yctr - 1,
       label   = "0",
-      color   = dark_grey,
-      size    = 6,
+      color   = "grey50",
+      size    = 4,
       family  = "serif"
     ) +
     
@@ -428,63 +442,55 @@ if (taxa == "mammals") {
       x       = xs[length(xs)],
       y       = yctr - 1,
       label   = "1",
-      color   = dark_grey,
-      size    = 6,
+      color   = "grey50",
+      size    = 4,
       family  = "serif"
     ) +
     
     annotate(
       geom    = "text",
-      x       = 3.5,
+      x       = 2.5,
       y       = yctr + 1.15,
-      label   = "bold(Distinctiveness)",
-      color   = dark_grey,
-      size    = 6.5,
+      label   = "bold(mean_depth)",
+      color   = "grey50",
+      size    = 4,
       family  = "serif",
       parse = TRUE
     )
-}
+
 
 plots[[n]] <- tree_legend
 
-n <- n + 1
-}
+#n <- n + 1
+
 
 
 ## Arrange Sub-plots ----
 
 mat <- matrix(
-  data   = c(rep(c(rep(1, 4), rep(3, 4)), 4), rep(2, 4), rep(4, 4)),
-  ncol   = 8,
-  nrow   = 5,
+  data   = c(rep(1,35),3,2,2,2,3,3,2,2,2,3),
+  ncol   = 5,
+  nrow   = 9,
   byrow  = TRUE
 )
 
+
+
 grobs <- gridExtra::arrangeGrob(
-  plots[[1]], plots[[2]], plots[[3]], plots[[4]],
+  plots[[1]], plots[[2]],
   layout_matrix = mat
 )
 
-
+plot(grobs)
 ## Export Figure ----
 
 ggsave(
-  filename  = here::here("figures", paste0(figname, ".png")),
+  filename  = "~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/phyl_tree.png",
   plot      = grobs,
   width     = 24,
   height    = 13,
   units     = "in",
   dpi       = 600
-)
-
-
-## Message ----
-
-usethis::ui_done(
-  paste(
-    usethis::ui_value(figname), 
-    "successfully exported in figures/"
-  )
 )
 
 
