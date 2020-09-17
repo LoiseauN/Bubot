@@ -27,7 +27,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 # to save locally the table from the MySQL database
 work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data"
 #If working from home
-#work.folder="~/Documents/Bubot/Analyses/data"
+#work.folder="~/Documents/Bubot/Bubot_Analyse/data"
 
 # run the first function to select the data that are wanted
 selected.event=Event.list(DB.connection="yes",work.folder=work.folder,measurement.method=c("wave","webfish"),
@@ -224,7 +224,7 @@ colnames(fish_traits)[1] <- "Species"
 
 # first set a working directory. whatch out a new folder "Data_dump" will be created 
 # to save locally the table from the MySQL database
-work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data"
+#work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data"
 
 
 # run the first function to select the data that are wanted
