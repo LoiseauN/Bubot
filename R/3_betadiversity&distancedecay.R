@@ -203,7 +203,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           #--- All region
           deth.dist.all <- dist(data.frame(row.names=rownames(hab_pc_site_scale),depth=hab_pc_site_scale$depth))
         
-          
+         
           BetaFCTtot<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
           BetaFCTtur<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
           BetaFCTnes<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
@@ -226,14 +226,25 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
               tr <- tr[order(rownames(tr)) , ]
               
               result<-tryCatch(
-                BETA<-functional.beta.pair(x=mat, traits=tr, index.family="jaccard"),
+                fbc<-testbetag(x=mat, traits=tr, multi = TRUE, warning.time = TRUE, return.details = FALSE, 
+                                fbc.step = FALSE, parallel = FALSE, opt.parallel = beta.para.control(), 
+                                inter =  "geom", qhull.opt = list(geom = NULL)),
                 error=function(err){result="NA"}
                 )
               if((is(result)[1]=="character")=="TRUE") next
               
-              BetaFCTtot[i,j]<-BETA$funct.beta.jac
-              BetaFCTtur[i,j]<-BETA$funct.beta.jtu  
-              BetaFCTnes[i,j]<-BETA$funct.beta.jne
+              funct.beta.jtu <- (2 * fbc$min.not.shared)/((2 * fbc$min.not.shared) + 
+                                                            fbc$shared)
+              
+              funct.beta.jne <- ((fbc$max.not.shared - fbc$min.not.shared)/(fbc$shared + 
+                                    fbc$sum.not.shared)) * (fbc$shared/((2 * fbc$min.not.shared) + 
+                                    fbc$shared))
+              
+              funct.beta.jac <- fbc$sum.not.shared/(fbc$shared + fbc$sum.not.shared)
+              
+              BetaFCTtot[i,j] <- funct.beta.jac[2,1]
+              BetaFCTtur[i,j] <- funct.beta.jtu[2,1]
+              BetaFCTnes[i,j] <- funct.beta.jne[2,1]
               
               colnames(BetaFCTtot) <- rownames(species_site_scale0_1_funct)
               colnames(BetaFCTtur) <- colnames(BetaFCTtot)
@@ -243,10 +254,9 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
               rownames(BetaFCTtur) <- colnames(BetaFCTtot)
               rownames(BetaFCTnes) <- colnames(BetaFCTtot)
               
-              save(BetaFCTtot,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtot.RData")
-              save(BetaFCTtur,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtur.RData")
-              save(BetaFCTnes,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTnes.RData")
-              
+              #save(BetaFCTtot,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtot.RData")
+              #save(BetaFCTtur,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtur.RData")
+              #save(BetaFCTnes,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTnes.RData")
               
             }
           }
@@ -255,7 +265,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           test <-na.omit(test)
           
           pco.jac_all_fct<- ape::pcoa(as.dist(test))$vectors[,c(1:2)]
-          pco.jac_all_fct<- cbind(pco.jac_all_fct,hab_pc_site_scale) 
+          pco.jac_all_fct<- merge(pco.jac_all_fct,hab_pc_site_scale,by="row.names",all.x=T) 
       
           pco.plot_all_fct <- ggplot(pco.jac_all_fct, aes(x=Axis.1, y=Axis.2,color=classDepth))+
             geom_point(size=2, show.legend = TRUE)+
@@ -267,49 +277,68 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
             geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                           alpha = 0.7, show.legend = FALSE)
           
+            #--- Subset Mayotte
+          mayotte_beta_func <- list(beta.jac=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Mayotte")$Row.names,],
+                                    beta.jtu=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Mayotte")$Row.names,],
+                                    beta.jne=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Mayotte")$Row.names,])
+            #--- Subset Juan de Nova  
+          Juan_de_nova_beta_func <- list(beta.jac=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Juan_de_nova")$Row.names,],
+                                           beta.jtu=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Juan_de_nova")$Row.names,],
+                                           beta.jne=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Juan_de_nova")$Row.names,])
+          
+            #--- Subset Europa
+          Europa_beta_func <- list(beta.jac=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Europa")$Row.names,],
+                                     beta.jtu=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Europa")$Row.names,],
+                                     beta.jne=BetaFCTtot[rownames(BetaFCTtot) %in% subset(pco.jac_all_fct,pco.jac_all_fct$island=="Europa")$Row.names,])
           
           
-          all_beta_func<-functional.beta.pair(species_site_scale0_1_funct,vecpco,index.family = "jaccard")
+          deth.dist.all <- deth.dist.all[,colnames(deth.dist.all) %in% rownames(BetaFCTtot)]
+          deth.dist.all <- deth.dist.all[rownames(deth.dist.all) %in% rownames(BetaFCTtot),]
           
-          #--- Subset Mayotte
-       
+          deth.dist.mayotte <-deth.dist.mayotte[,colnames(deth.dist.mayotte) %in% rownames(mayotte_beta_func$beta.jac)]
+          deth.dist.mayotte <-  deth.dist.mayotte[rownames(deth.dist.mayotte) %in% rownames(mayotte_beta_func$beta.jac),]
           
-          dist.decay.mat <- data.frame(beta.value = c(dist2list(all_beta_func$beta.jac,tri = T)[,3],
-                                                      dist2list(all_beta_func$beta.jtu,tri = T)[,3],
-                                                      dist2list(all_beta_func$beta.jne,tri = T)[,3],
-                                                      dist2list(mayotte_beta_func$beta.jac,tri = T)[,3],
-                                                      dist2list(mayotte_beta_func$beta.jtu,tri = T)[,3],
-                                                      dist2list(mayotte_beta_func$beta.jne,tri = T)[,3],
-                                                      dist2list(Juan_de_nova_beta_func$beta.jac,tri = T)[,3],
-                                                      dist2list(Juan_de_nova_beta_func$beta.jtu,tri = T)[,3],
-                                                      dist2list(Juan_de_nova_bet_funca$beta.jne,tri = T)[,3],
-                                                      dist2list(Europa_beta_func$beta.jac,tri = T)[,3],
-                                                      dist2list(Europa_beta_func$beta.jtu,tri = T)[,3],
-                                                      dist2list(Europa_beta_func$beta.jne,tri = T)[,3]),
+          deth.dist.Juan_de_nova <-deth.dist.Juan_de_nova[,colnames(deth.dist.Juan_de_nova) %in% rownames(Juan_de_nova_beta_func$beta.jac)]
+          deth.dist.Juan_de_nova <-deth.dist.Juan_de_nova[rownames(deth.dist.Juan_de_nova) %in% rownames(Juan_de_nova_beta_func$beta.jac),]
+            
+          deth.dist.Europa <-deth.dist.Europa[,colnames(deth.dist.Europa) %in% rownames(Europa_beta_func$beta.jac)]
+          deth.dist.Europa <-   deth.dist.Europa[rownames(deth.dist.Europa) %in% rownames(Europa_beta_func$beta.jac),]
+          
+            dist.decay.mat <- data.frame(beta.value = c(dist2list(as.dist(BetaFCTtot),tri = T)[,3],
+                                                dist2list(as.dist(BetaFCTtur),tri = T)[,3],
+                                                dist2list(as.dist(BetaFCTnes),tri = T)[,3],
+                                                dist2list(as.dist(mayotte_beta_func$beta.jac),tri = T)[,3],
+                                                dist2list(as.dist(mayotte_beta_func$beta.jtu),tri = T)[,3],
+                                                dist2list(as.dist(mayotte_beta_func$beta.jne),tri = T)[,3],
+                                                dist2list(as.dist(Juan_de_nova_beta_func$beta.jac),tri = T)[,3],
+                                                dist2list(as.dist(Juan_de_nova_beta_func$beta.jtu),tri = T)[,3],
+                                                dist2list(as.dist(Juan_de_nova_beta_func$beta.jne),tri = T)[,3],
+                                                dist2list(as.dist(Europa_beta_func$beta.jac),tri = T)[,3],
+                                                dist2list(as.dist(Europa_beta_func$beta.jtu),tri = T)[,3],
+                                                dist2list(as.dist(Europa_beta_func$beta.jne),tri = T)[,3]),
                                        
-                                       components = c(rep("Total",length(all_beta_func$beta.jac)),
-                                                      rep("Turnover",length(all_beta_func$beta.jac)),
-                                                      rep("Nestedness",length(all_beta_func$beta.jac)),
-                                                      rep("Total",length(mayotte_beta_func$beta.jac)),
-                                                      rep("Turnover",length(mayotte_beta_func$beta.jac)),
-                                                      rep("Nestedness",length(mayotte_beta_func$beta.jac)),
-                                                      rep("Total",length(Juan_de_nova_beta_func$beta.jac)),
-                                                      rep("Turnover",length(Juan_de_nova_beta_func$beta.jac)),
-                                                      rep("Nestedness",length(Juan_de_nova_beta_func$beta.jac)),
-                                                      rep("Total",length(Europa_beta_func$beta.jac)),
-                                                      rep("Turnover",length(Europa_beta_func$beta.jac)),
-                                                      rep("Nestedness",length(Europa_beta_func$beta.jac))),
+                                       components = c(rep("Total",length(as.dist(BetaFCTtot))),
+                                                      rep("Turnover",length(as.dist(BetaFCTtot))),
+                                                      rep("Nestedness",length(as.dist(BetaFCTtot))),
+                                                      rep("Total",length(as.dist(mayotte_beta_func$beta.jac))),
+                                                      rep("Turnover",length(as.dist(mayotte_beta_func$beta.jac))),
+                                                      rep("Nestedness",length(as.dist(mayotte_beta_func$beta.jac))),
+                                                      rep("Total",length(as.dist(Juan_de_nova_beta_func$beta.jac))),
+                                                      rep("Turnover",length(as.dist(Juan_de_nova_beta_func$beta.jac))),
+                                                      rep("Nestedness",length(as.dist(Juan_de_nova_beta_func$beta.jac))),
+                                                      rep("Total",length(as.dist(Europa_beta_func$beta.jac))),
+                                                      rep("Turnover",length(as.dist(Europa_beta_func$beta.jac))),
+                                                      rep("Nestedness",length(as.dist(Europa_beta_func$beta.jac)))),
                                        
-                                       island   = c(rep("All Islands",length(all_beta_func$beta.jac)*3),
-                                                    rep("Mayotte",length(mayotte_beta_func$beta.jac)*3),
-                                                    rep("Juan de Nova",length(Juan_de_nova_beta_func$beta.jac)*3),
-                                                    rep("Europa",length(Europa_beta_func$beta.jac)*3)),
+                                       island   = c(rep("All Islands",length(as.dist(BetaFCTtot))*3),
+                                                    rep("Mayotte",length(as.dist(mayotte_beta_func$beta.jac))*3),
+                                                    rep("Juan de Nova",length(as.dist(Juan_de_nova_beta_func$beta.jac))*3),
+                                                    rep("Europa",length(as.dist(Europa_beta_func$beta.jac))*3)),
                                        
                                        dist.depth = c(rep(dist2list(deth.dist.all,tri = T)[,3],3),
                                                       rep(dist2list(deth.dist.mayotte,tri = T)[,3],3),
                                                       rep(dist2list(deth.dist.Juan_de_nova,tri = T)[,3],3),
                                                       rep(dist2list(deth.dist.Europa,tri = T)[,3],3)))
-          
           
           dist.decay.mat$components<-factor(dist.decay.mat$components, levels = c("Nestedness","Turnover","Total"),order=TRUE)
           
