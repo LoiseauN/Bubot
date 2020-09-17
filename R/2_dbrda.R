@@ -142,9 +142,6 @@ hab_pc_site_scale<- merge(hab_pc_site_scale,data.frame(species.site.matrix$site.
 hab_pc_site_scale<-hab_pc_site_scale[,-1]
 hab_pc_site_scale<- aggregate(. ~ Sample.code, data = hab_pc_site_scale, mean)
 
-
-hab_pc_site_scale<- aggregate(. ~ Sample.code, data = hab_pc_site_scale, mean)
-
 hab_pc_site_scale$classDepth <- NA
 
 for (i in 1: nrow(hab_pc_site_scale)){
@@ -160,7 +157,7 @@ hab_pc_site_scale<- merge(hab_pc_site_scale,sites,by.x="Sample.code",by.y="Sampl
 rownames(hab_pc_site_scale) <- hab_pc_site_scale[,1]
 hab_pc_site_scale<- hab_pc_site_scale[,-1]
 
-species_site_scale<-species.site.matrix$species.matrix
+species_site_scale <- species.site.matrix$species.matrix
 species_site_scale <- merge(species_site_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code")]),by.x="row.names",by.y="Sample.name") 
 species_site_scale <- species_site_scale[,-1]
 species_site_scale <- aggregate(. ~ Sample.code, data = species_site_scale, sum)

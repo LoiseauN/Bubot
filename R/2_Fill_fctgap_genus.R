@@ -415,6 +415,8 @@ pco.traits <- ape::pcoa(trait.dist)
 sp_pc_coord <- pco.traits$vectors[, 1:4]
 colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
 dat_complet <- merge(dat_complet,sp_pc_coord,by.x="variable",by.y="row.names",all.x=T)
+#save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
+save(dat_complet,file="~/Documents/Bubot/Bubot_Analyse/data/Data_dump/dat_complet.RData")
 
 # Start Working on Mayotte.
 dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
