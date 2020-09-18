@@ -21,7 +21,7 @@ number.dat=data.frame(number.ind,
                       subreplicate=species.site.matrix$site.data$Sample.name)
 
 
-number.dat <- merge(hab_pc,number.ind)
+number.dat <- merge(hab_pc_video_scale,number.ind)
 #################################################################
 ############### cleaning dataset ################################
 #################################################################
