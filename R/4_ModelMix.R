@@ -1,4 +1,58 @@
+####################
+hab_selec<-cbind(rownames(Hab),Hab[,c(1,2,5)])
+hab_selec[,2]<-as.numeric(hab_selec[,2])
+hab_selec[,3]<-as.numeric(hab_selec[,3])
+colnames(hab_selec)<-c("site","Lat", "Long", "Prof")
 
+GDM_results<-matrix(NA,3,6)
+rownames(GDM_results)<-c("tot","turn","nest")
+colnames(GDM_results)<-c("site","Lat", "Long", "Houle","Prof","Habi","Ile")
+
+
+hab_selec<- cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c(1:4,6)])
+colnames(hab_selec)<-c("site","PC1","PC2","PC3","PC4","depth")
+hab_selec<-merge(hab_selec,unique(species.site.matrix$site.data[,c("Sample.code","latitude", "longitude")]),by.x="site",by.y="Sample.code",all.x=T)
+colnames(hab_selec)<-c("site","PC1","PC2","PC3","PC4","depth","Lat", "Long")
+############TOTAL#####################################
+all_beta$beta.jtu <- as.data.frame(as.matrix(all_beta$beta.jtu)
+                                   
+                                   dat <- na.omit(as.data.frame(as.matrix(all_beta$beta.jtu)))
+                                   dat <-dat[,colnames(dat) %in% rownames(dat)]
+                                   
+                                   test <- cbind(rownames(dat), dat)
+                                   colnames(test)[1] <- "site"
+                                   hab_selec <- hab_selec[hab_selec$site %in% test$site,]
+                                   
+                                   exFormat3 <- formatsitepair(test,3, 
+                                                               XColumn="Long", YColumn="Lat",
+                                                               siteColumn="site",predData=hab_selec)
+                                   Mod <- gdm(exFormat3, geo=T)
+                                   
+                                   plot(Mod, plot.layout = c(3, 3))
+                                   
+                                   ############TURN#####################################
+                                   bob<-anosim (as.dist(all_beta$beta.jac) ~  PC1*PC2*PC3*PC4*depth,data = hab_selec)
+                                   bob2<-adonis2(as.dist(BETAX$beta.jac) ~ Houle*Prof*Habi*Ile,data = hab_selec)
+                                   BETAX
+                                   plot(bob)
+                                   
+                                   
+                                   load(system.file("./data/gdm.RData", package="gdm"))
+                                   sppData <- gdmExpData[, c(1,2,13,14)]
+                                   envTab <- gdmExpData[, c(2:ncol(gdmExpData))]
+                                   
+                                   
+                                   site <- unique(sppData$site)
+                                   gdmDissim <- cbind(site, gdmDissim)
+                                   exFormat3 <- formatsitepair(gdmDissim, 3, XColumn="Long", YColumn="Lat", predData=envTab,
+                                                               siteColumn="site")
+                                   
+                                   
+                                   ############TOTAL#####################################
+                                   exFormat3 <- formatsitepair(as.matrix(all_beta$beta.jac),3, 
+                                                               predData=hab_selec, XColumn="Long", YColumn="Lat",
+                                                               siteColumn="site")
+                                   Mod <- gdm(exFormat3, geo=T)
 ###########################################################################################
 #################### start to do some mix model analyses ##################################
 ###########################################################################################
