@@ -1,4 +1,14 @@
 
+
+
+
+#A CHECKER Forcipiger Scaridae Naso
+
+
+
+
+
+
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle',
           'doParallel','missForest','cowplot','grid','gridExtra','grid','taxize',
           "ggalt","GGally","tidyverse")
@@ -619,11 +629,9 @@ plotPCOA_1 <- merge(aggregate(value ~ FE + classDepth, plotPCOA, sum),
 plotPCOA <- merge(plotPCOA_1, 
                     aggregate(PC2 ~ FE , plotPCOA, mean),by="FE")
 
-
 FunctSpace<- ggplot(plotPCOA, aes(x=PC1, y=PC2)) + 
-  geom_point(aes(size=log10(value+1),colour= classDepth))+ #
+  geom_point(aes(size=log10(value+1),colour= classDepth,alpha=0.4))+ #
   scale_shape_manual(values=c(4, 16))+
-  scale_alpha_manual(values=c(0.3, 0.8))+
   geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                 alpha = 0.7, show.legend = FALSE)+
   theme_bw()+labs(x = "PCOA 1")+labs(y = "PCOA 2") +
@@ -640,9 +648,9 @@ FunctSpace<- ggplot(plotPCOA, aes(x=PC1, y=PC2)) +
         )
   
 plotPCOA_2 <- dat_complet_mayotte[,c("PC1","PC2")]
-
- FunctSpace + geom_point(data = plotPCOA_2, aes(x = PC1, y = PC2),size=1,color="grey",alpha=0.2) +
-   ggpubr::stat_chull(data = plotPCOA_2,aes(x = PC1, y = PC2), 
+colnames(plotPCOA_2)<-c("axis1","axis2")
+ FunctSpace + geom_point(data = plotPCOA_2, aes(x = axis1, y = axis2),size=1,color="grey",alpha=0.2) +
+   ggpubr::stat_chull(data = plotPCOA_2,aes(x = axis1, y = axis2), 
               alpha = 0.1, geom = "polygon")
  
  

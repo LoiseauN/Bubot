@@ -14,7 +14,7 @@ colnames(hab_selec)<-c("site","PC1","PC2","PC3","PC4","depth")
 hab_selec<-merge(hab_selec,unique(species.site.matrix$site.data[,c("Sample.code","latitude", "longitude")]),by.x="site",by.y="Sample.code",all.x=T)
 colnames(hab_selec)<-c("site","PC1","PC2","PC3","PC4","depth","Lat", "Long")
 ############TOTAL#####################################
-all_beta$beta.jtu <- as.data.frame(as.matrix(all_beta$beta.jtu)
+all_beta$beta.jtu <- as.data.frame(as.matrix(all_beta$beta.jtu))
                                    
                                    dat <- na.omit(as.data.frame(as.matrix(all_beta$beta.jtu)))
                                    dat <-dat[,colnames(dat) %in% rownames(dat)]
@@ -75,7 +75,7 @@ number.dat=data.frame(number.ind,
                       subreplicate=species.site.matrix$site.data$Sample.name)
 
 
-number.dat <- merge(hab_pc_video_scale,number.ind)
+number.dat <- merge(hab_pc_video_scale,number.dat)
 #################################################################
 ############### cleaning dataset ################################
 #################################################################
@@ -129,8 +129,21 @@ plot(fitted(individuals.full),residuals(individuals.full))
 
 
 
-
-
+new.number.dat$Island    <- as.factor(new.number.dat$Island  )
+ggplot(data      = new.number.dat,
+       aes(x     = depth,
+           y     = number.ind,
+           col   = island,
+           group = island))+ #to add the colours for different classes
+  geom_point(size     = 1.2,
+             alpha    = .8,
+             position = "jitter")+ #to add some random noise for plotting purposes
+  theme_minimal()+
+  #theme(legend.position = "none")+
+  geom_smooth(method = "loess",
+              se     = FALSE,
+              size   = .5, 
+              alpha  = .8)
 
 
 
