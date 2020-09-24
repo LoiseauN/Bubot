@@ -16,7 +16,7 @@ alpha_div <- matrix(NA,nrow=length(unique(dat_complet$Sample.code)),ncol=8)
 
   for (i in 1:length(unique(dat_complet$Sample.code))){
     print(i)
-    #i=20
+    #i=13
     subdat <- dat_complet[dat_complet$Sample.code==unique(dat_complet$Sample.code)[i],]
     if(nrow(subdat)<2){next}
     
@@ -54,6 +54,7 @@ alpha_div <- matrix(NA,nrow=length(unique(dat_complet$Sample.code)),ncol=8)
     alpha_div[i,6] <- NA
     alpha_div[i,7] <- NA
     alpha_div[i,8] <- NA
+    
     }
     else{
       alpha_div[i,1] <- abu
@@ -66,5 +67,67 @@ alpha_div <- matrix(NA,nrow=length(unique(dat_complet$Sample.code)),ncol=8)
       alpha_div[i,8] <- Funct_div[24]
     }
   
-    
-    }
+  }
+
+alpha_div <- data.frame(alpha_div)
+rownames(alpha_div) <- unique(dat_complet$Sample.code)
+colnames(alpha_div) <- c("Abu","S","FRic","FDiv","FEve","FDis","FSpe","FOri")
+
+
+
+subdat <- dat_complet[dat_complet$Sample.code==unique(dat_complet$Sample.code)[i],]
+if(nrow(subdat)<2){next}
+
+subcoord <- unique(subdat[,c("variable","PC1","PC2","PC3","PC4")])
+rownames(subcoord)<- subcoord[,1]
+subcoord<- subcoord[,-1]
+subcoord<- na.omit(subcoord)
+
+abu  <- sum(subdat$value)
+S    <- length(unique(subdat$variable))
+
+abumat <-  subdat[,c("variable","value","Sample.code")]
+abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= abumat))
+abumat  <- abumat[,abumat>0]
+
+abumat <- abumat[,colnames(abumat) %in% rownames(subcoord)]
+subcoord <- subcoord[rownames(subcoord) %in% colnames(abumat),]
+abumat <- rbind(abumat,abumat,abumat)
+
+load_all("./")
+
+
+alpha.fd.multidim(sp_faxes_coord = subcoord, asb_sp_w =abumat,
+                              scaling = TRUE, check.input = TRUE,
+                              store_details = FALSE)
+ 
+alpha.fd.multidim(sp_faxes_coord = as.matrix(subcoord), asb_sp_w =abumat,
+                  scaling = TRUE, check.input = TRUE,
+                  store_details = FALSE)
+
+asb_sp_w[1, which(asb_sp_w != 0)]
+colnames(abumat[1, which(abumat[1,] != 0)])
+
+colnames(asb_sp_w[1, which(asb_sp_w[1,] != 0)])
+
+
+abumat[1, which(abumat != 0)]
+
+
+asb_sp_w[1, ]
+
+abumat
+
+a <- asb.sp.summary(abumat)
+is.null(colnames(a$asb_sp_occ))
+        
+sp_w_asb_k[1, which(sp_w_asb_k != 0)]
+
+
+
+  library(devtools)
+  install.packages("devtools")
+  devtools::install_github("CmlMagneville/mFD", dependencies=TRUE)
+  rm(list = c("alpha.fd.multidim", "asb.sp.summary", "fdis.computation", "fdiv.computation", "feve.computation", "fide.computation", "fmpd.computation", "fnnd.computation", "fori.computation", "fric.computation", "fspe.computation", "sp.tr.summary"))
+  
+  Private
