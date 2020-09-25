@@ -12,122 +12,34 @@ alpha.fd.multidim <- function(sp_coord, asb_sp_w,
   #At the site scale
   dat_complet <- merge(dat_complet,  species.site.matrix$site.data[,c("Sample.name","Sample.code")],by.x="VideoID",by.y="Sample.name",all.x=T)
 
-alpha_div <- matrix(NA,nrow=length(unique(dat_complet$Sample.code)),ncol=8)
-
-  for (i in 1:length(unique(dat_complet$Sample.code))){
-    print(i)
-    #i=13
-    subdat <- dat_complet[dat_complet$Sample.code==unique(dat_complet$Sample.code)[i],]
-    if(nrow(subdat)<2){next}
-    
-    subcoord <- unique(subdat[,c("variable","PC1","PC2","PC3","PC4")])
-    rownames(subcoord)<- subcoord[,1]
-    subcoord<- subcoord[,-1]
-    subcoord<- na.omit(subcoord)
-    
-    abu  <- sum(subdat$value)
-    S    <- length(unique(subdat$variable))
-    
-    abumat <-  subdat[,c("variable","value","Sample.code")]
-    abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= abumat))
-    abumat  <- abumat[,abumat>0]
-    
-    abumat <- abumat[,colnames(abumat) %in% rownames(subcoord)]
-    subcoord <- subcoord[rownames(subcoord) %in% colnames(abumat),]
-    
-    subcoord <- subcoord[sort(row.names(subcoord)),]
-    abumat <- abumat[sort(names(abumat))]
-
-    result<- tryCatch(Funct_div <- multidimFD(coord=as.matrix(subcoord), weight= as.matrix(abumat), check_species_pool=TRUE, verb=TRUE,
-                            folder_plot=NULL, nm_asb_plot=NULL, Faxes_plot=NULL, Faxes_nm_plot=NULL, 
-                            plot_pool=FALSE),
-                          error=function(err){result="NA"}
-    )
-    
-    if((is(result)[1]=="character")=="TRUE") {
-    
-    alpha_div[i,1] <- abu
-    alpha_div[i,2] <- S
-    alpha_div[i,3] <- NA
-    alpha_div[i,4] <- NA
-    alpha_div[i,5] <- NA
-    alpha_div[i,6] <- NA
-    alpha_div[i,7] <- NA
-    alpha_div[i,8] <- NA
-    
-    }
-    else{
-      alpha_div[i,1] <- abu
-      alpha_div[i,2] <- S
-      alpha_div[i,3] <- Funct_div[19]
-      alpha_div[i,4] <- Funct_div[20]
-      alpha_div[i,5] <- Funct_div[21]
-      alpha_div[i,6] <- Funct_div[22]
-      alpha_div[i,7] <- Funct_div[23]
-      alpha_div[i,8] <- Funct_div[24]
-    }
-  
-  }
-
-alpha_div <- data.frame(alpha_div)
-rownames(alpha_div) <- unique(dat_complet$Sample.code)
-colnames(alpha_div) <- c("Abu","S","FRic","FDiv","FEve","FDis","FSpe","FOri")
-
-
-
-subdat <- dat_complet[dat_complet$Sample.code==unique(dat_complet$Sample.code)[i],]
-if(nrow(subdat)<2){next}
-
-subcoord <- unique(subdat[,c("variable","PC1","PC2","PC3","PC4")])
-rownames(subcoord)<- subcoord[,1]
-subcoord<- subcoord[,-1]
-subcoord<- na.omit(subcoord)
-
-abu  <- sum(subdat$value)
-S    <- length(unique(subdat$variable))
 
 abumat <-  subdat[,c("variable","value","Sample.code")]
-abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= abumat))
-abumat  <- abumat[,abumat>0]
+abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))
+coord  <- unique(dat_complet[,c("variable","PC1","PC2","PC3","PC4")])
+rownames(coord) <- coord[,1]
+coord<- coord[,-1]
 
-abumat <- abumat[,colnames(abumat) %in% rownames(subcoord)]
-subcoord <- subcoord[rownames(subcoord) %in% colnames(abumat),]
-abumat <- rbind(abumat,abumat,abumat)
+#POOURQUOI ENCORE DES COORD AVEC NA, A TESTER
+coord <- na.omit(coord)
+
+
+abumat <- abumat[ncol(abumat) - sapply(1:nrow(abumat),function(x) sum(abumat[x,]%in%0))>4,]
+abumat <- abumat[,apply(abumat,2,sum)>0]
+abumat <- abumat[apply(abumat,1,sum)>0,]
+
+abumat <- abumat[,colnames(abumat) %in% rownames(coord)]
+coord <- coord[rownames(coord) %in% colnames(abumat),]
+
+write.csv(abumat, file = "abumat.csv")
+write.csv(coord, file = "coord.csv")
 
 load_all("./")
+alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w =abumat[-c(130,144),],
+                           scaling = TRUE, check.input = TRUE,
+                           store_details = FALSE)
 
-
-alpha.fd.multidim(sp_faxes_coord = subcoord, asb_sp_w =abumat,
-                              scaling = TRUE, check.input = TRUE,
-                              store_details = FALSE)
- 
-alpha.fd.multidim(sp_faxes_coord = as.matrix(subcoord), asb_sp_w =abumat,
-                  scaling = TRUE, check.input = TRUE,
-                  store_details = FALSE)
-
-asb_sp_w[1, which(asb_sp_w != 0)]
-colnames(abumat[1, which(abumat[1,] != 0)])
-
-colnames(asb_sp_w[1, which(asb_sp_w[1,] != 0)])
-
-
-abumat[1, which(abumat != 0)]
-
-
-asb_sp_w[1, ]
-
-abumat
-
-a <- asb.sp.summary(abumat)
-is.null(colnames(a$asb_sp_occ))
-        
-sp_w_asb_k[1, which(sp_w_asb_k != 0)]
-
-
-
-  library(devtools)
-  install.packages("devtools")
-  devtools::install_github("CmlMagneville/mFD", dependencies=TRUE)
-  rm(list = c("alpha.fd.multidim", "asb.sp.summary", "fdis.computation", "fdiv.computation", "feve.computation", "fide.computation", "fmpd.computation", "fnnd.computation", "fori.computation", "fric.computation", "fspe.computation", "sp.tr.summary"))
-  
-  Private
+#Ligne 130 et 144 Comprendre erreur
+#   Error in alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w = abumat,  : 
+#                             Error: the sum of relative weights is not equal to one forMAEURUV011
+                           
+alpha_div$Abu   <- apply(abumat[-c(130,144),],1,sum)

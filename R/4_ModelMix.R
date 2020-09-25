@@ -151,10 +151,17 @@ ggplot(data      = new.number.dat,
 
 #At the site scale 
 alpha_div <- merge(alpha_div, hab_pc_site_scale, by="row.names")
+load("gravity.RData")
+for (i in 2:ncol(gravity)){
+  gravity[,i]<- as.numeric(gravity[,i])
+  
+}
+alpha_div<- merge(alpha_div, gravity, by.x="Row.names",by.y="site",all.x=T)
+
 
 ggplot(data      = alpha_div,
        aes(x     = depth,
-           y     = S,
+           y     = fdiv,
            col   = island,
            group = island))+ #to add the colours for different classes
   geom_point(size     = 1.2,
@@ -162,7 +169,7 @@ ggplot(data      = alpha_div,
              position = "jitter")+ #to add some random noise for plotting purposes
   theme_minimal()+
   #theme(legend.position = "none")+
-  geom_smooth(method = "loess",
+  geom_smooth(method = "lm",
               se     = FALSE,
               size   = .5, 
               alpha  = .8)
@@ -177,7 +184,7 @@ ggplot(data      = alpha_div,
              position = "jitter")+ #to add some random noise for plotting purposes
   theme_minimal()+ ylim(0,1500)+
   #theme(legend.position = "none")+
-  geom_smooth(method = "loess",
+  geom_smooth(method = "lm",
               se     = FALSE,
               size   = .5, 
               alpha  = .8)
