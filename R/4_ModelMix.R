@@ -191,3 +191,36 @@ ggplot(data      = alpha_div,
 
 
 
+ggplot(data      = alpha_div,
+       aes(x     = grav_nearest_pop,
+           y     = Abu,
+           col   = classDepth,
+           group = classDepth))+ #to add the colours for different classes
+  geom_point(size     = 1.2,
+             alpha    = .8,
+             position = "jitter")+ #to add some random noise for plotting purposes
+  theme_minimal()+ ylim(0,1500)+
+  #theme(legend.position = "none")+
+  geom_smooth(method = "lm",
+              se     = FALSE,
+              size   = .5, 
+              alpha  = .8)
+
+
+
+ggplot(data      = alpha_div,
+       aes(x     = gravtot100km,
+           y     = sp_richn,
+           col   = classDepth,
+           group = classDepth))+ #to add the colours for different classes
+  geom_point(size     = 1.2,
+             alpha    = .8,
+             position = "jitter")+ #to add some random noise for plotting purposes
+  theme_minimal()+
+  #theme(legend.position = "none")+
+  geom_smooth(method = "lm",
+              se     = FALSE,
+              size   = .5, 
+              alpha  = .8)
+
+

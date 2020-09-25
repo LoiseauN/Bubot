@@ -42,4 +42,7 @@ alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w =abumat[-c(130,1
 #   Error in alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w = abumat,  : 
 #                             Error: the sum of relative weights is not equal to one forMAEURUV011
                            
-alpha_div$Abu   <- apply(abumat[-c(130,144),],1,sum)
+alpha_div$Abu    <- apply(abumat[-c(130,144),],1,sum)
+
+
+
