@@ -13,7 +13,7 @@ alpha.fd.multidim <- function(sp_coord, asb_sp_w,
   dat_complet <- merge(dat_complet,  species.site.matrix$site.data[,c("Sample.name","Sample.code")],by.x="VideoID",by.y="Sample.name",all.x=T)
 
 
-abumat <-  subdat[,c("variable","value","Sample.code")]
+abumat <-  dat_complet[,c("variable","value","Sample.code")]
 abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))
 coord  <- unique(dat_complet[,c("variable","PC1","PC2","PC3","PC4")])
 rownames(coord) <- coord[,1]
@@ -30,14 +30,22 @@ abumat <- abumat[apply(abumat,1,sum)>0,]
 abumat <- abumat[,colnames(abumat) %in% rownames(coord)]
 coord <- coord[rownames(coord) %in% colnames(abumat),]
 
-write.csv(abumat, file = "abumat.csv")
-write.csv(coord, file = "coord.csv")
 
-load_all("./")
-alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w =abumat[-c(130,144),],
+
+
+devtools::load_all("~/Documents/Postdoc MARBEC/PACKAGE R - FDIV/Git3/mFD")
+alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w =abumat,
                            scaling = TRUE, check.input = TRUE,
                            store_details = FALSE)
+save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/alpha_div.RData")
+alpha_div <- 
+  test <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w =abumat,
+                               scaling = TRUE, check.input = TRUE,
+                               store_details = FALSE)
+[-c(130,144),]
 
+
+abumat[c(130,144),]
 #Ligne 130 et 144 Comprendre erreur
 #   Error in alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w = abumat,  : 
 #                             Error: the sum of relative weights is not equal to one forMAEURUV011
