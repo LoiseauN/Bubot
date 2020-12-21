@@ -53,4 +53,27 @@ abumat[c(130,144),]
 alpha_div$Abu    <- apply(abumat[-c(130,144),],1,sum)
 
 
+alpha_div <- merge(alpha_div,unique(dat_complet[,c("Sample.code","depth")]),by.x = "row.names",
+                   by.y= "Sample.code",all.x=T,all.y=F)
 
+
+ggplot(data = alpha_div, 
+             aes(x = depth, y = sp_richn, color = depth)) +
+  geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
+  theme(axis.text.x = element_text(
+                                   size=12),
+        axis.text.y = element_text(
+                                   size=12),
+        axis.title.x = element_text(size=14, face="bold"),
+        axis.title.y = element_text(size=14, face="bold"))
+
+
+ggplot(data = alpha_div, 
+       aes(x = depth, y = log10(Abu), color = depth)) +
+  geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
+  theme(axis.text.x = element_text(
+    size=12),
+    axis.text.y = element_text(
+      size=12),
+    axis.title.x = element_text(size=14, face="bold"),
+    axis.title.y = element_text(size=14, face="bold"))

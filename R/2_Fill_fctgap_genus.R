@@ -1,12 +1,4 @@
-
-
-
-
 #A CHECKER Forcipiger Scaridae Naso
-
-
-
-
 
 
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle',
