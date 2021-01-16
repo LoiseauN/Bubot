@@ -9,9 +9,6 @@
 
 
 #  library 
-
-
-
 pkgs <- c('rfishbase','leaflet','pbmcapply','parallel','tidyverse','plyr',
           'effects','lme4','lmerTest','broom','broom.mixed','cowplot','gridExtra','ade4','ggplot2','vegan','DBI','dplyr','RMySQL')
 nip <- pkgs[!(pkgs %in% installed.packages())]
