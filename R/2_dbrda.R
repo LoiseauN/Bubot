@@ -11,10 +11,13 @@ species_video_scale <- species.site.matrix$species.matrix
 species_video_scale <- species_video_scale[,which(colnames(species_video_scale)!="unknown_fish")]
 
 hab_pc_video_scale <- habit.score
-
 rownames(hab_pc_video_scale) <- rownames(species_video_scale)
 
+species_video_scale <- species_video_scale[apply(species_video_scale,1,sum)>0,]
+hab_pc_video_scale <- hab_pc_video_scale[rownames(hab_pc_video_scale) %in% rownames(species_video_scale),]
+
 hab_pc_video_scale <- merge(hab_pc_video_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth")]),by.x="row.names",by.y="Sample.name") 
+
 
 hab_pc_video_scale$classDepth <- NA
 
@@ -28,7 +31,7 @@ for (i in 1: nrow(hab_pc_video_scale)){
 }
 
 hab_pc_video_scale <- merge(hab_pc_video_scale,sites,by.x="Sample.code",by.y="Sample_code")
-
+for(i in 9:11){hab_pc_video_scale[,i] <-as.factor(hab_pc_video_scale[,i]) } 
 
 ### dbrda
 
@@ -111,7 +114,7 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
   scale_fill_hp(discrete = TRUE, option = "HarryPotter", name = "classDepth",
                 labels = c("[0-20[","[20-40[", "[40-60[", "[60-80[",">80")) +
   #scale_fill_manual(values = pal,      # purplescale
-                    
+  
   #name = "classDepth", labels = c("[0-20[","[20-40[", "[40-60[", "[60-80[",">80")) +
   
   scale_shape_manual(values = c(23:19),
@@ -136,8 +139,13 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
 
 
 #--- At the site scale 
-hab_pc_site_scale<- habit.score
-rownames(hab_pc_site_scale) <- rownames(species_video_scale)
+
+species_site_scale <- species.site.matrix$species.matrix
+species_site_scale <- species_site_scale[,which(colnames(species_site_scale)!="unknown_fish")]
+
+hab_pc_site_scale <- habit.score
+rownames(hab_pc_site_scale) <- rownames(species_site_scale)
+
 hab_pc_site_scale<- merge(hab_pc_site_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth")]),by.x="row.names",by.y="Sample.name") 
 hab_pc_site_scale<-hab_pc_site_scale[,-1]
 hab_pc_site_scale<- aggregate(. ~ Sample.code, data = hab_pc_site_scale, mean)
@@ -157,6 +165,9 @@ hab_pc_site_scale<- merge(hab_pc_site_scale,sites,by.x="Sample.code",by.y="Sampl
 rownames(hab_pc_site_scale) <- hab_pc_site_scale[,1]
 hab_pc_site_scale<- hab_pc_site_scale[,-1]
 
+
+for(i in 7:9){hab_pc_site_scale[,i] <-as.factor(hab_pc_site_scale[,i]) } 
+
 species_site_scale <- species.site.matrix$species.matrix
 species_site_scale <- merge(species_site_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code")]),by.x="row.names",by.y="Sample.name") 
 species_site_scale <- species_site_scale[,-1]
@@ -164,7 +175,9 @@ species_site_scale <- aggregate(. ~ Sample.code, data = species_site_scale, sum)
 rownames(species_site_scale) <- species_site_scale[,1]
 species_site_scale <- species_site_scale[,-1]
 species_site_scale <- species_site_scale[,which(colnames(species_site_scale)!="unknown_fish")]
-#species_site_scale[species_site_scale>1]<- 1
+species_site_scale <- species_site_scale[apply(species_site_scale,1,sum)>0,]
+hab_pc_site_scale <- hab_pc_site_scale[rownames(hab_pc_site_scale) %in% rownames(species_site_scale) ,]
+
 
 ### dbrda
 
@@ -244,10 +257,10 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
   
   geom_encircle(aes(group = classDepth, linetype =classDepth,fill=classDepth), s_shape = 1, expand = 0,size=1,
                 alpha = 0.2, show.legend = FALSE) +
-
+  
   scale_fill_hp(discrete = TRUE, option = "HarryPotter", name = "classDepth",
                 labels = c("[0-20[","[20-40[", "[40-60[", "[60-80[",">80")) +
- 
+  
   scale_shape_manual(values = c(25:21),
                      
                      name = "classDepth", labels = c("[0-20[","[20-40[", "[40-60[", "[60-80[",">80")) +
@@ -255,7 +268,7 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
   labs(x = paste0("CAP1 (", CAP1, "%)"), y = paste0("CAP2 (", CAP2, "%)"),
        
        title = paste0("species_site_scale ~ ", formula)) +
-
+  
   theme_bw() +
   
   theme(axis.line = element_line(colour = "black"),
@@ -263,10 +276,3 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
         panel.grid.major = element_blank(),panel.grid.minor = element_blank(),
         
         panel.border = element_blank(),panel.background = element_blank())
-
-
-
-
-
-
-

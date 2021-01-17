@@ -34,7 +34,7 @@ for (i in 1:nrow(dat_complet)){
   
 }
 
-#taxo_correct=unique(dat_complet[,c("variable","Genus","Familly")])
+taxo_correct=unique(dat_complet[,c("variable","Genus","Familly")])
 
 for (i in 1:nrow(taxo_correct)){
   print(i)
