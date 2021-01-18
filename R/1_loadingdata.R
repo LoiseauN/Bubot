@@ -22,7 +22,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 # first set a working directory. whatch out a new folder "Data_dump" will be created 
 # to save locally the table from the MySQL database
-work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data"
+work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data"
 #If working from home
 work.folder="~/Documents/Bubot/Bubot_Analyse/Bubot_Analyse/data"
 

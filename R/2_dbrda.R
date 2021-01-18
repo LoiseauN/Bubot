@@ -1,3 +1,11 @@
+data_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","data","Data_dump")
+
+results_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","results")
+
+script_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","R")
+
+fig_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","fig")
+  
 # libraries
 pkgs <- c('ade4','ggplot2','vegan','harrypotter','dplyr','ggalt')
 nip <- pkgs[!(pkgs %in% installed.packages())]
@@ -276,3 +284,4 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
         panel.grid.major = element_blank(),panel.grid.minor = element_blank(),
         
         panel.border = element_blank(),panel.background = element_blank())
+

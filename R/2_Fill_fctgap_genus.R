@@ -418,21 +418,7 @@ dat_complet <- merge(dat_complet,sp_pc_coord,by.x="variable",by.y="row.names",al
 #save(dat_complet,file="~/Documents/Bubot/Bubot_Analyse/data/Data_dump/dat_complet.RData")
 
 
-load(file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+load(file=file.path(data_dir,"dat_complet.RData"))
 
 # Start Working on Mayotte.
 dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
