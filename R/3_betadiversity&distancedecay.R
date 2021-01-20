@@ -1,4 +1,4 @@
-load("~/Documents/Bubot/Bubot_Analyse/Bubot_Analyse/data/Data_dump/dat_complet.RData")
+load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle')
 nip <- pkgs[!(pkgs %in% installed.packages())]
@@ -198,10 +198,21 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           vecpco <- unique(dat_complet[,c("variable","PC1","PC2","PC3","PC4")])
           rownames(vecpco) <- vecpco[,1]
           vecpco <- vecpco[,-1]
+          vecpco <- na.omit(vecpco)
           
           #Minimum 5 esp 
           species_site_scale0_1_funct <- species_site_scale0_1
-          species_site_scale0_1_funct <- species_site_scale0_1_funct[apply(species_site_scale0_1_funct,1,sum)>4,]
+          species_site_scale0_1_funct <- species_site_scale0_1_funct[apply(species_site_scale0_1_funct,1,sum)>5,]
+          
+          vecpco <- vecpco[rownames(vecpco) %in% colnames(species_site_scale0_1_funct),]
+          species_site_scale0_1_funct <- species_site_scale0_1_funct[,colnames(species_site_scale0_1_funct) %in%  rownames(vecpco)]
+          
+          testbeta(x=species_site_scale0_1_funct, traits=vecpco, multi = F)
+                   
+                   , multi = TRUE, warning.time = TRUE, return.details = FALSE, 
+                   fbc.step = FALSE, parallel = FALSE, opt.parallel = beta.para.control(), 
+                   inter =  "geom", qhull.opt = list(geom = NULL))
+          
           
           #--- All region
           deth.dist.all <- dist(data.frame(row.names=rownames(hab_pc_site_scale),depth=hab_pc_site_scale$depth))
@@ -229,7 +240,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
               tr <- tr[order(rownames(tr)) , ]
               
               result<-tryCatch(
-                fbc<-testbetag(x=mat, traits=tr, multi = TRUE, warning.time = TRUE, return.details = FALSE, 
+                fbc<-testbeta(x=mat, traits=tr, multi = TRUE, warning.time = TRUE, return.details = FALSE, 
                                 fbc.step = FALSE, parallel = FALSE, opt.parallel = beta.para.control(), 
                                 inter =  "geom", qhull.opt = list(geom = NULL)),
                 error=function(err){result="NA"}
