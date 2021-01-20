@@ -192,6 +192,8 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
             geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                           alpha = 0.7, show.legend = FALSE)
 # TRUE Functional betadiversity 
+          devtools::load_all("~/Downloads/betapart")
+          
           
           vecpco <- unique(dat_complet[,c("variable","PC1","PC2","PC3","PC4")])
           rownames(vecpco) <- vecpco[,1]
@@ -210,7 +212,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
           BetaFCTnes<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
           
           for (i in 1:nrow(species_site_scale0_1_funct)){
-            
+          
             print(paste0("i = ",i ))
             
             for (j in 1:nrow(species_site_scale0_1_funct)){

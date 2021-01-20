@@ -1,5 +1,13 @@
 #Compute all indices
 load("~/Documents/Bubot/Bubot_Analyse/Bubot_Analyse/data/Data_dump/dat_complet.RData")
+
+# Script from mFD packages
+#path <- "~/Documents/mFDpackages/lastversion/mFD_vers2/R"
+# source all files containing the string 'Rex'
+#source.all( path, ".R" )
+
+devtools::load_all("~/Documents/mFDpackages/lastversion/mFD_vers2/R")
+
 #At the video scale 
 
 alpha.fd.multidim <- function(sp_coord, asb_sp_w,
@@ -8,9 +16,8 @@ alpha.fd.multidim <- function(sp_coord, asb_sp_w,
                               scaling = TRUE, check.input = TRUE,
                               store_details = TRUE)
   
-  
-  #At the site scale
-  dat_complet <- merge(dat_complet,  species.site.matrix$site.data[,c("Sample.name","Sample.code")],by.x="VideoID",by.y="Sample.name",all.x=T)
+#At the site scale
+dat_complet <- merge(dat_complet,  species.site.matrix$site.data[,c("Sample.name","Sample.code")],by.x="VideoID",by.y="Sample.name",all.x=T)
 
 
 abumat <-  dat_complet[,c("variable","value","Sample.code")]
@@ -21,8 +28,6 @@ coord<- coord[,-1]
 
 #POOURQUOI ENCORE DES COORD AVEC NA, A TESTER
 coord <- na.omit(coord)
-
-
 abumat <- abumat[ncol(abumat) - sapply(1:nrow(abumat),function(x) sum(abumat[x,]%in%0))>4,]
 abumat <- abumat[,apply(abumat,2,sum)>0]
 abumat <- abumat[apply(abumat,1,sum)>0,]
@@ -32,8 +37,6 @@ coord <- coord[rownames(coord) %in% colnames(abumat),]
 
 
 
-
-devtools::load_all("~/Documents/Postdoc MARBEC/PACKAGE R - FDIV/Git3/mFD")
 alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w =abumat,
                            scaling = TRUE, check.input = TRUE,
                            store_details = FALSE)
@@ -77,3 +80,4 @@ ggplot(data = alpha_div,
       size=12),
     axis.title.x = element_text(size=14, face="bold"),
     axis.title.y = element_text(size=14, face="bold"))
+
