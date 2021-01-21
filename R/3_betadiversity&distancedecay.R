@@ -194,7 +194,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 # TRUE Functional betadiversity 
          abumat0_1 <- abumat
          abumat0_1[abumat0_1>0] <-1
-         abumat0_1 <- abumat0_1[apply(abumat0_1,1,sum)>6,]
+         abumat0_1 <- abumat0_1[apply(abumat0_1,1,sum)>9,]
          abumat0_1 <-abumat0_1[,apply(abumat0_1,2,sum)>0]
          coord <- as.matrix(coord[rownames(coord) %in% colnames(abumat0_1),])
          abumat0_1 <- as.matrix(abumat0_1[,colnames(abumat0_1) %in% rownames(coord)])
