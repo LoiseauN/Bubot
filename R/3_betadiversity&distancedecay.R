@@ -194,18 +194,23 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 # TRUE Functional betadiversity 
          abumat0_1 <- abumat
          abumat0_1[abumat0_1>0] <-1
-         abumat0_1 <- abumat0_1[apply(abumat0_1,1,sum)>4,]
+         abumat0_1 <- abumat0_1[apply(abumat0_1,1,sum)>6,]
+         abumat0_1 <-abumat0_1[,apply(abumat0_1,2,sum)>0]
+         coord <- as.matrix(coord[rownames(coord) %in% colnames(abumat0_1),])
+         abumat0_1 <- as.matrix(abumat0_1[,colnames(abumat0_1) %in% rownames(coord)])
+         
+         
          beta_div_fct <- beta.fd.multidim(
                             sp_faxes_coord = coord,
                             asb_sp_occ     = abumat0_1,
                             check.input    = TRUE,
-                            beta.family    = "Jaccard"
+                            beta.family    = "Jaccard",
+                            betapart.para.opt = betapart::beta.para.control(nc = 6, LB = TRUE)
+                        
                           )
           
-         store_details  = TRUE,
-         betapart.step  = FALSE,
-         betapart.para  = FALSE,
-         betapart.para.opt = betapart::beta.para.control(nc = 4, LB = TRUE)
+
+  
           
           
   

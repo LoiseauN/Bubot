@@ -38,10 +38,10 @@ alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w = abumat,
 alpha_div$abu <- apply(abumat,1,sum)
 alpha_div <- merge(alpha_div,hab_pc_site_scale,by = "row.names",
                    all.x=T,all.y=F)
+rownames(alpha_div) <- alpha_div[,1]
+alpha_div <- alpha_div[,-1]
 
-
-
-save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/alpha_div.RData")
+save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
 
 ggplot(data = alpha_div, 
        aes(x = depth, y = fdis, color = depth)) +
