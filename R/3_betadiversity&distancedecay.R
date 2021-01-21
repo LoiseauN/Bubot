@@ -192,94 +192,23 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
             geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                           alpha = 0.7, show.legend = FALSE)
 # TRUE Functional betadiversity 
-          devtools::load_all("~/Downloads/betapart")
+         abumat0_1 <- abumat
+         abumat0_1[abumat0_1>0] <-1
+         abumat0_1 <- abumat0_1[apply(abumat0_1,1,sum)>4,]
+         beta_div_fct <- beta.fd.multidim(
+                            sp_faxes_coord = coord,
+                            asb_sp_occ     = abumat0_1,
+                            check.input    = TRUE,
+                            beta.family    = "Jaccard"
+                          )
+          
+         store_details  = TRUE,
+         betapart.step  = FALSE,
+         betapart.para  = FALSE,
+         betapart.para.opt = betapart::beta.para.control(nc = 4, LB = TRUE)
           
           
-          vecpco <- unique(dat_complet[,c("variable","PC1","PC2","PC3","PC4")])
-          rownames(vecpco) <- vecpco[,1]
-          vecpco <- vecpco[,-1]
-          vecpco <- na.omit(vecpco)
-          
-          #Minimum 5 esp 
-          species_site_scale0_1_funct <- species_site_scale0_1
-          species_site_scale0_1_funct <- species_site_scale0_1_funct[apply(species_site_scale0_1_funct,1,sum)>5,]
-          
-          vecpco <- vecpco[rownames(vecpco) %in% colnames(species_site_scale0_1_funct),]
-          species_site_scale0_1_funct <- species_site_scale0_1_funct[,colnames(species_site_scale0_1_funct) %in%  rownames(vecpco)]
-          
-          testbeta(x=species_site_scale0_1_funct, traits=vecpco, multi = F)
-                   
-                   , multi = TRUE, warning.time = TRUE, return.details = FALSE, 
-                   fbc.step = FALSE, parallel = FALSE, opt.parallel = beta.para.control(), 
-                   inter =  "geom", qhull.opt = list(geom = NULL))
-          
-          
-          #--- All region
-          deth.dist.all <- dist(data.frame(row.names=rownames(hab_pc_site_scale),depth=hab_pc_site_scale$depth))
-        
-         
-          BetaFCTtot<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
-          BetaFCTtur<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
-          BetaFCTnes<-matrix(NA,nrow(species_site_scale0_1_funct),nrow(species_site_scale0_1_funct))
-          
-          for (i in 1:nrow(species_site_scale0_1_funct)){
-          
-            print(paste0("i = ",i ))
-            
-            for (j in 1:nrow(species_site_scale0_1_funct)){
-              
-              print(paste0("j = ",j ))
-              
-              mat<-rbind(species_site_scale0_1_funct[i,],species_site_scale0_1_funct[j,])
-              mat<-mat[,apply(mat,2,sum)>0]
-              
-              tr  <- vecpco[rownames(vecpco) %in% colnames(mat),]
-              mat <- mat[,colnames(mat) %in% rownames(tr)]
-              
-              mat <- mat[ , order(names(mat))]
-              tr <- tr[order(rownames(tr)) , ]
-              
-              result<-tryCatch(
-                fbc<-testbeta(x=mat, traits=tr, multi = TRUE, warning.time = TRUE, return.details = FALSE, 
-                                fbc.step = FALSE, parallel = FALSE, opt.parallel = beta.para.control(), 
-                                inter =  "geom", qhull.opt = list(geom = NULL)),
-                error=function(err){result="NA"}
-                )
-              if((is(result)[1]=="character")=="TRUE") next
-              
-              funct.beta.jtu <- (2 * fbc$min.not.shared)/((2 * fbc$min.not.shared) + 
-                                                            fbc$shared)
-              
-              funct.beta.jne <- ((fbc$max.not.shared - fbc$min.not.shared)/(fbc$shared + 
-                                    fbc$sum.not.shared)) * (fbc$shared/((2 * fbc$min.not.shared) + 
-                                    fbc$shared))
-              
-              funct.beta.jac <- fbc$sum.not.shared/(fbc$shared + fbc$sum.not.shared)
-              
-              BetaFCTtot[i,j] <- funct.beta.jac[2,1]
-              BetaFCTtur[i,j] <- funct.beta.jtu[2,1]
-              BetaFCTnes[i,j] <- funct.beta.jne[2,1]
-              
-              colnames(BetaFCTtot) <- rownames(species_site_scale0_1_funct)
-              colnames(BetaFCTtur) <- colnames(BetaFCTtot)
-              colnames(BetaFCTnes) <- colnames(BetaFCTtot)
-              
-              rownames(BetaFCTtot) <- colnames(BetaFCTtot)
-              rownames(BetaFCTtur) <- colnames(BetaFCTtot)
-              rownames(BetaFCTnes) <- colnames(BetaFCTtot)
-              
-              #save(BetaFCTtot,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtot.RData")
-              #save(BetaFCTtur,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTtur.RData")
-              #save(BetaFCTnes,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/BetaFCTnes.RData")
-              
-            }
-          }
-          
-          test <- BetaFCTtot[,colSums(is.na(BetaFCTtot)) < ncol(BetaFCTtot)/2 ]
-          test <-na.omit(test)
-          
-          pco.jac_all_fct<- ape::pcoa(as.dist(test))$vectors[,c(1:2)]
-          pco.jac_all_fct<- merge(pco.jac_all_fct,hab_pc_site_scale,by="row.names",all.x=T) 
+  
       
           pco.plot_all_fct <- ggplot(pco.jac_all_fct, aes(x=Axis.1, y=Axis.2,color=classDepth))+
             geom_point(size=2, show.legend = TRUE)+

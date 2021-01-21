@@ -1,24 +1,19 @@
 #Compute all indices
-load("~/Documents/Bubot/Bubot_Analyse/Bubot_Analyse/data/Data_dump/dat_complet.RData")
+load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+
+
 
 # Script from mFD packages
 #path <- "~/Documents/mFDpackages/lastversion/mFD_vers2/R"
 # source all files containing the string 'Rex'
 #source.all( path, ".R" )
 
-devtools::load_all("~/Documents/mFDpackages/lastversion/mFD_vers2/R")
+devtools::load_all("~/Documents/mFDpackages/Git/mFD_shared/R")
 
-#At the video scale 
+devtools::load_all("~/Documents/Postdoc MARBEC/PACKAGE R - FDIV/Git/mFD_shared/R")
 
-alpha.fd.multidim <- function(sp_coord, asb_sp_w,
-                              ind_vect = c("fdis", "fmpd", "fnnd", "feve",
-                                           "fric", "fdiv", "fori", "fspe"),
-                              scaling = TRUE, check.input = TRUE,
-                              store_details = TRUE)
-  
 #At the site scale
 dat_complet <- merge(dat_complet,  species.site.matrix$site.data[,c("Sample.name","Sample.code")],by.x="VideoID",by.y="Sample.name",all.x=T)
-
 
 abumat <-  dat_complet[,c("variable","value","Sample.code")]
 abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))
@@ -32,32 +27,31 @@ abumat <- abumat[ncol(abumat) - sapply(1:nrow(abumat),function(x) sum(abumat[x,]
 abumat <- abumat[,apply(abumat,2,sum)>0]
 abumat <- abumat[apply(abumat,1,sum)>0,]
 
-abumat <- abumat[,colnames(abumat) %in% rownames(coord)]
-coord <- coord[rownames(coord) %in% colnames(abumat),]
+abumat <- as.matrix(abumat[,colnames(abumat) %in% rownames(coord)])
+coord <- as.matrix(coord[rownames(coord) %in% colnames(abumat),])
 
 
-
-alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w =abumat,
+alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w = abumat,
                            scaling = TRUE, check.input = TRUE,
                            store_details = FALSE)
+
+alpha_div$abu <- apply(abumat,1,sum)
+alpha_div <- merge(alpha_div,hab_pc_site_scale,by = "row.names",
+                   all.x=T,all.y=F)
+
+
+
 save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/results/alpha_div.RData")
-alpha_div <- 
-  test <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w =abumat,
-                               scaling = TRUE, check.input = TRUE,
-                               store_details = FALSE)
-[-c(130,144),]
 
-
-abumat[c(130,144),]
-#Ligne 130 et 144 Comprendre erreur
-#   Error in alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w = abumat,  : 
-#                             Error: the sum of relative weights is not equal to one forMAEURUV011
-                           
-alpha_div$Abu    <- apply(abumat[-c(130,144),],1,sum)
-
-
-alpha_div <- merge(alpha_div,unique(dat_complet[,c("Sample.code","depth")]),by.x = "row.names",
-                   by.y= "Sample.code",all.x=T,all.y=F)
+ggplot(data = alpha_div, 
+       aes(x = depth, y = fdis, color = depth)) +
+  geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
+  theme(axis.text.x = element_text(
+    size=12),
+    axis.text.y = element_text(
+      size=12),
+    axis.title.x = element_text(size=14, face="bold"),
+    axis.title.y = element_text(size=14, face="bold"))
 
 
 ggplot(data = alpha_div, 
@@ -72,7 +66,7 @@ ggplot(data = alpha_div,
 
 
 ggplot(data = alpha_div, 
-       aes(x = depth, y = log10(Abu), color = depth)) +
+       aes(x = depth, y = log10(abu), color = depth)) +
   geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
   theme(axis.text.x = element_text(
     size=12),
@@ -80,4 +74,6 @@ ggplot(data = alpha_div,
       size=12),
     axis.title.x = element_text(size=14, face="bold"),
     axis.title.y = element_text(size=14, face="bold"))
+
+
 

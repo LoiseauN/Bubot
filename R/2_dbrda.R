@@ -1,11 +1,13 @@
+
+#At office
 data_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","data","Data_dump")
-
 results_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","results")
-
 script_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","R")
-
 fig_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","fig")
-  
+
+
+
+
 # libraries
 pkgs <- c('ade4','ggplot2','vegan','harrypotter','dplyr','ggalt')
 nip <- pkgs[!(pkgs %in% installed.packages())]
