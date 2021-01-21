@@ -41,7 +41,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
             geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                           alpha = 0.7, show.legend = FALSE)
           
-          #video Scale n'a pas de sens ici! Données trop bruité         
+        
      
           
           #--- Subset Mayotte
@@ -192,7 +192,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
             geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                           alpha = 0.7, show.legend = FALSE)
 # TRUE Functional betadiversity 
-         abumat0_1 <- abumat
+         abumat0_1 <- abumat[c(1:5),]
          abumat0_1[abumat0_1>0] <-1
          abumat0_1 <- abumat0_1[apply(abumat0_1,1,sum)>9,]
          abumat0_1 <-abumat0_1[,apply(abumat0_1,2,sum)>0]
@@ -205,10 +205,25 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
                             asb_sp_occ     = abumat0_1,
                             check.input    = TRUE,
                             beta.family    = "Jaccard",
-                            betapart.para.opt = betapart::beta.para.control(nc = 6, LB = TRUE)
-                        
-                          )
-          
+                            betapart.para.opt = betapart::beta.para.control(nc = 2, LB = TRUE)
+                        )
+         
+         
+         
+        
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
 
   
           

@@ -1,6 +1,7 @@
 #Compute all indices
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
+load("~/Documents/Bubot/Bubot_Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 
 # Script from mFD packages
@@ -8,7 +9,7 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
 # source all files containing the string 'Rex'
 #source.all( path, ".R" )
 
-devtools::load_all("~/Documents/mFDpackages/Git/mFD_shared/R")
+devtools::load_all("~/Documents/mFDpackages/mFD_shared/R")
 
 devtools::load_all("~/Documents/Postdoc MARBEC/PACKAGE R - FDIV/Git/mFD_shared/R")
 
@@ -44,7 +45,7 @@ alpha_div <- alpha_div[,-1]
 save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
 
 ggplot(data = alpha_div, 
-       aes(x = depth, y = fdis, color = depth)) +
+       aes(x = depth, y = PC1, color = depth)) +
   geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
   theme(axis.text.x = element_text(
     size=12),

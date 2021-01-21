@@ -57,10 +57,10 @@ ggplot(beta_classdepth, aes(jtu, geodist, color = depthcat)) +
   theme_minimal() +
   scale_color_gradient(low = "#0091ff", high = "#f0650e")
 
-ggplot(beta_classdepth, aes(x = jtu, y = geodist)) +
+ggplot(beta_classdepth, aes(x = jtu, y = geodist,colour=depthcat)) +
   geom_point() +
-  facet_wrap(~depthcat)+
-  scale_color_viridis_d()
+  facet_wrap(~depthcat)+theme_bw()+
+  scale_color_viridis_d(direction = -1)
 
 
 
