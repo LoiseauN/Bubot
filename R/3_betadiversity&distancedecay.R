@@ -192,42 +192,69 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
             geom_encircle(aes(colour= classDepth),s_shape = 1, expand = 0,size=3,
                           alpha = 0.7, show.legend = FALSE)
 # TRUE Functional betadiversity 
-         abumat0_1 <- abumat[c(1:5),]
-         abumat0_1[abumat0_1>0] <-1
-         abumat0_1 <- abumat0_1[apply(abumat0_1,1,sum)>9,]
-         abumat0_1 <-abumat0_1[,apply(abumat0_1,2,sum)>0]
-         coord <- as.matrix(coord[rownames(coord) %in% colnames(abumat0_1),])
-         abumat0_1 <- as.matrix(abumat0_1[,colnames(abumat0_1) %in% rownames(coord)])
+          #POOURQUOI ENCORE DES COORD AVEC NA, A TESTER
+        abumat <-  dat_complet[,c("variable","value","Sample.code")]
+        abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))
+        coord  <- unique(dat_complet[,c("variable","PC1","PC2","PC3","PC4")])
+        rownames(coord) <- coord[,1]
+        coord<- coord[,-1]
+          
+        coord <- na.omit(coord)
+        abumat <- abumat[ncol(abumat) - sapply(1:nrow(abumat),function(x) sum(abumat[x,]%in%0))>4,]
+        abumat <- abumat[,apply(abumat,2,sum)>0]
+        abumat <- abumat[apply(abumat,1,sum)>0,]
+          
+        abumat <- as.matrix(abumat[,colnames(abumat) %in% rownames(coord)])
+        coord <- as.matrix(coord[rownames(coord) %in% colnames(abumat),])
+          
+        abumat0_1 <- abumat
+        abumat0_1[abumat0_1>0] <-1
+        abumat0_1 <- abumat0_1[apply(abumat0_1,1,sum)>5,]
+        abumat0_1 <-abumat0_1[,apply(abumat0_1,2,sum)>0]
+        coord <- as.matrix(coord[rownames(coord) %in% colnames(abumat0_1),])
+        abumat0_1 <- as.matrix(abumat0_1[,colnames(abumat0_1) %in% rownames(coord)])
+         
+        abumat0_1  <- abumat0_1[,order(colnames(abumat0_1) )]
+        coord <- coord[order(rownames(coord)),]
+        
+         beta_div_fct <- functional.betapart.core(x              = abumat0_1, 
+                                                  traits         = coord, 
+                                                  multi          = FALSE, 
+                                                  warning.time   = FALSE, 
+                                                  return.details = FALSE, 
+                                                  fbc.step       = TRUE, 
+                                                  parallel       = TRUE, 
+                                                  opt.parallel   = beta.para.control(nc=6),
+                                                  convhull.opt   = list(conv1 = "QJ"))
          
          
-         beta_div_fct <- beta.fd.multidim(
-                            sp_faxes_coord = coord,
-                            asb_sp_occ     = abumat0_1,
-                            check.input    = TRUE,
-                            beta.family    = "Jaccard",
-                            betapart.para.opt = betapart::beta.para.control(nc = 2, LB = TRUE)
-                        )
+         
+         test <-functional.betapart.core.pairwise(x              = abumat0_1, 
+                                                  traits         = coord_test, 
+                                                  return.details = FALSE, 
+                                                  parallel       = TRUE, 
+                                                  opt.parallel   = beta.para.control(nc=6),
+                                                  convhull.opt   = list(conv1 = "QJ"))
          
          
-         
+         setwd("~/Downloads")
          remove.packages("betapart")
         
-         
-         
-         
-         install.packages("rtools")
-         library(rtools)
-      
-         
-         
-         remove.packages("betapart")
          
          pkgs <- c( 'doParallel', 'foreach', 'parallel', 'geometry', 'rcdd', 'ape', 'picante', 'fastmatch', 'itertools')
          nip <- pkgs[!(pkgs %in% installed.packages())]
          nip <- lapply(nip, install.packages, dependencies = TRUE)
          ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
          
-         install.packages("betapart_1.5.3.zip", repos = NULL, type="source")
+         install.packages("betapart_1.5.3.zip", repos = NULL, type="binary")
+         
+        
+      
+         
+         
+         remove.packages("betapart")
+         
+        
          
         
 
