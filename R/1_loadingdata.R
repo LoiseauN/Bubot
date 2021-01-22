@@ -210,6 +210,49 @@ trait_fishbase$Species <- as.character(gsub(" ", "_", trait_fishbase$Species))
 
 fish_traits <- merge(fish_traits,trait_fishbase,by.x="row.names",by.y="Species",all.x=T)
 colnames(fish_traits)[1] <- "Species"
+
+
+##########################
+##### Habitat ############
+##########################
+#install.packages("PCAmixdata")
+library(PCAmixdata)
+
+# collect the habitat data
+habitat=species.site.matrix$site.data[,c(10:17)]
+# give the row name
+row.names(habitat)=species.site.matrix$site.data$Sample.name
+
+# do a PCA on categorical data
+habit.mca=PCAmix(X.quali=apply(habitat,2,as.character),rename.level = T)
+
+habit.score=habit.mca$ind$coord
+
+# get the row name so it get ploted on the MCA graph
+r.names=species.site.matrix$site.data$H.community # change the last $ by H.substrat.type, Community,... to get an idea of habitat
+
+# get the variance of axes
+names=list(r.names,c("PC1","PC2","PC3","PC4","PC5"))
+dimnames(habit.score)=names
+
+vars=apply(habit.score,2,var)
+perc.axes=(vars/sum(vars))*100
+barplot(perc.axes)
+
+plot(habit.mca$ind$coord[,1],habit.mca$ind$coord[,2],cex=0)#,xlim=c(-3,-2),ylim=c(0,1))
+text(habit.mca$ind$coord[,1],habit.mca$ind$coord[,2],names[[1]])
+
+# just to check that axis 1 seems to match depth related habitat
+plot(habit.mca$ind$coord[,1],species.site.matrix$site.data$depth)
+
+
+
+
+
+
+
+
+
 ###########################################################################################################
 ######################################## get the biomass ##################################################
 ###########################################################################################################
@@ -277,38 +320,4 @@ boxplot(tot.biomass.fam[island.name=="Juan_de_nova"]~depth.class[island.name=="J
         col=c("blue","green","orange","red"))
 
 
-
-
-##########################
-##### Habitat ############
-##########################
-#install.packages("PCAmixdata")
-library(PCAmixdata)
-
-# collect the habitat data
-habitat=species.site.matrix$site.data[,c(10:17)]
-# give the row name
-row.names(habitat)=species.site.matrix$site.data$Sample.name
-
-# do a PCA on categorical data
-habit.mca=PCAmix(X.quali=apply(habitat,2,as.character),rename.level = T)
-
-habit.score=habit.mca$ind$coord
-
-# get the row name so it get ploted on the MCA graph
-r.names=species.site.matrix$site.data$H.community # change the last $ by H.substrat.type, Community,... to get an idea of habitat
-
-# get the variance of axes
-names=list(r.names,c("PC1","PC2","PC3","PC4","PC5"))
-dimnames(habit.score)=names
-
-vars=apply(habit.score,2,var)
-perc.axes=(vars/sum(vars))*100
-barplot(perc.axes)
-
-plot(habit.mca$ind$coord[,1],habit.mca$ind$coord[,2],cex=0)#,xlim=c(-3,-2),ylim=c(0,1))
-text(habit.mca$ind$coord[,1],habit.mca$ind$coord[,2],names[[1]])
-
-# just to check that axis 1 seems to match depth related habitat
-plot(habit.mca$ind$coord[,1],species.site.matrix$site.data$depth)
 

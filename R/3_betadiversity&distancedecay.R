@@ -210,20 +210,26 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
          
          
          
+         remove.packages("betapart")
         
          
          
          
+         install.packages("rtools")
+         library(rtools)
+      
          
          
+         remove.packages("betapart")
          
+         pkgs <- c( 'doParallel', 'foreach', 'parallel', 'geometry', 'rcdd', 'ape', 'picante', 'fastmatch', 'itertools')
+         nip <- pkgs[!(pkgs %in% installed.packages())]
+         nip <- lapply(nip, install.packages, dependencies = TRUE)
+         ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
          
+         install.packages("betapart_1.5.3.zip", repos = NULL, type="source")
          
-         
-         
-         
-         
-         
+        
 
   
           
