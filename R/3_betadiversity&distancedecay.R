@@ -217,7 +217,24 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
         abumat0_1  <- abumat0_1[,order(colnames(abumat0_1) )]
         coord <- coord[order(rownames(coord)),]
         
-         beta_div_fct <- functional.betapart.core(x              = abumat0_1, 
+        save(abumat0_1,file="abumat0_1.Rdata")
+        save(coord,file="coord.Rdata")
+        
+         Volume <- functional.betapart.core(x              = abumat0_1, 
+                                            traits         = coord, 
+                                            multi          = FALSE, 
+                                            warning.time   = FALSE, 
+                                            return.details = FALSE, 
+                                            fbc.step       = TRUE, 
+                                            parallel       = TRUE, 
+                                            opt.parallel   = beta.para.control(nc=6),
+                                            convhull.opt   = list(conv1 = "QJ"))
+         
+         beta_fonction <- functional.beta.pair(beta_div_fct,index.family="jaccard")
+         
+         
+         
+         beta_div_fct_2 <- functional.betapart.core(x              = abumat0_1, 
                                                   traits         = coord, 
                                                   multi          = FALSE, 
                                                   warning.time   = FALSE, 
@@ -225,16 +242,23 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
                                                   fbc.step       = TRUE, 
                                                   parallel       = TRUE, 
                                                   opt.parallel   = beta.para.control(nc=6),
-                                                  convhull.opt   = list(conv1 = "QJ"))
+                                                  convhull.opt   = qhull.opt(conv1 = "Qt"))
          
          
          
-         test <-functional.betapart.core.pairwise(x              = abumat0_1, 
-                                                  traits         = coord_test, 
+         test2 <- functional.betapart.core.pairwise(x             = abumat0_1, 
+                                                  traits         = coord, 
                                                   return.details = FALSE, 
                                                   parallel       = TRUE, 
                                                   opt.parallel   = beta.para.control(nc=6),
-                                                  convhull.opt   = list(conv1 = "QJ"))
+                                                  convhull.opt   = qhull.opt())
+         
+         
+       
+         
+         
+         
+         
          
          
          setwd("~/Downloads")

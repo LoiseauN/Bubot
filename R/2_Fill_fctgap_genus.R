@@ -74,8 +74,8 @@ taxo_correct$Familly <- addLevel(taxo_correct$Familly, "Blenniidae")
 taxo_correct[taxo_correct$variable=="Bleniidae",]$variable<- "Blenniidae"
 taxo_correct[taxo_correct$variable=="Blenniidae",]$Familly<- "Blenniidae"
 
-# Finish hand --- 
-{
+# If offline--- 
+
 taxo_correct[taxo_correct$variable =="Acanthurus",]$Genus<- "Acanthurus"
 taxo_correct[taxo_correct$variable =="Acanthurus",]$Familly<- "Acanthuridae"
 
@@ -258,7 +258,7 @@ taxo_correct[taxo_correct$variable =="Zebrasoma",]$Familly<- "Acanthuridae"
 
 taxo_correct[taxo_correct$variable =="Chromis",]$Genus<- "Chromis"
 taxo_correct[taxo_correct$variable =="Chromis",]$Familly<- "Pomacentridae"
-}
+
 
 dat_complet <- dat_complet[,-c(7,8)]
 dat_complet <- merge(dat_complet,taxo_correct, by="variable",all.x= T)
