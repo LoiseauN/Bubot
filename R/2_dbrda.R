@@ -296,18 +296,22 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
 
 
 ##########################################################################################
+station <- read.csv2("station.code.bubot.csv",sep=",",header = T)
+colnames(station) <- c("Sample.code", "island","station")
 
 #--- At the station scale ---
-
-species_station_scale <- species.station.matrix$species.matrix
+species_station_scale <- species.site.matrix$species.matrix
 species_station_scale <- species_station_scale[,which(colnames(species_station_scale)!="unknown_fish")]
 
 hab_pc_station_scale <- habit.score
 rownames(hab_pc_station_scale) <- rownames(species_station_scale)
 
-hab_pc_station_scale<- merge(hab_pc_station_scale,data.frame(species.station.matrix$station.data[,c("Sample.name","Sample.code","depth")]),by.x="row.names",by.y="Sample.name") 
-hab_pc_station_scale<-hab_pc_station_scale[,-1]
+hab_pc_station_scale <- merge(hab_pc_station_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth")]),by.x="row.names",by.y="Sample.name") 
+hab_pc_station_scale <- hab_pc_station_scale[,-1]
 hab_pc_station_scale<- aggregate(. ~ Sample.code, data = hab_pc_station_scale, mean)
+hab_pc_station_scale <- merge(hab_pc_station_scale,station,by="Sample.code",all.x = T)
+rownames(hab_pc_station_scale) <- hab_pc_station_scale[,1]
+hab_pc_station_scale<- hab_pc_station_scale[,-1]
 
 hab_pc_station_scale$classDepth <- NA
 
@@ -320,22 +324,44 @@ for (i in 1: nrow(hab_pc_station_scale)){
   
 }
 
-hab_pc_station_scale<- merge(hab_pc_station_scale,stations,by.x="Sample.code",by.y="Sample_code")
-rownames(hab_pc_station_scale) <- hab_pc_station_scale[,1]
-hab_pc_station_scale<- hab_pc_station_scale[,-1]
-
 
 for(i in 7:9){hab_pc_station_scale[,i] <-as.factor(hab_pc_station_scale[,i]) } 
 
-species_station_scale <- species.station.matrix$species.matrix
-species_station_scale <- merge(species_station_scale,data.frame(species.station.matrix$station.data[,c("Sample.name","Sample.code")]),by.x="row.names",by.y="Sample.name") 
+
+species_station_scale <- species.site.matrix$species.matrix
+species_station_scale <- merge(species_station_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code")]),by.x="row.names",by.y="Sample.name") 
 species_station_scale <- species_station_scale[,-1]
 species_station_scale <- aggregate(. ~ Sample.code, data = species_station_scale, sum)
 rownames(species_station_scale) <- species_station_scale[,1]
 species_station_scale <- species_station_scale[,-1]
 species_station_scale <- species_station_scale[,which(colnames(species_station_scale)!="unknown_fish")]
 species_station_scale <- species_station_scale[apply(species_station_scale,1,sum)>0,]
-hab_pc_station_scale <- hab_pc_station_scale[rownames(hab_pc_station_scale) %in% rownames(species_station_scale) ,]
+hab_pc_station_scale  <- hab_pc_station_scale[rownames(hab_pc_station_scale) %in% rownames(species_station_scale) ,]
+
+species_station_scale <- merge(species_station_scale,data.frame(species.site.matrix$site.data[,c("Sample.code","depth")]),by.x="row.names",by.y="Sample.code") 
+colnames(species_station_scale)[1] <- "Sample.code"
+species_station_scale<-  merge(species_station_scale,station,by="Sample.code",all.x = T)
+
+species_station_scale$classDepth <- NA
+
+for (i in 1: nrow(species_station_scale)){
+  if(species_station_scale$depth[i]<20){ species_station_scale$classDepth[i] <- "[0-20["}
+  if(species_station_scale$depth[i]>=20 & species_station_scale$depth[i]<40){ species_station_scale$classDepth[i] <- "[20-40["}
+  if(species_station_scale$depth[i]>=40 & species_station_scale$depth[i]<60){ species_station_scale$classDepth[i] <- "[40-60["}
+  if(species_station_scale$depth[i]>=60 & species_station_scale$depth[i]<80){ species_station_scale$classDepth[i] <- "[60-80["}
+  if(species_station_scale$depth[i]>=80){ species_station_scale$classDepth[i] <- ">80"}
+  
+}
+
+species_station_scale <-species_station_scale[,-c(1,321,320)]
+for(i in 319:320){species_station_scale[,i] <-as.factor(species_station_scale[,i]) } 
+
+species_station_scale <- aggregate(.~station+classDepth, species_station_scale, sum)
+rownames(species_station_scale) <- paste0(species_station_scale$station,"_",species_station_scale$classDepth)  
+species_station_scale <- species_station_scale[,-c(1,2)]
+
+hab_pc_station_scale <- aggregate(.~station+classDepth, hab_pc_station_scale, mean)
+rownames(hab_pc_station_scale) <- paste0(hab_pc_station_scale$station,"_",hab_pc_station_scale$classDepth)  
 
 
 ### dbrda
@@ -345,7 +371,6 @@ dbrda.tot.pc <- capscale(species_station_scale ~ classDepth + PC1 + PC2 + PC3 + 
 # partial dbrda
 
 dbrda.depth.pc <- capscale(species_station_scale ~ classDepth + Condition(PC1 + PC2 + PC3 + PC4 + island), data = hab_pc_station_scale, distance = "jaccard")
-
 
 
 # check results
@@ -370,7 +395,7 @@ dbrda <- dbrda.depth.pc
 
 scores_dbrda <- scores(dbrda)  # getting the scores from the analysis
 
-station_scores <- scores_dbrda$stations     # separating out the station scores
+station_scores <- scores_dbrda$sites     # separating out the station scores
 
 species_station_scale_scores <- scores_dbrda$species_station_scale   # separating out the species_station_scale
 
