@@ -33,8 +33,8 @@ coord <- as.matrix(coord[rownames(coord) %in% colnames(abumat),])
 
 
 alpha_div <- alpha.fd.multidim(sp_faxes_coord = coord, asb_sp_w = abumat,
-                           scaling = TRUE, check.input = TRUE,
-                           store_details = FALSE)
+                               scaling = TRUE, check.input = TRUE,
+                               store_details = FALSE)
 
 alpha_div$abu <- apply(abumat,1,sum)
 alpha_div <- merge(alpha_div,hab_pc_site_scale,by = "row.names",
@@ -56,14 +56,14 @@ ggplot(data = alpha_div,
 
 
 ggplot(data = alpha_div, 
-             aes(x = depth, y = sp_richn, color = depth)) +
+       aes(x = depth, y = sp_richn, color = depth)) +
   geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
   theme(axis.text.x = element_text(
-                                   size=12),
-        axis.text.y = element_text(
-                                   size=12),
-        axis.title.x = element_text(size=14, face="bold"),
-        axis.title.y = element_text(size=14, face="bold"))
+    size=12),
+    axis.text.y = element_text(
+      size=12),
+    axis.title.x = element_text(size=14, face="bold"),
+    axis.title.y = element_text(size=14, face="bold"))
 
 
 ggplot(data = alpha_div, 
@@ -75,6 +75,3 @@ ggplot(data = alpha_div,
       size=12),
     axis.title.x = element_text(size=14, face="bold"),
     axis.title.y = element_text(size=14, face="bold"))
-
-
-
