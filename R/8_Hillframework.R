@@ -3,6 +3,14 @@
 abumat <-  dat_complet[,c("variable","value","Sample.code")]
 abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))
 
+cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
+                   "Diet")] #maxLength ,"clean_diet"
+cov= unique(cov)
+rownames(cov) <- cov[,1]
+cov <- cov[,-1]
+cov.pcoa <- na.omit(cov)
+
+trait.dist <- daisy(cov.pcoa,metric ="gower")
 
 abumat <- abumat[,apply(abumat,2,sum)>0]
 abumat <- abumat[apply(abumat,1,sum)>0,]
@@ -19,6 +27,11 @@ abumat_relatif <- abumat
 for (i in 1:nrow(abumat_relatif)){
   abumat_relatif[i,] <- abumat_relatif[i,]/sum(abumat_relatif[i,])
 }
+
+
+
+
+
 ###############################################################################
 ###############################################################################
 #taxo richness : data= 0/1, q=0, tau=min (c'est la richesse spé)
@@ -135,7 +148,7 @@ coord_depth <- species.site.matrix$site.data[,c(2,5:7)]
 coord_depth<- aggregate(. ~ Sample.code, data = coord_depth, mean)
 rownames(coord_depth) <- coord_depth[,1]
 
-coord_depth <- coord_depth[rownames(coord_depth) %in% rownames(jaccard),]
+coord_depth <- coord_depth[rownames(coord_depth) %in% rownames(abumat),]
 
 coord <- coord_depth[,-2]
 colnames(coord) <- c("name","lat","lon")

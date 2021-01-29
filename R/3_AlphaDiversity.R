@@ -11,7 +11,7 @@ load("~/Documents/Bubot/Bubot_Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 devtools::load_all("~/Documents/mFDpackages/mFD_shared/R")
 
-devtools::load_all("~/Documents/Postdoc MARBEC/PACKAGE R - FDIV/Git/mFD_shared/R")
+devtools::load_all("~/Documents/mFDpackages/last/mFD/R")
 
 #At the site scale
 dat_complet <- merge(dat_complet,  species.site.matrix$site.data[,c("Sample.name","Sample.code")],by.x="VideoID",by.y="Sample.name",all.x=T)
