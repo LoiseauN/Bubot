@@ -54,41 +54,47 @@ alpha_hill_all <- data.frame(hill_taxo_richess  = alpha_hill_taxo_richess,
                              hill_fonct_richess = alpha_hill_fonct_richess,
                              hill_fonct_entropy = alpha_hill_fonct_entropy)
 
-alpha_hill_all$classDepth <- as.factor(str_split_fixed(rownames(alpha_hill_all), "_", 2)[,2])
-
-
+#alpha_hill_all$classDepth <- as.factor(str_split_fixed(rownames(alpha_hill_all), "_", 2)[,2])
 
 alpha_hill_all <- merge(alpha_div,alpha_hill_all,by="row.names",all.x=T)
 
-FD_q0 <- ggplot(alpha_hill_all,aes(x=classDepth,y=FD_q0,colour=classDepth ))+
-  geom_boxplot()+
-  theme_bw()+
-  theme(legend.position = "none")+
-  geom_jitter()+
-  ggtitle("Hill taxo richness")
 
-FD_q1<- ggplot(alpha_hill_all,aes(x=classDepth,y=FD_q1,colour=classDepth ))+
-  geom_boxplot()+
-  theme_bw()+
-  theme(legend.position = "none")+
-  geom_jitter()+
-  ggtitle("Hill taxo entropy")
 
-FD_q0.1<- ggplot(alpha_hill_all,aes(x=classDepth,y=FD_q0.1,colour=classDepth ))+
-  geom_boxplot()+
-  theme_bw()+
-  theme(legend.position = "none")+
-  geom_jitter()+
-  ggtitle("Hill funct richness")
-
-FD_q1.1<- ggplot(alpha_hill_all,aes(x=classDepth,y=FD_q1.1,colour=classDepth ))+
-  geom_boxplot()+
-  theme_bw()+
-  theme(legend.position = "none")+
-  geom_jitter()+
-  ggtitle("Hill funct entropy")
-
-grid.arrange(FD_q0,FD_q0.1,FD_q1,FD_q1.1)
+for (i in 1:4){
+  print(i)
+  if (i == 1) data_plot <- alpha_hill_all
+  if (i == 2) data_plot <- subset(alpha_hill_all,alpha_hill_all$island=="Mayotte")
+  if (i == 3) data_plot <- subset(alpha_hill_all,alpha_hill_all$island=="Juan_de_nova")
+  if (i == 4) data_plot <- subset(alpha_hill_all,alpha_hill_all$island=="Europa")
+  
+  
+  FD_q0 <- ggplot(data_plot,aes(x=depth,y=FD_q0))+
+    geom_point(color="cyan4")+
+    theme_bw()+
+    theme(legend.position = "none")+
+    ggtitle("Hill taxo richness")
+  
+  FD_q1<- ggplot(data_plot,aes(x=depth,y=FD_q1))+
+    geom_point(color="cyan4")+
+    theme_bw()+
+    theme(legend.position = "none")+
+    ggtitle("Hill taxo entropy")
+  
+  FD_q0.1<- ggplot(data_plot,aes(x=depth,y=FD_q0.1))+
+    geom_point(color="cyan4")+
+    theme_bw()+
+    theme(legend.position = "none")+
+    ggtitle("Hill funct richness")
+  
+  FD_q1.1<- ggplot(data_plot,aes(x=depth,y=FD_q1.1))+
+    geom_point(color="cyan4")+
+    theme_bw()+
+    theme(legend.position = "none")+
+    ggtitle("Hill funct entropy")
+  
+  grid.arrange(FD_q0,FD_q0.1,FD_q1,FD_q1.1)
+  
+}
 
 
 
@@ -124,6 +130,20 @@ beta_hill_fonct_richess_t <- reshape::melt(as.matrix(beta_hill_fonct_richess$bet
 beta_hill_fonct_entropy_t <- reshape::melt(as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1))[melt(upper.tri(as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1)))$value,]
 
 
+#Plot distance  en fonction des profondeurs
+coord_depth <- species.site.matrix$site.data[,c(2,5:7)]
+coord_depth<- aggregate(. ~ Sample.code, data = coord_depth, mean)
+rownames(coord_depth) <- coord_depth[,1]
+
+coord_depth <- coord_depth[rownames(coord_depth) %in% rownames(jaccard),]
+
+coord <- coord_depth[,-2]
+colnames(coord) <- c("name","lat","lon")
+geodist <-  as.matrix(round(GeoDistanceInMetresMatrix(coord) / 1000,3))
+depthdist <- as.matrix(dist(coord_depth[,2],"euclidean"))
+colnames(depthdist)<- rownames(coord_depth)
+rownames(depthdist)<- rownames(coord_depth)
+
 depthdist_t <- reshape::melt(as.matrix(depthdist))[melt(upper.tri(as.matrix(depthdist)))$value,]
 geodist_t  <- reshape::melt(as.matrix(geodist))[melt(upper.tri(as.matrix(geodist)))$value,]
 
@@ -136,7 +156,7 @@ beta_hill_all <- data.frame(X1                      = beta_hill_taxo_richess_t[,
                             depthdist               = depthdist_t[,3],
                             geodist                 = geodist_t[,3])
 
-BetaFD_q0<- ggplot(beta_hill_all,aes(x=depthdist,y=beta_hill_taxo_richess))+
+BetaFD_q0 <- ggplot(beta_hill_all,aes(x=depthdist,y=beta_hill_taxo_richess))+
   geom_point(color="cyan4")+
   theme_bw()+
   ylab("beta")+
@@ -164,20 +184,9 @@ BetaFD_q01.1<- ggplot(beta_hill_all,aes(x=depthdist,y=beta_hill_fonct_entropy))+
   theme(legend.position = "none")+
   ggtitle("Beta hill fonc entropy")
 
-grid.arrange(BetaFD_q0,BetaFD_q1,BetaFD_q0.1,BetaFD_q01.1)
+grid.arrange(BetaFD_q0,BetaFD_q0.1,BetaFD_q1,BetaFD_q01.1)
 
 
-#Plot distance decay en fonction des profondeurs
-coord_depth <- species.site.matrix$site.data[,c(2,5:7)]
-coord_depth<- aggregate(. ~ Sample.code, data = coord_depth, mean)
-rownames(coord_depth) <- coord_depth[,1]
-#--
-coord_depth <- coord_depth[rownames(coord_depth) %in% rownames(jaccard),]
-
-coord <- coord_depth[,-2]
-colnames(coord) <- c("name","lat","lon")
-geodist <-  as.matrix(round(GeoDistanceInMetresMatrix(coord) / 1000,3))
-depthdist <- as.matrix(dist(coord_depth[,2],"euclidean"))
 
 
 ##Add Column Pairs comparsion
@@ -192,71 +201,114 @@ for(i in 1:nrow(beta_hill_all)){
 beta_hill_all$pairsIsland <- paste0(beta_hill_all$island1,"_",beta_hill_all$island2)
 
 beta_hill_all_mayotte <- subset(beta_hill_all,beta_hill_all$pairsIsland=="Mayotte_Mayotte")
-ggplot(beta_hill_all_mayotte,aes(x=depthdist,y=beta_hill_fonct_entropy))+
+
+BetaFD_q0 <- ggplot(beta_hill_all_mayotte,aes(x=depthdist,y=beta_hill_taxo_richess))+
+  geom_point(color="cyan4")+
+  theme_bw()+
+  ylab("beta")+
+  theme(legend.position = "none")+
+  ggtitle("Beta hill taxo richness")
+
+BetaFD_q1<- ggplot(beta_hill_all_mayotte,aes(x=depthdist,y=beta_hill_taxo_entropy))+
+  geom_point(color="cyan4")+
+  theme_bw()+
+  ylab("beta")+
+  theme(legend.position = "none")+
+  ggtitle("Beta hill taxo entropy")
+
+BetaFD_q0.1<- ggplot(beta_hill_all_mayotte,aes(x=depthdist,y=beta_hill_fonct_richess))+
+  geom_point(color="cyan4")+
+  theme_bw()+
+  ylab("beta")+
+  theme(legend.position = "none")+
+  ggtitle("Beta hill fonc richness")
+
+BetaFD_q01.1<- ggplot(beta_hill_all_mayotte,aes(x=depthdist,y=beta_hill_fonct_entropy))+
   geom_point(color="cyan4")+
   theme_bw()+
   ylab("beta")+
   theme(legend.position = "none")+
   ggtitle("Beta hill fonc entropy")
 
-
-colnames(depthdist)<- rownames(coord_depth)
-rownames(depthdist)<- rownames(coord_depth)
+grid.arrange(BetaFD_q0,BetaFD_q0.1,BetaFD_q1,BetaFD_q01.1)
 
 
 
 
+###########################
 
+beta_hill_all_Juan_de_nova <- subset(beta_hill_all,beta_hill_all$pairsIsland=="Juan_de_nova_Juan_de_nova")
 
-
-
-
-#At the station scale
-abumat    <-species_station_scale
-
-trait.dist_mat <- as.matrix(trait.dist)
-abumat <- as.matrix(abumat[,colnames(abumat) %in% rownames(trait.dist_mat)])
-trait.dist_mat <- trait.dist_mat[,colnames(trait.dist_mat) %in% colnames(abumat)]
-trait.dist_mat <- trait.dist_mat[rownames(trait.dist_mat) %in% colnames(abumat),]
-
-abumat0_1 <- abumat
-abumat0_1[abumat0_1>0] <- 1
-
-abumat_relatif <- abumat
-for (i in 1:nrow(abumat_relatif)){
-  abumat_relatif[i,] <- abumat_relatif[i,]/sum(abumat_relatif[i,])
-}
-
-
-
-
-
-FD_q0<- ggplot(test,aes(x=classDepth.x,y=FD_q0,colour=classDepth.x ))+
-  geom_boxplot()+
+BetaFD_q0 <- ggplot(beta_hill_all_Juan_de_nova,aes(x=depthdist,y=beta_hill_taxo_richess))+
+  geom_point(color="cyan4")+
   theme_bw()+
+  ylab("beta")+
   theme(legend.position = "none")+
-  geom_jitter()+
-  ggtitle("Hill taxo richness")
+  ggtitle("Beta hill taxo richness")
 
-FD_q1<- ggplot(test,aes(x=classDepth.x,y=FD_q1,colour=classDepth.x ))+
-  geom_boxplot()+
+BetaFD_q1<- ggplot(beta_hill_all_Juan_de_nova,aes(x=depthdist,y=beta_hill_taxo_entropy))+
+  geom_point(color="cyan4")+
   theme_bw()+
+  ylab("beta")+
   theme(legend.position = "none")+
-  geom_jitter()+
-  ggtitle("Hill taxo entropy")
+  ggtitle("Beta hill taxo entropy")
 
-FD_q0.1<- ggplot(test,aes(x=classDepth.x,y=FD_q0.1,colour=classDepth.x ))+
-  geom_boxplot()+
+BetaFD_q0.1<- ggplot(beta_hill_all_Juan_de_nova,aes(x=depthdist,y=beta_hill_fonct_richess))+
+  geom_point(color="cyan4")+
   theme_bw()+
+  ylab("beta")+
   theme(legend.position = "none")+
-  geom_jitter()+
-  ggtitle("Hill funct richness")
+  ggtitle("Beta hill fonc richness")
 
-FD_q1.1<- ggplot(test,aes(x=classDepth.x,y=FD_q1.1,colour=classDepth.x))+
-  geom_boxplot()+
+BetaFD_q01.1<- ggplot(beta_hill_all_Juan_de_nova,aes(x=depthdist,y=beta_hill_fonct_entropy))+
+  geom_point(color="cyan4")+
   theme_bw()+
+  ylab("beta")+
   theme(legend.position = "none")+
-  geom_jitter()+
-  ggtitle("Hill funct entropy")
+  ggtitle("Beta hill fonc entropy")
 
-grid.arrange(FD_q0,FD_q0.1,FD_q1,FD_q1.1)
+grid.arrange(BetaFD_q0,BetaFD_q0.1,BetaFD_q1,BetaFD_q01.1)
+
+
+###########################
+beta_hill_all_Europa <- subset(beta_hill_all,beta_hill_all$pairsIsland=="Europa_Europa")
+
+BetaFD_q0 <- ggplot(beta_hill_all_Europa,aes(x=depthdist,y=beta_hill_taxo_richess))+
+  geom_point(color="cyan4")+
+  theme_bw()+
+  ylab("beta")+
+  theme(legend.position = "none")+
+  ggtitle("Beta hill taxo richness")
+
+BetaFD_q1<- ggplot(beta_hill_all_Europa,aes(x=depthdist,y=beta_hill_taxo_entropy))+
+  geom_point(color="cyan4")+
+  theme_bw()+
+  ylab("beta")+
+  theme(legend.position = "none")+
+  ggtitle("Beta hill taxo entropy")
+
+BetaFD_q0.1<- ggplot(beta_hill_all_Europa,aes(x=depthdist,y=beta_hill_fonct_richess))+
+  geom_point(color="cyan4")+
+  theme_bw()+
+  ylab("beta")+
+  theme(legend.position = "none")+
+  ggtitle("Beta hill fonc richness")
+
+BetaFD_q01.1<- ggplot(beta_hill_all_Europa,aes(x=depthdist,y=beta_hill_fonct_entropy))+
+  geom_point(color="cyan4")+
+  theme_bw()+
+  ylab("beta")+
+  theme(legend.position = "none")+
+  ggtitle("Beta hill fonc entropy")
+
+grid.arrange(BetaFD_q0,BetaFD_q0.1,BetaFD_q1,BetaFD_q01.1)
+
+
+
+
+
+
+
+
+
+

@@ -19,7 +19,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 # to save locally the table from the MySQL database
 work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data"
 #If working from home
-work.folder="~/Documents/Bubot/Bubot_Analyse/Bubot/data"
+#work.folder="~/Documents/Bubot/Bubot_Analyse/Bubot/data"
 
 # run the first function to select the data that are wanted
 selected.event=Event.list(DB.connection="yes",work.folder=work.folder,measurement.method=c("wave","webfish"),
