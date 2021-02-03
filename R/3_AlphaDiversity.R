@@ -1,7 +1,7 @@
 #Compute all indices
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
-load("~/Documents/Bubot/Bubot_Analyse/Bubot/data/Data_dump/dat_complet.RData")
+#load("~/Documents/Bubot/Bubot_Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 
 #install.packages("mFD_0.0.0.9000.tar.gz", repos = NULL)

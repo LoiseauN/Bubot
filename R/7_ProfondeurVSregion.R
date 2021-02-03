@@ -7,8 +7,8 @@ coord_depth <- species.site.matrix$site.data[,c(2,5:7)]
 coord_depth<- aggregate(. ~ Sample.code, data = coord_depth, mean)
 rownames(coord_depth) <- coord_depth[,1]
 #--
-jaccard <- as.matrix(all_beta$beta.jac)
-coord_depth <- coord_depth[rownames(coord_depth) %in% rownames(jaccard),]
+
+coord_depth <- coord_depth[rownames(coord_depth) %in% rownames(abumat),]
 
 coord <- coord_depth[,-2]
 colnames(coord) <- c("name","lat","lon")
