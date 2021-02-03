@@ -4,14 +4,8 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
 load("~/Documents/Bubot/Bubot_Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 
-# Script from mFD packages
-#path <- "~/Documents/mFDpackages/lastversion/mFD_vers2/R"
-# source all files containing the string 'Rex'
-#source.all( path, ".R" )
+#install.packages("mFD_0.0.0.9000.tar.gz", repos = NULL)
 
-devtools::load_all("~/Documents/mFDpackages/mFD_shared/R")
-
-devtools::load_all("~/Documents/mFDpackages/last/mFD/R")
 
 #At the site scale
 dat_complet <- merge(dat_complet,  species.site.matrix$site.data[,c("Sample.name","Sample.code")],by.x="VideoID",by.y="Sample.name",all.x=T)

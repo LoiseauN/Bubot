@@ -39,6 +39,14 @@ for (i in 1:nrow(abumat_relatif)){
 #fonctio richness: data= 0/1, q=0, tau=mean
 #fonctio entropy: data= 0/1, q=1, tau=mean
 
+trait.dist_mat
+co.dist.mat <- pcoa(as.dist(trait.dist_mat))
+co.ord <-  co.dist.mat$vectors[,c(1:7)]
+co.ord.dist <- dist(co.ord,method = "euclidean")
+co.ord.dist[which(co.ord.dist<0.0000000001)]<-0
+
+range(trait.dist_mat)
+range(co.ord.dist)
 
 
 #alpha
@@ -57,7 +65,7 @@ alpha_hill_fonct_richess <- alpha.fd.hill (asb_sp_w = abumat0_1,
                                           q        = 0,
                                           tau      = "mean")$asb_FD_Hill
 
-alpha_hill_fonct_entropy <- alpha.fd.hill (asb_sp_w = abumat0_1,
+alpha_hill_fonct_entropy <- alpha.fd.hill (asb_sp_w = abumat_relatif,
                                           sp_dist  = trait.dist_mat,
                                           q        = 1,
                                           tau      = "mean")$asb_FD_Hill
@@ -128,9 +136,9 @@ beta_hill_fonct_richess <- beta.fd.hill (asb_sp_w = abumat0_1,
                                           sp_dist  = trait.dist_mat,
                                           q        = 0,
                                           tau      = "mean",
-                                         beta_type = "Jaccard")
+                                          beta_type = "Jaccard")
 
-beta_hill_fonct_entropy <- beta.fd.hill (asb_sp_w = abumat0_1,
+beta_hill_fonct_entropy <- beta.fd.hill (asb_sp_w = abumat_relatif,
                                           sp_dist  = trait.dist_mat,
                                           q        = 1,
                                           tau      = "mean",
@@ -198,8 +206,6 @@ BetaFD_q01.1<- ggplot(beta_hill_all,aes(x=depthdist,y=beta_hill_fonct_entropy))+
   ggtitle("Beta hill fonc entropy")
 
 grid.arrange(BetaFD_q0,BetaFD_q0.1,BetaFD_q1,BetaFD_q01.1)
-
-
 
 
 ##Add Column Pairs comparsion
