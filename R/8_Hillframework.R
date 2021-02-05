@@ -230,6 +230,15 @@ BetaFD_q01.1<- ggplot(beta_hill_all,aes(x=depthdist,y=beta_hill_fonct_entropy))+
 grid.arrange(BetaFD_q0,BetaFD_q0.1,BetaFD_q1,BetaFD_q01.1)
 
 
+
+
+
+
+
+
+
+
+
 ##Add Column Pairs comparsion
 beta_hill_all$island1 <- NA
 beta_hill_all$island2 <- NA
@@ -273,6 +282,8 @@ BetaFD_q01.1<- ggplot(beta_hill_all_mayotte,aes(x=depthdist,y=beta_hill_fonct_en
 
 grid.arrange(BetaFD_q0,BetaFD_q0.1,BetaFD_q1,BetaFD_q01.1)
 
+plot(beta_hill_all_mayotte$beta_hill_taxo_richess,beta_hill_all_mayotte$beta_hill_taxo_entropy)
+plot(beta_hill_all_mayotte$beta_hill_fonct_richess,beta_hill_all_mayotte$beta_hill_fonct_entropy)
 
 
 
