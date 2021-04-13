@@ -1,4 +1,5 @@
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+load("~/Documents/Bubot/Bubot_Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle')
 nip <- pkgs[!(pkgs %in% installed.packages())]
