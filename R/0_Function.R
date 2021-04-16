@@ -1189,3 +1189,17 @@ GeoDistanceInMetresMatrix <- function(df.geopoints){
   
   return(mat.distances)
 }
+
+
+
+#AddLevel function
+##############
+addLevel <- function(x, newlevel=NULL) {
+  if(is.factor(x)) {
+    if (is.na(match(newlevel, levels(x))))
+      return(factor(x, levels=c(levels(x), newlevel)))
+  }
+  return(x)
+}
+##############
+
