@@ -68,46 +68,40 @@ for (i in 1:nrow(species_site_scale_longmat)){
 
 
 #Add family info for size
-for (i in 1:nrow(sizeBUBOT))
-  if(sizeBUBOT$genus[i] %in sizeBUBOT$genus[i]
+sizeBUBOT$family <- NA
 
-     if(sizeBUBOT$species[i] %in%  Species_info$Genus_species){
-       
-       sizeBUBOT$genus[i] <- Species_info[Species_info$Genus_species %in% sizeBUBOT$species[i],]$Genus
-       
-       sizeBUBOT$family[i] <- Species_info[Species_info$Genus_species %in% sizeBUBOT$species[i],]$Familly
-       
-     }
-     
-     else if(sizeBUBOT$species[i] %in%  Species_info$Genus){
-       
-       sizeBUBOT$genus[i] <- Species_info[Species_info$Genus %in% sizeBUBOT$species[i],]$Genus
-       
-       sizeBUBOT$family[i] <- Species_info[Species_info$Genus %in% sizeBUBOT$species[i],]$Familly
+for (i in 1:nrow(sizeBUBOT)){
+  
+     if(sizeBUBOT$Species[i] %in%  Species_info$Genus_species){
+    
+       sizeBUBOT$family[i] <- Species_info[Species_info$Genus_species %in% sizeBUBOT$Species[i],]$Familly
        
      }
      
-     else if(sizeBUBOT$species[i] %in%  Species_info$Familly){
+     else if(sizeBUBOT$Species[i] %in%  Species_info$Genus){
+
+       sizeBUBOT$family[i] <- Species_info[Species_info$Genus %in% sizeBUBOT$Species[i],]$Familly
        
-       sizeBUBOT$genus[i] <- NA
-       
-       sizeBUBOT$family[i] <- Species_info[Species_info$Familly %in% sizeBUBOT$species[i],]$Familly
+     }
+     
+    else if(sizeBUBOT$Species[i] %in%  Species_info$Familly){
+   
+       sizeBUBOT$family[i] <- Species_info[Species_info$Familly %in% sizeBUBOT$Species[i],]$Familly
        
      }
      
      else {
        
-       sizeBUBOT$genus[i] <- NA
-       
        sizeBUBOT$family[i] <- NA
        
      }
      
-     }
+}
 
+# RAJOUTER QUE SI Y A UNE FAMILY DANS GENUS A ENLEVER
 
-
-
+if(sizeBUBOT$genus[i] %in sizeBUBOT$genus[i]
+   
 
 
 
