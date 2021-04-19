@@ -7,6 +7,14 @@ library(stringr)
 sizeBUBOT <- read.table("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/extraction_tailles.txt",sep="\t",header=T)
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/sizeRLS.RData")
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/coefRLS.RData")
+load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+
+colnames(dat_complet)[c(1,6)] <- c("Species", "Abundance")
+
+dat_complet <- dat_complet[,colnames(dat_complet) %notin% c("TempPrefMin","TempPrefMean","TempPrefMax",
+                                                            "BodyShapeI","FoodI","FoodII","FoodIII","swimtype","FE")]
+
+dat_complet[is.na(dat_complet$Activity),]
 #same format species
 sizeRLS$species <-  gsub(" ", "_", sizeRLS$species )
 coefRLS$species <-  gsub(" ", "_", coefRLS$species )
@@ -15,6 +23,12 @@ coefRLS$species <-  gsub(" ", "_", coefRLS$species )
 
 sizeBUBOT$genus <-  str_split_fixed(sizeBUBOT$Species, "_", 2)[,1]
 sizeRLS$genus   <-  str_split_fixed(sizeRLS$species, "_", 2)[,1]
+
+
+dat_complet[is.na(dat_complet$Size),]
+
+
+
 
 species_site_scale2 <- data.frame(id=rownames(species_site_scale),species_site_scale)
 species_site_scale_longmat <- melt(species_site_scale2)

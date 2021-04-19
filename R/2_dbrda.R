@@ -307,6 +307,12 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
 
 
 
+
+
+
+
+
+
 ##########################################################################################
 #--- At the station scale ---
 station <- read.csv2("station.code.bubot.csv",sep=",",header = T)

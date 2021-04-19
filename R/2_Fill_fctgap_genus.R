@@ -1,6 +1,8 @@
 #A CHECKER Forcipiger Scaridae Naso
 
 
+library(reshape2)
+
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle',
           'doParallel','missForest','cowplot','grid','gridExtra','grid','taxize',
           "ggalt","GGally","tidyverse")
@@ -13,11 +15,12 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
 rownames(tab) <- tab[,1]
 
-
-library(reshape2)
 dat_complet<-melt(tab, id.vars = c(1,320:322))
 dat_complet <- dat_complet[dat_complet$value >0,]
 dat_complet  <- data.frame(merge(dat_complet,fish_traits,by.x="variable",by.y="Species",all.x=T))
+
+colnames(dat_complet)[c(1,6)] <- c("Species", "Abundance")
+
 
 dat_complet$clean_diet <- NA
 for (i in 1:nrow(dat_complet)){
@@ -34,14 +37,14 @@ for (i in 1:nrow(dat_complet)){
   
 }
 
-taxo_correct=unique(dat_complet[,c("variable","Genus","Familly")])
+taxo_correct=unique(dat_complet[,c("Species","Genus","Familly")])
 
 for (i in 1:nrow(taxo_correct)){
   print(i)
   
-  if(!grepl("_",as.character(taxo_correct$variable[i]), fixed = TRUE)){
+  if(!grepl("_",as.character(taxo_correct$Species[i]), fixed = TRUE)){
     
-    classif <- classification(as.character(taxo_correct$variable[i]),db= 'itis')
+    classif <- classification(as.character(taxo_correct$Species[i]),db= 'itis')
 
     if(sum(classif[[1]]$rank=="genus")>0){  
       
@@ -67,221 +70,226 @@ addLevel <- function(x, newlevel=NULL) {
   return(x)
 }
 
-taxo_correct$variable <- addLevel(taxo_correct$variable, "Blenniidae")
+taxo_correct$Species <- addLevel(taxo_correct$Species, "Blenniidae")
 taxo_correct$Familly <- addLevel(taxo_correct$Familly, "Blenniidae")
 
 
-taxo_correct[taxo_correct$variable=="Bleniidae",]$variable<- "Blenniidae"
-taxo_correct[taxo_correct$variable=="Blenniidae",]$Familly<- "Blenniidae"
+taxo_correct[taxo_correct$Species=="Bleniidae",]$Species<- "Blenniidae"
+taxo_correct[taxo_correct$Species=="Blenniidae",]$Familly<- "Blenniidae"
 
 # If offline--- 
 
-taxo_correct[taxo_correct$variable =="Acanthurus",]$Genus<- "Acanthurus"
-taxo_correct[taxo_correct$variable =="Acanthurus",]$Familly<- "Acanthuridae"
+taxo_correct[taxo_correct$Species =="Acanthurus",]$Genus<- "Acanthurus"
+taxo_correct[taxo_correct$Species =="Acanthurus",]$Familly<- "Acanthuridae"
 
-taxo_correct[taxo_correct$variable =="Cheilinus",]$Genus<- "Cheilinus"
-taxo_correct[taxo_correct$variable =="Cheilinus",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Cheilinus",]$Genus<- "Cheilinus"
+taxo_correct[taxo_correct$Species =="Cheilinus",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Lutjanus",]$Genus<- "Lutjanus"
-taxo_correct[taxo_correct$variable =="Lutjanus",]$Familly<- "Lutjanidae"
+taxo_correct[taxo_correct$Species =="Lutjanus",]$Genus<- "Lutjanus"
+taxo_correct[taxo_correct$Species =="Lutjanus",]$Familly<- "Lutjanidae"
 
-taxo_correct[taxo_correct$variable =="Lethrinus",]$Genus<- "Lethrinus"
-taxo_correct[taxo_correct$variable =="Lethrinus",]$Familly<- "Lethrinidae"
+taxo_correct[taxo_correct$Species =="Lethrinus",]$Genus<- "Lethrinus"
+taxo_correct[taxo_correct$Species =="Lethrinus",]$Familly<- "Lethrinidae"
 
-taxo_correct[taxo_correct$variable =="Siganus",]$Genus<- "Siganus"
-taxo_correct[taxo_correct$variable =="Siganus",]$Familly<- "Siganidae"
+taxo_correct[taxo_correct$Species =="Siganus",]$Genus<- "Siganus"
+taxo_correct[taxo_correct$Species =="Siganus",]$Familly<- "Siganidae"
 
-taxo_correct[taxo_correct$variable =="Macropharyngodon",]$Genus<- "Macropharyngodon"
-taxo_correct[taxo_correct$variable =="Macropharyngodon",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Macropharyngodon",]$Genus<- "Macropharyngodon"
+taxo_correct[taxo_correct$Species =="Macropharyngodon",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Pomacentrus",]$Genus<- "Pomacentrus"
+taxo_correct[taxo_correct$Species =="Pomacentrus",]$Genus<- "Pomacentrus"
 
-taxo_correct[taxo_correct$variable =="Pomacentrus",]$Familly<- "Pomacentridae"
+taxo_correct[taxo_correct$Species =="Pomacentrus",]$Familly<- "Pomacentridae"
 
-taxo_correct[taxo_correct$variable =="Ostracion",]$Genus<- "Ostracion"
-taxo_correct[taxo_correct$variable =="Ostracion",]$Familly<- "Ostraciidae"
+taxo_correct[taxo_correct$Species =="Ostracion",]$Genus<- "Ostracion"
+taxo_correct[taxo_correct$Species =="Ostracion",]$Familly<- "Ostraciidae"
 
-taxo_correct[taxo_correct$variable =="Pomacanthus",]$Genus<- "Pomacanthus"
-taxo_correct[taxo_correct$variable =="Pomacanthus",]$Familly<- "Pomacanthidae"
+taxo_correct[taxo_correct$Species =="Pomacanthus",]$Genus<- "Pomacanthus"
+taxo_correct[taxo_correct$Species =="Pomacanthus",]$Familly<- "Pomacanthidae"
 
-taxo_correct[taxo_correct$variable =="Rhinecanthus",]$Genus<- "Rhinecanthus"
-taxo_correct[taxo_correct$variable =="Rhinecanthus",]$Familly<- "Balistidae"
+taxo_correct[taxo_correct$Species =="Rhinecanthus",]$Genus<- "Rhinecanthus"
+taxo_correct[taxo_correct$Species =="Rhinecanthus",]$Familly<- "Balistidae"
 
-taxo_correct[taxo_correct$variable =="Pseudochromis",]$Genus<- "Pseudochromis"
-taxo_correct[taxo_correct$variable =="Pseudochromis",]$Familly<- "Pseudochromidae"
+taxo_correct[taxo_correct$Species =="Pseudochromis",]$Genus<- "Pseudochromis"
+taxo_correct[taxo_correct$Species =="Pseudochromis",]$Familly<- "Pseudochromidae"
 
-taxo_correct[taxo_correct$variable =="Sargocentron",]$Genus<- "Sargocentron"
-taxo_correct[taxo_correct$variable =="Sargocentron",]$Familly<- "Holocentridae"
+taxo_correct[taxo_correct$Species =="Sargocentron",]$Genus<- "Sargocentron"
+taxo_correct[taxo_correct$Species =="Sargocentron",]$Familly<- "Holocentridae"
 
-taxo_correct[taxo_correct$variable =="Coris",]$Genus<- "Coris"
-taxo_correct[taxo_correct$variable =="Coris",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Coris",]$Genus<- "Coris"
+taxo_correct[taxo_correct$Species =="Coris",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Aphareus",]$Genus<- "Aphareus"
-taxo_correct[taxo_correct$variable =="Aphareus",]$Familly<- "Lutjanidae"
+taxo_correct[taxo_correct$Species =="Aphareus",]$Genus<- "Aphareus"
+taxo_correct[taxo_correct$Species =="Aphareus",]$Familly<- "Lutjanidae"
 
-taxo_correct[taxo_correct$variable =="Halichoeres",]$Genus<- "Halichoeres"
-taxo_correct[taxo_correct$variable =="Halichoeres",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Halichoeres",]$Genus<- "Halichoeres"
+taxo_correct[taxo_correct$Species =="Halichoeres",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Cheilodipterus",]$Genus<- "Cheilodipterus"
-taxo_correct[taxo_correct$variable =="Cheilodipterus",]$Familly<- "Apogonidae"
+taxo_correct[taxo_correct$Species =="Cheilodipterus",]$Genus<- "Cheilodipterus"
+taxo_correct[taxo_correct$Species =="Cheilodipterus",]$Familly<- "Apogonidae"
 
-taxo_correct[taxo_correct$variable =="Anampses",]$Genus<- "Anampses"
-taxo_correct[taxo_correct$variable =="Anampses",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Anampses",]$Genus<- "Anampses"
+taxo_correct[taxo_correct$Species =="Anampses",]$Familly<- "Labridae"
 
 taxo_correct$Genus <- addLevel(taxo_correct$Genus, "Apogon")
-taxo_correct[taxo_correct$variable =="Apogon",]$Genus<- "Apogon"
-taxo_correct[taxo_correct$variable =="Apogon",]$Familly<- "Apogonidae"
+taxo_correct[taxo_correct$Species =="Apogon",]$Genus<- "Apogon"
+taxo_correct[taxo_correct$Species =="Apogon",]$Familly<- "Apogonidae"
 
-taxo_correct[taxo_correct$variable =="Cirrhilabrus",]$Genus<- "Cirrhilabrus"
-taxo_correct[taxo_correct$variable =="Cirrhilabrus",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Cirrhilabrus",]$Genus<- "Cirrhilabrus"
+taxo_correct[taxo_correct$Species =="Cirrhilabrus",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Sphyraena",]$Genus<- "Sphyraena"
-taxo_correct[taxo_correct$variable =="Sphyraena",]$Familly<- "Scombridae"
+taxo_correct[taxo_correct$Species =="Sphyraena",]$Genus<- "Sphyraena"
+taxo_correct[taxo_correct$Species =="Sphyraena",]$Familly<- "Scombridae"
 
-taxo_correct[taxo_correct$variable =="Muraenidae",]$Familly<- "Muraenidae"
-taxo_correct[taxo_correct$variable =="Siganidae",]$Familly<- "Siganidae"
-taxo_correct[taxo_correct$variable =="Diodontidae",]$Familly<- "Diodontidae"
-taxo_correct[taxo_correct$variable =="Gobiidae",]$Familly<- "Gobiidae"
-taxo_correct[taxo_correct$variable =="Scorpaenidae",]$Familly<- "Scorpaenidae"
-taxo_correct[taxo_correct$variable =="Apogonidae",]$Familly<- "Apogonidae"
-taxo_correct[taxo_correct$variable =="Congridae",]$Familly<- "Congridae"
-taxo_correct[taxo_correct$variable =="Nemipteridae",]$Familly<- "Nemipteridae"
-taxo_correct[taxo_correct$variable =="Acanthuridae",]$Familly<- "Acanthuridae"
-taxo_correct[taxo_correct$variable =="Pomacanthidae",]$Familly<- "Pomacanthidae"
-taxo_correct[taxo_correct$variable =="Pomacentridae",]$Familly<- "Pomacentridae"
-taxo_correct[taxo_correct$variable =="Priacanthidae",]$Familly<- "Priacanthidae"
-taxo_correct[taxo_correct$variable =="Pseudochromidae",]$Familly<- "Pseudochromidae"
-taxo_correct[taxo_correct$variable =="Scombridae",]$Familly<- "Scombridae"
-taxo_correct[taxo_correct$variable =="Serranidae",]$Familly<- "Serranidae"
-taxo_correct[taxo_correct$variable =="Tetraodontidae",]$Familly<- "Tetraodontidae"
-taxo_correct[taxo_correct$variable =="Chaetodontidae",]$Familly<- "Chaetodontidae"
-taxo_correct[taxo_correct$variable =="Cirrhitidae",]$Familly<- "Cirrhitidae"
-taxo_correct[taxo_correct$variable =="Aulostomidae",]$Familly<- "Aulostomidae"
-taxo_correct[taxo_correct$variable =="Balistidae",]$Familly<- "Balistidae"
-taxo_correct[taxo_correct$variable =="Belonidae",]$Familly<- "Belonidae"
-taxo_correct[taxo_correct$variable =="Bleniidae",]$Familly<- "Bleniidae"
-taxo_correct[taxo_correct$variable =="Caesionidae",]$Familly<- "Caesionidae"
-taxo_correct[taxo_correct$variable =="Carangidae",]$Familly<- "Carangidae"
-taxo_correct[taxo_correct$variable =="Cirrhitidae",]$Familly<- "Cirrhitidae"
-taxo_correct[taxo_correct$variable =="Holocentridae",]$Familly<- "Holocentridae"
-taxo_correct[taxo_correct$variable =="Labridae",]$Familly<- "Labridae"
-taxo_correct[taxo_correct$variable =="Lethrinidae",]$Familly<- "Lethrinidae"
-taxo_correct[taxo_correct$variable =="Lutjanidae",]$Familly<- "Lutjanidae"
-taxo_correct[taxo_correct$variable =="Microdesmidae",]$Familly<- "Microdesmidae"
-taxo_correct[taxo_correct$variable =="Monacanthidae",]$Familly<- "Monacanthidae"
-taxo_correct[taxo_correct$variable =="Mullidae",]$Familly<- "Mullidae"
-taxo_correct[taxo_correct$variable =="Ostraciidae",]$Familly<- "Ostraciidae"
+taxo_correct[taxo_correct$Species =="Muraenidae",]$Familly<- "Muraenidae"
+taxo_correct[taxo_correct$Species =="Siganidae",]$Familly<- "Siganidae"
+taxo_correct[taxo_correct$Species =="Diodontidae",]$Familly<- "Diodontidae"
+taxo_correct[taxo_correct$Species =="Gobiidae",]$Familly<- "Gobiidae"
+taxo_correct[taxo_correct$Species =="Scorpaenidae",]$Familly<- "Scorpaenidae"
+taxo_correct[taxo_correct$Species =="Apogonidae",]$Familly<- "Apogonidae"
+taxo_correct[taxo_correct$Species =="Congridae",]$Familly<- "Congridae"
+taxo_correct[taxo_correct$Species =="Nemipteridae",]$Familly<- "Nemipteridae"
+taxo_correct[taxo_correct$Species =="Acanthuridae",]$Familly<- "Acanthuridae"
+taxo_correct[taxo_correct$Species =="Pomacanthidae",]$Familly<- "Pomacanthidae"
+taxo_correct[taxo_correct$Species =="Pomacentridae",]$Familly<- "Pomacentridae"
+taxo_correct[taxo_correct$Species =="Priacanthidae",]$Familly<- "Priacanthidae"
+taxo_correct[taxo_correct$Species =="Pseudochromidae",]$Familly<- "Pseudochromidae"
+taxo_correct[taxo_correct$Species =="Scombridae",]$Familly<- "Scombridae"
+taxo_correct[taxo_correct$Species =="Serranidae",]$Familly<- "Serranidae"
+taxo_correct[taxo_correct$Species =="Tetraodontidae",]$Familly<- "Tetraodontidae"
+taxo_correct[taxo_correct$Species =="Chaetodontidae",]$Familly<- "Chaetodontidae"
+taxo_correct[taxo_correct$Species =="Cirrhitidae",]$Familly<- "Cirrhitidae"
+taxo_correct[taxo_correct$Species =="Aulostomidae",]$Familly<- "Aulostomidae"
+taxo_correct[taxo_correct$Species =="Balistidae",]$Familly<- "Balistidae"
+taxo_correct[taxo_correct$Species =="Belonidae",]$Familly<- "Belonidae"
+taxo_correct[taxo_correct$Species =="Caesionidae",]$Familly<- "Caesionidae"
+taxo_correct[taxo_correct$Species =="Carangidae",]$Familly<- "Carangidae"
+taxo_correct[taxo_correct$Species =="Cirrhitidae",]$Familly<- "Cirrhitidae"
+taxo_correct[taxo_correct$Species =="Holocentridae",]$Familly<- "Holocentridae"
+taxo_correct[taxo_correct$Species =="Labridae",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Lethrinidae",]$Familly<- "Lethrinidae"
+taxo_correct[taxo_correct$Species =="Lutjanidae",]$Familly<- "Lutjanidae"
+taxo_correct[taxo_correct$Species =="Microdesmidae",]$Familly<- "Microdesmidae"
+taxo_correct[taxo_correct$Species =="Monacanthidae",]$Familly<- "Monacanthidae"
+taxo_correct[taxo_correct$Species =="Mullidae",]$Familly<- "Mullidae"
+taxo_correct[taxo_correct$Species =="Ostraciidae",]$Familly<- "Ostraciidae"
 
-taxo_correct[taxo_correct$variable =="Gomphosus",]$Genus<- "Gomphosus"
-taxo_correct[taxo_correct$variable =="Gomphosus",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Gomphosus",]$Genus<- "Gomphosus"
+taxo_correct[taxo_correct$Species =="Gomphosus",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Ctenochaetus",]$Genus<- "Ctenochaetus"
-taxo_correct[taxo_correct$variable =="Ctenochaetus",]$Familly<- "Acanthuridae"
+taxo_correct[taxo_correct$Species =="Ctenochaetus",]$Genus<- "Ctenochaetus"
+taxo_correct[taxo_correct$Species =="Ctenochaetus",]$Familly<- "Acanthuridae"
 
-taxo_correct[taxo_correct$variable =="Dascyllus",]$Genus<- "Dascyllus"
-taxo_correct[taxo_correct$variable =="Dascyllus",]$Familly<- "Pomacentridae"
+taxo_correct[taxo_correct$Species =="Dascyllus",]$Genus<- "Dascyllus"
+taxo_correct[taxo_correct$Species =="Dascyllus",]$Familly<- "Pomacentridae"
 
-taxo_correct[taxo_correct$variable =="Epinephelus",]$Genus<- "Epinephelus"
-taxo_correct[taxo_correct$variable =="Epinephelus",]$Familly<- "Serranidae"
+taxo_correct[taxo_correct$Species =="Epinephelus",]$Genus<- "Epinephelus"
+taxo_correct[taxo_correct$Species =="Epinephelus",]$Familly<- "Serranidae"
 
-taxo_correct[taxo_correct$variable =="Amblyeleotris",]$Genus<- "Amblyeleotris"
-taxo_correct[taxo_correct$variable =="Amblyeleotris",]$Familly<- "Gobiidae"
+taxo_correct[taxo_correct$Species =="Amblyeleotris",]$Genus<- "Amblyeleotris"
+taxo_correct[taxo_correct$Species =="Amblyeleotris",]$Familly<- "Gobiidae"
 
-taxo_correct[taxo_correct$variable =="Amphiprion",]$Genus<- "Amphiprion"
-taxo_correct[taxo_correct$variable =="Amphiprion",]$Familly<- "Pomacentridae"
+taxo_correct[taxo_correct$Species =="Amphiprion",]$Genus<- "Amphiprion"
+taxo_correct[taxo_correct$Species =="Amphiprion",]$Familly<- "Pomacentridae"
 
-taxo_correct[taxo_correct$variable =="Arothron",]$Genus<- "Arothron"
-taxo_correct[taxo_correct$variable =="Arothron",]$Familly<- "Tetraodontidae"
+taxo_correct[taxo_correct$Species =="Arothron",]$Genus<- "Arothron"
+taxo_correct[taxo_correct$Species =="Arothron",]$Familly<- "Tetraodontidae"
 
-taxo_correct[taxo_correct$variable =="Aulostomus",]$Genus<- "Aulostomus"
-taxo_correct[taxo_correct$variable =="Aulostomus",]$Familly<- "Aulostomidae"
+taxo_correct[taxo_correct$Species =="Aulostomus",]$Genus<- "Aulostomus"
+taxo_correct[taxo_correct$Species =="Aulostomus",]$Familly<- "Aulostomidae"
 
-taxo_correct[taxo_correct$variable =="Caesio",]$Genus<- "Caesio"
-taxo_correct[taxo_correct$variable =="Caesio",]$Familly<- "Caesionidae"
+taxo_correct[taxo_correct$Species =="Caesio",]$Genus<- "Caesio"
+taxo_correct[taxo_correct$Species =="Caesio",]$Familly<- "Caesionidae"
 
-taxo_correct[taxo_correct$variable =="Centropyge",]$Genus<- "Centropyge"
-taxo_correct[taxo_correct$variable =="Centropyge",]$Familly<- "Pomacanthidae"
+taxo_correct[taxo_correct$Species =="Centropyge",]$Genus<- "Centropyge"
+taxo_correct[taxo_correct$Species =="Centropyge",]$Familly<- "Pomacanthidae"
 
-taxo_correct[taxo_correct$variable =="Cephalopholis",]$Genus<- "Cephalopholis"
-taxo_correct[taxo_correct$variable =="Cephalopholis",]$Familly<- "Serranidae"
+taxo_correct[taxo_correct$Species =="Cephalopholis",]$Genus<- "Cephalopholis"
+taxo_correct[taxo_correct$Species =="Cephalopholis",]$Familly<- "Serranidae"
 
-taxo_correct[taxo_correct$variable =="Heniochus",]$Genus<- "Heniochus"
-taxo_correct[taxo_correct$variable =="Heniochus",]$Familly<- "Chaetodontidae"
+taxo_correct[taxo_correct$Species =="Heniochus",]$Genus<- "Heniochus"
+taxo_correct[taxo_correct$Species =="Heniochus",]$Familly<- "Chaetodontidae"
 
-taxo_correct[taxo_correct$variable =="Labroides",]$Genus<- "Labroides"
-taxo_correct[taxo_correct$variable =="Labroides",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Labroides",]$Genus<- "Labroides"
+taxo_correct[taxo_correct$Species =="Labroides",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Myripristis",]$Genus<- "Myripristis"
-taxo_correct[taxo_correct$variable =="Myripristis",]$Familly<- "Holocentridae"
+taxo_correct[taxo_correct$Species =="Myripristis",]$Genus<- "Myripristis"
+taxo_correct[taxo_correct$Species =="Myripristis",]$Familly<- "Holocentridae"
 
-taxo_correct[taxo_correct$variable =="Nemateleotris",]$Genus<- "Nemateleotris"
-taxo_correct[taxo_correct$variable =="Nemateleotris",]$Familly<- "Gobiidae"
+taxo_correct[taxo_correct$Species =="Nemateleotris",]$Genus<- "Nemateleotris"
+taxo_correct[taxo_correct$Species =="Nemateleotris",]$Familly<- "Gobiidae"
 
-taxo_correct[taxo_correct$variable =="Oxycheilinus",]$Genus<- "Oxycheilinus"
-taxo_correct[taxo_correct$variable =="Oxycheilinus",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Oxycheilinus",]$Genus<- "Oxycheilinus"
+taxo_correct[taxo_correct$Species =="Oxycheilinus",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Parupeneus",]$Genus<- "Parupeneus"
-taxo_correct[taxo_correct$variable =="Parupeneus",]$Familly<- "Mullidae"
+taxo_correct[taxo_correct$Species =="Parupeneus",]$Genus<- "Parupeneus"
+taxo_correct[taxo_correct$Species =="Parupeneus",]$Familly<- "Mullidae"
 
-taxo_correct[taxo_correct$variable =="Melichthys",]$Genus<- "Melichthys"
-taxo_correct[taxo_correct$variable =="Melichthys",]$Familly<- "Balistidae"
+taxo_correct[taxo_correct$Species =="Melichthys",]$Genus<- "Melichthys"
+taxo_correct[taxo_correct$Species =="Melichthys",]$Familly<- "Balistidae"
 
-taxo_correct[taxo_correct$variable =="Pseudanthias",]$Genus<- "Pseudanthias"
-taxo_correct[taxo_correct$variable =="Pseudanthias",]$Familly<- "Serranidae"
+taxo_correct[taxo_correct$Species =="Pseudanthias",]$Genus<- "Pseudanthias"
+taxo_correct[taxo_correct$Species =="Pseudanthias",]$Familly<- "Serranidae"
 
-taxo_correct[taxo_correct$variable =="Pseudocheilinus",]$Genus<- "Pseudocheilinus"
-taxo_correct[taxo_correct$variable =="Pseudocheilinus",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Pseudocheilinus",]$Genus<- "Pseudocheilinus"
+taxo_correct[taxo_correct$Species =="Pseudocheilinus",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Pseudocoris",]$Genus<- "Pseudocoris"
-taxo_correct[taxo_correct$variable =="Pseudocoris",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Pseudocoris",]$Genus<- "Pseudocoris"
+taxo_correct[taxo_correct$Species =="Pseudocoris",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Ptereleotris",]$Genus<- "Ptereleotris"
-taxo_correct[taxo_correct$variable =="Ptereleotris",]$Familly<- "Gobiidae"
+taxo_correct[taxo_correct$Species =="Ptereleotris",]$Genus<- "Ptereleotris"
+taxo_correct[taxo_correct$Species =="Ptereleotris",]$Familly<- "Gobiidae"
 
-taxo_correct[taxo_correct$variable =="Scarus",]$Genus<- "Scarus"
-taxo_correct[taxo_correct$variable =="Scarus",]$Familly<- "Scaridae"
+taxo_correct[taxo_correct$Species =="Scarus",]$Genus<- "Scarus"
+taxo_correct[taxo_correct$Species =="Scarus",]$Familly<- "Scaridae"
 
-taxo_correct[taxo_correct$variable =="Sufflamen",]$Genus<- "Sufflamen"
-taxo_correct[taxo_correct$variable =="Sufflamen",]$Familly<- "Balistidae"
+taxo_correct[taxo_correct$Species =="Sufflamen",]$Genus<- "Sufflamen"
+taxo_correct[taxo_correct$Species =="Sufflamen",]$Familly<- "Balistidae"
 
-taxo_correct[taxo_correct$variable =="Thalassoma",]$Genus<- "Thalassoma"
-taxo_correct[taxo_correct$variable =="Thalassoma",]$Familly<- "Labridae"
+taxo_correct[taxo_correct$Species =="Thalassoma",]$Genus<- "Thalassoma"
+taxo_correct[taxo_correct$Species =="Thalassoma",]$Familly<- "Labridae"
 
-taxo_correct[taxo_correct$variable =="Variola",]$Genus<- "Variola"
-taxo_correct[taxo_correct$variable =="Variola",]$Familly<- "Serranidae"
+taxo_correct[taxo_correct$Species =="Variola",]$Genus<- "Variola"
+taxo_correct[taxo_correct$Species =="Variola",]$Familly<- "Serranidae"
 
-taxo_correct[taxo_correct$variable =="Xanthichthys",]$Genus<- "Xanthichthys"
-taxo_correct[taxo_correct$variable =="Xanthichthys",]$Familly<- "Balistidae"
+taxo_correct[taxo_correct$Species =="Xanthichthys",]$Genus<- "Xanthichthys"
+taxo_correct[taxo_correct$Species =="Xanthichthys",]$Familly<- "Balistidae"
 
-taxo_correct[taxo_correct$variable =="Zebrasoma",]$Genus<- "Zebrasoma"
-taxo_correct[taxo_correct$variable =="Zebrasoma",]$Familly<- "Acanthuridae"
+taxo_correct[taxo_correct$Species =="Zebrasoma",]$Genus<- "Zebrasoma"
+taxo_correct[taxo_correct$Species =="Zebrasoma",]$Familly<- "Acanthuridae"
 
-taxo_correct[taxo_correct$variable =="Chromis",]$Genus<- "Chromis"
-taxo_correct[taxo_correct$variable =="Chromis",]$Familly<- "Pomacentridae"
-
-
-dat_complet <- dat_complet[,-c(7,8)]
-dat_complet <- merge(dat_complet,taxo_correct, by="variable",all.x= T)
-colnames(dat_complet)[c(2,28:29)] <- c("VideoID","Genus","Family")
-
-#save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
-
-# Test with random forest, values are false
-#cov=dat_complet[,c("variable","Genus","Familly","Size","Mobility","Activity","Schooling","Position",
-#                   "MaxLengthTL","Troph","clean_diet")]
-#cov= unique(cov)
-#rownames(cov) <- cov[,1]
-#cov <- cov[,-1]
+taxo_correct[taxo_correct$Species =="Chromis",]$Genus<- "Chromis"
+taxo_correct[taxo_correct$Species =="Chromis",]$Familly<- "Pomacentridae"
 
 
-#registerDoParallel(cores = 4)
-#cov.test <- cov[!is.na(cov$Genus),]
-#cov.test[cov.test == "<NA>"] = "NA"  
-#cov.test$clean_diet <-as.factor(as.character(cov.test$clean_diet))
-#cov.imp = missForest(cov.test,parallelize = "forests", ntree = 100)
-#cov.imp <- cov.imp$ximp
+dat_complet <- dat_complet[,colnames(dat_complet) %notin% c("Familly","Genus")]
+dat_complet <- merge(dat_complet,taxo_correct, by="Species",all.x= T)
 
-# Based on PCOA 
+#Clean order and names
+dat_complet <- data.frame(surveys = dat_complet$Row.names,
+                            depth = dat_complet$depth,
+                            classDepth   = dat_complet$classDepth,
+                            island = dat_complet$island,
+                            species = dat_complet$Species,
+                            genus = dat_complet$Genus,
+                            family = dat_complet$Familly,
+                            class = dat_complet$Class,
+                            abundance = dat_complet$Abundance,
+                            reef_associated = dat_complet$Reef_associated,
+                            mobility = dat_complet$Mobility,
+                            activity = dat_complet$Activity,
+                            schooling = dat_complet$Schooling,
+                            position = dat_complet$Position,
+                            diet = dat_complet$Diet,
+                            clean_diet = dat_complet$clean_diet,
+                            trophic.level = dat_complet$Trophic.level_Fishbase,
+                            bodyShape_Fishbase = dat_complet$BodyShape_Fishbase,
+                            maxLengthTL_Fishbase = dat_complet$MaxLengthTL_Fishbase,
+                            a= dat_complet$a,
+                            b= dat_complet$b
+                            )
+
+#save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 #
 # To avoid to give average value from infered value
@@ -312,7 +320,7 @@ for (i in 1:nrow(dat_complet)) {
        trait_selec<- trait_selec[trait_selec$Fromlitterature==1,]
        
        
-       if(nrow(trait_selec)==0) {next}
+          if(nrow(trait_selec)==0) {next}
        
       trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet",'Size',
                                   "MaxLengthTL","Troph","Diet")])#,"PC1","PC2","PC3","PC4")])

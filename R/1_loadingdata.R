@@ -120,14 +120,11 @@ Species_info=read.table("Species_info.txt",sep=";",header = T)
 #############################################################################
 
 # collect only functional trait data
-fish_traits <- Species_info[,c(1,2,3,10:15)]
-rownames(fish_traits) <- fish_traits[,1]
-fish_traits <- fish_traits[,-1]
-
-for (i in 1:5) {
-  fish_traits[,i]<- factor(fish_traits[,i],order=T)
-}
-fish_traits[,6]<- factor(fish_traits[,6])
+fish_traits <- Species_info[,colnames(Species_info) %in% c(
+"Genus_species","Class","Familly","Genus","Schooling","Activity","Mobility","Reef_associated",
+"Position","Diet","Trophic.level_Fishbase","Trophic.level_Fishbase","BodyShape_Fishbase","MaxLengthTL_Fishbase",
+"Trophic.level_Fishbase","BodyShape_Fishbase","a","b"),]
+colnames(fish_traits)[1] <- "Species"
 
 
 ################################################################################
@@ -147,22 +144,22 @@ fish_traits[,6]<- factor(fish_traits[,6])
 #' 
 #################################################################################
 
-nb_cores <- 2
-trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   #
+#nb_cores <- 2
+#trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   #
   
   #sp <- "Abudefduf sparoides"
   #sp<-as.character(gsub("_", " ", sp))
-  sp<-as.character(gsub("_", " ", Species_info$ID[i]))
+ # sp<-as.character(gsub("_", " ", Species_info$Genus_species[i]))
   #Loading growth data from Fishbase
-  estimate_growth_data <- estimate(sp) %>%
+ # estimate_growth_data <- estimate(sp) %>%
     #Selecting the column that are of interest
-    select(c("Species",'MaxLengthTL','Troph','DepthMax',"a","b",
+ #   select(c("Species",'MaxLengthTL','Troph','DepthMax',"a","b",
              'K','TempPrefMin', 'TempPrefMean', 'TempPrefMax')) 
 
 
-  species_info <- species(sp) %>%
+  #species_info <- species(sp) %>%
   #Selecting the column that are of interest
-   select(c("Species","BodyShapeI"))
+  # select(c("Species","BodyShapeI"))
 
   #INFO VRAIMENT PAS TERRIBLE DES ZERO PARTOUT, -1 QUAND Y A UNE INFO??
   #traits_level <- ecology(sp) %>%
@@ -177,41 +174,43 @@ trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   
   #  names(sort(table(traits_level[,i]),decreasing = TRUE)[1])))),
   #t(data.frame(apply(traits_level[,-c(1,2)],2,min,na.rm=T))))
   
-  diet_data <- fooditems(sp)%>%
+ # diet_data <- fooditems(sp)%>%
     #Selecting the column that are of interest
-      select(c("FoodI","FoodII","FoodIII"))
+   #   select(c("FoodI","FoodII","FoodIII"))
   
-  if(nrow(diet_data)==1) { diet_data <- data.frame(Species = sp,diet_data) 
+  #if(nrow(diet_data)==1) { diet_data <- data.frame(Species = sp,diet_data) 
   
-  }else{ 
+ # }else{ 
     
     #choose the most frequent item
-  diet_data <- data.frame(Species=sp,t(data.frame(sapply(c("FoodI","FoodII","FoodIII"), function(i)
-    names(sort(table(diet_data[,i]),decreasing = TRUE)[1])))))
-  }
+ # diet_data <- data.frame(Species=sp,t(data.frame(sapply(c("FoodI","FoodII","FoodIII"), function(i)
+ #   names(sort(table(diet_data[,i]),decreasing = TRUE)[1])))))
+ # }
   
-  swim_data  <-  data.frame(swimming(sp))%>%
+ # swim_data  <-  data.frame(swimming(sp))%>%
     #Selecting the column that are of interest
-    select(c("Species","AdultType"))%>%
-    dplyr::rename(swimtype="AdultType")
+ #   select(c("Species","AdultType"))%>%
+ #   dplyr::rename(swimtype="AdultType")
   
   #taxonomy <- taxize::tax_name(query = sp, get = c("genus","family"), db = "ncbi")  %>%
   #Selecting the column that are of interest
   # select(c("query","genus","family"))
   #colnames(taxonomy)[1] <- "Species"
   
-  data <- plyr::join_all(list(species_info,diet_data,swim_data, estimate_growth_data), by = 'Species', type = 'full')
+  #data <- plyr::join_all(list(species_info,diet_data,swim_data, estimate_growth_data), by = 'Species', type = 'full')
   
-  return(data)
+ # return(data)
   
-},mc.cores = nb_cores))
+#},mc.cores = nb_cores))
 
-trait_fishbase$Species <- as.character(gsub(" ", "_", trait_fishbase$Species))
+#trait_fishbase$Species <- as.character(gsub(" ", "_", trait_fishbase$Species))
 
-fish_traits <- merge(fish_traits,trait_fishbase,by.x="row.names",by.y="Species",all.x=T)
-colnames(fish_traits)[1] <- "Species"
+#fish_traits <- merge(fish_traits,trait_fishbase,by.x="row.names",by.y="Species",all.x=T)
+#colnames(fish_traits)[1] <- "Species"
 
 
+
+                          
 ##########################
 ##### Habitat ############
 ##########################

@@ -1,13 +1,26 @@
 
-#install.packages("mFD_1.0.0 (1).tar.gz",repos = NULL)
-#library(mFD)
+
+library(mFD)
 `%notin%` <- Negate(`%in%`)
 
 abumat <-  dat_complet[,c("variable","value","Sample.code")]
-abumat <-   as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))
-
-cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
+abumat <-  as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))
+abumat <-  species_site_scale_biomass
+traits=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
                    "Diet")] #maxLength ,"clean_diet"
+colnames(traits)[1]<- "species"
+#Dominant Traits for species at the scale of the genus or family
+for (i in 1:nrow(dat_complet)){
+  if(is.na(dat_complet[i,2])){ 
+        
+    if(dat_complet[i,1] %in% )
+    
+    
+    }
+  
+}
+
+
 cov= unique(cov)
 rownames(cov) <- cov[,1]
 cov <- cov[,-1]
