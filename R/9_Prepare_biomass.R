@@ -9,10 +9,7 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/sizeRLS.RDa
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/coefRLS.RData")
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
-colnames(dat_complet)[c(1,6)] <- c("Species", "Abundance")
 
-dat_complet <- dat_complet[,colnames(dat_complet) %notin% c("TempPrefMin","TempPrefMean","TempPrefMax",
-                                                            "BodyShapeI","FoodI","FoodII","FoodIII","swimtype","FE")]
 
 dat_complet[is.na(dat_complet$Activity),]
 #same format species

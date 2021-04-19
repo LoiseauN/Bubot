@@ -13,7 +13,13 @@ colnames(traits)[1]<- "species"
 for (i in 1:nrow(dat_complet)){
   if(is.na(dat_complet[i,2])){ 
         
-    if(dat_complet[i,1] %in% )
+    if(dat_complet[i,1] %in% dat_complet$Genus){
+        dat_complet[i,1] %in% dat_complet$Genus
+    }
+      
+      else if(dat_complet[i,1] %in% dat_complet$Familly){
+        
+      }
     
     
     }

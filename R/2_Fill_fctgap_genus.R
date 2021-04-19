@@ -288,17 +288,17 @@ dat_complet <- data.frame(surveys = dat_complet$Row.names,
                             a= dat_complet$a,
                             b= dat_complet$b
                             )
+dat_complet$maxLengthTL_Fishbase <- as.numeric(as.character(dat_complet$maxLengthTL_Fishbase))
 
 #save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
-#
-# To avoid to give average value from infered value
-dat_complet$Fromlitterature <- 0
+
+dat_complet$Infered <- 1
 for (i in 1:nrow(dat_complet)){
   
   if(!is.na(dat_complet$clean_diet[i])){
     
-    dat_complet$Fromlitterature[i] <- 1
+    dat_complet$Infered[i] <- 0
 }
 }
 
@@ -306,48 +306,74 @@ for (i in 1:nrow(dat_complet)){
 for (i in 1:nrow(dat_complet)) {
   
   print(i)
+  #i=19
   
   
   if(is.na(dat_complet$clean_diet[i])){
     
     #If scale of genus possible
-    if(!is.na(dat_complet$Genus[i])){
+    if(!is.na(dat_complet$genus[i])){
     
       #Trait 
-       trait_selec <- dat_complet[dat_complet$Genus==dat_complet$Genus[i],]
+       trait_selec <- dat_complet[dat_complet$genus==dat_complet$genus[i],]
        trait_selec <- trait_selec[rowSums(is.na(trait_selec)) != ncol(trait_selec), ]
        trait_selec <- trait_selec[!is.na(trait_selec$clean_diet),]
-       trait_selec<- trait_selec[trait_selec$Fromlitterature==1,]
+       trait_selec<- trait_selec[trait_selec$Infered==0,]
        
        
           if(nrow(trait_selec)==0) {next}
        
-      trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet",'Size',
-                                  "MaxLengthTL","Troph","Diet")])#,"PC1","PC2","PC3","PC4")])
+      trait_selec <- unique(trait_selec[,c("species","reef_associated","mobility","activity","schooling","position","diet","clean_diet",
+                                           "trophic.level","bodyShape_Fishbase","maxLengthTL_Fishbase","a","b")])
       rownames(trait_selec) <- trait_selec[,1]
       trait_selec <- trait_selec[,-1]
-
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"Mobility"]  <- names(sort(table(trait_selec[,"Mobility"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"Activity"] <- names(sort(table(trait_selec[,"Activity"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"Schooling"] <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"Position"] <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"clean_diet"] <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"Size"] <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"Diet"] <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"MaxLengthTL"] <- mean(trait_selec$MaxLengthTL,na.rm=T)
-      dat_complet[which(dat_complet$Genus==dat_complet$Genus[i] & is.na(dat_complet$Troph)),"Troph"] <- mean(trait_selec$Troph,na.rm=T)
-
-      #PC
-      #bary <- na.omit(dat_complet[dat_complet$Genus=="Thalassoma",]) 
       
-      #bary <- trait_selec
-      #bary <- unique(bary[,c("PC1","PC2","PC3","PC4")])
-      #dat_complet[i,c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(1:4)],2,mean,na.rm=T)  
-      #dat_complet[dat_complet$Genus==dat_complet$Genus[i] | is.na(dat_complet$PC1),c("PC1","PC2","PC3","PC4")] <- apply(bary[,c(1:4)],2,mean,na.rm=T)  
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$reef_associated)),"reef_associated"]  <- names(sort(table(trait_selec[,"reef_associated"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$mobility)),"mobility"]  <- names(sort(table(trait_selec[,"mobility"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$activity)),"activity"] <- names(sort(table(trait_selec[,"activity"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$schooling)),"schooling"] <- names(sort(table(trait_selec[,"schooling"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$position)),"position"] <- names(sort(table(trait_selec[,"position"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$mobility)),"diet"] <- names(sort(table(trait_selec[,"diet"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$clean_diet)),"clean_diet"] <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$trophic.level)),"trophic.level"] <- mean(trait_selec[,"trophic.level"],na.rm=T)
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$bodyShape_Fishbase)),"bodyShape_Fishbase"] <- names(sort(table(trait_selec[,"bodyShape_Fishbase"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$maxLengthTL_Fishbase)),"maxLengthTL_Fishbase"] <- mean(trait_selec[,"maxLengthTL_Fishbase"],na.rm=T)
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$trophic.level)),"trophic.level"] <- mean(trait_selec[,"trophic.level"],na.rm=T)
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$a)),"a"] <- mean(trait_selec[,"a"],na.rm=T)
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$b)),"b"] <- mean(trait_selec[,"b"],na.rm=T)
+    }
       
-    }    else{
+      
+    else if(is.na(dat_complet$genus[i])){
         
-      next}
+      #Trait 
+      trait_selec <- dat_complet[dat_complet$family==dat_complet$family[i],]
+      trait_selec <- trait_selec[rowSums(is.na(trait_selec)) != ncol(trait_selec), ]
+      trait_selec <- trait_selec[!is.na(trait_selec$clean_diet),]
+      trait_selec<- trait_selec[trait_selec$Infered==0,]
+      
+      
+      if(nrow(trait_selec)==0) {next}
+      
+      trait_selec <- unique(trait_selec[,c("species","reef_associated","mobility","activity","schooling","position","diet","clean_diet",
+                                           "trophic.level","bodyShape_Fishbase","maxLengthTL_Fishbase","a","b")])
+      rownames(trait_selec) <- trait_selec[,1]
+      trait_selec <- trait_selec[,-1]
+      
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$reef_associated)),"reef_associated"]  <- names(sort(table(trait_selec[,"reef_associated"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$mobility)),"mobility"]  <- names(sort(table(trait_selec[,"mobility"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$activity)),"activity"] <- names(sort(table(trait_selec[,"activity"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$schooling)),"schooling"] <- names(sort(table(trait_selec[,"schooling"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$position)),"position"] <- names(sort(table(trait_selec[,"position"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$mobility)),"diet"] <- names(sort(table(trait_selec[,"diet"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$clean_diet)),"clean_diet"] <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$trophic.level)),"trophic.level"] <- mean(trait_selec[,"trophic.level"],na.rm=T)
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$bodyShape_Fishbase)),"bodyShape_Fishbase"] <- names(sort(table(trait_selec[,"bodyShape_Fishbase"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$maxLengthTL_Fishbase)),"maxLengthTL_Fishbase"] <- mean(trait_selec[,"maxLengthTL_Fishbase"],na.rm=T)
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$trophic.level)),"trophic.level"] <- mean(trait_selec[,"trophic.level"],na.rm=T)
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$a)),"a"] <- mean(trait_selec[,"a"],na.rm=T)
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$b)),"b"] <- mean(trait_selec[,"b"],na.rm=T)   
+      } 
     
       }
   }
