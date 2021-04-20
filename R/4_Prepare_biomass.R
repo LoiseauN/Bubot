@@ -178,3 +178,5 @@ species_site_scale_biomass = melt( dat_complet , id.vars = c( "site" , "species"
 species_site_scale_biomass = dcast( species_site_scale_biomass , site~species,sum,na.rm=T )
 
 
+save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+
