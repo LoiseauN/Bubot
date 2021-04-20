@@ -393,7 +393,7 @@ dat_complet$position <- factor(as.character(dat_complet$position),
 dat_complet$schooling <- forcats::fct_rev(factor(as.character(dat_complet$schooling), 
                              order=T))
 dat_complet$clean_diet <- factor(as.character(dat_complet$clean_diet), 
-                        levels=c("HM","HD","OM","PK","IS","IM","FC"),order=T)
+                        levels=c("HM","HD","OM","PK","IS","IM","PI"),order=T)
 
 dat_complet$diet <- factor(as.character(dat_complet$diet), levels=
                              c("herbivorous-detritivorous",

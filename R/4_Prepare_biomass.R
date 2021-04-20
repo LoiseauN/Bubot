@@ -13,12 +13,8 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
 sizeRLS$species <-  gsub(" ", "_", sizeRLS$species )
 coefRLS$species <-  gsub(" ", "_", coefRLS$species )
 #Add info genus for size
-
-
 sizeBUBOT$genus <-  str_split_fixed(sizeBUBOT$Species, "_", 2)[,1]
 sizeRLS$genus   <-  str_split_fixed(sizeRLS$species, "_", 2)[,1]
-
-
 
 #Add family info for size
 sizeBUBOT$family <- NA
@@ -84,7 +80,8 @@ for (i in 1:nrow(sizeBUBOT)){
   }
 }
 sizeBUBOT_clean <- sizeBUBOT 
-
+colnames(sizeBUBOT_clean)[10] <- "species"
+colnames(sizeBUBOT_clean)[12] <- "size"
 #remove family and genus in species names in sizeBUBOT_clean to avoid mistake when preparing data
 for (i in 1: nrow(sizeBUBOT_clean)){
   
@@ -98,7 +95,7 @@ for (i in 1: nrow(sizeBUBOT_clean)){
   
 }
 
-save(sizeBUBOT_clean,file="sizeBUBOT_clean.RData")
+save(sizeBUBOT_clean,file=file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 
 load(file= file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 load(file= file.path(outputs_dir,"sizeRLS_clean.RData"))
@@ -175,7 +172,9 @@ dat_complet$Groupweigth <- dat_complet$Indweigth * dat_complet$abundance
 
 dat_complet$site <- str_split_fixed(dat_complet$surveys, "-", 2)[,1]
 species_site_scale_biomass = melt( dat_complet , id.vars = c( "site" , "species" ) , measure.vars = "Groupweigth" )
-species_site_scale_biomass = dcast( species_site_scale_biomass , site~species,sum,na.rm=T )
+species_site_scale_biomass = dcast( species_site_scale_biomass , site~species,sum,na.rm=T)
+rownames(species_site_scale_biomass) <- species_site_scale_biomass[,1]
+species_site_scale_biomass <- species_site_scale_biomass[,-1]
 
 
 save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
