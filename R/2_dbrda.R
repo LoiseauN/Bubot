@@ -2,6 +2,7 @@
 #At office
 data_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","data","Data_dump")
 results_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","results")
+outputs_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","outputs")
 script_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","R")
 fig_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","fig")
 
@@ -164,12 +165,6 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
 
 
 
-##################################################################
-###############FOR NOW NOT NECESSARY##############################
-##################################################################
-
-
-
 
 
 
@@ -309,6 +304,12 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
 
 
 
+
+
+
+##################################################################
+###############FOR NOW NOT NECESSARY##############################
+##################################################################
 
 
 

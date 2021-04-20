@@ -1,4 +1,19 @@
+# Based on PCOA 
+cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
+                   "Diet")] #maxLength ,"clean_diet"
+cov= unique(cov)
+rownames(cov) <- cov[,1]
+cov <- cov[,-1]
+cov.pcoa <- na.omit(cov)
 
+
+# computing PCoA ----
+trait.dist <- daisy(cov.pcoa,metric ="gower")
+pco.traits <- ape::pcoa(trait.dist)
+
+# Work with 4 dimensions
+sp_pc_coord <- pco.traits$vectors[, 1:4]
+colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
 
 library(mFD)
 `%notin%` <- Negate(`%in%`)

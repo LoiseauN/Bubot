@@ -154,7 +154,7 @@ colnames(fish_traits)[1] <- "Species"
  # estimate_growth_data <- estimate(sp) %>%
     #Selecting the column that are of interest
  #   select(c("Species",'MaxLengthTL','Troph','DepthMax',"a","b",
-             'K','TempPrefMin', 'TempPrefMean', 'TempPrefMax')) 
+#           'K','TempPrefMin', 'TempPrefMean', 'TempPrefMax')) 
 
 
   #species_info <- species(sp) %>%

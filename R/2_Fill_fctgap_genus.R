@@ -27,53 +27,48 @@ for (i in 1:nrow(dat_complet)){
   
   print(i)
   if(is.na(dat_complet$Diet[i])) { dat_complet$clean_diet[i] <- NA }
-  else if(dat_complet$Diet[i]=="HD")  { dat_complet$clean_diet[i] <- "Herbivore-Detritivore" }
-  else if(dat_complet$Diet[i]=="PK")  { dat_complet$clean_diet[i] <- "Planktivore" }
-  else if(dat_complet$Diet[i]=="FC")  { dat_complet$clean_diet[i] <- "Piscivore" }
-  else if(dat_complet$Diet[i]=="IM")  { dat_complet$clean_diet[i] <- "Invertivore" }
-  else if(dat_complet$Diet[i]=="IS")  { dat_complet$clean_diet[i] <- "Invertivore" }
-  else if(dat_complet$Diet[i]=="OM")   { dat_complet$clean_diet[i] <- "Omnivore" }
-  else { dat_complet$clean_diet[i] <- "Herbivore-Detritivore" }
+  else if(dat_complet$Diet[i]=="herbivorous-detritivorous")  { dat_complet$clean_diet[i] <- "HD" }
+  else if(dat_complet$Diet[i]=="macroalgal-herbivorous")  { dat_complet$clean_diet[i] <- "HM" }
+  else if(dat_complet$Diet[i]=="omnivorous")  { dat_complet$clean_diet[i] <- "OM" }
+  else if(dat_complet$Diet[i]=="planktivorous")  { dat_complet$clean_diet[i] <- "PK" }
+  else if(dat_complet$Diet[i]=="invertivorous-targeting-mobile-invertebrate")  { dat_complet$clean_diet[i] <- "IM" }
+  else if(dat_complet$Diet[i]=="invertivorous-targeting-sessile-invertebrates")   { dat_complet$clean_diet[i] <- "IS"}
+  else if(dat_complet$Diet[i]=="piscivorous")   { dat_complet$clean_diet[i] <- "PI" }
   
 }
 
 taxo_correct=unique(dat_complet[,c("Species","Genus","Familly")])
 
-for (i in 1:nrow(taxo_correct)){
-  print(i)
+#for (i in 1:nrow(taxo_correct)){
+# print(i)
   
-  if(!grepl("_",as.character(taxo_correct$Species[i]), fixed = TRUE)){
+#  if(!grepl("_",as.character(taxo_correct$Species[i]), fixed = TRUE)){
     
-    classif <- classification(as.character(taxo_correct$Species[i]),db= 'itis')
+#    classif <- classification(as.character(taxo_correct$Species[i]),db= 'itis')
 
-    if(sum(classif[[1]]$rank=="genus")>0){  
+#    if(sum(classif[[1]]$rank=="genus")>0){  
       
-      taxo_correct$Genus[i] <- classif[[1]][classif[[1]]$rank=="genus",]$name
+#      taxo_correct$Genus[i] <- classif[[1]][classif[[1]]$rank=="genus",]$name
       
-      if(is.na(taxo_correct$Familly[i])){taxo_correct$Familly[i] <- classif[[1]][classif[[1]]$rank=="family",]$name}
+#      if(is.na(taxo_correct$Familly[i])){taxo_correct$Familly[i] <- classif[[1]][classif[[1]]$rank=="family",]$name}
       
-    }
+#    }
     
-    if(sum(classif[[1]]$rank=="family")>0){  
+#    if(sum(classif[[1]]$rank=="family")>0){  
       
-      taxo_correct$Familly[i] <- classif[[1]][classif[[1]]$rank=="family",]$name
+#      taxo_correct$Familly[i] <- classif[[1]][classif[[1]]$rank=="family",]$name
       
-    }
-  }
-}
+#   }
+#  }
+#}
 
-addLevel <- function(x, newlevel=NULL) {
-  if(is.factor(x)) {
-    if (is.na(match(newlevel, levels(x))))
-      return(factor(x, levels=c(levels(x), newlevel)))
-  }
-  return(x)
-}
+
 
 taxo_correct$Species <- addLevel(taxo_correct$Species, "Blenniidae")
 taxo_correct$Familly <- addLevel(taxo_correct$Familly, "Blenniidae")
+dat_complet$Species <- addLevel(dat_complet$Species, "Blenniidae")
 
-
+dat_complet[dat_complet$Species=="Bleniidae",]$Species<- "Blenniidae"
 taxo_correct[taxo_correct$Species=="Bleniidae",]$Species<- "Blenniidae"
 taxo_correct[taxo_correct$Species=="Blenniidae",]$Familly<- "Blenniidae"
 
@@ -174,6 +169,9 @@ taxo_correct[taxo_correct$Species =="Monacanthidae",]$Familly<- "Monacanthidae"
 taxo_correct[taxo_correct$Species =="Mullidae",]$Familly<- "Mullidae"
 taxo_correct[taxo_correct$Species =="Ostraciidae",]$Familly<- "Ostraciidae"
 
+taxo_correct[taxo_correct$Species =="Chaetodon",]$Genus<- "Chaetodon"
+taxo_correct[taxo_correct$Species =="Chaetodon",]$Familly<- "Chaetodontidae"
+
 taxo_correct[taxo_correct$Species =="Gomphosus",]$Genus<- "Gomphosus"
 taxo_correct[taxo_correct$Species =="Gomphosus",]$Familly<- "Labridae"
 
@@ -261,6 +259,19 @@ taxo_correct[taxo_correct$Species =="Zebrasoma",]$Familly<- "Acanthuridae"
 taxo_correct[taxo_correct$Species =="Chromis",]$Genus<- "Chromis"
 taxo_correct[taxo_correct$Species =="Chromis",]$Familly<- "Pomacentridae"
 
+taxo_correct[taxo_correct$Species =="Forcipiger",]$Genus<- "Forcipiger"
+taxo_correct[taxo_correct$Species =="Forcipiger",]$Familly<- "Chaetodontidae"
+
+taxo_correct[taxo_correct$Species =="Scaridae",]$Familly<- "Scaridae"
+
+taxo_correct[taxo_correct$Species =="Naso",]$Genus<- "Naso"
+taxo_correct[taxo_correct$Species =="Naso",]$Familly<- "Acanthuridae"
+
+taxo_correct[taxo_correct$Species =="Caranx",]$Genus<- "Caranx"
+taxo_correct[taxo_correct$Species =="Caranx",]$Familly<- "Carangidae"
+
+
+
 
 dat_complet <- dat_complet[,colnames(dat_complet) %notin% c("Familly","Genus")]
 dat_complet <- merge(dat_complet,taxo_correct, by="Species",all.x= T)
@@ -288,9 +299,6 @@ dat_complet <- data.frame(surveys = dat_complet$Row.names,
                             a= dat_complet$a,
                             b= dat_complet$b
                             )
-dat_complet$maxLengthTL_Fishbase <- as.numeric(as.character(dat_complet$maxLengthTL_Fishbase))
-
-#save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 
 dat_complet$Infered <- 1
@@ -309,8 +317,8 @@ for (i in 1:nrow(dat_complet)) {
   #i=19
   
   
-  if(is.na(dat_complet$clean_diet[i])){
-    
+  if(is.na(dat_complet$trophic.level[i])){
+
     #If scale of genus possible
     if(!is.na(dat_complet$genus[i])){
     
@@ -333,7 +341,7 @@ for (i in 1:nrow(dat_complet)) {
       dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$activity)),"activity"] <- names(sort(table(trait_selec[,"activity"]),decreasing = T)[1])
       dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$schooling)),"schooling"] <- names(sort(table(trait_selec[,"schooling"]),decreasing = T)[1])
       dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$position)),"position"] <- names(sort(table(trait_selec[,"position"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$mobility)),"diet"] <- names(sort(table(trait_selec[,"diet"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$diet)),"diet"] <- names(sort(table(trait_selec[,"diet"]),decreasing = T)[1])
       dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$clean_diet)),"clean_diet"] <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
       dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$trophic.level)),"trophic.level"] <- mean(trait_selec[,"trophic.level"],na.rm=T)
       dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$bodyShape_Fishbase)),"bodyShape_Fishbase"] <- names(sort(table(trait_selec[,"bodyShape_Fishbase"]),decreasing = T)[1])
@@ -343,7 +351,7 @@ for (i in 1:nrow(dat_complet)) {
       dat_complet[which(dat_complet$genus==dat_complet$genus[i] & is.na(dat_complet$b)),"b"] <- mean(trait_selec[,"b"],na.rm=T)
     }
       
-      
+    #If scale of genus impossible, family level
     else if(is.na(dat_complet$genus[i])){
         
       #Trait 
@@ -365,7 +373,7 @@ for (i in 1:nrow(dat_complet)) {
       dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$activity)),"activity"] <- names(sort(table(trait_selec[,"activity"]),decreasing = T)[1])
       dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$schooling)),"schooling"] <- names(sort(table(trait_selec[,"schooling"]),decreasing = T)[1])
       dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$position)),"position"] <- names(sort(table(trait_selec[,"position"]),decreasing = T)[1])
-      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$mobility)),"diet"] <- names(sort(table(trait_selec[,"diet"]),decreasing = T)[1])
+      dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$diet)),"diet"] <- names(sort(table(trait_selec[,"diet"]),decreasing = T)[1])
       dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$clean_diet)),"clean_diet"] <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
       dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$trophic.level)),"trophic.level"] <- mean(trait_selec[,"trophic.level"],na.rm=T)
       dat_complet[which(dat_complet$family==dat_complet$family[i] & is.na(dat_complet$bodyShape_Fishbase)),"bodyShape_Fishbase"] <- names(sort(table(trait_selec[,"bodyShape_Fishbase"]),decreasing = T)[1])
@@ -377,82 +385,42 @@ for (i in 1:nrow(dat_complet)) {
     
       }
   }
-  
 
-# FAIRE DANS UN 2EME TEMPS POUR QUE LE TABLEAU SOIT REMPLI AU MAXIMIM
 
-#If scale of genus impossible, family level
-for (i in 1:nrow(dat_complet)) {
-  
-  print(i)
-  
-  if(is.na(dat_complet$clean_diet[i])){
-    
-if(is.na(dat_complet$Genus[i])){
-  
-  #Trait
-  # trait_selec <-dat_complet[dat_complet$Family=="Acanthuridae",]
-  trait_selec <- dat_complet[dat_complet$Family==dat_complet$Family[i],]
-  trait_selec <- trait_selec[rowSums(is.na(trait_selec)) != ncol(trait_selec), ]
-  trait_selec <- trait_selec[!is.na(trait_selec$clean_diet),]
-  trait_selec<- trait_selec[trait_selec$Fromlitterature==1,]
-  
-  
-  if(nrow(trait_selec)==0) {next}
-  trait_selec <- unique(trait_selec[,c("variable","Mobility","Activity","Schooling","Position","clean_diet",'Size',
-                                       "MaxLengthTL","Troph","Diet")])#,"PC1","PC2","PC3","PC4"
-  rownames(trait_selec) <- trait_selec[,1]
-  trait_selec <- trait_selec[,-1]
-
-  
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"Mobility"]   <- names(sort(table(trait_selec[,"Mobility"]),decreasing = T)[1])
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"Activity"]   <- names(sort(table(trait_selec[,"Activity"]),decreasing = T)[1])
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"Schooling"]  <- names(sort(table(trait_selec[,"Schooling"]),decreasing = T)[1])
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"Position"]   <- names(sort(table(trait_selec[,"Position"]),decreasing = T)[1])
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"clean_diet"] <- names(sort(table(trait_selec[,"clean_diet"]),decreasing = T)[1])
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"Size"]       <- names(sort(table(trait_selec[,"Size"]),decreasing = T)[1])
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"Diet"]       <- names(sort(table(trait_selec[,"Diet"]),decreasing = T)[1])
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"MaxLengthTL"]<- mean(trait_selec$MaxLengthTL,na.rm=T)
-  dat_complet[which(dat_complet$Family==dat_complet$Family[i] & is.na(dat_complet$Troph)),"Troph"]      <- mean(trait_selec$Troph,na.rm=T)
-}
-    
-  }
-}
-  
-dat_complet$FE <- paste0(dat_complet$Size,dat_complet$Mobility,dat_complet$Activity,dat_complet$Schooling,
-                         dat_complet$Position,dat_complet$Diet) 
-
-dat_complet$Position <- factor(as.character(dat_complet$Position), 
+#Check nature of traits
+dat_complet$position <- factor(as.character(dat_complet$position), 
                             order=T)
-dat_complet$Schooling <- factor(as.character(dat_complet$Schooling), 
-                             order=T)
-dat_complet$Diet <- factor(as.character(dat_complet$Diet), 
+dat_complet$schooling <- forcats::fct_rev(factor(as.character(dat_complet$schooling), 
+                             order=T))
+dat_complet$clean_diet <- factor(as.character(dat_complet$clean_diet), 
                         levels=c("HM","HD","OM","PK","IS","IM","FC"),order=T)
 
-dat_complet$clean_diet <- factor(as.character(dat_complet$clean_diet), levels=c("Herbivore-Detritivore","Omnivore","Planktivore","Invertivore","Piscivore"))
+dat_complet$diet <- factor(as.character(dat_complet$diet), levels=
+                             c("herbivorous-detritivorous",
+                               "macroalgal-herbivorous",
+                               "Omnivore",
+                               "omnivorous",
+                               "planktivorous",
+                               "invertivorous-targeting-sessile-invertebrates",
+                               "invertivorous-targeting-mobile-invertebrate",
+                               "piscivorous"),order=T)
 
-# Based on PCOA 
-cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
-                   "Diet")] #maxLength ,"clean_diet"
-cov= unique(cov)
-rownames(cov) <- cov[,1]
-cov <- cov[,-1]
-cov.pcoa <- na.omit(cov)
+dat_complet$mobility<- forcats::fct_rev(factor(as.character(dat_complet$mobility), 
+                              order=T))
 
+#Remove Apogonidae / Elasmobranchii / Gobiidae
+    #Remove apogon
+    dat_complet <- subset(dat_complet, dat_complet$family!="Apogonidae") #5 obs, 7 inds
+   
+    #Remove shark
+    dat_complet <- subset(dat_complet, dat_complet$class=="Actinopterygii" |  is.na(dat_complet$class)) #17 obs, 30 inds
+    
+    #Remove gobiidae
+    dat_complet <- subset(dat_complet, dat_complet$family!="Gobiidae")#23 obs, 33 inds
 
-# computing PCoA ----
-trait.dist <- daisy(cov.pcoa,metric ="gower")
-pco.traits <- ape::pcoa(trait.dist)
-
-# Work with 4 dimensions
-sp_pc_coord <- pco.traits$vectors[, 1:4]
-colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
-dat_complet <- merge(dat_complet,sp_pc_coord,by.x="variable",by.y="row.names",all.x=T)
-#save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/data/Data_dump/dat_complet.RData")
-#save(dat_complet,file="~/Documents/Bubot/Bubot_Analyse/data/Data_dump/dat_complet.RData")
-
-
-load(file=file.path(data_dir,"dat_complet.RData"))
+    
+save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+    
 
 # Start Working on Mayotte.
 dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
