@@ -1,9 +1,20 @@
 
 
-tree <- read.tree("Reef_fish_all.tacted.newick.tre")
+tree <- ape::read.tree(file.path(data_dir,"Reef_fish_all.tacted.newick.tre"))
 
+test <- phytools::getDescendants(tree, node=5, curr=NULL)
+
+#the package ggphylo seemed to have the answer to my problem, but it is no longer supported (last updates were in 2012)
+ggphylo::tree.as.data.frame(tree)
+
+
+test<-chao_alpha_beta(biomass_mat, tree)
+
+
+
+#Plot Phylo
 #Dropping names not in  ID
-set_fish <- ape::drop.tip(tree,tree$tip.label[!is.element(tree$tip.label,as.character(dat_complet$variable))])
+set_fish <- ape::drop.tip(tree,tree$tip.label[!is.element(tree$tip.label,as.character(dat_complet$species))])
 
 
 #ADD UNIQUENESS OU DISTINCTIVENESS!!!
@@ -58,9 +69,6 @@ tree_plot <- ggtree::ggtree(new_phylo, aes(color = meanDepth), layout = "circula
   
   scale_colour_gradientn(colours = color_meandepth)+
   theme(legend.position="none")
-
-
-
 
 # Compute Taxa Segments Coordinates ----
 
