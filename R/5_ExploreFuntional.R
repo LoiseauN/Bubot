@@ -1,19 +1,7 @@
+load(file.path("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData"))
 
-# Start Working on Mayotte.
+#Working on Mayotte only
 dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
-totalbiomass_classDepth <- dat_complet_mayotte[,c("Groupweigth","classDepth")]
-totalbiomass_classDepth <- aggregate(. ~ classDepth, data = totalbiomass_classDepth, sum)
-colnames(totalbiomass_classDepth)[2]<-"totalbiomass"
-
-totalbiomass_site <- dat_complet_mayotte[,c("site","Groupweigth")]
-totalbiomass_site <- aggregate(. ~ site, data = totalbiomass_site, sum)
-colnames(totalbiomass_site)[2]<-"totalbiomass_site"
-
-dat_complet_mayotte<- merge(dat_complet_mayotte,totalbiomass_site,by="site",all.x=T)
-dat_complet_mayotte<- merge(dat_complet_mayotte,totalbiomass_classDepth,by="classDepth",all.x=T)
-
-dat_complet_mayotte$aburelatif <- dat_complet_mayotte$value/dat_complet_mayotte$totalbiomass_site
-
 
 var <- c("reef_associated","mobility","activity","schooling","position","diet","clean_diet",
          "trophic.level","bodyShape_Fishbase","maxLengthTL_Fishbase")

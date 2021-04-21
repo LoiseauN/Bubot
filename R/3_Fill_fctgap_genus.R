@@ -407,7 +407,7 @@ dat_complet$diet <- factor(as.character(dat_complet$diet), levels=
 
 dat_complet$mobility<- forcats::fct_rev(factor(as.character(dat_complet$mobility), 
                               order=T))
-
+dat_complet$activity <- factor(dat_complet$activity)   
 #Remove Apogonidae / Elasmobranchii / Gobiidae
     #Remove apogon
     dat_complet <- subset(dat_complet, dat_complet$family!="Apogonidae") #5 obs, 7 inds

@@ -1203,4 +1203,5 @@ addLevel <- function(x, newlevel=NULL) {
 }
 ##############
 
+`%notin%` <- Negate(`%in%`)
 

@@ -171,10 +171,7 @@ dat_complet$Indweigth <- dat_complet$a * dat_complet$size^dat_complet$b
 dat_complet$Groupweigth <- dat_complet$Indweigth * dat_complet$abundance
 
 dat_complet$site <- str_split_fixed(dat_complet$surveys, "-", 2)[,1]
-species_site_scale_biomass = melt( dat_complet , id.vars = c( "site" , "species" ) , measure.vars = "Groupweigth" )
-species_site_scale_biomass = dcast( species_site_scale_biomass , site~species,sum,na.rm=T)
-rownames(species_site_scale_biomass) <- species_site_scale_biomass[,1]
-species_site_scale_biomass <- species_site_scale_biomass[,-1]
+
 
 
 save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
