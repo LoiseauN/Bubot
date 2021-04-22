@@ -1,20 +1,22 @@
 
 
 tree <- ape::read.tree(file.path(data_dir,"Reef_fish_all.tacted.newick.tre"))
+set_fish <- ape::drop.tip(tree,tree$tip.label[!is.element(tree$tip.label,as.character(colnames(biomass_mat)))])
 
-test <- phytools::getDescendants(tree, node=5, curr=NULL)
+ape::write.tree(set_fish, file="tree.txt") # 1°/ you need to make a .txt file in a newick format
+tree<-paste(readLines('tree.txt')) # 2°/ you need to read it as a character string
+tree_phylog<-ade4::newick2phylog(tree) # 3°/ newick2phylog{ade4} 
 
-#the package ggphylo seemed to have the answer to my problem, but it is no longer supported (last updates were in 2012)
-ggphylo::tree.as.data.frame(tree)
+# On perd 72 esp 
+biomass_mat_phylo <- biomass_mat[,colnames(biomass_mat) %in% set_fish$tip.label]
+biomass_mat_phylo <- biomass_mat_phylo[apply(biomass_mat_phylo,1,sum)>0,]
 
-
-test<-chao_alpha_beta(biomass_mat, tree)
-
+test<-chao_alpha_beta(matrix = biomass_mat_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
+#test<-chao_alpha_beta(matrix, tree_phylog)
 
 
 #Plot Phylo
 #Dropping names not in  ID
-set_fish <- ape::drop.tip(tree,tree$tip.label[!is.element(tree$tip.label,as.character(dat_complet$species))])
 
 
 #ADD UNIQUENESS OU DISTINCTIVENESS!!!
