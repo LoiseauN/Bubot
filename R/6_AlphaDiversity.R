@@ -1,6 +1,9 @@
 #
-library(reshape2)
-library(mFD)
+
+pkgs <- c('reshape2','mFD','viridis')
+nip <- pkgs[!(pkgs %in% installed.packages())]
+nip <- lapply(nip, install.packages, dependencies = TRUE)
+ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 #Compute all indices
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
@@ -172,3 +175,4 @@ ggplot(data = alpha_div,
       size=12),
     axis.title.x = element_text(size=14, face="bold"),
     axis.title.y = element_text(size=14, face="bold"))
+

@@ -1,3 +1,7 @@
+library(mFD)
+`%notin%` <- Negate(`%in%`)
+
+
 # Based on PCOA 
 cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
                    "Diet")] #maxLength ,"clean_diet"
@@ -15,8 +19,6 @@ pco.traits <- ape::pcoa(trait.dist)
 sp_pc_coord <- pco.traits$vectors[, 1:4]
 colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
 
-library(mFD)
-`%notin%` <- Negate(`%in%`)
 
 abumat <-  dat_complet[,c("variable","value","Sample.code")]
 abumat <-  as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))

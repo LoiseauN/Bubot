@@ -8,18 +8,18 @@ tree<-paste(readLines('tree.txt')) # 2°/ you need to read it as a character str
 tree_phylog<-ade4::newick2phylog(tree) # 3°/ newick2phylog{ade4} 
 
 # On perd 72 esp 
-biomass_mat_phylo <- biomass_mat[,colnames(biomass_mat) %in% set_fish$tip.label]
-biomass_mat_phylo <- biomass_mat_phylo[apply(biomass_mat_phylo,1,sum)>0,]
-
-test<-chao_alpha_beta(matrix = biomass_mat_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
-#test<-chao_alpha_beta(matrix, tree_phylog)
+biomass_mat_phylo <- biomass_mat[,colnames(biomass_mat) %in% names(tree_phylog$leaves)]
+biomass_mat_phylo <- biomass_mat_phylo[apply(biomass_mat_phylo,1,sum)>4,]
+biomass_mat_phylo <- biomass_mat_phylo[,apply(biomass_mat_phylo,1,sum)>0]
 
 
-#Plot Phylo
-#Dropping names not in  ID
+Alpha_beta_hill_phylo<-chao_alpha_beta(matrix = biomass_mat_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
 
 
-#ADD UNIQUENESS OU DISTINCTIVENESS!!!
+
+
+
+#Plot Phylogeny
 
 #' ---------------------------------------------------------------------------- @PresenceSpeciesPerDepth
 dat <- data.frame(unique(data.frame(dat_complet$variable,dat_complet$Family)), 

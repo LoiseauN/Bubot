@@ -1,11 +1,11 @@
 #A CHECKER Forcipiger Scaridae Naso
 
 
-library(reshape2)
+
 
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle',
           'doParallel','missForest','cowplot','grid','gridExtra','grid','taxize',
-          "ggalt","GGally","tidyverse")
+          "ggalt","GGally","tidyverse",'reshape2')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
