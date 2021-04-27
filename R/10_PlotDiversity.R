@@ -1,75 +1,38 @@
+pkgs <- c('reshape2','mFD','viridis','data.table','ggplot2')
+nip <- pkgs[!(pkgs %in% installed.packages())]
+nip <- lapply(nip, install.packages, dependencies = TRUE)
+ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
-library(ggplot2)
-library(reshape2)
+# Plot alpha
+ind <- c("sp_richn","fdis","fmpd","fnnd","feve","fric","fdiv","fori","fspe",
+         "biomass","hill_taxo_entropy","hill_fonct_richess",
+         "hill_fonct_entropy","hill_phylo_richess","hill_phylo_entropy")
+
+df <- reshape2::melt(alpha_div_all, id.vars="depth")
+df$value <- as.numeric(df$value)
+df <- df[df$variable %in% ind,]
+
+ggplot(df,aes(x = depth, y = value, color = variable )) +
+  geom_point() +
+  facet_wrap(~ variable, scales = "free") +
+  theme_bw()+
+  stat_smooth()+
+    theme(legend.position = "none")
 
 
-df <- melt(alpha_div_all, id.vars="depth")
-
-library(ggplot2)
-
-data_plot <- df[df$variable %like% "hill", ]
-ggplot(data_plot, aes(x=depth, y=value, fill=variable,color=variable)) + geom_line(stat='identity')
-
-
-library(data.table)
-
-mtcars[rownames(mtcars) %like% "Merc", ]
-
-
-
-# Everything on the same plot
-ggplot(d, aes(Xax,value, col=variable)) + 
-  geom_point() + 
-  stat_smooth() 
-
-# Separate plots
-ggplot(d, aes(Xax,value)) + 
-  geom_point() + 
-  stat_smooth() +
-  facet_wrap(~variable)
+###PLot Beta
 
 
 
 
- ggplot(alpha_div_all, aes(x=depth, y=hill_phylo_richess)) + 
-    geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
-    #geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-    #  position=position_dodge(0.05),color ="cadetblue3")+
-    theme_bw()+ylab("Hill taxo richness")+
-    geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-  
-  
-  FD_q1<- ggplot(data_plot, aes(x=depth, y=FD_q1)) + 
-    geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
-    #geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-    #  position=position_dodge(0.05),color ="cadetblue3")+
-    theme_bw()+ylab("Hill taxo entropy")+
-    geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-  
-  FD_q0.1<- ggplot(data_plot, aes(x=depth, y=FD_q0.1)) + 
-    geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
-    #geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-    #  position=position_dodge(0.05),color ="cadetblue3")+
-    theme_bw()+ylab("Hill funct richness")+
-    geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-  
-  FD_q1.1<- ggplot(data_plot, aes(x=depth, y=FD_q1.1)) + 
-    geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
-    #geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-    #  position=position_dodge(0.05),color ="cadetblue3")+
-    theme_bw()+ylab("Hill funct entropy")+
-    geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-  
-  
-  if (i == 1) title <- textGrob("All Islands",
-                                gp=gpar(fontsize=20,fontface=2))
-  if (i == 2) title <- textGrob("Mayotte",
-                                gp=gpar(fontsize=20,fontface=2))
-  if (i == 3) title <- textGrob("Juan de Nova",
-                                gp=gpar(fontsize=20,fontface=2))
-  if (i == 4) title <- textGrob("Europa",
-                                gp=gpar(fontsize=20,fontface=2))
-  
-  grid.arrange(FD_q0,FD_q0.1,FD_q1,FD_q1.1,ncol=2,top = title)
-  
-}
+df <- reshape2::melt(beta_hill[,-c(1,2)], id.vars="diff_depth")
+df$value <- as.numeric(df$value)
+
+
+ggplot(df,aes(x = diff_depth, y = value, color = variable )) +
+  geom_point() +
+  facet_wrap(~ variable, scales = "free",ncol = 2) +
+  theme_bw()+
+  stat_smooth()+
+  theme(legend.position = "none")
+

@@ -118,6 +118,7 @@ beta_hill <- data.frame(site1 = beta_hill_taxo_richess_t[,1],
 
 
 
+
 beta_hill_phylo_richess_t <- reshape::melt(as.matrix(alpha_beta_hill_phylo$beta_phylo$q0))[melt(upper.tri(as.matrix(alpha_beta_hill_phylo$beta_phylo$q0)))$value,]
 
 beta_hill_phylo_entropy_t <- reshape::melt(as.matrix(alpha_beta_hill_phylo$beta_phylo$q1))[melt(upper.tri(as.matrix(alpha_beta_hill_phylo$beta_phylo$q1)))$value,]
@@ -129,6 +130,24 @@ beta_hill_phylo <- data.frame(pairsID = paste0(beta_hill_phylo_entropy_t[,1], "_
                               beta_hill_phylo_entropy = beta_hill_phylo_entropy_t[,3])
 
 beta_hill <- merge(beta_hill,beta_hill_phylo,by="pairsID", all.x =T)
+
+
+
+diff_depth <- data.frame(row.names = rownames(alpha_div_all),
+                         depth=alpha_div_all$depth)
+
+
+diff_depth  <- dist(diff_depth, method = "euclidean")                        
+diff_depth <- reshape2::melt(as.matrix(diff_depth))[melt(upper.tri(as.matrix(diff_depth)))$value,]
+
+diff_depth$pairsID <- paste0(diff_depth[,1], "__",
+                             diff_depth[,2])          
+diff_depth <- diff_depth[,-c(1,2)]     
+beta_hill <- merge(beta_hill,diff_depth,by="pairsID",all.x = T)
+rownames(beta_hill) <- beta_hill[,1]
+beta_hill <- beta_hill[,-c(1)]
+colnames(beta_hill)[9] <- "diff_depth"
+save(beta_hill,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/beta_hill.RData")
 
 
 #alpha_hill_all$classDepth <- as.factor(str_split_fixed(rownames(alpha_hill_all), "_", 2)[,2])
