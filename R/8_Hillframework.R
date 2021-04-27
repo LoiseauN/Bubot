@@ -2,70 +2,147 @@ library(mFD)
 `%notin%` <- Negate(`%in%`)
 
 
-# Based on PCOA 
-cov=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
-                   "Diet")] #maxLength ,"clean_diet"
-cov= unique(cov)
-rownames(cov) <- cov[,1]
-cov <- cov[,-1]
-cov.pcoa <- na.omit(cov)
 
 
-# computing PCoA ----
-trait.dist <- daisy(cov.pcoa,metric ="gower")
-pco.traits <- ape::pcoa(trait.dist)
-
-# Work with 4 dimensions
-sp_pc_coord <- pco.traits$vectors[, 1:4]
-colnames(sp_pc_coord) <- paste("PC", 1:4, sep = "")
 
 
-abumat <-  dat_complet[,c("variable","value","Sample.code")]
-abumat <-  as.data.frame.matrix(xtabs(value ~ Sample.code + variable ,data= dat_complet))
-abumat <-  species_site_scale_biomass
-traits=dat_complet[,c("variable","Mobility","Activity","Schooling","Position",'Size',
-                   "Diet")] #maxLength ,"clean_diet"
-colnames(traits)[1]<- "species"
-#Dominant Traits for species at the scale of the genus or family
-for (i in 1:nrow(dat_complet)){
-  if(is.na(dat_complet[i,2])){ 
-        
-    if(dat_complet[i,1] %in% dat_complet$Genus){
-        dat_complet[i,1] %in% dat_complet$Genus
-    }
-      
-      else if(dat_complet[i,1] %in% dat_complet$Familly){
-        
-      }
-    
-    
-    }
-  
-}
 
 
-cov= unique(cov)
-rownames(cov) <- cov[,1]
-cov <- cov[,-1]
-cov.pcoa <- na.omit(cov)
 
-trait.dist <- cluster::daisy(cov.pcoa,metric ="gower")
-
-abumat <- abumat[,apply(abumat,2,sum)>0]
-abumat <- abumat[apply(abumat,1,sum)>0,]
-trait.dist_mat <- as.matrix(trait.dist)
-abumat <- as.matrix(abumat[,colnames(abumat) %in% rownames(trait.dist_mat)])
-trait.dist_mat <- trait.dist_mat[,colnames(trait.dist_mat) %in% colnames(abumat)]
-trait.dist_mat <- trait.dist_mat[rownames(trait.dist_mat) %in% colnames(abumat),]
+###############################################################################
+###############################################################################
+#taxo richness : data= 0/1, q=0, tau=min (c'est la richesse spé)
+#taxo entropy: data= relative biomass, q=1, tau=min (c'est exp(Shannon) )
+#fonctio richness: data= 0/1, q=0, tau=mean
+#fonctio entropy: data= 0/1, q=1, tau=mean
 
 
-abumat0_1 <- abumat
-abumat0_1[abumat0_1>0] <- 1
+ape::write.tree(set_fish, file="tree.txt") # 1°/ you need to make a .txt file in a newick format
+tree<-paste(readLines('tree.txt')) # 2°/ you need to read it as a character string
+tree_phylog<-ade4::newick2phylog(tree) # 3°/ newick2phylog{ade4} 
 
-abumat_relatif <- abumat
-for (i in 1:nrow(abumat_relatif)){
-  abumat_relatif[i,] <- abumat_relatif[i,]/sum(abumat_relatif[i,])
-}
+# On perd 72 esp 
+biomass_mat_phylo <- biomass_mat[,colnames(biomass_mat) %in% names(tree_phylog$leaves)]
+biomass_mat_phylo <- biomass_mat_phylo[apply(biomass_mat_phylo,1,sum)>4,]
+biomass_mat_phylo <- biomass_mat_phylo[,apply(biomass_mat_phylo,1,sum)>0]
+
+biomass_mat0_1 <- biomass_mat
+biomass_mat0_1[biomass_mat0_1>0] <- 1
+
+alpha_beta_hill_phylo<-chao_alpha_beta(matrix = biomass_mat_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
+
+#alpha
+alpha_hill_taxo_richess  <- mFD::alpha.fd.hill (asb_sp_w = biomass_mat0_1,
+                                           sp_dist  = sp_dist_traits,
+                                           q        = 0,
+                                           tau      = "min")$asb_FD_Hill
+
+alpha_hill_taxo_entropy  <- mFD::alpha.fd.hill (asb_sp_w = biomass_mat,
+                                           sp_dist  = sp_dist_traits,
+                                           q        = 1,
+                                           tau      = "min")$asb_FD_Hill
+
+alpha_hill_fonct_richess <- mFD::alpha.fd.hill (asb_sp_w = biomass_mat0_1,
+                                           sp_dist  = sp_dist_traits,
+                                           q        = 0,
+                                           tau      = "mean")$asb_FD_Hill
+
+alpha_hill_fonct_entropy <- mFD::alpha.fd.hill (asb_sp_w = biomass_mat,
+                                           sp_dist  = sp_dist_traits,
+                                           q        = 1,
+                                           tau      = "mean")$asb_FD_Hill
+
+alpha_hill_all <- data.frame(hill_taxo_richess  = alpha_hill_taxo_richess[,1],
+                             hill_taxo_entropy  = alpha_hill_taxo_entropy[,1],
+                             hill_fonct_richess = alpha_hill_fonct_richess[,1],
+                             hill_fonct_entropy = alpha_hill_fonct_entropy[,1])
+
+
+alpha_hill_all <- merge(alpha_hill_all, 
+                        data.frame(alpha_beta_hill_phylo$alpha_phylo[,c(1,2)]), by="row.names", all.x = T)
+rownames(alpha_hill_all) <- alpha_hill_all[,1]
+alpha_hill_all <- alpha_hill_all[,-1]
+colnames(alpha_hill_all) <- c("alpha_hill_taxo_richess","alpha_hill_taxo_entropy",
+                              "alpha_hill_fonct_richess","alpha_hill_fonct_entropy",
+                              "alpha_hill_phylo_richess","alpha_hill_phylo_entropy")
+
+
+alpha_div_all <- merge(alpha_div_all,alpha_hill_all,by="row.names")
+rownames(alpha_div_all) <- alpha_div_all[,1]
+alpha_div_all <- alpha_div_all[,-c(1,2)]
+
+
+save(alpha_div_all,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
+
+
+#beta
+beta_hill_taxo_richess  <- mFD::beta.fd.hill (asb_sp_w = biomass_mat0_1,
+                                         sp_dist  = sp_dist_traits,
+                                         q        = 0,
+                                         tau      = "min",
+                                         beta_type = "Jaccard")
+
+beta_hill_taxo_entropy  <- mFD::beta.fd.hill (asb_sp_w = biomass_mat,
+                                         sp_dist  = sp_dist_traits,
+                                         q        = 1,
+                                         tau      = "min",
+                                         beta_type = "Jaccard")
+
+beta_hill_fonct_richess <- mFD::beta.fd.hill (asb_sp_w = biomass_mat0_1,
+                                         sp_dist  = sp_dist_traits,
+                                         q        = 0,
+                                         tau      = "mean",
+                                         beta_type = "Jaccard")
+
+beta_hill_fonct_entropy <- mFD::beta.fd.hill (asb_sp_w = biomass_mat,
+                                         sp_dist  = sp_dist_traits,
+                                         q        = 1,
+                                         tau      = "mean",
+                                         beta_type = "Jaccard")
+
+
+beta_hill_taxo_richess_t <- reshape::melt(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0))[melt(upper.tri(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0)))$value,]
+beta_hill_taxo_entropy_t <- reshape::melt(as.matrix(beta_hill_taxo_entropy$beta_fd_q$q1))[melt(upper.tri(as.matrix(beta_hill_taxo_entropy$beta_fd_q$q1)))$value,]
+beta_hill_fonct_richess_t <- reshape::melt(as.matrix(beta_hill_fonct_richess$beta_fd_q$q0))[melt(upper.tri(as.matrix(beta_hill_fonct_richess$beta_fd_q$q0)))$value,]
+beta_hill_fonct_entropy_t <- reshape::melt(as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1))[melt(upper.tri(as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1)))$value,]
+
+beta_hill <- data.frame(site1 = beta_hill_taxo_richess_t[,1],
+                        site2 = beta_hill_taxo_richess_t[,2],
+                        beta_hill_taxo_richess = beta_hill_taxo_richess_t[,3],
+                        beta_hill_taxo_entropy = beta_hill_taxo_entropy_t[,3],
+                        beta_hill_fonct_richess = beta_hill_fonct_richess_t[,3],
+                        beta_hill_fonct_entropy = beta_hill_fonct_entropy_t[,3],
+                        pairsID = paste0(beta_hill_taxo_richess_t[,1], "__",
+                                         beta_hill_taxo_richess_t[,2]))
+
+
+
+
+beta_hill_phylo_richess_t <- reshape::melt(as.matrix(alpha_beta_hill_phylo$beta_phylo$q0))[melt(upper.tri(as.matrix(alpha_beta_hill_phylo$beta_phylo$q0)))$value,]
+
+beta_hill_phylo_entropy_t <- reshape::melt(as.matrix(alpha_beta_hill_phylo$beta_phylo$q1))[melt(upper.tri(as.matrix(alpha_beta_hill_phylo$beta_phylo$q1)))$value,]
+
+
+beta_hill_phylo <- data.frame(pairsID = paste0(beta_hill_phylo_entropy_t[,1], "__",
+                                                 beta_hill_phylo_entropy_t[,2]),
+                              beta_hill_phylo_richess  = beta_hill_phylo_richess_t[,3],
+                              beta_hill_phylo_entropy = beta_hill_phylo_entropy_t[,3])
+
+beta_hill <- merge(beta_hill,beta_hill_phylo,by="pairsID", all.x =T)
+
+
+#alpha_hill_all$classDepth <- as.factor(str_split_fixed(rownames(alpha_hill_all), "_", 2)[,2])
+
+
+
+
+
+
+
+
+
+
+
 
 
 #Plot distance decay en fonction des profondeurs
@@ -82,133 +159,6 @@ geodist <-  as.matrix(round(GeoDistanceInMetresMatrix(coord) / 1000,3))
 depthdist <- as.matrix(dist(coord_depth[,2],"euclidean"))
 colnames(depthdist)<- rownames(coord_depth)
 rownames(depthdist)<- rownames(coord_depth)
-
-
-###############################################################################
-###############################################################################
-#taxo richness : data= 0/1, q=0, tau=min (c'est la richesse spé)
-#taxo entropy: data= relative biomass, q=1, tau=min (c'est exp(Shannon) )
-#fonctio richness: data= 0/1, q=0, tau=mean
-#fonctio entropy: data= 0/1, q=1, tau=mean
-
-
-
-#alpha
-alpha_hill_taxo_richess  <- alpha.fd.hill (asb_sp_w = abumat0_1,
-                                          sp_dist  = trait.dist_mat,
-                                          q        = 0,
-                                          tau      = "min")$asb_FD_Hill
-
-alpha_hill_taxo_entropy  <- alpha.fd.hill (asb_sp_w = abumat_relatif,
-                                          sp_dist  = trait.dist_mat,
-                                          q        = 1,
-                                          tau      = "min")$asb_FD_Hill
-
-alpha_hill_fonct_richess <- alpha.fd.hill (asb_sp_w = abumat0_1,
-                                          sp_dist  = trait.dist_mat,
-                                          q        = 0,
-                                          tau      = "mean")$asb_FD_Hill
-
-alpha_hill_fonct_entropy <- alpha.fd.hill (asb_sp_w = abumat_relatif,
-                                          sp_dist  = trait.dist_mat,
-                                          q        = 1,
-                                          tau      = "mean")$asb_FD_Hill
-
-alpha_hill_all <- data.frame(hill_taxo_richess  = alpha_hill_taxo_richess,
-                             hill_taxo_entropy  = alpha_hill_taxo_entropy,
-                             hill_fonct_richess = alpha_hill_fonct_richess,
-                             hill_fonct_entropy = alpha_hill_fonct_entropy)
-
-#alpha_hill_all$classDepth <- as.factor(str_split_fixed(rownames(alpha_hill_all), "_", 2)[,2])
-
-alpha_hill_all <- merge(alpha_div,alpha_hill_all,by="row.names",all.x=T)
-
-
-for (i in 1:4){
-  print(i)
-  if (i == 1) data_plot <- alpha_hill_all
-  if (i == 2) data_plot <- subset(alpha_hill_all,alpha_hill_all$island=="Mayotte")
-  if (i == 3) data_plot <- subset(alpha_hill_all,alpha_hill_all$island=="Juan_de_nova")
-  if (i == 4) data_plot <- subset(alpha_hill_all,alpha_hill_all$island=="Europa")
-  
-  
-  FD_q0 <- ggplot(data_plot, aes(x=depth, y=FD_q0)) + 
-    geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
-    #geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-                #  position=position_dodge(0.05),color ="cadetblue3")+
-    theme_bw()+ylab("Hill taxo richness")+
-    geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-  
-  
-  FD_q1<- ggplot(data_plot, aes(x=depth, y=FD_q1)) + 
-    geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
-    #geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-    #  position=position_dodge(0.05),color ="cadetblue3")+
-    theme_bw()+ylab("Hill taxo entropy")+
-    geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-  
-  FD_q0.1<- ggplot(data_plot, aes(x=depth, y=FD_q0.1)) + 
-    geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
-    #geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-    #  position=position_dodge(0.05),color ="cadetblue3")+
-    theme_bw()+ylab("Hill funct richness")+
-    geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-  
-  FD_q1.1<- ggplot(data_plot, aes(x=depth, y=FD_q1.1)) + 
-    geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
-    #geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-    #  position=position_dodge(0.05),color ="cadetblue3")+
-    theme_bw()+ylab("Hill funct entropy")+
-    geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-  
-  
-  if (i == 1) title <- textGrob("All Islands",
-                                gp=gpar(fontsize=20,fontface=2))
-  if (i == 2) title <- textGrob("Mayotte",
-                                gp=gpar(fontsize=20,fontface=2))
-  if (i == 3) title <- textGrob("Juan de Nova",
-                                gp=gpar(fontsize=20,fontface=2))
-  if (i == 4) title <- textGrob("Europa",
-                                gp=gpar(fontsize=20,fontface=2))
-                                
-  grid.arrange(FD_q0,FD_q0.1,FD_q1,FD_q1.1,ncol=2,top = title)
-  
-}
-
-
-
-#beta
-beta_hill_taxo_richess  <- beta.fd.hill (asb_sp_w = abumat0_1,
-                                          sp_dist  = trait.dist_mat,
-                                          q        = 0,
-                                          tau      = "min",
-                                          beta_type = "Jaccard")
-
-beta_hill_taxo_entropy  <- beta.fd.hill (asb_sp_w = abumat_relatif,
-                                          sp_dist  = trait.dist_mat,
-                                          q        = 1,
-                                          tau      = "min",
-                                          beta_type = "Jaccard")
-
-beta_hill_fonct_richess <- beta.fd.hill (asb_sp_w = abumat0_1,
-                                          sp_dist  = trait.dist_mat,
-                                          q        = 0,
-                                          tau      = "mean",
-                                          beta_type = "Jaccard")
-
-beta_hill_fonct_entropy <- beta.fd.hill (asb_sp_w = abumat_relatif,
-                                          sp_dist  = trait.dist_mat,
-                                          q        = 1,
-                                          tau      = "mean",
-                                          beta_type = "Jaccard")
-
-
-beta_hill_taxo_richess_t <- reshape::melt(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0))[melt(upper.tri(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0)))$value,]
-beta_hill_taxo_entropy_t <- reshape::melt(as.matrix(beta_hill_taxo_entropy$beta_fd_q$q1))[melt(upper.tri(as.matrix(beta_hill_taxo_entropy$beta_fd_q$q1)))$value,]
-beta_hill_fonct_richess_t <- reshape::melt(as.matrix(beta_hill_fonct_richess$beta_fd_q$q0))[melt(upper.tri(as.matrix(beta_hill_fonct_richess$beta_fd_q$q0)))$value,]
-beta_hill_fonct_entropy_t <- reshape::melt(as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1))[melt(upper.tri(as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1)))$value,]
-
-
 #Plot distance  en fonction des profondeurs
 coord_depth <- species.site.matrix$site.data[,c(2,5:7)]
 coord_depth<- aggregate(. ~ Sample.code, data = coord_depth, mean)

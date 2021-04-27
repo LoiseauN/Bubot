@@ -3,20 +3,6 @@
 tree <- ape::read.tree(file.path(data_dir,"Reef_fish_all.tacted.newick.tre"))
 set_fish <- ape::drop.tip(tree,tree$tip.label[!is.element(tree$tip.label,as.character(colnames(biomass_mat)))])
 
-ape::write.tree(set_fish, file="tree.txt") # 1°/ you need to make a .txt file in a newick format
-tree<-paste(readLines('tree.txt')) # 2°/ you need to read it as a character string
-tree_phylog<-ade4::newick2phylog(tree) # 3°/ newick2phylog{ade4} 
-
-# On perd 72 esp 
-biomass_mat_phylo <- biomass_mat[,colnames(biomass_mat) %in% names(tree_phylog$leaves)]
-biomass_mat_phylo <- biomass_mat_phylo[apply(biomass_mat_phylo,1,sum)>4,]
-biomass_mat_phylo <- biomass_mat_phylo[,apply(biomass_mat_phylo,1,sum)>0]
-
-
-Alpha_beta_hill_phylo<-chao_alpha_beta(matrix = biomass_mat_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
-
-
-
 
 
 #Plot Phylogeny
