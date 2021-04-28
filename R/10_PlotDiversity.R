@@ -21,9 +21,6 @@ ggplot(df,aes(x = depth, y = value, color = variable )) +
 
 ###PLot Beta
 
-
-
-
 df <- reshape2::melt(beta_hill[,-c(1,2)], id.vars="diff_depth")
 df$value <- as.numeric(df$value)
 
