@@ -71,8 +71,9 @@ alpha_div_all <- merge(alpha_div_all,alpha_hill_all,by="row.names")
 rownames(alpha_div_all) <- alpha_div_all[,1]
 alpha_div_all <- alpha_div_all[,-c(1,2)]
 
+colnames(alpha_div_all)[c(15:19)] <- c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","PC5_hab")
 
-save(alpha_div_all,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
+save(alpha_div_all,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div_all.RData")
 
 
 #beta

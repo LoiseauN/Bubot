@@ -1216,7 +1216,7 @@ addLevel <- function(x, newlevel=NULL) {
 ####################################################################################
 # FUNCTION to compute Chao's alpha and beta diversity, expressed as Hill Numbers,
 # for a set of communities
-#
+# Modified from Chiarello Marèlène
 # This function requires the installation of packages entropart (Marcon & Hérault, 2015 ; Marcon et al.,
 # PloS One, 2014)
 #

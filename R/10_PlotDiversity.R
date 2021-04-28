@@ -19,7 +19,6 @@ ggplot(df,aes(x = depth, y = value, color = variable )) +
   stat_smooth()+
     theme(legend.position = "none")
 
-
 ###PLot Beta
 
 

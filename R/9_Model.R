@@ -1,4 +1,28 @@
 ####################
+
+
+alpha_div_all
+
+
+
+mod <- lm(sp_richn ~ PC1_hab + PC2_hab + depth,data = alpha_div_all)
+mod <- lm(sp_richn ~ PC1_hab + PC2_hab + depth,data = alpha_div_all)
+
+
+
+
+
+beta_hill
+
+
+
+
+
+
+
+
+
+
 hab_selec<-cbind(rownames(Hab),Hab[,c(1,2,5)])
 hab_selec[,2]<-as.numeric(hab_selec[,2])
 hab_selec[,3]<-as.numeric(hab_selec[,3])

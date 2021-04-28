@@ -142,6 +142,8 @@ alpha_div_all <- merge(alpha_div_all,hab_pc_site_scale,by = "row.names",
 rownames(alpha_div_all) <- alpha_div_all[,1]
 alpha_div <- alpha_div_all[,-1]
 
+
+
 save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
 
 ggplot(data = alpha_div, 
