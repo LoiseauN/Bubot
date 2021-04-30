@@ -26,10 +26,11 @@ biomass_mat_phylo <- biomass_mat[,colnames(biomass_mat) %in% names(tree_phylog$l
 biomass_mat_phylo <- biomass_mat_phylo[apply(biomass_mat_phylo,1,sum)>4,]
 biomass_mat_phylo <- biomass_mat_phylo[,apply(biomass_mat_phylo,1,sum)>0]
 
+
 biomass_mat0_1 <- biomass_mat
 biomass_mat0_1[biomass_mat0_1>0] <- 1
 
-alpha_beta_hill_phylo<-chao_alpha_beta(matrix = biomass_mat_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
+alpha_beta_hill_phylo <- chao_alpha_beta(matrix = biomass_mat_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
 
 #alpha
 alpha_hill_taxo_richess  <- mFD::alpha.fd.hill (asb_sp_w = biomass_mat0_1,
