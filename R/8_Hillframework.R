@@ -20,11 +20,13 @@ library(mFD)
 ape::write.tree(set_fish, file="tree.txt") # 1°/ you need to make a .txt file in a newick format
 tree<-paste(readLines('tree.txt')) # 2°/ you need to read it as a character string
 tree_phylog<-ade4::newick2phylog(tree) # 3°/ newick2phylog{ade4} 
-
+# force.ultrametric()
 # On perd 72 esp 
 biomass_mat_phylo <- biomass_mat[,colnames(biomass_mat) %in% names(tree_phylog$leaves)]
 biomass_mat_phylo <- biomass_mat_phylo[apply(biomass_mat_phylo,1,sum)>4,]
 biomass_mat_phylo <- biomass_mat_phylo[,apply(biomass_mat_phylo,1,sum)>0]
+
+biomass_mat_phylo <- biomass_mat_phylo/apply(biomass_mat_phylo,1,sum)
 
 
 biomass_mat0_1 <- biomass_mat
@@ -68,9 +70,9 @@ colnames(alpha_hill_all) <- c("alpha_hill_taxo_richess","alpha_hill_taxo_entropy
                               "alpha_hill_phylo_richess","alpha_hill_phylo_entropy")
 
 
-alpha_div_all <- merge(alpha_div_all,alpha_hill_all,by="row.names")
+alpha_div_all <- merge(alpha_div,alpha_hill_all,by="row.names")
 rownames(alpha_div_all) <- alpha_div_all[,1]
-alpha_div_all <- alpha_div_all[,-c(1,2)]
+alpha_div_all <- alpha_div_all[,-c(1)]
 
 colnames(alpha_div_all)[c(15:19)] <- c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","PC5_hab")
 
