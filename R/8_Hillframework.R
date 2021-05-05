@@ -32,6 +32,10 @@ biomass_mat_phylo <- biomass_mat_phylo/apply(biomass_mat_phylo,1,sum)
 biomass_mat0_1 <- biomass_mat
 biomass_mat0_1[biomass_mat0_1>0] <- 1
 
+biomass_mat0_1 <-as.matrix(biomass_mat0_1)
+biomass_mat <-as.matrix(biomass_mat)
+
+
 alpha_beta_hill_phylo <- chao_alpha_beta(matrix = biomass_mat_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
 
 #alpha

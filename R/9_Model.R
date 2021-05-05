@@ -38,10 +38,21 @@ colnames(GDM_results)<-c("site","Lat", "Long", "Houle","Prof","Habi","Ile")
 
 
 ############TOTAL#####################################
-exFormat3 <- formatsitepair(as.data.frame(as.matrix(beta_hill_taxo_richess),3, 
-                            predData=hab_selec, XColumn="Long", YColumn="Lat",
-                            siteColumn="site"))
+
+
+gdmDissim <- data.frame(site=hab_selec$site, as.data.frame(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0)))
+
+exFormat3 <- formatsitepair(gdmDissim, 
+                            bioFormat = 3, 
+                            XColumn="Long", 
+                            YColumn="Lat", 
+                            predData=hab_selec, 
+                            siteColumn="site")
 Mod <- gdm(exFormat3, geo=T)
+
+
+
+
 
 GDM_hit_PerEx_tax[1,1]<-Mod$explained
 
