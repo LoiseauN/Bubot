@@ -18,11 +18,11 @@ MRM(dist(LOAR10.presence) ~ dist(sitelocation) + dist(forestpct),
 
 coord_depth_mayot <- coord_depth[rownames(coord_depth) %in% rownames(alpha_div_all),]
 #coord_depth_mayot <- coord_depth
-From1to20depth <- subset(coord_depth_mayot, coord_depth_mayot$depth<=20)
-From20toInfdepth <- subset(coord_depth_mayot, coord_depth_mayot$depth>20)
+From1to10depth <- subset(coord_depth_mayot, coord_depth_mayot$depth<=10)
+From10toInfdepth <- subset(coord_depth_mayot, coord_depth_mayot$depth>10)
 
-ResHill <- matrix(NA,nrow(From20toInfdepth),12)
-rownames(ResHill) <- rownames(From20toInfdepth) 
+ResHill <- matrix(NA,nrow(From10toInfdepth),12)
+rownames(ResHill) <- rownames(From10toInfdepth) 
 colnames(ResHill) <- c("taxo_rich_m","taxo_rich_sd",
                        "taxo_entro_m","taxo_entro_sd",
                        "fct_rich_m","fct_rich_sd",
@@ -34,10 +34,10 @@ biomass_mat <- biomass_mat[apply(biomass_mat,1,sum)>4,]
 biomass_mat <- biomass_mat[,apply(biomass_mat,1,sum)>0]
 
 
-for(j in 27:nrow(From20toInfdepth)){
+for(j in 1:nrow(From10toInfdepth)){
   print(j)
   
-  biomasscompa <- biomass_mat[rownames(biomass_mat) %in% c(rownames(From20toInfdepth[j,]) , rownames(From1to20depth)),]
+  biomasscompa <- biomass_mat[rownames(biomass_mat) %in% c(rownames(From10toInfdepth[j,]) , rownames(From1to10depth)),]
   biomasscompa <- biomasscompa[,apply(biomasscompa,2,sum) > 0]
   biomasscompa <- as.matrix(biomasscompa[,colnames(biomasscompa) %in% rownames(trait.dist_mat)])
   trait.dist_matcompa <- trait.dist_mat[,colnames(trait.dist_mat) %in% colnames(biomasscompa)]
@@ -84,79 +84,94 @@ for(j in 27:nrow(From20toInfdepth)){
                                                 beta_type = "Jaccard")$beta_fd_q$q1)
   
   
-  ResHill[j,1] <- mean(beta_hill_taxo_richess[rownames(beta_hill_taxo_richess) %in% rownames(From20toInfdepth[j,]),
-                                              colnames(beta_hill_taxo_richess) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,1] <- mean(beta_hill_taxo_richess[rownames(beta_hill_taxo_richess) %in% rownames(From10toInfdepth[j,]),
+                                              colnames(beta_hill_taxo_richess) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,2] <- sd(beta_hill_taxo_richess[rownames(beta_hill_taxo_richess) %in% rownames(From20toInfdepth[j,]),
-                                            colnames(beta_hill_taxo_richess) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,2] <- sd(beta_hill_taxo_richess[rownames(beta_hill_taxo_richess) %in% rownames(From10toInfdepth[j,]),
+                                            colnames(beta_hill_taxo_richess) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,3] <- mean(beta_hill_taxo_entropy[rownames(beta_hill_taxo_entropy) %in% rownames(From20toInfdepth[j,]),
-                                              colnames(beta_hill_taxo_entropy) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,3] <- mean(beta_hill_taxo_entropy[rownames(beta_hill_taxo_entropy) %in% rownames(From10toInfdepth[j,]),
+                                              colnames(beta_hill_taxo_entropy) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,4] <- sd(beta_hill_taxo_entropy[rownames(beta_hill_taxo_entropy) %in% rownames(From20toInfdepth[j,]),
-                                            colnames(beta_hill_taxo_entropy) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,4] <- sd(beta_hill_taxo_entropy[rownames(beta_hill_taxo_entropy) %in% rownames(From10toInfdepth[j,]),
+                                            colnames(beta_hill_taxo_entropy) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,5] <- mean(beta_hill_fonct_richess[rownames(beta_hill_fonct_richess) %in% rownames(From20toInfdepth[j,]),
-                                               colnames(beta_hill_fonct_richess) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,5] <- mean(beta_hill_fonct_richess[rownames(beta_hill_fonct_richess) %in% rownames(From10toInfdepth[j,]),
+                                               colnames(beta_hill_fonct_richess) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,6] <- sd(beta_hill_fonct_richess[rownames(beta_hill_fonct_richess) %in% rownames(From20toInfdepth[j,]),
-                                             colnames(beta_hill_fonct_richess) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,6] <- sd(beta_hill_fonct_richess[rownames(beta_hill_fonct_richess) %in% rownames(From10toInfdepth[j,]),
+                                             colnames(beta_hill_fonct_richess) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,7] <- mean(beta_hill_fonct_entropy[rownames(beta_hill_fonct_entropy) %in% rownames(From20toInfdepth[j,]),
-                                               colnames(beta_hill_fonct_entropy) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,7] <- mean(beta_hill_fonct_entropy[rownames(beta_hill_fonct_entropy) %in% rownames(From10toInfdepth[j,]),
+                                               colnames(beta_hill_fonct_entropy) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,8] <- sd(beta_hill_fonct_entropy[rownames(beta_hill_fonct_entropy) %in% rownames(From20toInfdepth[j,]),
-                                             colnames(beta_hill_fonct_entropy) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,8] <- sd(beta_hill_fonct_entropy[rownames(beta_hill_fonct_entropy) %in% rownames(From10toInfdepth[j,]),
+                                             colnames(beta_hill_fonct_entropy) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,9] <- mean(beta_hill_phylo_richess[rownames(beta_hill_phylo_richess) %in% rownames(From20toInfdepth[j,]),
-                                               colnames(beta_hill_phylo_richess) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,9] <- mean(beta_hill_phylo_richess[rownames(beta_hill_phylo_richess) %in% rownames(From10toInfdepth[j,]),
+                                               colnames(beta_hill_phylo_richess) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,10] <- sd(beta_hill_phylo_richess[rownames(beta_hill_phylo_richess) %in% rownames(From20toInfdepth[j,]),
-                                             colnames(beta_hill_phylo_richess) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,10] <- sd(beta_hill_phylo_richess[rownames(beta_hill_phylo_richess) %in% rownames(From10toInfdepth[j,]),
+                                             colnames(beta_hill_phylo_richess) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,11] <- mean(beta_hill_phylo_entropy[rownames(beta_hill_phylo_entropy) %in% rownames(From20toInfdepth[j,]),
-                                               colnames(beta_hill_phylo_entropy) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,11] <- mean(beta_hill_phylo_entropy[rownames(beta_hill_phylo_entropy) %in% rownames(From10toInfdepth[j,]),
+                                               colnames(beta_hill_phylo_entropy) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,12] <- sd(beta_hill_phylo_entropy[rownames(beta_hill_phylo_entropy) %in% rownames(From20toInfdepth[j,]),
-                                             colnames(beta_hill_phylo_entropy) %notin% rownames(From20toInfdepth[j,])])
+  ResHill[j,12] <- sd(beta_hill_phylo_entropy[rownames(beta_hill_phylo_entropy) %in% rownames(From10toInfdepth[j,]),
+                                             colnames(beta_hill_phylo_entropy) %notin% rownames(From10toInfdepth[j,])])
 }
-Decay_Hill <- ResHill
-save(Decay_Hill,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/Decay_Hill.RData")
-
+Decay_Hill_10toInfdepth <- ResHill
+save(Decay_Hill_10toInfdepth,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/Decay_Hill_10toInfdepth.RData")
+ResHill<- Decay_Hill
 ResHill <- as.data.frame(ResHill)
-ResHill$depth <- From10toInfdepth$depth
+ResHill <- merge(ResHill,From20toInfdepth, by="row.names",all.x=T)
 
 a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta Hill taxo richness")+
+  theme_bw()+ylab("Beta-richness taxo")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=taxo_entro_m-taxo_entro_sd, ymax=taxo_entro_m+taxo_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta Hill taxo entropy")+
+  theme_bw()+ylab("Beta-entropy taxo")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=fct_rich_m-fct_rich_sd, ymax=fct_rich_m+fct_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta Hill fonctio richness")+
+  theme_bw()+ylab("Beta-richness fonct")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=fct_entro_m-fct_entro_sd, ymax=fct_entro_m+fct_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta Hill fonctio entropy")+
+  theme_bw()+ylab("Beta-entropy fonct")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+e <- ggplot(ResHill, aes(x=depth, y=phylo_rich_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_errorbar(aes(ymin=phylo_rich_m-phylo_rich_sd, ymax=phylo_rich_m+phylo_rich_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab("Beta-richness phylo")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+f <- ggplot(ResHill, aes(x=depth, y=phylo_entro_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_errorbar(aes(ymin=phylo_entro_m-phylo_entro_sd, ymax=phylo_entro_m+phylo_entro_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab("Beta-entropy phylo")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
 
 title <- textGrob("Depth Decay Mayotte",
                   gp=gpar(fontsize=20,fontface=2))
-grid.arrange(a,c,b,d,ncol=2,top = title)
+grid.arrange(a,c,b,d,e,f,ncol=2,top = title)
 
 
 alpha_div_all
