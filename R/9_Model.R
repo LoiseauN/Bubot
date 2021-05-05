@@ -1,3 +1,5 @@
+data(graze)
+
 # Abundance of this grass is related to forest cover but not location
 MRM(dist(LOAR10) ~ dist(sitelocation) + dist(forestpct), data=graze, nperm=10)
 
@@ -9,6 +11,39 @@ LOAR10.presence <- ifelse(graze$LOAR10 > 0, 1, 0)
 MRM(dist(LOAR10.presence) ~ dist(sitelocation) + dist(forestpct), 
     data=graze, nperm=10, method="logistic")
 # }
+
+
+
+
+
+
+####################
+
+hab_pc_site_scale <- merge(hab_pc_site_scale,species.site.matrix$site.data[,c(2,6:7)],by.x="row.names",
+                           by.y="Sample.code",all.x=T)
+
+hab_pc_site_scale <- unique(hab_pc_site_scale)
+rownames(hab_pc_site_scale)  <- hab_pc_site_scale[,1]
+hab_pc_site_scale  <- hab_pc_site_scale[,-1]
+hab_pc_site_scale <- hab_pc_site_scale[rownames(hab_pc_site_scale) %in% rownames(alpha_div_all),]
+
+
+hab_selec<-cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c(1,2,6,10,11)])
+
+colnames(hab_selec)<-c("site","PC1","PC2","depth","Lat", "Long")
+
+GDM_results<-matrix(NA,6,6)
+rownames(GDM_results)<-c("tot","turn","nest")
+colnames(GDM_results)<-c("site","Lat", "Long", "Houle","Prof","Habi","Ile")
+
+
+############TOTAL#####################################
+exFormat3 <- formatsitepair(as.data.frame(as.matrix(beta_hill_taxo_richess),3, 
+                            predData=hab_selec, XColumn="Long", YColumn="Lat",
+                            siteColumn="site"))
+Mod <- gdm(exFormat3, geo=T)
+
+GDM_hit_PerEx_tax[1,1]<-Mod$explained
 
 ####################HILL SUGGESTION SEB
 #Pour chaque video "profonde de D mètres" (D>10m), tu calcules ses beta avec toutes les vidéos "surfaces" (D<10m).
@@ -122,63 +157,10 @@ for(j in 1:nrow(From10toInfdepth)){
 }
 Decay_Hill_10toInfdepth <- ResHill
 save(Decay_Hill_10toInfdepth,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/Decay_Hill_10toInfdepth.RData")
-ResHill<- Decay_Hill
-ResHill <- as.data.frame(ResHill)
-ResHill <- merge(ResHill,From20toInfdepth, by="row.names",all.x=T)
-
-a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-richness taxo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=taxo_entro_m-taxo_entro_sd, ymax=taxo_entro_m+taxo_entro_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-entropy taxo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=fct_rich_m-fct_rich_sd, ymax=fct_rich_m+fct_rich_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-richness fonct")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=fct_entro_m-fct_entro_sd, ymax=fct_entro_m+fct_entro_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-entropy fonct")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-e <- ggplot(ResHill, aes(x=depth, y=phylo_rich_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=phylo_rich_m-phylo_rich_sd, ymax=phylo_rich_m+phylo_rich_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-richness phylo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-f <- ggplot(ResHill, aes(x=depth, y=phylo_entro_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=phylo_entro_m-phylo_entro_sd, ymax=phylo_entro_m+phylo_entro_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-entropy phylo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-
-title <- textGrob("Depth Decay Mayotte",
-                  gp=gpar(fontsize=20,fontface=2))
-grid.arrange(a,c,b,d,e,f,ncol=2,top = title)
-
-
-alpha_div_all
 
 
 
-mod <- lm(sp_richn ~ PC1_hab + PC2_hab + depth,data = alpha_div_all)
+mod <- lm(alpha_hill_fonct_richess ~ PC1_hab + PC2_hab + depth,data = alpha_div_all)
 mod <- lm(sp_richn ~ PC1_hab + PC2_hab + depth,data = alpha_div_all)
 
 
