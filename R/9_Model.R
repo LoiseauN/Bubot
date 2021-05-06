@@ -13,15 +13,23 @@ hab_selec<-cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c(1,2,6,10,11)])
 
 colnames(hab_selec)<-c("site","PC1","PC2","depth","Lat", "Long")
 
-GDM_results<-matrix(NA,6,6)
-rownames(GDM_results)<-c("beta_hill_taxo_richess","beta_hill_taxo_richess",)
-colnames(GDM_results)<-c("PC1","PC2","depth","Geography")
+GDM_results<-matrix(NA,6,4)
+rownames(GDM_results)<-c("beta_hill_taxo_richess","beta_hill_taxo_entropy",
+                         "beta_hill_fonct_richess","beta_hill_fonct_entropy",
+                         "beta_hill_phylo_richess","beta_hill_phylo_entropy")
+colnames(GDM_results)<-c("All","PC1","PC2","depth")
 
-plot.gdm(Mod)
-for(i in 1:nrow(GDM_results)){
+
+for(i in 1:4){ #nrow(GDM_results)
+  print(i)
+  if(i == 1) { mat = as.matrix(beta_hill_taxo_richess$beta_fd_q$q0)}
+  if(i == 2) { mat = as.matrix(beta_hill_taxo_entropy$beta_fd_q$q1)}
+  if(i == 3) { mat = as.matrix(beta_hill_fonct_richess$beta_fd_q$q0)}
+  if(i == 4) { mat = as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1)}
+  #if(i = 5) { mat = as.matrix(beta_hill_phylo_richess$beta_fd_q$q0)}
+  #if(i = 6) { mat = as.matrix(beta_hill_phylo_entropy$beta_fd_q$q0)}
   
-  
-  dissim <-  as.data.frame(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0))
+  dissim <-  as.data.frame(mat)
   site<- as.factor(rownames(dissim))
   dissim<- cbind(site, dissim)
   exFormat3 <- formatsitepair(dissim, 
@@ -32,30 +40,77 @@ for(i in 1:nrow(GDM_results)){
                               siteColumn="site")
   
   Mod <- gdm(exFormat3, geo=T)
+  GDM_results[i,1]<-Mod$explained
   
-  dissim <-  as.data.frame(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0))
+  dissim <-  as.data.frame(mat)
   site<- as.factor(rownames(dissim))
   dissim<- cbind(site, dissim)
   exFormat3 <- formatsitepair(dissim, 
                               bioFormat = 3, 
                               XColumn="Long", 
                               YColumn="Lat", 
-                              predData = hab_selec[,-c(2,4)], 
+                              predData=hab_selec[,-2], 
                               siteColumn="site")
-
+  
   Mod <- gdm(exFormat3, geo=T)
-  Mod$explained
-  
+  GDM_results[i,2]<-((GDM_results[i,1]-Mod$explained)/GDM_results[i,1])*100
 
   
   
-  GDM_results[1,1]<-Mod$explained
+  dissim <-  as.data.frame(mat)
+  site<- as.factor(rownames(dissim))
+  dissim<- cbind(site, dissim)
+  exFormat3 <- formatsitepair(dissim, 
+                              bioFormat = 3, 
+                              XColumn="Long", 
+                              YColumn="Lat", 
+                              predData=hab_selec[,-3], 
+                              siteColumn="site")
   
+  Mod <- gdm(exFormat3, geo=T)
+  GDM_results[i,3]<-((GDM_results[i,1]-Mod$explained)/GDM_results[i,1])*100
   
+  dissim <-  as.data.frame(mat)
+  site<- as.factor(rownames(dissim))
+  dissim<- cbind(site, dissim)
+  exFormat3 <- formatsitepair(dissim, 
+                              bioFormat = 3, 
+                              XColumn="Long", 
+                              YColumn="Lat", 
+                              predData=hab_selec[,-4], 
+                              siteColumn="site")
   
-  Percent Deviance Explained:  37.1586874208488
+  Mod <- gdm(exFormat3, geo=T)
+  GDM_results[i,4]<-((GDM_results[i,1]-Mod$explained)/GDM_results[i,1])*100
+  
   
 }
+  
+GDM_results <- na.omit(GDM_results)
+  
+GDM_results2 <- data.frame(Component = c(rep("beta_hill_taxo_richess",3),
+                 rep("beta_hill_taxo_entropy",3),
+                 rep("beta_hill_fonct_richess",3),
+                 rep("beta_hill_fonct_entropy",3)),
+                 
+                 drivers = rep(c("PC1","PC2","depth"),4),
+                 
+                 
+                 Contribution = c(GDM_results[1,2:4],
+                                GDM_results[2,2:4],
+                                GDM_results[3,2:4],
+                                GDM_results[4,2:4]))
+                 
+p <- ggplot(GDM_results2, aes(x = Component, y = Contribution))+
+  geom_col(aes(fill = drivers), width = 0.7)+
+  
+p + coord_flip()+ theme_bw()
+
+  
+  
+ 
+  
+
 
 
 

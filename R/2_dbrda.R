@@ -7,6 +7,12 @@ script_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse
 fig_dir <<- file.path("~","Documents","Postdoc MARBEC","BUBOT","Bubot Analyse","Bubot","fig")
 
 
+#At home
+data_dir <<- file.path("~","Documents","Bubot","Bubot_Analyse","Bubot","data","Data_dump")
+results_dir <<- file.path("~","Documents","Bubot","Bubot_Analyse","Bubot","results")
+outputs_dir <<- file.path("~","Documents","Bubot","Bubot_Analyse","Bubot","outputs")
+script_dir <<- file.path("~","Documents","Bubot","Bubot_Analyse","Bubot","R")
+fig_dir <<- file.path("~","Documents","Bubot","Bubot_Analyse","Bubot","fig")
 
 
 # libraries
