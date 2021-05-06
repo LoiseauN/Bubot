@@ -8,17 +8,17 @@ set_fish <- ape::drop.tip(tree,tree$tip.label[!is.element(tree$tip.label,as.char
 #Plot Phylogeny
 
 #' ---------------------------------------------------------------------------- @PresenceSpeciesPerDepth
-dat <- data.frame(unique(data.frame(dat_complet$variable,dat_complet$Family)), 
+dat <- data.frame(unique(data.frame(dat_complet$species,dat_complet$family)), 
                   "depth0_20"  = rep(NA,length(unique(dat_complet$variable))),
                   "depth20_40"  = rep(NA),
-                  "depth40_60"  = rep(NA,length(unique(dat_complet$variable))),
-                  "depth60_80"  = rep(NA,length(unique(dat_complet$variable))),
-                  "depth_sup80"  = rep(NA,length(unique(dat_complet$variable))))
+                  "depth40_60"  = rep(NA,length(unique(dat_complet$species))),
+                  "depth60_80"  = rep(NA,length(unique(dat_complet$species))),
+                  "depth_sup80"  = rep(NA,length(unique(dat_complet$species))))
 
 colnames(dat)[1:2] <- c("label","group")
 for(i in 1:nrow(dat)){
   print(i)
-  select <- dat_complet[dat_complet$variable %in% dat$label[i],]
+  select <- dat_complet[dat_complet$species %in% dat$label[i],]
   if(nrow(select[select$classDepth %in% c("[0-20["),])>0) dat$depth0_20[i] <- 1
   if(nrow(select[select$classDepth %in% c("[20-40["),])>0) dat$depth20_40[i] <- 1
   if(nrow(select[select$classDepth %in% c("[40-60["),])>0) dat$depth40_60[i] <- 1
@@ -28,7 +28,7 @@ for(i in 1:nrow(dat)){
   
 }
 
-dat <- merge(dat,aggregate(. ~ variable, data = dat_complet[,c("variable","depth")],mean),by.x="label",by.y="variable",all.x=TRUE)
+dat <- merge(dat,aggregate(. ~ species, data = dat_complet[,c("species","depth")],mean),by.x="label",by.y="species",all.x=TRUE)
 colnames(dat)[8] <- "meanDepth"
 #' ---------------------------------------------------------------------------- @Parameters
 

@@ -1,23 +1,4 @@
-data(graze)
-
-# Abundance of this grass is related to forest cover but not location
-MRM(dist(LOAR10) ~ dist(sitelocation) + dist(forestpct), data=graze, nperm=10)
-
-# Abundance of this legume is related to location but not forest cover
-MRM(dist(TRRE3) ~ dist(sitelocation) + dist(forestpct), data=graze, nperm=10)
-
-# Compare to presence/absence of grass LOAR10 using logistic regression
-LOAR10.presence <- ifelse(graze$LOAR10 > 0, 1, 0)
-MRM(dist(LOAR10.presence) ~ dist(sitelocation) + dist(forestpct), 
-    data=graze, nperm=10, method="logistic")
-# }
-
-
-
-
-
-
-####################
+##GDM
 
 hab_pc_site_scale <- merge(hab_pc_site_scale,species.site.matrix$site.data[,c(2,6:7)],by.x="row.names",
                            by.y="Sample.code",all.x=T)
@@ -33,26 +14,72 @@ hab_selec<-cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c(1,2,6,10,11)])
 colnames(hab_selec)<-c("site","PC1","PC2","depth","Lat", "Long")
 
 GDM_results<-matrix(NA,6,6)
-rownames(GDM_results)<-c("tot","turn","nest")
-colnames(GDM_results)<-c("site","Lat", "Long", "Houle","Prof","Habi","Ile")
+rownames(GDM_results)<-c("beta_hill_taxo_richess","beta_hill_taxo_richess",)
+colnames(GDM_results)<-c("PC1","PC2","depth","Geography")
+
+plot.gdm(Mod)
+for(i in 1:nrow(GDM_results)){
+  
+  
+  dissim <-  as.data.frame(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0))
+  site<- as.factor(rownames(dissim))
+  dissim<- cbind(site, dissim)
+  exFormat3 <- formatsitepair(dissim, 
+                              bioFormat = 3, 
+                              XColumn="Long", 
+                              YColumn="Lat", 
+                              predData=hab_selec, 
+                              siteColumn="site")
+  
+  Mod <- gdm(exFormat3, geo=T)
+  
+  dissim <-  as.data.frame(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0))
+  site<- as.factor(rownames(dissim))
+  dissim<- cbind(site, dissim)
+  exFormat3 <- formatsitepair(dissim, 
+                              bioFormat = 3, 
+                              XColumn="Long", 
+                              YColumn="Lat", 
+                              predData=hab_selec[,-4], 
+                              siteColumn="site")
+  
+  Mod <- gdm(exFormat3, geo=T)
+  Mod$explained
+  
+  dissim <-  as.data.frame(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0))
+  site<- as.factor(rownames(dissim))
+  dissim<- cbind(site, dissim)
+  exFormat3 <- formatsitepair(dissim, 
+                              bioFormat = 3, 
+                              predData=hab_selec[,-c(5:6)], 
+                              siteColumn="site")
+  
+  Mod <- gdm(exFormat3, geo=T)
+  Mod$explained
+  
+  
+  GDM_results[1,1]<-Mod$explained
+  
+  
+  
+  Percent Deviance Explained:  37.1586874208488
+  
+}
 
 
-############TOTAL#####################################
 
 
-gdmDissim <- data.frame(site=hab_selec$site, as.data.frame(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0)))
 
+## bioData = dissim matrix model
+site <- unique(sppData$site)
+gdmDissim <- cbind(site, gdmDissim)
 exFormat3 <- formatsitepair(gdmDissim, 
                             bioFormat = 3, 
                             XColumn="Long", 
                             YColumn="Lat", 
-                            predData=hab_selec, 
+                            predData=envTab1, 
                             siteColumn="site")
 Mod <- gdm(exFormat3, geo=T)
-
-
-
-
 
 GDM_hit_PerEx_tax[1,1]<-Mod$explained
 
