@@ -46,16 +46,7 @@ for(i in 1:nrow(GDM_results)){
   Mod <- gdm(exFormat3, geo=T)
   Mod$explained
   
-  dissim <-  as.data.frame(as.matrix(beta_hill_taxo_richess$beta_fd_q$q0))
-  site<- as.factor(rownames(dissim))
-  dissim<- cbind(site, dissim)
-  exFormat3 <- formatsitepair(dissim, 
-                              bioFormat = 3, 
-                              predData=hab_selec[,-c(5:6)], 
-                              siteColumn="site")
-  
-  Mod <- gdm(exFormat3, geo=T)
-  Mod$explained
+
   
   
   GDM_results[1,1]<-Mod$explained
