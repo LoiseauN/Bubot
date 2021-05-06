@@ -40,9 +40,9 @@ for(i in 1:nrow(GDM_results)){
                               bioFormat = 3, 
                               XColumn="Long", 
                               YColumn="Lat", 
-                              predData=hab_selec[,-4], 
+                              predData = hab_selec[,-c(2,4)], 
                               siteColumn="site")
-  
+
   Mod <- gdm(exFormat3, geo=T)
   Mod$explained
   
