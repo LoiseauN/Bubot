@@ -54,6 +54,46 @@ title <- textGrob("Alpha Hill",
                   gp=gpar(fontsize=20,fontface=2))
 grid.arrange(a,b,c,d,e,f,ncol=2,top = title)
 
+
+
+##REPRESENTATION WITH BOXPLOT
+
+
+a <- ggplot(alpha_div_all, aes(x=classDepth, y=sp_richn)) + 
+  geom_boxplot(fill ="cadetblue3",pch=21)+
+  theme_bw()+ylab("Alpha-richness taxo")+ geom_jitter(width = 0.1, size = 0.5)
+  
+b <- ggplot(alpha_div_all, aes(x=classDepth, y=alpha_hill_taxo_entropy)) + 
+  geom_boxplot(fill ="cadetblue3",pch=21)+
+  theme_bw()+ylab("Alpha-entropy taxo")+ geom_jitter(width = 0.1, size = 0.5)
+ 
+c <- ggplot(alpha_div_all, aes(x=classDepth, y=alpha_hill_fonct_richess)) + 
+  geom_boxplot(fill ="cadetblue3",pch=21)+
+  theme_bw()+ylab("Alpha-richness fonct")+ geom_jitter(width = 0.1, size = 0.5)
+ 
+d <- ggplot(alpha_div_all, aes(x=classDepth, y=alpha_hill_fonct_entropy)) + 
+  geom_boxplot(fill ="cadetblue3",pch=21)+
+  theme_bw()+ylab("Alpha-entropy fonct")+ geom_jitter(width = 0.1, size = 0.5)
+ 
+e <- ggplot(alpha_div_all, aes(x=classDepth, y=alpha_hill_phylo_richess)) + 
+  geom_boxplot(fill ="cadetblue3",pch=21)+
+  theme_bw()+ylab("Alpha-richness phylo")+ geom_jitter(width = 0.1, size = 0.5)
+ 
+f <- ggplot(alpha_div_all, aes(x=classDepth, y=alpha_hill_phylo_entropy)) + 
+  geom_boxplot(fill ="cadetblue3",pch=21)+
+  theme_bw()+ylab("Alpha-entropy phylo")+ geom_jitter(width = 0.1, size = 0.5)
+ 
+title <- textGrob("Alpha Hill boxplot",
+                  gp=gpar(fontsize=20,fontface=2))
+grid.arrange(a,b,c,d,e,f,ncol=2,top = title)
+
+
+
+
+
+
+
+
 ###PLot Beta
 
 a <- ggplot(beta_hill, aes(x=diff_depth, y=beta_hill_taxo_richess)) + 

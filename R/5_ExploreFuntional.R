@@ -135,37 +135,37 @@ for(j in 1:length(var)){
 
 
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Activity.png", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Activity.png", 
        plot = main.plot1, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Schooling.png", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Schooling.png", 
        plot = main.plot2, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Position.png", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Position.png", 
        plot = main.plot3, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/clean_diet.png", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/clean_diet.png", 
        plot = main.plot4, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Size.png", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Size.png", 
        plot = main.plot5, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/Diet.png", 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Diet.png", 
        plot = main.plot6, 
        width = 297, 
        height = 210, 

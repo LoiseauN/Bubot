@@ -31,7 +31,7 @@ GDM_results<-matrix(NA,6,4)
 rownames(GDM_results)<-c("beta_hill_taxo_richess","beta_hill_taxo_entropy",
                          "beta_hill_fonct_richess","beta_hill_fonct_entropy",
                          "beta_hill_phylo_richess","beta_hill_phylo_entropy")
-colnames(GDM_results)<-c("All","PC1","PC2","depth")
+colnames(GDM_results)<-c("DevianceExplained","contrib_PC1","contrib_PC2","contrib_depth")
 
 
 for(i in 1:4){ #nrow(GDM_results)
