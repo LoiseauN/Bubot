@@ -2,9 +2,9 @@ load(file.path("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_d
 
 #Working on Mayotte only
 dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
-
-var <- c("reef_associated","mobility","activity","schooling","position","diet","clean_diet",
-         "trophic.level","bodyShape_Fishbase","maxLengthTL_Fishbase")
+dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$diet),]
+var <- c("reef_associated","mobility","activity","schooling","position","diet","clean_diet")#,
+#"trophic.level","bodyShape_Fishbase","maxLengthTL_Fishbase")
 
 for(j in 1:length(var)){
   
@@ -16,8 +16,8 @@ for(j in 1:length(var)){
     theme_bw()+ 
     labs(colour = var[j]) + 
     theme(legend.position = "right")+
-    ylim(0,4)+
-    labs(x="Depth",y="biomassdance (log)")+
+    ylim(0,6)+
+    labs(x="Depth",y="biomass (log)")+
     geom_vline(xintercept=20,  linetype="dotted",size=1)+
     geom_vline(xintercept=40,  linetype="dotted",size=1)+
     geom_vline(xintercept=60,  linetype="dotted",size=1)+
@@ -81,34 +81,34 @@ for(j in 1:length(var)){
                legend.background = element_rect(fill = "transparent")))
   }
   #main.plot<- 
-  if (j==1 || j==5 || j==6){ 
+  if (j==1 || j==5 ){ 
     assign(paste0("main.plot",j), ggdraw() +
              draw_plot(main.plot) +
              draw_plot(inset.plot1, x = 0.04, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot2, x = 0.20, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot3, x = 0.35, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot4, x = 0.52, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot5, x = 0.72, y = 0.81, width = 0.12, height = 0.12))
+             draw_plot(inset.plot2, x = 0.18, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot3, x = 0.325, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot4, x = 0.48, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot5, x = 0.68, y = 0.81, width = 0.12, height = 0.12))
   }
   
   if (j==2){ 
     assign(paste0("main.plot",j), ggdraw() +
              draw_plot(main.plot) +
              draw_plot(inset.plot1, x = 0.04, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot2, x = 0.19, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot3, x = 0.35, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot4, x = 0.51, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot5, x = 0.7, y = 0.81, width = 0.12, height = 0.12)
+             draw_plot(inset.plot2, x = 0.17, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot3, x = 0.32, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot4, x = 0.46, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot5, x = 0.66, y = 0.81, width = 0.12, height = 0.12)
     )}
   
   if (j==3){ 
     assign(paste0("main.plot",j), ggdraw() +
              draw_plot(main.plot) +
              draw_plot(inset.plot1, x = 0.04, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot2, x = 0.195, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot3, x = 0.35, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot4, x = 0.51, y = 0.81, width = 0.12, height = 0.12)+
-             draw_plot(inset.plot5, x = 0.71, y = 0.81, width = 0.12, height = 0.12)
+             draw_plot(inset.plot2, x = 0.17, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot3, x = 0.30, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot4, x = 0.44, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot5, x = 0.62, y = 0.81, width = 0.12, height = 0.12)
     )}
   
   if (j==4 || j==7 || j==8 || j==9 || j==10){ 
@@ -120,6 +120,16 @@ for(j in 1:length(var)){
              draw_plot(inset.plot4, x = 0.46, y = 0.81, width = 0.12, height = 0.12)+
              draw_plot(inset.plot5, x = 0.65, y = 0.81, width = 0.12, height = 0.12)
     )}
+  
+  if (j==6 ){ 
+    assign(paste0("main.plot",j), ggdraw() +
+             draw_plot(main.plot) +
+             draw_plot(inset.plot1, x = 0.0258, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot2, x = 0.14, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot3, x = 0.26, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot4, x = 0.39, y = 0.81, width = 0.12, height = 0.12)+
+             draw_plot(inset.plot5, x = 0.53, y = 0.81, width = 0.12, height = 0.12))
+  }
   
 }
 

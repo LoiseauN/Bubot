@@ -5,8 +5,10 @@ m <- lm(sleep_total ~ brainwt + sleep_cycle+ vore, data = ggplot2::msleep)
 
 
 m <- glm(sp_richn ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+1 - (m$deviance/m$null.deviance )
 
-check_normality(m)
+
+performance::check_normality(m)
 #> OK: residuals appear as normally distributed (p = 0.230).
 forest_model(m)
 
