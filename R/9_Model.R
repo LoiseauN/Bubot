@@ -1,3 +1,15 @@
+#Model Beta
+library(forestmodel)
+
+m <- lm(sleep_total ~ brainwt + sleep_cycle+ vore, data = ggplot2::msleep)
+
+
+m <- glm(sp_richn ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+
+check_normality(m)
+#> OK: residuals appear as normally distributed (p = 0.230).
+forest_model(m)
+
 ##GDM
 
 hab_pc_site_scale <- merge(hab_pc_site_scale,species.site.matrix$site.data[,c(2,6:7)],by.x="row.names",
