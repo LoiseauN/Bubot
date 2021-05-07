@@ -80,6 +80,7 @@ alpha_div_all <- alpha_div_all[,-c(1)]
 
 colnames(alpha_div_all)[c(15:19)] <- c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","PC5_hab")
 
+
 save(alpha_div_all,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div_all.RData")
 
 

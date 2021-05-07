@@ -129,20 +129,20 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
       
       tax_ind_values <- data.frame(biomass = apply(biomass_mat,1,sum))
       
-alpha_div_all <- merge(fd_ind_values,tax_ind_values,by = "row.names",
+alpha_div <- merge(fd_ind_values,tax_ind_values,by = "row.names",
                    all= T )
 
-rownames(alpha_div_all) <- alpha_div_all[,1]
-alpha_div_all <- alpha_div_all[,-1]
+rownames(alpha_div) <- alpha_div[,1]
+alpha_div <- alpha_div[,-1]
 
 
-alpha_div_all <- merge(alpha_div_all,hab_pc_site_scale,by = "row.names",
+alpha_div <- merge(alpha_div,hab_pc_site_scale,by = "row.names",
                        all.X= T )
 
-rownames(alpha_div_all) <- alpha_div_all[,1]
-alpha_div <- alpha_div_all[,-1]
+rownames(alpha_div) <- alpha_div[,1]
+alpha_div <- alpha_div[,-1]
 
-save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
+#save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
 
 ggplot(data = alpha_div, 
        aes(x = depth, y = PC1, color = depth)) +

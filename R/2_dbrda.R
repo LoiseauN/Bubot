@@ -22,10 +22,7 @@ nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
-
-
 ##########################################################################################
-
 #--- At the site scale ---
 
 species_site_scale <- species.site.matrix$species.matrix

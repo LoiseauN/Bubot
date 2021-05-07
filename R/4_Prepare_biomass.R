@@ -2,8 +2,6 @@ library(reshape2)
 library(stringr)
 
 
-
-
 sizeBUBOT <- read.table("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/extraction_tailles.txt",sep="\t",header=T)
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/sizeRLS.RData")
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/coefRLS.RData")
@@ -12,6 +10,7 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
 #same format species
 sizeRLS$species <-  gsub(" ", "_", sizeRLS$species )
 coefRLS$species <-  gsub(" ", "_", coefRLS$species )
+
 #Add info genus for size
 sizeBUBOT$genus <-  str_split_fixed(sizeBUBOT$Species, "_", 2)[,1]
 sizeRLS$genus   <-  str_split_fixed(sizeRLS$species, "_", 2)[,1]
