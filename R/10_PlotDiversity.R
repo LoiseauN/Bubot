@@ -20,33 +20,39 @@ ggplot(df,aes(x = depth, y = value, color = variable )) +
     theme(legend.position = "none")
 
 
+biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=biomass)) + 
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
+  theme_bw()+ylab("Biomass")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+
 a <- ggplot(alpha_div_all, aes(x=depth, y=sp_richn)) + 
-  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
    theme_bw()+ylab("Alpha-richness taxo")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 b <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_taxo_entropy)) + 
-  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab("Alpha-entropy taxo")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 c <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_richess)) + 
-  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab("Alpha-richness fonct")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 d <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_entropy)) + 
-  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab("Alpha-entropy fonct")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 e <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_phylo_richess)) + 
-  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab("Alpha-richness phylo")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 f <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_phylo_entropy)) + 
-  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab("Alpha-entropy phylo")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
