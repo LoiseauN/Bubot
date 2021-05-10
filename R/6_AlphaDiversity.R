@@ -37,6 +37,8 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
     
     trait_mat  <- trait_mat[,-1]
     
+    trait_mat <- trait_mat[rownames(trait_mat) %in% colnames(biomass_mat),]
+    
     trait_cat <- data.frame(trait_name = colnames(trait_mat),
                             trait_type = c("O","N","O","O","O","Q")
                            )

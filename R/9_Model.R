@@ -2,19 +2,45 @@
 
 library(forestmodel)
 
-m <- lm(sleep_total ~ brainwt + sleep_cycle+ vore, data = ggplot2::msleep)
+mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+performance::check_normality(mod_biomass)
+performance::check_heteroscedasticity(mod_biomass)
+performance::check_model(mod_biomass)
+performance::model_performance(mod_biomass)
 
-m <- glm(sp_richn ~  depth + PC1_hab + PC2_hab, data = alpha_hill_taxo_entropy)
-1 - (m$deviance/m$null.deviance )
-performance::check_normality(m)
+1 - (mod_biomass$deviance/mod_biomass$null.deviance )
+
+mod_alphaS <- glm(sp_richn ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+mod_alphaentro <- glm(alpha_hill_taxo_entropy ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+performance::check_normality(mod_alphaS)
+performance::check_heteroscedasticity(mod_alphaS)
+performance::check_model(mod_alphaS)
+performance::model_performance(mod_alphaS)
+
+performance::check_normality(mod_alphaentro)
+performance::check_heteroscedasticity(mod_alphaentro)
+performance::check_model(mod_alphaentro)
+performance::model_performance(mod_alphaentro)
+
+
+
+mod_alphaFct <- glm(alpha_hill_fonct_richess ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+mod_alphaFct_entro <- glm(alpha_hill_fonct_entropy ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+performance::check_normality(mod_alphaFct)
+performance::check_heteroscedasticity(mod_alphaFct)
+performance::check_model(mod_alphaFct)
+performance::model_performance(mod_alphaFct)
+
+
+performance::check_normality(mod_alphaFct_entro)
+performance::check_heteroscedasticity(mod_alphaFct_entro)
+performance::check_model(mod_alphaFct_entro)
+performance::model_performance(mod_alphaFct_entro)
+
+
 
 m <- glm(sp_richn ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
 1 - (m$deviance/m$null.deviance )
-
-
-performance::check_normality(m)
-performance::check_normality(m)
-
 
 ##GDM
 

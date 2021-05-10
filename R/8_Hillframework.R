@@ -1,14 +1,6 @@
 library(mFD)
 `%notin%` <- Negate(`%in%`)
 
-
-
-
-
-
-
-
-
 ###############################################################################
 ###############################################################################
 #taxo richness : data= 0/1, q=0, tau=min (c'est la richesse spé)
@@ -16,21 +8,36 @@ library(mFD)
 #fonctio richness: data= 0/1, q=0, tau=mean
 #fonctio entropy: data= 0/1, q=1, tau=mean
 
-biomass_mat0_1 <- biomass_mat
-biomass_mat0_1[biomass_mat0_1>0] <- 1
+#Check NA
+sum(is.na(biomass_mat0_1))
+sum(is.na(sp_dist_traits))
 
-biomass_mat0_1 <-as.matrix(biomass_mat0_1)
-biomass_mat <-as.matrix(biomass_mat)
+#Check 1/0
+min(biomass_mat0_1)
+max(biomass_mat0_1)
+range(biomass_mat0_1)
 
+#Check same species
+dim(biomass_mat0_1)
+length(labels(sp_dist_traits))
+sum(!labels(sp_dist_traits) %in% colnames(biomass_mat0_1))
+sum(!colnames(biomass_mat0_1) %in% labels(sp_dist_traits))
+any(is.na(sp_dist_traits))
+#Check no species with 0 occurence and site with 0 species
+min(apply(biomass_mat0_1,2,sum))
+min(apply(biomass_mat0_1,1,sum))
+      
+
+# it is possible to compute taxonomic alpha and beta with beta.fd.hill but functional distance
+# must be higher than 0 to avoid transformation of species in FE (reducing the real value of alpha)
+
+sp_dist_traits_for_taxo <- sp_dist_traits
+sp_dist_traits_for_taxo[sp_dist_traits_for_taxo==0]<- 0.0001
 
 #alpha
-alpha_hill_taxo_richess  <- mFD::alpha.fd.hill (asb_sp_w = biomass_mat0_1,
-                                           sp_dist  = sp_dist_traits,
-                                           q        = 0,
-                                           tau      = "min")$asb_FD_Hill
 
 alpha_hill_taxo_entropy  <- mFD::alpha.fd.hill (asb_sp_w = biomass_mat,
-                                           sp_dist  = sp_dist_traits,
+                                           sp_dist  = sp_dist_traits_for_taxo,
                                            q        = 1,
                                            tau      = "min")$asb_FD_Hill
 
@@ -44,13 +51,12 @@ alpha_hill_fonct_entropy <- mFD::alpha.fd.hill (asb_sp_w = biomass_mat,
                                            q        = 1,
                                            tau      = "mean")$asb_FD_Hill
 
-alpha_hill_all <- data.frame(hill_taxo_richess  = alpha_hill_taxo_richess[,1],
-                             hill_taxo_entropy  = alpha_hill_taxo_entropy[,1],
+alpha_hill_all <- data.frame(hill_taxo_entropy  = alpha_hill_taxo_entropy[,1],
                              hill_fonct_richess = alpha_hill_fonct_richess[,1],
                              hill_fonct_entropy = alpha_hill_fonct_entropy[,1])
 
 
-colnames(alpha_hill_all) <- c("alpha_hill_taxo_richess","alpha_hill_taxo_entropy",
+colnames(alpha_hill_all) <- c("alpha_hill_taxo_entropy",
                               "alpha_hill_fonct_richess","alpha_hill_fonct_entropy")
 
 
@@ -65,14 +71,16 @@ save(alpha_div_all,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/re
 
 
 #beta
+
+
 beta_hill_taxo_richess  <- mFD::beta.fd.hill (asb_sp_w = biomass_mat0_1,
-                                         sp_dist  = sp_dist_traits,
+                                         sp_dist  = sp_dist_traits_for_taxo,
                                          q        = 0,
                                          tau      = "min",
                                          beta_type = "Jaccard")
 
 beta_hill_taxo_entropy  <- mFD::beta.fd.hill (asb_sp_w = biomass_mat,
-                                         sp_dist  = sp_dist_traits,
+                                         sp_dist  = sp_dist_traits_for_taxo,
                                          q        = 1,
                                          tau      = "min",
                                          beta_type = "Jaccard")
@@ -118,7 +126,7 @@ diff_depth <- diff_depth[,-c(1,2)]
 beta_hill <- merge(beta_hill,diff_depth,by="pairsID",all.x = T)
 rownames(beta_hill) <- beta_hill[,1]
 beta_hill <- beta_hill[,-c(1)]
-colnames(beta_hill)[9] <- "diff_depth"
+colnames(beta_hill)[7] <- "diff_depth"
 save(beta_hill,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/beta_hill.RData")
 
 
