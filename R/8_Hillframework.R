@@ -8,6 +8,11 @@ library(mFD)
 #fonctio richness: data= 0/1, q=0, tau=mean
 #fonctio entropy: data= 0/1, q=1, tau=mean
 
+
+biomass_mat <- as.matrix(biomass_mat)
+biomass_mat0_1 <- biomass_mat
+biomass_mat0_1[biomass_mat0_1>0] <- 1
+
 #Check NA
 sum(is.na(biomass_mat0_1))
 sum(is.na(sp_dist_traits))
