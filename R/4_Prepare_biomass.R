@@ -171,7 +171,18 @@ dat_complet$Groupweigth <- dat_complet$Indweigth * dat_complet$abundance
 
 dat_complet$site <- str_split_fixed(dat_complet$surveys, "-", 2)[,1]
 
+#Working on Mayotte only
+dat_complet<- dat_complet[dat_complet$island=="Mayotte",]
 
+dat_complet <- dat_complet[!is.na(dat_complet$diet),]
+
+#Remove 37 individuals with no information
+#Belonidae
+#Muraenidae
+#Nemipteridae
+#Pseudochromis
+#Siganus
+#Siganidae
 
 save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 

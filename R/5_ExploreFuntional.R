@@ -1,14 +1,12 @@
 load(file.path("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData"))
 
-#Working on Mayotte only
-dat_complet_mayotte<- dat_complet[dat_complet$island=="Mayotte",]
-dat_complet_mayotte <- dat_complet_mayotte[!is.na(dat_complet_mayotte$diet),]
-var <- c("reef_associated","mobility","activity","schooling","position","diet","clean_diet")#,
-#"trophic.level","bodyShape_Fishbase","maxLengthTL_Fishbase")
+
+var <- c("reef_associated","mobility","activity","schooling","position","diet","clean_diet",
+"trophic.level","maxLengthTL_Fishbase")
 
 for(j in 1:length(var)){
   
-  main.plot <- ggplot(dat_complet_mayotte, aes(x=depth, y=log10(Groupweigth),color=dat_complet_mayotte[,var[j]]))+
+  main.plot <- ggplot(dat_complet, aes(x=depth, y=log10(Groupweigth),color=dat_complet[,var[j]]))+
     geom_point(size=2, show.legend = TRUE)+
     scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
     #scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
@@ -30,7 +28,7 @@ for(j in 1:length(var)){
   #geom_label(label="60-80m", x=74, y=4, size=3, hjust=0,color="black")+
   #geom_label(label=">80m", x=10, y=4, size=3, hjust=0,color="black")
   
-  biomass_classDepth <- dat_complet_mayotte[,c("Groupweigth","classDepth",var[j])]
+  biomass_classDepth <- dat_complet[,c("Groupweigth","classDepth",var[j])]
   colnames(biomass_classDepth)[3] <- "trait"
   biomass_classDepth <- aggregate(. ~ classDepth + trait, data = biomass_classDepth, sum)
   
@@ -175,7 +173,7 @@ ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Diet.p
 #Functional space
 # PROBLEM SUR DES PC A 0,0, 0
 # cluster_core = 1 === singleton
-plotPCOA <- dat_complet_mayotte[,c("FE","value","classDepth","PC1","PC2")]
+plotPCOA <- dat_complet[,c("FE","value","classDepth","PC1","PC2")]
 plotPCOA <- aggregate(. ~ classDepth + FE, data = plotPCOA, sum)
 
 plotPCOA_1 <- merge(aggregate(value ~ FE + classDepth, plotPCOA, sum), 
@@ -202,7 +200,7 @@ FunctSpace<- ggplot(plotPCOA, aes(x=PC1, y=PC2)) +
         #axis.ticks = element_blank()
   )
 
-plotPCOA_2 <- dat_complet_mayotte[,c("PC1","PC2")]
+plotPCOA_2 <- dat_complet[,c("PC1","PC2")]
 colnames(plotPCOA_2)<-c("axis1","axis2")
 FunctSpace + geom_point(data = plotPCOA_2, aes(x = axis1, y = axis2),size=1,color="grey",alpha=0.2) +
   ggpubr::stat_chull(data = plotPCOA_2,aes(x = axis1, y = axis2), 

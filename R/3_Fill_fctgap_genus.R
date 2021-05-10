@@ -12,7 +12,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 #Fill gap ---
 #####################
-tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")
+tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")#
 rownames(tab) <- tab[,1]
 
 dat_complet<-melt(tab, id.vars = c(1,320:322))
@@ -418,6 +418,13 @@ dat_complet$activity <- factor(dat_complet$activity)
     #Remove gobiidae
     dat_complet <- subset(dat_complet, dat_complet$family!="Gobiidae")#23 obs, 33 inds
 
+    
+    #Some very few family (37 individuals ) do not have any info
+    dat_complet <-  dat_complet[dat_complet$family %notin% c("Belonidae",
+                                                             "Muraenidae",
+                                                             "Nemipteridae",
+                                                             "Pseudochromidae",
+                                                             "Siganidae"),]
     
 save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
     

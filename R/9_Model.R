@@ -1,16 +1,20 @@
-#Model Beta
+#Model Alpha : 
+
 library(forestmodel)
 
 m <- lm(sleep_total ~ brainwt + sleep_cycle+ vore, data = ggplot2::msleep)
 
+m <- glm(sp_richn ~  depth + PC1_hab + PC2_hab, data = alpha_hill_taxo_entropy)
+1 - (m$deviance/m$null.deviance )
+performance::check_normality(m)
 
 m <- glm(sp_richn ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
 1 - (m$deviance/m$null.deviance )
 
 
 performance::check_normality(m)
-#> OK: residuals appear as normally distributed (p = 0.230).
-forest_model(m)
+performance::check_normality(m)
+
 
 ##GDM
 
@@ -29,8 +33,7 @@ colnames(hab_selec)<-c("site","PC1","PC2","depth","Lat", "Long")
 
 GDM_results<-matrix(NA,6,4)
 rownames(GDM_results)<-c("beta_hill_taxo_richess","beta_hill_taxo_entropy",
-                         "beta_hill_fonct_richess","beta_hill_fonct_entropy",
-                         "beta_hill_phylo_richess","beta_hill_phylo_entropy")
+                         "beta_hill_fonct_richess","beta_hill_fonct_entropy")
 colnames(GDM_results)<-c("DevianceExplained","contrib_PC1","contrib_PC2","contrib_depth")
 
 
@@ -40,9 +43,7 @@ for(i in 1:4){ #nrow(GDM_results)
   if(i == 2) { mat = as.matrix(beta_hill_taxo_entropy$beta_fd_q$q1)}
   if(i == 3) { mat = as.matrix(beta_hill_fonct_richess$beta_fd_q$q0)}
   if(i == 4) { mat = as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1)}
-  #if(i = 5) { mat = as.matrix(beta_hill_phylo_richess$beta_fd_q$q0)}
-  #if(i = 6) { mat = as.matrix(beta_hill_phylo_entropy$beta_fd_q$q0)}
-  
+
   dissim <-  as.data.frame(mat)
   site<- as.factor(rownames(dissim))
   dissim<- cbind(site, dissim)
@@ -241,18 +242,7 @@ for(j in 1:nrow(From10toInfdepth)){
   ResHill[j,8] <- sd(beta_hill_fonct_entropy[rownames(beta_hill_fonct_entropy) %in% rownames(From10toInfdepth[j,]),
                                              colnames(beta_hill_fonct_entropy) %notin% rownames(From10toInfdepth[j,])])
   
-  ResHill[j,9] <- mean(beta_hill_phylo_richess[rownames(beta_hill_phylo_richess) %in% rownames(From10toInfdepth[j,]),
-                                               colnames(beta_hill_phylo_richess) %notin% rownames(From10toInfdepth[j,])])
-  
-  ResHill[j,10] <- sd(beta_hill_phylo_richess[rownames(beta_hill_phylo_richess) %in% rownames(From10toInfdepth[j,]),
-                                             colnames(beta_hill_phylo_richess) %notin% rownames(From10toInfdepth[j,])])
-  
-  ResHill[j,11] <- mean(beta_hill_phylo_entropy[rownames(beta_hill_phylo_entropy) %in% rownames(From10toInfdepth[j,]),
-                                               colnames(beta_hill_phylo_entropy) %notin% rownames(From10toInfdepth[j,])])
-  
-  ResHill[j,12] <- sd(beta_hill_phylo_entropy[rownames(beta_hill_phylo_entropy) %in% rownames(From10toInfdepth[j,]),
-                                             colnames(beta_hill_phylo_entropy) %notin% rownames(From10toInfdepth[j,])])
-}
+ }
 Decay_Hill_10toInfdepth <- ResHill
 save(Decay_Hill_10toInfdepth,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/Decay_Hill_10toInfdepth.RData")
 

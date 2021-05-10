@@ -15,16 +15,7 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
 #At the site scale
 
   #Biomass matrix
-    dat_complet_mayotte <- dat_complet[dat_complet$island=="Mayotte",]
-    
-    #Some very few family (37 individuals ) do not have any info
-    dat_complet_mayotte <-  dat_complet_mayotte[dat_complet_mayotte$family %notin% c("Belonidae",
-                                                                                     "Muraenidae",
-                                                                                     "Nemipteridae",
-                                                                                     "Pseudochromidae",
-                                                                                     "Siganidae"),]
-    
-    biomass_mat = melt( dat_complet_mayotte , id.vars = c( "site" , "species" ) , measure.vars = "Groupweigth" )
+    biomass_mat = melt( dat_complet , id.vars = c( "site" , "species" ) , measure.vars = "Groupweigth" )
     biomass_mat = dcast( biomass_mat , site~species,sum,na.rm=T)
     rownames(biomass_mat) <- biomass_mat[,1]
     biomass_mat <- biomass_mat[,-1]
@@ -38,8 +29,8 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
     biomass_mat <- biomass_mat[,colnames(biomass_mat) %in% colnames(preabs_mat)]
     
 #Traits matrix
-    trait_mat <- dat_complet_mayotte[,c("species","mobility","activity","schooling","position","clean_diet",
-                             "trophic.level","maxLengthTL_Fishbase")]
+    trait_mat <- dat_complet[,c("species","mobility","activity","schooling","position","clean_diet",
+                             "maxLengthTL_Fishbase")]
     trait_mat <-unique(trait_mat)
     
     rownames(trait_mat)  <- trait_mat[,1]
@@ -47,7 +38,7 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
     trait_mat  <- trait_mat[,-1]
     
     trait_cat <- data.frame(trait_name = colnames(trait_mat),
-                            trait_type = c("O","N","O","O","O","Q","Q")
+                            trait_type = c("O","N","O","O","O","Q")
                            )
     
       traits_summary <- mFD::sp.tr.summary(tr_cat = trait_cat,    # Traits informations
@@ -144,35 +135,4 @@ alpha_div <- alpha_div[,-1]
 
 #save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
 
-ggplot(data = alpha_div, 
-       aes(x = depth, y = PC1, color = depth)) +
-  geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
-  theme(axis.text.x = element_text(
-    size=12),
-    axis.text.y = element_text(
-      size=12),
-    axis.title.x = element_text(size=14, face="bold"),
-    axis.title.y = element_text(size=14, face="bold"))
-
-
-ggplot(data = alpha_div, 
-       aes(x = depth, y = sp_richn, color = depth)) +
-  geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
-  theme(axis.text.x = element_text(
-    size=12),
-    axis.text.y = element_text(
-      size=12),
-    axis.title.x = element_text(size=14, face="bold"),
-    axis.title.y = element_text(size=14, face="bold"))
-
-
-ggplot(data = alpha_div, 
-       aes(x = depth, y = log10(biomass), color = depth)) +
-  geom_point(size=4)+scale_color_viridis(direction = -1)+theme_bw()+
-  theme(axis.text.x = element_text(
-    size=12),
-    axis.text.y = element_text(
-      size=12),
-    axis.title.x = element_text(size=14, face="bold"),
-    axis.title.y = element_text(size=14, face="bold"))
 
