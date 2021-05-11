@@ -22,14 +22,14 @@ work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data"
 #work.folder="~/Documents/Bubot/Bubot_Analyse/Bubot/data"
 
 # run the first function to select the data that are wanted
-selected.event=Event.list(DB.connection="no",work.folder=work.folder,measurement.method=c("wave","webfish"),
+selected.event=Event.list(DB.connection="yes",work.folder=work.folder,measurement.method=c("wave","webfish"),
                           island=c("Europa","Juan_de_Nova","Mayotte"))
 
 # calculate the Max N table
-Max.N=MaxN.calculation(DB.connection="no",work.folder=work.folder,selected.event=selected.event,max.dist=7)
+Max.N=MaxN.calculation(DB.connection="yes",work.folder=work.folder,selected.event=selected.event,max.dist=7)
 
 # compute the species matrix. this function is particularly slow, I made it fast, so take your time...
-species.site.matrix=species.matrix(DB.connection="no",work.folder=work.folder,Max.N=Max.N,biomass.calc="no") 
+species.site.matrix=species.matrix(DB.connection="yes",work.folder=work.folder,Max.N=Max.N,biomass.calc="no") 
 
 # get a list of species
 sp.list=colnames(species.site.matrix$species.matrix)
@@ -218,7 +218,7 @@ colnames(fish_traits)[1] <- "Species"
 library(PCAmixdata)
 
 # collect the habitat data
-habitat=species.site.matrix$site.data[,c(10:17)]
+habitat=species.site.matrix$site.data[,c(11:18)]
 # give the row name
 row.names(habitat)=species.site.matrix$site.data$Sample.name
 

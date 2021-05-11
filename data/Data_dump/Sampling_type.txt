@@ -1,358 +1,406 @@
 "X.sampling_code";"field_code";"date";"time";"country";"site";"code_site";"longitude";"latitude";"Abiotic_code";"Tide_code";"depth";"technique";"project";"remarks"
-"1";"MAEULONG001";"long1";"2019-04-08";"10:00:00";"FR_europa";"Europa_north";"EURO_N";40.33989;-22.33933;"EURO1";"FR_europa_TID_01";6;"RUV";"MAPOR";"système déposé puis corde 5m passé et cadrat de 1m² posé en face de chaque caméra"
-"2";"MAEULONG002";"long2";"2019-04-09";"09:48:00";"FR_europa";"Europa_north";"EURO_N";40.35828;-22.33248;"EURO2";"FR_europa_TID_02";7;"RUV";"MAPOR";"système déposé puis corde 5m passé et cadrat de 1m² posé en face de chaque caméra"
-"3";"MAEULONG003";"long3";"2019-04-09";"09:48:00";"FR_europa";"Europa_north";"EURO_N";40.35839;-22.33262;"EURO2";"FR_europa_TID_02";6;"RUV";"MAPOR";"système déposé puis corde 5m passé et cadrat de 1m² posé en face de chaque caméra, vidéo gardé par Virginie"
-"4";"MAEULONG004";"long4";"2019-04-10";"10:00:00";"FR_europa";"Europa_north";"EURO_N";40.39148;-22.33809;"EURO5";"FR_europa_TID_03";9;"RUV";"MAPOR";NA
-"5";"MAEULONG005";"long5";"2019-04-11";"09:30:00";"FR_europa";"Europa_north";"EURO_N";40.34245;-22.33775;"EURO8";"FR_europa_TID_04";7;"RUV";"MAPOR";"système déposé puis corde 5m passé devant chaque caméra"
-"6";"MAEUROS001";"euro1";"2019-04-08";"10:50:00";"FR_europa";"Europa_north";"EURO_N";40.33313;-22.34254;"EURO1";"FR_europa_TID_01";9;"rosette";"MAPOR";NA
-"7";"MAEUROS002";"euro2";"2019-04-08";"10:55:00";"FR_europa";"Europa_north";"EURO_N";40.33291;-22.34219;"EURO1";"FR_europa_TID_01";25;"rosette";"MAPOR";NA
-"8";"MAEUROS003";"euro3";"2019-04-08";"11:00:00";"FR_europa";"Europa_north";"EURO_N";40.33265;-22.34204;"EURO1";"FR_europa_TID_01";46.3;"rosette";"MAPOR";NA
-"9";"MAEUROS004";"euro4";"2019-04-08";"11:06:00";"FR_europa";"Europa_north";"EURO_N";40.33246;-22.3917;"EURO1";"FR_europa_TID_01";112;"rosette";"MAPOR";"descente lente, dérive importante"
-"10";"MAEUROS005";"euro5";"2019-04-08";"11:15:00";"FR_europa";"Europa_north";"EURO_N";40.33223;-22.3418;"EURO1";"FR_europa_TID_01";76;"rosette";"MAPOR";NA
-"11";"MAEUROS006";"euro6";"2019-04-08";"11:43:00";"FR_europa";"Europa_north";"EURO_N";40.35013;-22.33362;"EURO1";"FR_europa_TID_01";15;"rosette";"MAPOR";NA
-"12";"MAEUROS007";"euro7";"2019-04-08";"11:46:00";"FR_europa";"Europa_north";"EURO_N";40.35018;-22.33288;"EURO1";"FR_europa_TID_01";45;"rosette";"MAPOR";NA
-"13";"MAEUROS008";"euro8";"2019-04-08";"11:53:00";"FR_europa";"Europa_north";"EURO_N";40.35033;-22.33257;"EURO1";"FR_europa_TID_01";73;"rosette";"MAPOR";NA
-"14";"MAEUROS009";"euro9";"2019-04-08";"12:11:00";"FR_europa";"Europa_north";"EURO_N";40.36022;-22.33081;"EURO1";"FR_europa_TID_01";12;"rosette";"MAPOR";NA
-"15";"MAEUROS010";"euro10";"2019-04-08";"12:14:00";"FR_europa";"Europa_north";"EURO_N";40.36055;-22.32936;"EURO1";"FR_europa_TID_01";25;"rosette";"MAPOR";NA
-"16";"MAEUROS011";"euro11";"2019-04-08";"12:17:00";"FR_europa";"Europa_north";"EURO_N";40.36058;-22.32903;"EURO1";"FR_europa_TID_01";72;"rosette";"MAPOR";NA
-"17";"MAEUROS012";"euro12";"2019-04-08";"12:45:00";"FR_europa";"Europa_north";"EURO_N";40.37794;-22.3295;"EURO1";"FR_europa_TID_01";15;"rosette";"MAPOR";NA
-"18";"MAEUROS013";"euro13";"2019-04-08";"12:48:00";"FR_europa";"Europa_north";"EURO_N";40.37848;-22.32853;"EURO1";"FR_europa_TID_01";45;"rosette";"MAPOR";NA
-"19";"MAEUROS014";"euro14";"2019-04-08";"12:53:00";"FR_europa";"Europa_north";"EURO_N";40.37897;-22.32808;"EURO1";"FR_europa_TID_01";70;"rosette";"MAPOR";"rosette accroché"
-"20";"MAEURUV001";"ES1";"2019-04-08";"14:11:00";"FR_europa";"Europa_north";"EURO_N";40.35929;-22.33183;"EURO1";"FR_europa_TID_01";8.6;"RUV";"MAPOR";NA
-"21";"MAEURUV002";"ES2";"2019-04-08";"14:20:00";"FR_europa";"Europa_north";"EURO_N";40.3593;-22.3304;"EURO1";"FR_europa_TID_01";18;"RUV";"MAPOR";NA
-"22";"MAEURUV003";"ES3";"2019-04-08";"14:29:00";"FR_europa";"Europa_north";"EURO_N";40.35934;-22.32983;"EURO1";"FR_europa_TID_01";24.7;"RUV";"MAPOR";NA
-"23";"MAEURUV004";"ES4";"2019-04-08";"14:48:00";"FR_europa";"Europa_north";"EURO_N";40.35944;-22.32959;"EURO1";"FR_europa_TID_01";40;"RUV";"MAPOR";"boué sous l'eau, remonté anticipé"
-"24";"MAEURUV005";"ES5";"2019-04-08";"15:00:00";"FR_europa";"Europa_north";"EURO_N";40.35959;-22.3293;"EURO1";"FR_europa_TID_01";66;"RUV";"MAPOR";"boué qui a coulé imédiatement, donc remonté rapidement"
-"25";"MAEURUV006";"ES6";"2019-04-09";"10:10:00";"FR_europa";"Europa_north";"EURO_N";40.3593;-22.32981;"EURO3";"FR_europa_TID_02";25.2;"RUV";"MAPOR";NA
-"26";"MAEURUV007";"ES7";"2019-04-09";"10:20:00";"FR_europa";"Europa_north";"EURO_N";40.35933;-22.33036;"EURO3";"FR_europa_TID_02";18.5;"RUV";"MAPOR";NA
-"27";"MAEURUV008";"ES8";"2019-04-09";"10:26:00";"FR_europa";"Europa_north";"EURO_N";40.35927;-22.33174;"EURO3";"FR_europa_TID_02";8.5;"RUV";"MAPOR";NA
-"28";"MAEURUV009";"ES9";"2019-04-09";"10:33:00";"FR_europa";"Europa_north";"EURO_N";40.35942;-22.32958;"EURO3";"FR_europa_TID_02";43;"RUV";"MAPOR";NA
-"29";"MAEURUV010";"ES10";"2019-04-09";"10:43:00";"FR_europa";"Europa_north";"EURO_N";40.35962;-22.32935;"EURO3";"FR_europa_TID_02";63;"RUV";"MAPOR";"ligne prise dans l'hélice"
-"30";"MAEURUV011";"ES11";"2019-04-09";"11:03:00";"FR_europa";"Europa_north";"EURO_N";40.35964;-22.3292;"EURO3";"FR_europa_TID_02";72;"RUV";"MAPOR";NA
-"31";"MAEURUV012";"ES12";"2019-04-09";"13:02:00";"FR_europa";"Europa_north";"EURO_N";40.33195;-22.34172;"EURO4";"FR_europa_TID_02";73;"RUV";"MAPOR";"remonté car en dérive"
-"32";"MAEURUV013";"ES13";"2019-04-09";"13:14:00";"FR_europa";"Europa_north";"EURO_N";40.33195;-22.34196;"EURO4";"FR_europa_TID_02";61;"RUV";"MAPOR";"remonté car en dérive"
-"33";"MAEURUV014";"ES14";"2019-04-09";"13:38:00";"FR_europa";"Europa_north";"EURO_N";40.33214;-22.34209;"EURO4";"FR_europa_TID_02";35;"RUV";"MAPOR";"remonté car en dérive"
-"34";"MAEURUV015";"ES15";"2019-04-09";"13:54:00";"FR_europa";"Europa_north";"EURO_N";40.33145;-22.34226;"EURO4";"FR_europa_TID_02";50;"RUV";"MAPOR";NA
-"35";"MAEURUV016";"ES16";"2019-04-09";"14:20:00";"FR_europa";"Europa_north";"EURO_N";40.33089;-22.3421;"EURO4";"FR_europa_TID_02";60;"RUV";"MAPOR";"remonté car en dérive"
-"36";"MAEURUV017";"ES17";"2019-04-09";"14:28:00";"FR_europa";"Europa_north";"EURO_N";40.33119;-22.34266;"EURO4";"FR_europa_TID_02";30;"RUV";"MAPOR";NA
-"37";"MAEURUV018";"ES18";"2019-04-09";"14:35:00";"FR_europa";"Europa_north";"EURO_N";40.33169;-22.34292;"EURO4";"FR_europa_TID_02";13;"RUV";"MAPOR";"fibre optique débranché"
-"38";"MAEURUV019";"ES19";"2019-04-09";"14:38:00";"FR_europa";"Europa_north";"EURO_N";40.33204;-22.34328;"EURO4";"FR_europa_TID_02";7;"RUV";"MAPOR";NA
-"39";"MAEURUV020";"ES20";"2019-04-10";"11:00:00";"FR_europa";"Europa_north";"EURO_N";40.37742;-22.33063;"EURO6";"FR_europa_TID_03";6;"RUV";"MAPOR";"repose rapidos et pris c'est mis à l'eau"
-"40";"MAEURUV021";"ES21";"2019-04-10";"11:10:00";"FR_europa";"Europa_north";"EURO_N";40.37779;-22.32905;"EURO6";"FR_europa_TID_03";19.2;"RUV";"MAPOR";NA
-"41";"MAEURUV022";"ES22";"2019-04-10";"11:18:00";"FR_europa";"Europa_north";"EURO_N";40.37864;-22.32873;"EURO6";"FR_europa_TID_03";32;"RUV";"MAPOR";NA
-"42";"MAEURUV023";"ES23";"2019-04-10";"11:28:00";"FR_europa";"Europa_north";"EURO_N";40.37996;-22.32845;"EURO6";"FR_europa_TID_03";52.3;"RUV";"MAPOR";"remonté car en dérive"
-"43";"MAEURUV024";"ES24";"2019-04-10";"11:40:00";"FR_europa";"Europa_north";"EURO_N";40.38286;-22.32849;"EURO6";"FR_europa_TID_03";68;"RUV";"MAPOR";"gopro droite 4 arrété"
-"44";"MAEURUV025";"ES25";"2019-04-10";"11:58:00";"FR_europa";"Europa_north";"EURO_N";40.38248;-22.32881;"EURO6";"FR_europa_TID_03";50;"RUV";"MAPOR";NA
-"45";"MAEURUV026";"ES26";"2019-04-10";"14:02:00";"FR_europa";"Europa_north";"EURO_N";40.3595;-22.32926;"EURO7";"FR_europa_TID_03";74.9;"RUV";"MAPOR";NA
-"46";"MAEURUV027";"ES27";"2019-04-10";"14:13:00";"FR_europa";"Europa_north";"EURO_N";40.35947;-22.32957;"EURO7";"FR_europa_TID_03";56;"RUV";"MAPOR";NA
-"47";"MAEURUV028";"ES28";"2019-04-10";"14:20:00";"FR_europa";"Europa_north";"EURO_N";40.35935;-22.32988;"EURO7";"FR_europa_TID_03";24;"RUV";"MAPOR";NA
-"48";"MAEURUV029";"ES29";"2019-04-10";"14:26:00";"FR_europa";"Europa_north";"EURO_N";40.35925;-22.33037;"EURO7";"FR_europa_TID_03";18;"RUV";"MAPOR";NA
-"49";"MAEURUV030";"ES30";"2019-04-10";"14:32:00";"FR_europa";"Europa_north";"EURO_N";40.35927;-22.33187;"EURO7";"FR_europa_TID_03";8.2;"RUV";"MAPOR";NA
-"50";"MAEURUV031";"ES31";"2019-04-10";"14:57:00";"FR_europa";"Europa_north";"EURO_N";40.35937;-22.32957;"EURO7";"FR_europa_TID_03";52.8;"RUV";"MAPOR";NA
-"51";"MAEURUV032";"ES32";"2019-04-10";"15:18:00";"FR_europa";"Europa_north";"EURO_N";40.35947;-22.32926;"EURO7";"FR_europa_TID_03";70;"RUV";"MAPOR";NA
-"52";"MAEURUV033";"ES33";"2019-04-11";"09:54:00";"FR_europa";"Europa_north";"EURO_N";40.38296;-22.32838;"EURO9";"FR_europa_TID_04";72;"RUV";"MAPOR";"remonté car en dérive"
-"53";"MAEURUV034";"ES34";"2019-04-11";"10:04:00";"FR_europa";"Europa_north";"EURO_N";40.38239;-22.32895;"EURO9";"FR_europa_TID_04";34.5;"RUV";"MAPOR";NA
-"54";"MAEURUV035";"ES35";"2019-04-11";"10:13:00";"FR_europa";"Europa_north";"EURO_N";40.3824;-22.32911;"EURO9";"FR_europa_TID_04";29.6;"RUV";"MAPOR";NA
-"55";"MAEURUV036";"ES36";"2019-04-11";"10:30:00";"FR_europa";"Europa_north";"EURO_N";40.38294;-22.32861;"EURO9";"FR_europa_TID_04";57.4;"RUV";"MAPOR";"attaché au fond donc tentative de décrochage pendant 1h avant d'y arriver"
-"56";"MAEURUV037";"ES37";"2019-04-11";"10:39:00";"FR_europa";"Europa_north";"EURO_N";40.38194;-22.32966;"EURO9";"FR_europa_TID_04";18.7;"RUV";"MAPOR";NA
-"57";"MAEURUV038";"ES38";"2019-04-11";"10:46:00";"FR_europa";"Europa_north";"EURO_N";40.38096;-22.33117;"EURO9";"FR_europa_TID_04";6.8;"RUV";"MAPOR";NA
-"58";"MAEURUV039";"ES39";"2019-04-11";"13:39:00";"FR_europa";"Europa_north";"EURO_N";40.35805;-22.33241;"EURO10";"FR_europa_TID_04";6.3;"RUV";"MAPOR";NA
-"59";"MAEURUV040";"ES40";"2019-04-11";"13:45:00";"FR_europa";"Europa_north";"EURO_N";40.35802;-22.33057;"EURO10";"FR_europa_TID_04";20;"RUV";"MAPOR";NA
-"60";"MAEURUV041";"ES41";"2019-04-11";"13:51:00";"FR_europa";"Europa_north";"EURO_N";40.35818;-22.33014;"EURO10";"FR_europa_TID_04";28.6;"RUV";"MAPOR";NA
-"61";"MAEURUV042";"ES42";"2019-04-11";"14:00:00";"FR_europa";"Europa_north";"EURO_N";40.35878;-22.32985;"EURO10";"FR_europa_TID_04";39;"RUV";"MAPOR";NA
-"62";"MAEURUV043";"ES43";"2019-04-11";"14:06:00";"FR_europa";"Europa_north";"EURO_N";40.35963;-22.32925;"EURO10";"FR_europa_TID_04";66;"RUV";"MAPOR";NA
-"63";"MAJULONG006";"long6";"2019-04-13";"11:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75455;-17.02681;"JUAN1";"FR_juan_nova_TID_01";12;"RUV";"MAPOR";"système déposé puis corde 5m passé devant chaque caméra"
-"64";"MAJULONG007";"long6bis";"2019-04-13";"15:45:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75455;-17.02681;"JUAN3";"FR_juan_nova_TID_01";12;"RUV";"MAPOR";"système échangé avec la vidéo de long6 (même position pour capturer la soirée)"
-"65";"MAJULONG008";"long7";"2019-04-14";"09:10:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75455;-17.02681;"JUAN4";"FR_juan_nova_TID_02";12;"RUV";"MAPOR";"système échangé avec la vidéo de long6bis (même position)"
-"66";"MAJULONG009";"long8";"2019-04-16";"09:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.68948;-17.02203;"JUAN8";"FR_juan_nova_TID_04";6;"RUV";"MAPOR";"calibration distance et cadrat"
-"67";"MAJURUV001";"JNS1";"2019-04-13";"11:46:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75318;-17.02412;"JUAN2";"FR_juan_nova_TID_01";9.5;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"68";"MAJURUV002";"JNS2";"2019-04-13";"12:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75522;-17.01851;"JUAN2";"FR_juan_nova_TID_01";11.1;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"69";"MAJURUV003";"JNS3";"2019-04-13";"12:20:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74786;-17.00413;"JUAN2";"FR_juan_nova_TID_01";13.9;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"70";"MAJURUV004";"JNS4";"2019-04-13";"12:38:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74787;-17.0175;"JUAN2";"FR_juan_nova_TID_01";13.3;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"71";"MAJURUV005";"JNS5";"2019-04-13";"12:53:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74598;-17.03668;"JUAN2";"FR_juan_nova_TID_01";3.7;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"72";"MAJURUV006";"JNS6";"2019-04-13";"13:03:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.7436;-17.04006;"JUAN2";"FR_juan_nova_TID_01";4.9;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"73";"MAJURUV007";"JNS7";"2019-04-13";"14:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.7532;-17.02414;"JUAN3";"FR_juan_nova_TID_01";10.2;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"74";"MAJURUV008";"JNS8";"2019-04-13";"14:18:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75521;-17.0185;"JUAN3";"FR_juan_nova_TID_01";10.5;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"75";"MAJURUV009";"JNS9";"2019-04-13";"14:42:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74787;-17.0042;"JUAN3";"FR_juan_nova_TID_01";14.5;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"76";"MAJURUV010";"JNS10";"2019-04-13";"15:03:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74788;-17.01753;"JUAN3";"FR_juan_nova_TID_01";13.7;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"77";"MAJURUV011";"JNS11";"2019-04-13";"15:20:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74597;-17.03664;"JUAN3";"FR_juan_nova_TID_01";2.9;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"78";"MAJURUV012";"JNS12";"2019-04-13";"15:30:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74359;-17.04006;"JUAN3";"FR_juan_nova_TID_01";4;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
-"79";"MAJURUV013";"JNS13";"2019-04-14";"09:40:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.73252;-17.01657;"JUAN5";"FR_juan_nova_TID_02";9;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"80";"MAJURUV014";"JNS14";"2019-04-14";"09:56:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.72809;-17.00731;"JUAN5";"FR_juan_nova_TID_02";14.6;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"81";"MAJURUV015";"JNS15";"2019-04-14";"10:17:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.72607;-16.99785;"JUAN5";"FR_juan_nova_TID_02";15.3;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"82";"MAJURUV016";"JNS16";"2019-04-14";"10:37:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.73324;-16.99636;"JUAN5";"FR_juan_nova_TID_02";15.8;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"83";"MAJURUV017";"JNS17";"2019-04-14";"10:53:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.73675;-16.99471;"JUAN5";"FR_juan_nova_TID_02";17.4;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"84";"MAJURUV018";"JNS18";"2019-04-14";"11:19:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.73958;-16.98995;"JUAN5";"FR_juan_nova_TID_02";17.8;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"85";"MAJURUV019";"JNS19";"2019-04-14";"13:52:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75731;-17.00472;"JUAN6";"FR_juan_nova_TID_02";17.9;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"86";"MAJURUV020";"JNS20";"2019-04-14";"14:08:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.76947;-17.00512;"JUAN6";"FR_juan_nova_TID_02";14.1;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"87";"MAJURUV021";"JNS21";"2019-04-14";"14:23:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.76552;-17.01885;"JUAN6";"FR_juan_nova_TID_02";13.9;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"88";"MAJURUV022";"JNS22";"2019-04-14";"14:41:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.76782;-17.02402;"JUAN6";"FR_juan_nova_TID_02";18;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
-"89";"MAJURUV023";"JNS23";"2019-04-15";"09:18:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65763;-17.0164;"JUAN7";"FR_juan_nova_TID_03";16.2;"RUV";"MAPOR";"trop de courant pose raté (plus de 2 nœud de courant)"
-"90";"MAJURUV024";"JNS24";"2019-04-15";"10:35:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65936;-16.96499;"JUAN7";"FR_juan_nova_TID_03";24.8;"RUV";"MAPOR";"pose raté sur du sable"
-"91";"MAJURUV025";"JNS25";"2019-04-15";"11:04:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66038;-16.9634;"JUAN7";"FR_juan_nova_TID_03";20.9;"RUV";"MAPOR";"Elliott a positionné cette caméra, Elliott a repositionné cette caméra a 11:47"
-"92";"MAJURUV026";"JNS26";"2019-04-15";"11:21:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66018;-16.96261;"JUAN7";"FR_juan_nova_TID_03";27.7;"RUV";"MAPOR";"caméra de droite remplacé par caméra 7"
-"93";"MAJURUV027";"JNS27";"2019-04-15";"11:31:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65969;-16.96279;"JUAN7";"FR_juan_nova_TID_03";48;"RUV";"MAPOR";NA
-"94";"MAJURUV028";"JNS28";"2019-04-15";"11:42:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65927;-16.96205;"JUAN7";"FR_juan_nova_TID_03";70.5;"RUV";"MAPOR";NA
-"95";"MAJURUV029";"JNS29";"2019-04-15";"11:58:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66196;-16.96457;"JUAN7";"FR_juan_nova_TID_03";16.5;"RUV";"MAPOR";"11:58 Elliott qui sonde pour déposer la caméra"
-"96";"MAJURUV030";"JNS30";"2019-04-15";"13:14:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66031;-16.96341;"JUAN7";"FR_juan_nova_TID_03";21.8;"RUV";"MAPOR";"vidéo remis en bas du petit tombant par Elliott"
-"97";"MAJURUV031";"JNS31";"2019-04-15";"13:32:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66016;-16.9625;"JUAN7";"FR_juan_nova_TID_03";28.9;"RUV";"MAPOR";NA
-"98";"MAJURUV032";"JNS32";"2019-04-15";"13:49:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65971;-16.96277;"JUAN7";"FR_juan_nova_TID_03";45;"RUV";"MAPOR";NA
-"99";"MAJURUV033";"JNS33";"2019-04-15";"14:07:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65925;-16.96203;"JUAN7";"FR_juan_nova_TID_03";70.7;"RUV";"MAPOR";NA
-"100";"MAJURUV034";"JNS34";"2019-04-15";"14:23:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66195;-16.96455;"JUAN7";"FR_juan_nova_TID_03";14.4;"RUV";"MAPOR";NA
-"101";"MAJURUV035";"JNS35";"2019-04-16";"10:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.69738;-17.00949;"JUAN8";"FR_juan_nova_TID_04";10;"RUV";"MAPOR";"posé par Yann"
-"102";"MAJURUV036";"JNS36";"2019-04-16";"10:12:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70064;-17.0039;"JUAN8";"FR_juan_nova_TID_04";14.1;"RUV";"MAPOR";"posé par Yann"
-"103";"MAJURUV037";"JNS37";"2019-04-16";"10:23:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70315;-16.99641;"JUAN8";"FR_juan_nova_TID_04";14.8;"RUV";"MAPOR";NA
-"104";"MAJURUV038";"JNS38";"2019-04-16";"10:34:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70268;-16.99208;"JUAN8";"FR_juan_nova_TID_04";14.3;"RUV";"MAPOR";NA
-"105";"MAJURUV039";"JNS39";"2019-04-16";"10:49:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70478;-16.48567;"JUAN8";"FR_juan_nova_TID_04";15;"RUV";"MAPOR";NA
-"106";"MAJURUV040";"JNS40";"2019-04-16";"11:03:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70358;-16.97828;"JUAN8";"FR_juan_nova_TID_04";10.4;"RUV";"MAPOR";NA
-"107";"MAJURUV041";"JNS41";"2019-04-16";"12:22:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70475;-17.01017;"JUAN9";"FR_juan_nova_TID_04";9.6;"RUV";"MAPOR";NA
-"108";"MAJURUV042";"JNS42";"2019-04-16";"12:44:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.7088;-17.00359;"JUAN9";"FR_juan_nova_TID_04";11.5;"RUV";"MAPOR";NA
-"109";"MAJURUV043";"JNS43";"2019-04-16";"13:30:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.71042;-16.9966;"JUAN9";"FR_juan_nova_TID_04";18;"RUV";"MAPOR";NA
-"110";"MAJURUV044";"JNS44";"2019-04-16";"13:59:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70871;-16.98982;"JUAN9";"FR_juan_nova_TID_04";18.9;"RUV";"MAPOR";NA
-"111";"MAJURUV045";"JNS45";"2019-04-16";"14:23:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.6975;-16.99514;"JUAN9";"FR_juan_nova_TID_04";18.5;"RUV";"MAPOR";NA
-"112";"MAJURUV046";"JNS46";"2019-04-16";"14:55:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.69442;-17.00934;"JUAN9";"FR_juan_nova_TID_04";10.8;"RUV";"MAPOR";NA
-"113";"MA_CMB_025";"M25";"2019-02-05";"13:53:00";"YT";"Chira_moiba_be";"YT_CMB";44.98468;-12.72454;"NA";"YT_TID_003";8;"rosette";"MAPOR";NA
-"114";"MA_CMB_026";"M26";"2019-02-05";"13:57:00";"YT";"Chira_moiba_be";"YT_CMB";44.98384;-12.72448;"NA";"YT_TID_003";20;"rosette";"MAPOR";NA
-"115";"MA_CMB_027";"M27";"2019-02-05";"14:01:00";"YT";"Chira_moiba_be";"YT_CMB";44.98363;-12.72448;"NA";"YT_TID_003";38;"rosette";"MAPOR";NA
-"116";"MA_CMB_028";"M28";"2019-02-05";"14:05:00";"YT";"Chira_moiba_be";"YT_CMB";44.98323;-12.72446;"NA";"YT_TID_003";63;"rosette";"MAPOR";NA
-"117";"MA_CMB_029";"M29";"2019-02-05";"14:12:00";"YT";"Chira_moiba_be";"YT_CMB";44.98285;-12.72429;"NA";"YT_TID_003";80;"rosette";"MAPOR";NA
-"118";"MA_CMB_030";"M30";"2019-02-05";"14:20:00";"YT";"Chira_moiba_be";"YT_CMB";44.98254;-12.7242;"NA";"YT_TID_003";100;"rosette";"MAPOR";NA
-"119";"MA_CTJ_063";"M63";"2019-02-06";"14:36:00";"YT";"Chira_titi_jossi";"YT_CTJ";44.98848;-12.99657;"NA";"YT_TID_004";12;"rosette";"MAPOR";NA
-"120";"MA_CTJ_064";"M64";"2019-02-06";"14:40:00";"YT";"Chira_titi_jossi";"YT_CTJ";44.98822;-12.99651;"NA";"YT_TID_004";30;"rosette";"MAPOR";NA
-"121";"MA_CTJ_065";"M65";"2019-02-06";"14:50:00";"YT";"Chira_titi_jossi";"YT_CTJ";44.9879;-12.99662;"NA";"YT_TID_004";50;"rosette";"MAPOR";NA
-"122";"MA_CTJ_066";"M66";"2019-02-06";"14:56:00";"YT";"Chira_titi_jossi";"YT_CTJ";44.98739;-12.99686;"NA";"YT_TID_004";92;"rosette";"MAPOR";NA
-"123";"MA_DJO_044";"M44";"2019-02-06";"11:14:00";"YT";"Djole";"YT_DJO";44.96275;-12.91583;"NA";"YT_TID_004";13;"rosette";"MAPOR";NA
-"124";"MA_DJO_045";"M45";"2019-02-06";"11:17:00";"YT";"Djole";"YT_DJO";44.9619;-12.91594;"NA";"YT_TID_004";36;"rosette";"MAPOR";NA
-"125";"MA_DJO_046";"M46";"2019-02-06";"11:22:00";"YT";"Djole";"YT_DJO";44.96141;-12.91576;"NA";"YT_TID_004";70;"rosette";"MAPOR";NA
-"126";"MA_DJO_047";"M47";"2019-02-06";"11:28:00";"YT";"Djole";"YT_DJO";44.96056;-12.91559;"NA";"YT_TID_004";110;"rosette";"MAPOR";NA
-"127";"MA_GMO_040";"M40";"2019-02-06";"10:40:00";"YT";"Gnouma_moiba";"YT_GMO";44.9536;-12.89555;"NA";"YT_TID_004";9;"rosette";"MAPOR";NA
-"128";"MA_GMO_041";"M41";"2019-02-06";"10:42:00";"YT";"Gnouma_moiba";"YT_GMO";44.95355;-12.89576;"NA";"YT_TID_004";31;"rosette";"MAPOR";NA
-"129";"MA_GMO_042";"M42";"2019-02-06";"10:48:00";"YT";"Gnouma_moiba";"YT_GMO";44.95254;-12.89671;"NA";"YT_TID_004";50;"rosette";"MAPOR";NA
-"130";"MA_GMO_043";"M43";"2019-02-06";"10:58:00";"YT";"Gnouma_moiba";"YT_GMO";44.95178;-12.89712;"NA";"YT_TID_004";90;"rosette";"MAPOR";NA
-"131";"MA_GMO_130";"R8.4";"2019-03-08";"14:19:00";"YT";"Gnouma_moiba";"YT_GMO";44.95199;-12.89744;"YT_GMO_001";"YT_TID_011";86;"RUV";"MAPOR";NA
-"132";"MA_GMO_131";"R8.3";"2019-03-08";"14:08:00";"YT";"Gnouma_moiba";"YT_GMO";44.9526;-12.89662;"YT_GMO_001";"YT_TID_011";46;"RUV";"MAPOR";NA
-"133";"MA_GMO_132";"R8.2";"2019-03-08";"13:59:00";"YT";"Gnouma_moiba";"YT_GMO";44.95345;-12.89564;"YT_GMO_001";"YT_TID_011";27;"RUV";"MAPOR";NA
-"134";"MA_GMO_133";"R8.1";"2019-03-08";"13:52:00";"YT";"Gnouma_moiba";"YT_GMO";44.95359;-12.89553;"YT_GMO_001";"YT_TID_011";11;"RUV";"MAPOR";NA
-"135";"MA_GMO_152";"R8.5";"2019-03-15";"13:04:00";"YT";"Gnouma_moiba";"YT_GMO";44.95201;-12.89742;"YT_GMO_002";"YT_TID_013";84.5;"RUV";"MAPOR";NA
-"136";"MA_GMO_153";"R8.6";"2019-03-15";"13:14:00";"YT";"Gnouma_moiba";"YT_GMO";44.95262;-12.89659;"YT_GMO_002";"YT_TID_013";46;"RUV";"MAPOR";NA
-"137";"MA_GMO_154";"R8.7";"2019-03-15";"13:21:00";"YT";"Gnouma_moiba";"YT_GMO";44.9534;-12.8956;"YT_GMO_002";"YT_TID_013";28.9;"RUV";"MAPOR";NA
-"138";"MA_GMO_155";"R8.8";"2019-03-15";"13:26:00";"YT";"Gnouma_moiba";"YT_GMO";44.9536;-12.8955;"YT_GMO_002";"YT_TID_013";10.2;"RUV";"MAPOR";NA
-"139";"MA_GMO_169";"R8.12";"2019-03-18";"12:48:00";"YT";"Gnouma_moiba";"YT_GMO";44.95359;-12.89548;"YT_GMO_003";"YT_TID_014";12;"RUV";"MAPOR";NA
-"140";"MA_GMO_170";"R8.11";"2019-03-18";"12:45:00";"YT";"Gnouma_moiba";"YT_GMO";44.95342;-12.89562;"YT_GMO_003";"YT_TID_014";25;"RUV";"MAPOR";NA
-"141";"MA_GMO_171";"R8.10";"2019-03-18";"12:38:00";"YT";"Gnouma_moiba";"YT_GMO";44.95261;-12.89664;"YT_GMO_003";"YT_TID_014";47.6;"RUV";"MAPOR";NA
-"142";"MA_GMO_172";"R8.9";"2019-03-18";"12:30:00";"YT";"Gnouma_moiba";"YT_GMO";44.95199;-12.89742;"YT_GMO_003";"YT_TID_014";93;"RUV";"MAPOR";NA
-"143";"MA_GMO_199";"R8.13";"2019-03-20";"13:48:00";"YT";"Gnouma_moiba";"YT_GMO";44.95361;-12.89547;"YT_GMO_004";"YT_TID_016";8.6;"RUV";"MAPOR";NA
-"144";"MA_GMO_200";"R8.14";"2019-03-20";"13:56:00";"YT";"Gnouma_moiba";"YT_GMO";44.95341;-12.8956;"YT_GMO_004";"YT_TID_016";28.2;"RUV";"MAPOR";NA
-"145";"MA_GMO_201";"R8.15";"2019-03-20";"14:04:00";"YT";"Gnouma_moiba";"YT_GMO";44.95261;-12.89661;"YT_GMO_004";"YT_TID_016";47;"RUV";"MAPOR";NA
-"146";"MA_GMO_202";"R8.16";"2019-03-20";"14:13:00";"YT";"Gnouma_moiba";"YT_GMO";44.95201;-12.89744;"YT_GMO_004";"YT_TID_016";85;"RUV";"MAPOR";NA
-"147";"MA_JOS_058";"M58";"2019-02-06";"13:52:00";"YT";"Jossi";"YT_JOS";44.97791;-12.97081;"NA";"YT_TID_004";13;"rosette";"MAPOR";NA
-"148";"MA_JOS_059";"M59";"2019-02-06";"13:55:00";"YT";"Jossi";"YT_JOS";44.97763;-12.97091;"NA";"YT_TID_004";33;"rosette";"MAPOR";NA
-"149";"MA_JOS_060";"M60";"2019-02-06";"13:59:00";"YT";"Jossi";"YT_JOS";44.97724;-12.97113;"NA";"YT_TID_004";44;"rosette";"MAPOR";NA
-"150";"MA_JOS_061";"M61";"2019-02-06";"14:11:00";"YT";"Jossi";"YT_JOS";44.977;-12.97139;"NA";"YT_TID_004";78;"rosette";"MAPOR";NA
-"151";"MA_JOS_062";"M62";"2019-02-06";"14:17:00";"YT";"Jossi";"YT_JOS";44.97651;-12.97136;"NA";"YT_TID_004";100;"rosette";"MAPOR";NA
-"152";"MA_JOS_096";"R12.1";"2019-02-28";"10:19:00";"YT";"Jossi";"YT_JOS";44.97702;-12.97109;"YT_JOS_001";"YT_TID_008";65;"RUV";"MAPOR";NA
-"153";"MA_JOS_097";"R12.2";"2019-02-28";"10:30:00";"YT";"Jossi";"YT_JOS";44.97782;-12.97073;"YT_JOS_001";"YT_TID_008";12;"RUV";"MAPOR";NA
-"154";"MA_JOS_098";"R12.3";"2019-02-28";"10:42:00";"YT";"Jossi";"YT_JOS";44.97769;-12.97082;"YT_JOS_001";"YT_TID_008";24;"RUV";"MAPOR";NA
-"155";"MA_JOS_099";"R12.4";"2019-02-28";"10:50:00";"YT";"Jossi";"YT_JOS";44.97724;-12.97093;"YT_JOS_001";"YT_TID_008";42;"RUV";"MAPOR";NA
-"156";"MA_JOS_122";"R12.5";"2019-03-08";"08:03:00";"YT";"Jossi";"YT_JOS";44.97786;-12.97072;"YT_JOS_002";"YT_TID_011";12;"RUV";"MAPOR";NA
-"157";"MA_JOS_123";"R12.6";"2019-03-08";"08:11:00";"YT";"Jossi";"YT_JOS";44.97768;-12.97081;"YT_JOS_002";"YT_TID_011";27;"RUV";"MAPOR";NA
-"158";"MA_JOS_124";"R12.7";"2019-03-08";"08:19:00";"YT";"Jossi";"YT_JOS";44.97724;-12.97111;"YT_JOS_002";"YT_TID_011";43;"RUV";"MAPOR";NA
-"159";"MA_JOS_125";"R12.8";"2019-03-08";"08:30:00";"YT";"Jossi";"YT_JOS";44.97663;-12.97156;"YT_JOS_002";"YT_TID_011";90;"RUV";"MAPOR";NA
-"160";"MA_JOS_156";"R12.9";"2019-03-15";"14:52:00";"YT";"Jossi";"YT_JOS";44.97779;-12.97073;"YT_JOS_003";"YT_TID_013";11;"RUV";"MAPOR";NA
-"161";"MA_JOS_157";"R12.10";"2019-03-15";"14:57:00";"YT";"Jossi";"YT_JOS";44.97767;-12.97081;"YT_JOS_003";"YT_TID_013";25;"RUV";"MAPOR";NA
-"162";"MA_JOS_158";"R12.11";"2019-03-15";"15:03:00";"YT";"Jossi";"YT_JOS";44.97722;-12.97107;"YT_JOS_003";"YT_TID_013";42.7;"RUV";"MAPOR";NA
-"163";"MA_JOS_159";"R12.12";"2019-03-15";"15:12:00";"YT";"Jossi";"YT_JOS";44.97697;-12.97117;"YT_JOS_003";"YT_TID_013";72;"RUV";"MAPOR";NA
-"164";"MA_JOS_173";"R12.13";"2019-03-18";"14:11:00";"YT";"Jossi";"YT_JOS";44.97786;-12.9707;"YT_JOS_004";"YT_TID_014";11;"RUV";"MAPOR";NA
-"165";"MA_JOS_174";"R12.14";"2019-03-18";"14:16:00";"YT";"Jossi";"YT_JOS";44.9777;-12.97082;"YT_JOS_004";"YT_TID_014";24.1;"RUV";"MAPOR";NA
-"166";"MA_JOS_175";"R12.15";"2019-03-18";"14:23:00";"YT";"Jossi";"YT_JOS";44.97723;-12.97109;"YT_JOS_004";"YT_TID_014";44.2;"RUV";"MAPOR";NA
-"167";"MA_JOS_176";"R12.16";"2019-03-18";"14:29:00";"YT";"Jossi";"YT_JOS";44.97699;-12.97114;"YT_JOS_004";"YT_TID_014";69;"RUV";"MAPOR";NA
-"168";"MA_JOS_195";"R12.20";"2019-03-20";"12:23:00";"YT";"Jossi";"YT_JOS";44.97784;-12.97068;"YT_JOS_005";"YT_TID_016";9;"RUV";"MAPOR";NA
-"169";"MA_JOS_196";"R12.19";"2019-03-20";"12:18:00";"YT";"Jossi";"YT_JOS";44.97723;-12.9708;"YT_JOS_005";"YT_TID_016";21;"RUV";"MAPOR";NA
-"170";"MA_JOS_197";"R12.18";"2019-03-20";"12:11:00";"YT";"Jossi";"YT_JOS";44.97723;-12.97106;"YT_JOS_005";"YT_TID_016";41.8;"RUV";"MAPOR";NA
-"171";"MA_JOS_198";"R12.17";"2019-03-20";"12:01:00";"YT";"Jossi";"YT_JOS";44.977;-12.97117;"YT_JOS_005";"YT_TID_016";68;"RUV";"MAPOR";NA
-"172";"MA_MDZ_053";"M53";"2019-02-06";"13:11:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96697;-12.93975;"NA";"YT_TID_004";12;"rosette";"MAPOR";NA
-"173";"MA_MDZ_054";"M54";"2019-02-06";"13:14:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96684;-12.93991;"NA";"YT_TID_004";27;"rosette";"MAPOR";NA
-"174";"MA_MDZ_055";"M55";"2019-02-06";"13:18:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96647;-12.94046;"NA";"YT_TID_004";41;"rosette";"MAPOR";NA
-"175";"MA_MDZ_056";"M56";"2019-02-06";"13:23:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96613;-12.94042;"NA";"YT_TID_004";71;"rosette";"MAPOR";NA
-"176";"MA_MDZ_057";"M57";"2019-02-06";"13:30:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96571;-12.94073;"NA";"YT_TID_004";90;"rosette";"MAPOR";NA
-"177";"MA_MFO2_012";"M12";"2019-02-05";"12:17:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96877;-12.69394;"NA";"YT_TID_003";10;"rosette";"MAPOR";NA
-"178";"MA_MFO2_013";"M13";"2019-02-05";"12:21:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96868;-12.69368;"NA";"YT_TID_003";23;"rosette";"MAPOR";NA
-"179";"MA_MFO2_014";"M14";"2019-02-05";"12:27:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96849;-12.69417;"NA";"YT_TID_003";37;"rosette";"MAPOR";NA
-"180";"MA_MFO2_015";"M15";"2019-02-05";"12:30:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.9681;-12.69441;"NA";"YT_TID_003";41.2;"rosette";"MAPOR";NA
-"181";"MA_MFO2_016";"M16";"2019-02-05";"12:33:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96781;-12.69463;"NA";"YT_TID_003";44;"rosette";"MAPOR";NA
-"182";"MA_MFO2_017";"M17";"2019-02-05";"12:37:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96762;-12.69468;"NA";"YT_TID_003";63.6;"rosette";"MAPOR";NA
-"183";"MA_MFO2_018";"M18";"2019-02-05";"12:45:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96719;-12.69463;"NA";"YT_TID_003";76.1;"rosette";"MAPOR";NA
-"184";"MA_MFO2_019";"M19";"2019-02-05";"12:52:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96674;-12.69499;"NA";"YT_TID_003";100;"rosette";"MAPOR";NA
-"185";"MA_MFO2_020";"M20";"2019-02-05";"13:03:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.97043;-12.69727;"NA";"YT_TID_003";9;"rosette";"MAPOR";NA
-"186";"MA_MFO2_021";"M21";"2019-02-05";"13:06:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.97021;-12.6974;"NA";"YT_TID_003";24.2;"rosette";"MAPOR";NA
-"187";"MA_MFO2_022";"M22";"2019-02-05";"13:09:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96996;-12.6976;"NA";"YT_TID_003";42;"rosette";"MAPOR";NA
-"188";"MA_MFO2_023";"M23";"2019-02-05";"13:13:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96903;-12.69783;"NA";"YT_TID_003";56;"rosette";"MAPOR";NA
-"189";"MA_MFO2_024";"M24";"2019-02-05";"13:19:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96856;-12.69774;"NA";"YT_TID_003";86;"rosette";"MAPOR";NA
-"190";"MA_MHA_031";"M31";"2019-02-05";"14:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98372;-12.73275;"NA";"YT_TID_003";10;"rosette";"MAPOR";NA
-"191";"MA_MHA_032";"M32";"2019-02-05";"14:36:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98335;-12.73279;"NA";"YT_TID_003";30;"rosette";"MAPOR";NA
-"192";"MA_MHA_033";"M33";"2019-02-05";"14:40:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98303;-12.73278;"NA";"YT_TID_003";65;"rosette";"MAPOR";NA
-"193";"MA_MHA_034";"M34";"2019-02-05";"14:43:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98177;-12.73246;"NA";"YT_TID_003";80;"rosette";"MAPOR";NA
-"194";"MA_MHA_067";"M67";"2019-02-25";"15:48:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98319;-12.7328;"NA";"YT_TID_005";29.8;"rosette";"MAPOR";NA
-"195";"MA_MHA_068";"M68";"2019-02-25";"15:52:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98308;-12.73279;"NA";"YT_TID_005";41;"rosette";"MAPOR";NA
-"196";"MA_MHA_069";"M69";"2019-02-25";"15:58:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98308;-12.73279;"NA";"YT_TID_005";41;"rosette";"MAPOR";NA
-"197";"MA_MHA_070";"M70";"2019-02-25";"16:03:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98283;-12.73277;"NA";"YT_TID_005";62;"rosette";"MAPOR";NA
-"198";"MA_MHA_071";"M71";"2019-02-25";"16:08:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73281;"NA";"YT_TID_005";62;"rosette";"MAPOR";NA
-"199";"MA_MHA_072";"M72";"2019-02-25";"16:19:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98267;-12.73272;"NA";"YT_TID_005";71;"rosette";"MAPOR";NA
-"200";"MA_MHA_073";"M73";"2019-02-25";"16:25:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9823;-12.7326;"NA";"YT_TID_005";76;"rosette";"MAPOR";NA
-"201";"MA_MHA_074";"M74";"2019-02-25";"16:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98182;-12.73248;"NA";"YT_TID_005";79;"rosette";"MAPOR";NA
-"202";"MA_MHA_075";"C1";"2019-02-26";"13:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98364;-12.7327;"YT_MHA_001";"YT_TID_006";15.1;"RUV";"MAPOR";NA
-"203";"MA_MHA_076";"C2";"2019-02-26";"13:34:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98317;-12.73281;"YT_MHA_001";"YT_TID_006";31;"RUV";"MAPOR";NA
-"204";"MA_MHA_077";"C3";"2019-02-26";"13:47:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98285;-12.73279;"YT_MHA_001";"YT_TID_006";50;"RUV";"MAPOR";NA
-"205";"MA_MHA_078";"C4";"2019-02-26";"14:00:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98186;-12.73243;"YT_MHA_001";"YT_TID_006";81;"RUV";"MAPOR";NA
-"206";"MA_MHA_079";"C5";"2019-02-26";"15:37:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98364;-12.73264;"YT_MHA_001";"YT_TID_006";17;"RUV";"MAPOR";NA
-"207";"MA_MHA_080";"C6";"2019-02-26";"15:52:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98318;-12.73281;"YT_MHA_001";"YT_TID_006";31.1;"RUV";"MAPOR";NA
-"208";"MA_MHA_081";"C7";"2019-02-26";"16:05:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98286;-12.73278;"YT_MHA_001";"YT_TID_006";9.3;"RUV";"MAPOR";NA
-"209";"MA_MHA_082";"C8";"2019-02-26";"16:25:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98185;-12.73245;"YT_MHA_001";"YT_TID_006";77;"RUV";"MAPOR";NA
-"210";"MA_MHA_083";"C9";"2019-02-27";"10:17:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9818;-12.73248;"YT_MHA_002";"YT_TID_007";82.5;"RUV";"MAPOR";NA
-"211";"MA_MHA_084";"C10";"2019-02-27";"10:23:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9831;-12.73279;"YT_MHA_002";"YT_TID_007";65;"RUV";"MAPOR";NA
-"212";"MA_MHA_085";"C11";"2019-02-27";"10:33:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98339;-12.73277;"YT_MHA_002";"YT_TID_007";30;"RUV";"MAPOR";NA
-"213";"MA_MHA_086";"C12";"2019-02-27";"10:40:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98378;-12.73267;"YT_MHA_002";"YT_TID_007";11;"RUV";"MAPOR";NA
-"214";"MA_MHA_087";"C13";"2019-02-27";"12:32:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98179;-12.73249;"YT_MHA_002";"YT_TID_007";80;"RUV";"MAPOR";NA
-"215";"MA_MHA_088";"C14";"2019-02-27";"12:47:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98296;-12.73276;"YT_MHA_002";"YT_TID_007";43;"RUV";"MAPOR";NA
-"216";"MA_MHA_089";"C15";"2019-02-27";"13:02:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98346;-12.7328;"YT_MHA_002";"YT_TID_007";26;"RUV";"MAPOR";NA
-"217";"MA_MHA_090";"C16";"2019-02-27";"13:18:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9837;-12.73265;"YT_MHA_002";"YT_TID_007";12;"RUV";"MAPOR";NA
-"218";"MA_MHA_091";"C17";"2019-02-27";"14:45:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98181;-12.73245;"YT_MHA_002";"YT_TID_007";83;"RUV";"MAPOR";NA
-"219";"MA_MHA_092";"C18";"2019-02-27";"14:58:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73479;"YT_MHA_002";"YT_TID_007";62;"RUV";"MAPOR";NA
-"220";"MA_MHA_093";"C19";"2019-02-27";"15:15:00";"YT";"Mwamba_harrabou";"YT_MHA";44.99342;-12.73278;"YT_MHA_002";"YT_TID_007";28;"RUV";"MAPOR";NA
-"221";"MA_MHA_094";"C20";"2019-02-27";"15:29:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73267;"YT_MHA_002";"YT_TID_007";10;"RUV";"MAPOR";NA
-"222";"MA_MHA_095";"C17bis";"2019-02-27";"14:45:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9829;-12.73795;"YT_MHA_002";"YT_TID_007";80;"RUV";"MAPOR";NA
-"223";"MA_MHA_100";"C21";"2019-03-01";"10:07:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98369;-12.7327;"YT_MHA_003";"YT_TID_009";11;"RUV";"MAPOR";NA
-"224";"MA_MHA_101";"C22";"2019-03-01";"10:16:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9834;-12.73281;"YT_MHA_003";"YT_TID_009";29.4;"RUV";"MAPOR";NA
-"225";"MA_MHA_102";"C23";"2019-03-01";"10:25:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73279;"YT_MHA_003";"YT_TID_009";40;"RUV";"MAPOR";NA
-"226";"MA_MHA_103";"C24";"2019-03-01";"10:33:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98172;-12.73258;"YT_MHA_003";"YT_TID_009";84;"RUV";"MAPOR";NA
-"227";"MA_MHA_104";"C25";"2019-03-01";"10:49:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98181;-12.73246;"YT_MHA_003";"YT_TID_009";79.6;"RUV";"MAPOR";NA
-"228";"MA_MHA_105";"C26";"2019-03-01";"12:18:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98369;-12.73268;"YT_MHA_003";"YT_TID_009";14;"RUV";"MAPOR";NA
-"229";"MA_MHA_106";"C27";"2019-03-01";"12:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98343;-12.73278;"YT_MHA_003";"YT_TID_009";30;"RUV";"MAPOR";NA
-"230";"MA_MHA_107";"C28";"2019-03-01";"12:42:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73277;"YT_MHA_003";"YT_TID_009";47;"RUV";"MAPOR";NA
-"231";"MA_MHA_108";"C29";"2019-03-01";"13:03:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98182;-12.73247;"YT_MHA_003";"YT_TID_009";80;"RUV";"MAPOR";NA
-"232";"MA_MHA_109";"C30";"2019-03-01";"14:33:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98372;-12.73268;"YT_MHA_003";"YT_TID_009";12.9;"RUV";"MAPOR";NA
-"233";"MA_MHA_110";"C31";"2019-03-01";"14:44:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98342;-12.73277;"YT_MHA_003";"YT_TID_009";30;"RUV";"MAPOR";NA
-"234";"MA_MHA_111";"C32";"2019-03-01";"14:58:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98298;-12.73277;"YT_MHA_003";"YT_TID_009";63;"RUV";"MAPOR";NA
-"235";"MA_MHA_112";"C33";"2019-03-01";"15:13:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98184;-12.73249;"YT_MHA_003";"YT_TID_009";80;"RUV";"MAPOR";NA
-"236";"MA_MHA_113";"C34";"2019-03-07";"08:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98186;-12.73242;"YT_MHA_004";"YT_TID_010";77;"RUV";"MAPOR";NA
-"237";"MA_MHA_114";"C35";"2019-03-07";"08:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73273;"YT_MHA_004";"YT_TID_010";44;"RUV";"MAPOR";NA
-"238";"MA_MHA_115";"C36";"2019-03-07";"08:36:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98343;-12.73279;"YT_MHA_004";"YT_TID_010";28;"RUV";"MAPOR";NA
-"239";"MA_MHA_116";"C37";"2019-03-07";"08:42:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98374;-12.73264;"YT_MHA_004";"YT_TID_010";10;"RUV";"MAPOR";NA
-"240";"MA_MHA_117";"C38";"2019-03-07";"09:24:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98184;-12.73248;"YT_MHA_004";"YT_TID_010";81;"RUV";"MAPOR";NA
-"241";"MA_MHA_118";"C39";"2019-03-07";"10:21:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98184;-12.73247;"YT_MHA_004";"YT_TID_010";78;"RUV";"MAPOR";NA
-"242";"MA_MHA_119";"C40";"2019-03-07";"10:57:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73276;"YT_MHA_004";"YT_TID_010";40;"RUV";"MAPOR";NA
-"243";"MA_MHA_120";"C41";"2019-03-07";"11:08:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98343;-12.73283;"YT_MHA_004";"YT_TID_010";28;"RUV";"MAPOR";NA
-"244";"MA_MHA_121";"C42";"2019-03-07";"11:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9837;-12.73271;"YT_MHA_004";"YT_TID_010";10;"RUV";"MAPOR";NA
-"245";"MA_MHA_134";"C43";"2019-03-09";"08:59:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98184;-12.73242;"YT_MHA_005";"YT_TID_012";80;"RUV";"MAPOR";NA
-"246";"MA_MHA_135";"C44";"2019-03-09";"09:10:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98298;-12.73276;"YT_MHA_005";"YT_TID_012";60;"RUV";"MAPOR";NA
-"247";"MA_MHA_136";"C45";"2019-03-09";"09:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98349;-12.73272;"YT_MHA_005";"YT_TID_012";24;"RUV";"MAPOR";NA
-"248";"MA_MHA_137";"C46";"2019-03-09";"09:24:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98371;-12.73269;"YT_MHA_005";"YT_TID_012";11;"RUV";"MAPOR";NA
-"249";"MA_MHA_138";"C47";"2019-03-09";"09:43:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98302;-12.73276;"YT_MHA_005";"YT_TID_012";44;"RUV";"MAPOR";NA
-"250";"MA_MHA_139";"C48";"2019-03-09";"10:14:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98185;-12.73244;"YT_MHA_005";"YT_TID_012";77;"RUV";"MAPOR";NA
-"251";"MA_MHA_140";"C49";"2019-03-09";"11:40:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73268;"YT_MHA_005";"YT_TID_012";10;"RUV";"MAPOR";NA
-"252";"MA_MHA_141";"C50";"2019-03-09";"11:57:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9835;-12.7328;"YT_MHA_005";"YT_TID_012";24;"RUV";"MAPOR";NA
-"253";"MA_MHA_142";"C51";"2019-03-09";"12:17:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73277;"YT_MHA_005";"YT_TID_012";44;"RUV";"MAPOR";NA
-"254";"MA_MHA_143";"C52";"2019-03-09";"12:47:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98187;-12.73243;"YT_MHA_005";"YT_TID_012";76;"RUV";"MAPOR";NA
-"255";"MA_MHA_203";"C56";"2019-03-21";"08:56:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73264;"YT_MHA_006";"YT_TID_017";9;"RUV";"MAPOR";NA
-"256";"MA_MHA_204";"C55";"2019-03-21";"08:50:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98348;-12.73277;"YT_MHA_006";"YT_TID_017";24;"RUV";"MAPOR";NA
-"257";"MA_MHA_205";"C54";"2019-03-21";"08:40:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98302;-12.73276;"YT_MHA_006";"YT_TID_017";62;"RUV";"MAPOR";NA
-"258";"MA_MHA_206";"C53";"2019-03-21";"08:27:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98185;-12.73242;"YT_MHA_006";"YT_TID_017";77;"RUV";"MAPOR";NA
-"259";"MA_MHA_207";"C57";"2019-03-21";"10:41:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98174;-12.7325;"YT_MHA_006";"YT_TID_017";80;"RUV";"MAPOR";NA
-"260";"MA_MHA_208";"C58";"2019-03-21";"10:58:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73273;"YT_MHA_006";"YT_TID_017";36;"RUV";"MAPOR";NA
-"261";"MA_MHA_209";"C59";"2019-03-21";"11:13:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98346;-12.73282;"YT_MHA_006";"YT_TID_017";26;"RUV";"MAPOR";NA
-"262";"MA_MHA_210";"C60";"2019-03-21";"11:22:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98369;-12.73265;"YT_MHA_006";"YT_TID_017";11;"RUV";"MAPOR";NA
-"263";"MA_MHA_211";"C61";"2019-03-21";"13:02:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98175;-12.7325;"YT_MHA_006";"YT_TID_017";83;"RUV";"MAPOR";NA
-"264";"MA_MHA_212";"C62";"2019-03-21";"13:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98302;-12.73276;"YT_MHA_006";"YT_TID_017";63;"RUV";"MAPOR";NA
-"265";"MA_MHA_213";"C63";"2019-03-21";"13:35:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9835;-12.73277;"YT_MHA_006";"YT_TID_017";27;"RUV";"MAPOR";NA
-"266";"MA_MHA_214";"C64";"2019-03-21";"13:44:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98371;-12.73268;"YT_MHA_006";"YT_TID_017";12;"RUV";"MAPOR";NA
-"267";"MA_MHA_215";"C65";"2019-03-21";"14:51:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98187;-12.73245;"YT_MHA_006";"YT_TID_017";79;"RUV";"MAPOR";NA
-"268";"MA_MHA_216";"C66";"2019-03-23";"08:28:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98175;-12.73249;"YT_MHA_007";"YT_TID_018";82.1;"RUV";"MAPOR";NA
-"269";"MA_MHA_217";"C67";"2019-03-23";"08:34:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73268;"YT_MHA_007";"YT_TID_018";10;"RUV";"MAPOR";NA
-"270";"MA_MHA_218";"C68";"2019-03-23";"08:42:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98353;-12.73274;"YT_MHA_007";"YT_TID_018";23;"RUV";"MAPOR";NA
-"271";"MA_MHA_219";"C69";"2019-03-23";"08:48:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98302;-12.73272;"YT_MHA_007";"YT_TID_018";37;"RUV";"MAPOR";NA
-"272";"MA_MHA_220";"C70";"2019-03-23";"10:45:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73266;"YT_MHA_007";"YT_TID_018";8.1;"RUV";"MAPOR";NA
-"273";"MA_MHA_221";"C71";"2019-03-23";"10:55:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98351;-12.73275;"YT_MHA_007";"YT_TID_018";23;"RUV";"MAPOR";NA
-"274";"MA_MHA_222";"C72";"2019-03-23";"11:08:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98301;-12.73277;"YT_MHA_007";"YT_TID_018";42;"RUV";"MAPOR";NA
-"275";"MA_MHA_223";"C73";"2019-03-23";"11:25:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98174;-12.73247;"YT_MHA_007";"YT_TID_018";80;"RUV";"MAPOR";NA
-"276";"MA_MHA_224";"C74";"2019-03-23";"12:57:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98376;-12.73271;"YT_MHA_007";"YT_TID_018";9;"RUV";"MAPOR";NA
-"277";"MA_MHA_225";"C75";"2019-03-23";"13:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98351;-12.73278;"YT_MHA_007";"YT_TID_018";25;"RUV";"MAPOR";NA
-"278";"MA_MHA_226";"C76";"2019-03-23";"13:59:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98175;-12.73247;"YT_MHA_007";"YT_TID_018";87;"RUV";"MAPOR";NA
-"279";"MA_MHA_227";"C77";"2019-03-23";"15:15:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98188;-12.73246;"YT_MHA_007";"YT_TID_018";82;"RUV";"MAPOR";NA
-"280";"MA_MKO_035";"M35";"2019-02-05";"14:55:00";"YT";"Mwamba_koutri";"YT_MKO";44.98486;-12.75348;"NA";"YT_TID_003";9.1;"rosette";"MAPOR";NA
-"281";"MA_MKO_036";"M36";"2019-02-05";"14:58:00";"YT";"Mwamba_koutri";"YT_MKO";44.98444;-12.75329;"NA";"YT_TID_003";29;"rosette";"MAPOR";NA
-"282";"MA_MKO_037";"M37";"2019-02-05";"15:01:00";"YT";"Mwamba_koutri";"YT_MKO";44.98405;-12.75298;"NA";"YT_TID_003";66;"rosette";"MAPOR";NA
-"283";"MA_MKO_038";"M38";"2019-02-05";"15:07:00";"YT";"Mwamba_koutri";"YT_MKO";44.98368;-12.75298;"NA";"YT_TID_003";82;"rosette";"MAPOR";NA
-"284";"MA_MKO_039";"M39";"2019-02-05";"15:18:00";"YT";"Mwamba_koutri";"YT_MKO";44.9903;-12.76294;"NA";"YT_TID_003";54;"rosette";"MAPOR";NA
-"285";"MA_MMA_001";"M01";"2019-02-05";"11:14:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95404;-12.67381;"NA";"YT_TID_003";9.4;"rosette";"MAPOR";NA
-"286";"MA_MMA_002";"M02";"2019-02-05";"11:19:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95367;-12.67392;"NA";"YT_TID_003";36;"rosette";"MAPOR";NA
-"287";"MA_MMA_003";"M03";"2019-02-05";"11:23:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95322;-12.67406;"NA";"YT_TID_003";42.5;"rosette";"MAPOR";NA
-"288";"MA_MMA_004";"M04";"2019-02-05";"11:27:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95276;-12.67419;"NA";"YT_TID_003";55;"rosette";"MAPOR";NA
-"289";"MA_MMA_005";"M05";"2019-02-05";"11:32:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95237;-12.67439;"NA";"YT_TID_003";74.4;"rosette";"MAPOR";NA
-"290";"MA_MMA_006";"M06";"2019-02-05";"11:39:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95184;-12.67445;"NA";"YT_TID_003";100;"rosette";"MAPOR";NA
-"291";"MA_MMA_007";"M07";"2019-02-05";"11:46:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95588;-12.67569;"NA";"YT_TID_003";7;"rosette";"MAPOR";NA
-"292";"MA_MMA_008";"M08";"2019-02-05";"11:49:00";"YT";"Mwamba_maricabou";"YT_MMA";44.9555;-12.67587;"NA";"YT_TID_003";30.5;"rosette";"MAPOR";NA
-"293";"MA_MMA_009";"M09";"2019-02-05";"11:52:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95504;-12.67631;"NA";"YT_TID_003";46;"rosette";"MAPOR";NA
-"294";"MA_MMA_010";"M10";"2019-02-05";"11:55:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95495;-12.67654;"NA";"YT_TID_003";76;"rosette";"MAPOR";NA
-"295";"MA_MMA_011";"M11";"2019-02-05";"12:00:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95465;-12.6769;"NA";"YT_TID_003";100;"rosette";"MAPOR";NA
-"296";"MA_MMA_144";"R2.1";"2019-03-15";"08:46:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95462;-12.67673;"YT_MMA_001";"YT_TID_013";90;"RUV";"MAPOR";NA
-"297";"MA_MMA_145";"R2.2";"2019-03-15";"08:53:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95479;-12.67636;"YT_MMA_001";"YT_TID_013";54;"RUV";"MAPOR";NA
-"298";"MA_MMA_146";"R2.3";"2019-03-15";"09:03:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95507;-12.67567;"YT_MMA_001";"YT_TID_013";40;"RUV";"MAPOR";NA
-"299";"MA_MMA_147";"R2.4";"2019-03-15";"09:08:00";"YT";"Mwamba_maricabou";"YT_MMA";44.9552;-12.67498;"YT_MMA_001";"YT_TID_013";9.5;"RUV";"MAPOR";NA
-"300";"MA_MMA_148";"R3.1";"2019-03-15";"10:37:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96889;-12.69396;"YT_MFO2_001";"YT_TID_013";9;"RUV";"MAPOR";NA
-"301";"MA_MMA_149";"R3.2";"2019-03-15";"10:42:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96863;-12.69405;"YT_MFO2_001";"YT_TID_013";28.6;"RUV";"MAPOR";NA
-"302";"MA_MMA_150";"R3.3";"2019-03-15";"10:48:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96767;-12.6946;"YT_MFO2_001";"YT_TID_013";47;"RUV";"MAPOR";NA
-"303";"MA_MMA_151";"R3.4";"2019-03-15";"10:54:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9669;-12.69492;"YT_MFO2_001";"YT_TID_013";86.2;"RUV";"MAPOR";NA
-"304";"MA_MMA_160";"R2.8";"2019-03-18";"08:49:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95523;-12.67504;"YT_MMA_002";"YT_TID_014";10;"RUV";"MAPOR";NA
-"305";"MA_MMA_161";"R2.7";"2019-03-18";"08:45:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95511;-12.67561;"YT_MMA_002";"YT_TID_014";2.2;"RUV";"MAPOR";NA
-"306";"MA_MMA_162";"R2.6";"2019-03-18";"08:38:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95481;-12.67636;"YT_MMA_002";"YT_TID_014";51;"RUV";"MAPOR";NA
-"307";"MA_MMA_163";"R2.5";"2019-03-18";"08:30:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95462;-12.6767;"YT_MMA_002";"YT_TID_014";80;"RUV";"MAPOR";NA
-"308";"MA_MMA_164";"R3.8";"2019-03-18";"10:25:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9665;-12.69491;"YT_MFO2_002";"YT_TID_014";96;"RUV";"MAPOR";NA
-"309";"MA_MMA_165";"R3.7";"2019-03-18";"10:15:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9677;-12.69463;"YT_MFO2_002";"YT_TID_014";45.5;"RUV";"MAPOR";NA
-"310";"MA_MMA_166";"R3.6";"2019-03-18";"10:09:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9686;-12.69405;"YT_MFO2_002";"YT_TID_014";29.3;"RUV";"MAPOR";NA
-"311";"MA_MMA_167";"R3.5";"2019-03-18";"10:03:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96889;-12.69404;"YT_MFO2_002";"YT_TID_014";7.8;"RUV";"MAPOR";NA
-"312";"MA_MMA_168";"R3.9";"2019-03-18";"10:42:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96685;-12.695;"YT_MFO2_002";"YT_TID_014";87;"RUV";"MAPOR";NA
-"313";"MA_MMA_177";"R2.9";"2019-03-19";"08:23:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95464;-12.67668;"YT_MMA_003";"YT_TID_015";78;"RUV";"MAPOR";NA
-"314";"MA_MMA_178";"R2.10";"2019-03-19";"08:35:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95469;-12.67629;"YT_MMA_003";"YT_TID_015";51;"RUV";"MAPOR";NA
-"315";"MA_MMA_179";"R2.11";"2019-03-19";"08:41:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95509;-12.67553;"YT_MMA_003";"YT_TID_015";28;"RUV";"MAPOR";NA
-"316";"MA_MMA_180";"R2.12";"2019-03-19";"08:46:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95518;-12.67503;"YT_MMA_003";"YT_TID_015";9;"RUV";"MAPOR";NA
-"317";"MA_MMA_181";"R3.10";"2019-03-19";"10:04:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96881;-12.69399;"YT_MFO2_003";"YT_TID_015";9;"RUV";"MAPOR";NA
-"318";"MA_MMA_182";"R3.11";"2019-03-19";"10:12:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9686;-12.69404;"YT_MFO2_003";"YT_TID_015";28;"RUV";"MAPOR";NA
-"319";"MA_MMA_183";"R3.12";"2019-03-19";"10:18:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96765;-12.69459;"YT_MFO2_003";"YT_TID_015";45;"RUV";"MAPOR";NA
-"320";"MA_MMA_184";"R3.13";"2019-03-19";"10:26:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96678;-12.69494;"YT_MFO2_003";"YT_TID_015";91;"RUV";"MAPOR";NA
-"321";"MA_MMB_048";"M48";"2019-02-06";"11:41:00";"YT";"Mlongo_mbole";"YT_MMB";44.964;-12.92117;"NA";"YT_TID_004";11;"rosette";"MAPOR";NA
-"322";"MA_MMB_049";"M49";"2019-02-06";"11:45:00";"YT";"Mlongo_mbole";"YT_MMB";44.96373;-12.92115;"NA";"YT_TID_004";33;"rosette";"MAPOR";NA
-"323";"MA_MMB_050";"M50";"2019-02-06";"11:49:00";"YT";"Mlongo_mbole";"YT_MMB";44.96351;-12.92099;"NA";"YT_TID_004";53;"rosette";"MAPOR";NA
-"324";"MA_MMB_051";"M51";"2019-02-06";"11:55:00";"YT";"Mlongo_mbole";"YT_MMB";44.96297;-12.92086;"NA";"YT_TID_004";71;"rosette";"MAPOR";NA
-"325";"MA_MMB_052";"M52";"2019-02-06";"12:04:00";"YT";"Mlongo_mbole";"YT_MMB";44.96222;-12.92052;"NA";"YT_TID_004";92;"rosette";"MAPOR";NA
-"326";"MA_MWD_001";"A1";"2018-11-28";"10:37:00";"YT";"Mwamba_dziani";"YT_MWD";44.97357;-12.95552;"NA";"YT_TID_001";19.5;"RUV";"MAPOR";"thunk blinking light"
-"327";"MA_MWD_002";"D1";"2018-11-28";"11:18:00";"YT";"Mwamba_dziani";"YT_MWD";44.9718;-12.95711;"NA";"YT_TID_001";78.6;"RUV";"MAPOR";"thunk blinking light"
-"328";"MA_MWD_003";"C1";"2018-11-28";"11:07:00";"YT";"Mwamba_dziani";"YT_MWD";44.97234;-12.95672;"NA";"YT_TID_001";55;"RUV";"MAPOR";"thunk blinking light. Depth more around 50-68 range, not sure."
-"329";"MA_MWD_004";"B1";"2018-11-28";"10:51:00";"YT";"Mwamba_dziani";"YT_MWD";44.97289;-12.95606;"NA";"YT_TID_001";34.2;"RUV";"MAPOR";NA
-"330";"MA_MWD_005";"A2";"2018-11-28";"12:13:00";"YT";"Mwamba_dziani";"YT_MWD";44.97363;-12.95549;"NA";"YT_TID_001";18.6;"RUV";"MAPOR";"Dauphin sur site, reste 2h36 donc rien changé!"
-"331";"MA_MWD_006";"A3";"2018-11-29";"11:19:00";"YT";"Mwamba_dziani";"YT_MWD";44.9735;-12.95559;"NA";"YT_TID_002";19.5;"RUV";"MAPOR";"pas de fibre synchro"
-"332";"MA_MWD_007";"C2";"2018-11-29";"10:53:00";"YT";"Mwamba_dziani";"YT_MWD";44.97253;-12.95716;"NA";"YT_TID_002";61;"RUV";"MAPOR";"semble courant ver le nord, dépôt pied du mur mais haut a 50m, pas de fibre de synchro"
-"333";"MA_MWD_008";"B2";"2018-11-29";"11:10:00";"YT";"Mwamba_dziani";"YT_MWD";44.97298;-12.95654;"NA";"YT_TID_002";36;"RUV";"MAPOR";"semble courant ver le nord, pas de fibre synchro"
-"334";"MA_MWD_009";"D2";"2018-11-29";"10:41:00";"YT";"Mwamba_dziani";"YT_MWD";44.97177;-12.95734;"NA";"YT_TID_002";81.1;"RUV";"MAPOR";"semble courant ver le nord, passage de dauphin electra a 12:41"
-"335";"MA_MWD_010";"D3";"2018-11-29";"12:59:00";"YT";"Mwamba_dziani";"YT_MWD";44.97175;-12.95729;"NA";"YT_TID_002";80;"RUV";"MAPOR";"semble courant ver le nord"
-"336";"MA_MWD_011";"C3";"2018-11-29";"13:15:00";"YT";"Mwamba_dziani";"YT_MWD";44.97247;-12.95698;"NA";"YT_TID_002";59.7;"RUV";"MAPOR";"semble courant ver le nord, pas de fibre synchro"
-"337";"MA_MWD_012";"B3";"2018-11-29";"13:31:00";"YT";"Mwamba_dziani";"YT_MWD";44.97296;-12.95642;"NA";"YT_TID_002";34.7;"RUV";"MAPOR";"posé, tiré et reposé, pas de fibre synchro"
-"338";"MA_MWD_013";"A4";"2018-11-29";"13:49:00";"YT";"Mwamba_dziani";"YT_MWD";44.97355;-12.9555;"NA";"YT_TID_002";18.7;"RUV";"MAPOR";"pas de fibre synchro"
-"339";"MA_VVM_126";"R14.1";"2019-03-08";"11:02:00";"YT";"Vara_vara_mati";"YT_VVM";45.13173;-13.07748;"YT_VVM_001";"YT_TID_011";90;"RUV";"MAPOR";NA
-"340";"MA_VVM_127";"R14.2";"2019-03-08";"11:10:00";"YT";"Vara_vara_mati";"YT_VVM";45.13204;-13.0765;"YT_VVM_001";"YT_TID_011";40;"RUV";"MAPOR";NA
-"341";"MA_VVM_128";"R14.3";"2019-03-08";"11:14:00";"YT";"Vara_vara_mati";"YT_VVM";45.13242;-13.07539;"YT_VVM_001";"YT_TID_011";25;"RUV";"MAPOR";NA
-"342";"MA_VVM_129";"R14.4";"2019-03-08";"11:28:00";"YT";"Vara_vara_mati";"YT_VVM";45.13264;-13.07518;"YT_VVM_001";"YT_TID_011";9;"RUV";"MAPOR";NA
-"343";"MA_VVM_185";"R14.5";"2019-03-19";"13:10:00";"YT";"Vara_vara_mati";"YT_VVM";45.13172;-13.07747;"YT_VVM_002";"YT_TID_015";110;"RUV";"MAPOR";NA
-"344";"MA_VVM_186";"R14.6";"2019-03-19";"13:21:00";"YT";"Vara_vara_mati";"YT_VVM";45.13195;-13.07648;"YT_VVM_002";"YT_TID_015";42.7;"RUV";"MAPOR";NA
-"345";"MA_VVM_187";"R14.7";"2019-03-19";"13:26:00";"YT";"Vara_vara_mati";"YT_VVM";45.13243;-13.07536;"YT_VVM_002";"YT_TID_015";27.7;"RUV";"MAPOR";NA
-"346";"MA_VVM_188";"R14.8";"2019-03-19";"13:33:00";"YT";"Vara_vara_mati";"YT_VVM";45.13264;-13.07513;"YT_VVM_002";"YT_TID_015";8;"RUV";"MAPOR";NA
-"347";"MA_VVM_189";"R14.9";"2019-03-20";"08:28:00";"YT";"Vara_vara_mati";"YT_VVM";45.13264;-13.07517;"YT_VVM_003";"YT_TID_016";10;"RUV";"MAPOR";NA
-"348";"MA_VVM_190";"R14.10";"2019-03-20";"08:33:00";"YT";"Vara_vara_mati";"YT_VVM";45.13246;-13.07537;"YT_VVM_003";"YT_TID_016";26;"RUV";"MAPOR";NA
-"349";"MA_VVM_191";"R14.11";"2019-03-20";"08:44:00";"YT";"Vara_vara_mati";"YT_VVM";45.13204;-13.07651;"YT_VVM_003";"YT_TID_016";65;"RUV";"MAPOR";NA
-"350";"MA_VVM_192";"R14.12";"2019-03-20";"08:57:00";"YT";"Vara_vara_mati";"YT_VVM";45.13177;-13.07748;"YT_VVM_003";"YT_TID_016";91;"RUV";"MAPOR";NA
-"351";"MA_VVM_193";"R14.13";"2019-03-20";"09:17:00";"YT";"Vara_vara_mati";"YT_VVM";45.1321;-13.07632;"YT_VVM_003";"YT_TID_016";37.3;"RUV";"MAPOR";NA
-"352";"MA_VVM_194";"R14.14";"2019-03-20";"10:05:00";"YT";"Vara_vara_mati";"YT_VVM";45.13181;-13.07746;"YT_VVM_003";"YT_TID_016";90;"RUV";"MAPOR";NA
-"353";"YT_CUR_01";"couranto1";"2018-11-26";"14:40:00";"YT";"Nangajou";"YT_NAN";44.97392;-12.95538;NA;NA;28.24;"Current_meter";"MAPOR";"couranto posé sur un patch de sable"
-"354";"YT_CUR_02";"couranto2";"2019-02-25";"12:00:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98336;-12.73312;NA;NA;30.64;"Current_meter";"MAPOR";"couranto posé sur un patch de sable calé avec une patate pour le rendre vertical"
-"355";"YT_IBL_01";"Ile_blanche1";"2019-05-13";"08:30:00";"YT";"Ile_blanche";"YT_IBL";45.17066;-12.71617;NA;NA;2.94;"RUV";"CARBODIS";"camera posé face a structure carbodis"
-"356";"YT_SUR_01";"Surprise1";"2019-05-01";"08:00:00";"YT";"Surprise";"YT_SUR";45.14253;-12.63601;NA;NA;2.28;"RUV";"CARBODIS";"film longue durée pas marché, posé face a la structure Carbodis"
-"357";"YT_SUR_02";"Surprise2";"2019-05-02";"08:30:00";"YT";"Surprise";"YT_SUR";45.14253;-12.63601;NA;NA;2.28;"RUV";"CARBODIS";"camera posé face a structure carbodis"
+"1";"AL_BAN_001";"Bandrele01";"2021-03-22";"10:10:00";"YT";"Bandrele";"YT_BAN";45.20335822;-12.90319322;"YT_BAND_001";"YT_TID_027";2;"RUV";"ALLIANCE";NA
+"2";"AL_BAN_002";"Bandrele02";"2021-03-22";"10:10:00";"YT";"Bandrele";"YT_BAN";45.2032757;-12.90374489;"YT_BAND_001";"YT_TID_027";2;"RUV";"ALLIANCE";NA
+"3";"AL_BAN_003";"Bandrele03";"2021-03-22";"10:10:00";"YT";"Bandrele";"YT_BAN";45.20331283;-12.90406136;"YT_BAND_001";"YT_TID_027";2;"RUV";"ALLIANCE";NA
+"4";"AL_BAN_004";"Bandrele04";"2021-03-22";"10:10:00";"YT";"Bandrele";"YT_BAN";45.20334117;-12.90491135;"YT_BAND_001";"YT_TID_027";2;"RUV";"ALLIANCE";NA
+"5";"AL_BAN_005";"Bandrele05";"2021-03-23";"09:20:00";"YT";"Bandrele";"YT_BAN";45.20344285;-12.90526394;"YT_BAND_002";"YT_TID_028";2;"RUV";"ALLIANCE";NA
+"6";"AL_BAN_006";"Bandrele06";"2021-03-23";"09:20:00";"YT";"Bandrele";"YT_BAN";45.20342509;-12.90610493;"YT_BAND_002";"YT_TID_028";2;"RUV";"ALLIANCE";NA
+"7";"AL_BAN_007";"Bandrele07";"2021-03-23";"09:20:00";"YT";"Bandrele";"YT_BAN";45.20381269;-12.90664719;"YT_BAND_002";"YT_TID_028";2;"RUV";"ALLIANCE";NA
+"8";"AL_BAN_008";"Bandrele08";"2021-03-23";"09:20:00";"YT";"Bandrele";"YT_BAN";45.20364735;-12.90736169;"YT_BAND_002";"YT_TID_028";2;"RUV";"ALLIANCE";NA
+"9";"AL_BAN_009";"Bandrele09";"2021-03-24";"09:39:00";"YT";"Bandrele";"YT_BAN";45.20442702;-12.91395323;"YT_BAND_003";"YT_TID_029";2;"RUV";"ALLIANCE";NA
+"10";"AL_BAN_010";"Bandrele10";"2021-03-24";"09:39:00";"YT";"Bandrele";"YT_BAN";45.20429709;-12.91287725;"YT_BAND_003";"YT_TID_029";2;"RUV";"ALLIANCE";NA
+"11";"AL_BAN_011";"Bandrele11";"2021-03-24";"09:39:00";"YT";"Bandrele";"YT_BAN";45.20478367;-12.91042629;"YT_BAND_003";"YT_TID_029";2;"RUV";"ALLIANCE";"Déplacement système 1 par pêcheur"
+"12";"AL_BAN_012";"Bandrele12";"2021-03-24";"09:39:00";"YT";"Bandrele";"YT_BAN";45.20454384;-12.91023658;"YT_BAND_003";"YT_TID_029";2;"RUV";"ALLIANCE";NA
+"13";"AL_MTS_001";"Mtsamboro01";"2021-02-23";"10:30:00";"YT";"Mtsamboro";"YT_MTS";45.0646576;-12.69582131;"YT_MTS_001";"YT_TID_019";2;"RUV";"ALLIANCE";NA
+"14";"AL_MTS_002";"Mtsamboro02";"2021-02-23";"10:30:00";"YT";"Mtsamboro";"YT_MTS";45.06466665;-12.6951883;"YT_MTS_001";"YT_TID_019";2;"RUV";"ALLIANCE";NA
+"15";"AL_MTS_003";"Mtsamboro03";"2021-02-23";"10:30:00";"YT";"Mtsamboro";"YT_MTS";45.06475862;-12.69465474;"YT_MTS_001";"YT_TID_019";2;"RUV";"ALLIANCE";NA
+"16";"AL_MTS_004";"Mtsamboro04";"2021-02-23";"10:30:00";"YT";"Mtsamboro";"YT_MTS";45.06525591;-12.69438333;"YT_MTS_001";"YT_TID_019";2;"RUV";"ALLIANCE";NA
+"17";"AL_MTS_005";"Mtsamboro05";"2021-02-24";"10:16:00";"YT";"Mtsamboro";"YT_MTS";45.06261311;-12.69681652;"YT_MTS_002";"YT_TID_020";2;"RUV";"ALLIANCE";"Nuage de boue"
+"18";"AL_MTS_006";"Mtsamboro06";"2021-02-24";"10:16:00";"YT";"Mtsamboro";"YT_MTS";45.06315646;-12.69650893;"YT_MTS_002";"YT_TID_020";2;"RUV";"ALLIANCE";"Nuage de boue"
+"19";"AL_MTS_007";"Mtsamboro07";"2021-02-24";"10:16:00";"YT";"Mtsamboro";"YT_MTS";45.06353404;-12.69631894;"YT_MTS_002";"YT_TID_020";2;"RUV";"ALLIANCE";"Nuage de boue"
+"20";"AL_MTS_008";"Mtsamboro08";"2021-02-24";"10:16:00";"YT";"Mtsamboro";"YT_MTS";45.06398529;-12.69604754;"YT_MTS_002";"YT_TID_020";2;"RUV";"ALLIANCE";"Nuage de boue"
+"21";"AL_MTS_009";"Mtsamboro09";"2021-03-09";"09:55:00";"YT";"Mtsamboro";"YT_MTS";45.06072534;-12.69841755;"YT_MTS_003";"YT_TID_025";2;"RUV";"ALLIANCE";NA
+"22";"AL_MTS_010";"Mtsamboro10";"2021-03-09";"09:55:00";"YT";"Mtsamboro";"YT_MTS";45.06126857;-12.69763069;"YT_MTS_003";"YT_TID_025";2;"RUV";"ALLIANCE";NA
+"23";"AL_MTS_011";"Mtsamboro11";"2021-03-09";"09:55:00";"YT";"Mtsamboro";"YT_MTS";45.06172906;-12.69744973;"YT_MTS_003";"YT_TID_025";2;"RUV";"ALLIANCE";NA
+"24";"AL_MTS_012";"Mtsamboro12";"2021-03-09";"09:55:00";"YT";"Mtsamboro";"YT_MTS";45.06248416;-12.6968075;"YT_MTS_003";"YT_TID_025";2;"RUV";"ALLIANCE";NA
+"25";"AL_NGJ_001";"Ngouja01";"2021-02-26";"10:10:00";"YT";"Ngouja";"YT_NGJ";45.08337856;-12.96368267;"YT_NGJ_001";"YT_TID_021";2;"RUV";"ALLIANCE";NA
+"26";"AL_NGJ_002";"Ngouja02";"2021-02-26";"10:10:00";"YT";"Ngouja";"YT_NGJ";45.08406105;-12.96427927;"YT_NGJ_001";"YT_TID_021";2;"RUV";"ALLIANCE";NA
+"27";"AL_NGJ_003";"Ngouja03";"2021-02-26";"10:10:00";"YT";"Ngouja";"YT_NGJ";45.08493717;-12.96485772;"YT_NGJ_001";"YT_TID_021";2;"RUV";"ALLIANCE";NA
+"28";"AL_NGJ_004";"Ngouja04";"2021-02-26";"10:10:00";"YT";"Ngouja";"YT_NGJ";45.08521385;-12.96504753;"YT_NGJ_001";"YT_TID_021";2;"RUV";"ALLIANCE";NA
+"29";"AL_NGJ_005";"Ngouja05";"2021-03-03";"07:55:00";"YT";"Ngouja";"YT_NGJ";45.08234587;-12.9636197;"YT_NGJ_002";"YT_TID_022";2;"RUV";"ALLIANCE";NA
+"30";"AL_NGJ_006";"Ngouja06";"2021-03-03";"07:55:00";"YT";"Ngouja";"YT_NGJ";45.08188487;-12.96365601;"YT_NGJ_002";"YT_TID_022";2;"RUV";"ALLIANCE";NA
+"31";"AL_NGJ_007";"Ngouja07";"2021-03-03";"07:55:00";"YT";"Ngouja";"YT_NGJ";45.08071402;-12.96402713;"YT_NGJ_002";"YT_TID_022";2;"RUV";"ALLIANCE";NA
+"32";"AL_NGJ_008";"Ngouja08";"2021-03-03";"07:55:00";"YT";"Ngouja";"YT_NGJ";45.07963546;-12.96468758;"YT_NGJ_002";"YT_TID_022";2;"RUV";"ALLIANCE";NA
+"33";"AL_NGJ_009";"Ngouja09";"2021-03-04";"07:50:00";"YT";"Ngouja";"YT_NGJ";45.08648642;-12.9655535;"YT_NGJ_003";"YT_TID_023";2;"RUV";"ALLIANCE";NA
+"34";"AL_NGJ_010";"Ngouja10";"2021-03-04";"07:50:00";"YT";"Ngouja";"YT_NGJ";45.08668035;-12.96643058;"YT_NGJ_003";"YT_TID_023";2;"RUV";"ALLIANCE";NA
+"35";"AL_NGJ_011";"Ngouja11";"2021-03-04";"07:50:00";"YT";"Ngouja";"YT_NGJ";45.08698469;-12.96663846;"YT_NGJ_003";"YT_TID_023";2;"RUV";"ALLIANCE";NA
+"36";"AL_NGJ_012";"Ngouja12";"2021-03-04";"07:50:00";"YT";"Ngouja";"YT_NGJ";45.08769499;-12.96759675;"YT_NGJ_003";"YT_TID_023";2;"RUV";"ALLIANCE";NA
+"37";"AL_SAK_001";"Sakouli01";"2021-03-05";"09:30:00";"YT";"Sakouli";"YT_SAK";45.2189321;-12.88745534;"YT_SAK_001";"YT_TID_024";2;"RUV";"ALLIANCE";NA
+"38";"AL_SAK_002";"Sakouli02";"2021-03-05";"09:30:00";"YT";"Sakouli";"YT_SAK";45.21690503;-12.88832513;"YT_SAK_001";"YT_TID_024";2;"RUV";"ALLIANCE";NA
+"39";"AL_SAK_003";"Sakouli03";"2021-03-05";"09:30:00";"YT";"Sakouli";"YT_SAK";45.215947;-12.88900413;"YT_SAK_001";"YT_TID_024";2;"RUV";"ALLIANCE";NA
+"40";"AL_SAK_004";"Sakouli04";"2021-03-05";"09:30:00";"YT";"Sakouli";"YT_SAK";45.21581825;-12.8893569;"YT_SAK_001";"YT_TID_024";2;"RUV";"ALLIANCE";NA
+"41";"AL_SAK_005";"Sakouli05";"2021-03-10";"09:00:00";"YT";"Sakouli";"YT_SAK";45.21546836;-12.88979124;"YT_SAK_002";"YT_TID_026";2;"RUV";"ALLIANCE";NA
+"42";"AL_SAK_006";"Sakouli06";"2021-03-10";"09:00:00";"YT";"Sakouli";"YT_SAK";45.21499866;-12.89024376;"YT_SAK_002";"YT_TID_026";2;"RUV";"ALLIANCE";NA
+"43";"AL_SAK_007";"Sakouli07";"2021-03-10";"09:00:00";"YT";"Sakouli";"YT_SAK";45.21449196;-12.89055163;"YT_SAK_002";"YT_TID_026";2;"RUV";"ALLIANCE";NA
+"44";"AL_SAK_008";"Sakouli08";"2021-03-10";"09:00:00";"YT";"Sakouli";"YT_SAK";45.21365409;-12.89163744;"YT_SAK_002";"YT_TID_026";2;"RUV";"ALLIANCE";NA
+"45";"AL_SAK_009";"Sakouli09";"2021-03-26";"09:48:00";"YT";"Sakouli";"YT_SAK";45.212937;-12.89386254;"YT_SAK_003";"YT_TID_030";2;"RUV";"ALLIANCE";NA
+"46";"AL_SAK_010";"Sakouli10";"2021-03-26";"09:48:00";"YT";"Sakouli";"YT_SAK";45.21287223;-12.89356418;"YT_SAK_003";"YT_TID_030";2;"RUV";"ALLIANCE";NA
+"47";"AL_SAK_011";"Sakouli11";"2021-03-26";"09:48:00";"YT";"Sakouli";"YT_SAK";45.21314794;-12.89259639;"YT_SAK_003";"YT_TID_030";2;"RUV";"ALLIANCE";NA
+"48";"AL_SAK_012";"Sakouli12";"2021-03-26";"09:48:00";"YT";"Sakouli";"YT_SAK";45.21337798;-12.89212598;"YT_SAK_003";"YT_TID_030";2;"RUV";"ALLIANCE";NA
+"49";"MAEULONG001";"long1";"2019-04-08";"10:00:00";"FR_europa";"Europa_north";"EURO_N";40.33989;-22.33933;"EURO1";"FR_europa_TID_01";6;"RUV";"MAPOR";"système déposé puis corde 5m passé et cadrat de 1m² posé en face de chaque caméra"
+"50";"MAEULONG002";"long2";"2019-04-09";"09:48:00";"FR_europa";"Europa_north";"EURO_N";40.35828;-22.33248;"EURO2";"FR_europa_TID_02";7;"RUV";"MAPOR";"système déposé puis corde 5m passé et cadrat de 1m² posé en face de chaque caméra"
+"51";"MAEULONG003";"long3";"2019-04-09";"09:48:00";"FR_europa";"Europa_north";"EURO_N";40.35839;-22.33262;"EURO2";"FR_europa_TID_02";6;"RUV";"MAPOR";"système déposé puis corde 5m passé et cadrat de 1m² posé en face de chaque caméra, vidéo gardé par Virginie"
+"52";"MAEULONG004";"long4";"2019-04-10";"10:00:00";"FR_europa";"Europa_north";"EURO_N";40.39148;-22.33809;"EURO5";"FR_europa_TID_03";9;"RUV";"MAPOR";NA
+"53";"MAEULONG005";"long5";"2019-04-11";"09:30:00";"FR_europa";"Europa_north";"EURO_N";40.34245;-22.33775;"EURO8";"FR_europa_TID_04";7;"RUV";"MAPOR";"système déposé puis corde 5m passé devant chaque caméra"
+"54";"MAEUROS001";"euro1";"2019-04-08";"10:50:00";"FR_europa";"Europa_north";"EURO_N";40.33313;-22.34254;"EURO1";"FR_europa_TID_01";9;"rosette";"MAPOR";NA
+"55";"MAEUROS002";"euro2";"2019-04-08";"10:55:00";"FR_europa";"Europa_north";"EURO_N";40.33291;-22.34219;"EURO1";"FR_europa_TID_01";25;"rosette";"MAPOR";NA
+"56";"MAEUROS003";"euro3";"2019-04-08";"11:00:00";"FR_europa";"Europa_north";"EURO_N";40.33265;-22.34204;"EURO1";"FR_europa_TID_01";46.3;"rosette";"MAPOR";NA
+"57";"MAEUROS004";"euro4";"2019-04-08";"11:06:00";"FR_europa";"Europa_north";"EURO_N";40.33246;-22.3917;"EURO1";"FR_europa_TID_01";112;"rosette";"MAPOR";"descente lente, dérive importante"
+"58";"MAEUROS005";"euro5";"2019-04-08";"11:15:00";"FR_europa";"Europa_north";"EURO_N";40.33223;-22.3418;"EURO1";"FR_europa_TID_01";76;"rosette";"MAPOR";NA
+"59";"MAEUROS006";"euro6";"2019-04-08";"11:43:00";"FR_europa";"Europa_north";"EURO_N";40.35013;-22.33362;"EURO1";"FR_europa_TID_01";15;"rosette";"MAPOR";NA
+"60";"MAEUROS007";"euro7";"2019-04-08";"11:46:00";"FR_europa";"Europa_north";"EURO_N";40.35018;-22.33288;"EURO1";"FR_europa_TID_01";45;"rosette";"MAPOR";NA
+"61";"MAEUROS008";"euro8";"2019-04-08";"11:53:00";"FR_europa";"Europa_north";"EURO_N";40.35033;-22.33257;"EURO1";"FR_europa_TID_01";73;"rosette";"MAPOR";NA
+"62";"MAEUROS009";"euro9";"2019-04-08";"12:11:00";"FR_europa";"Europa_north";"EURO_N";40.36022;-22.33081;"EURO1";"FR_europa_TID_01";12;"rosette";"MAPOR";NA
+"63";"MAEUROS010";"euro10";"2019-04-08";"12:14:00";"FR_europa";"Europa_north";"EURO_N";40.36055;-22.32936;"EURO1";"FR_europa_TID_01";25;"rosette";"MAPOR";NA
+"64";"MAEUROS011";"euro11";"2019-04-08";"12:17:00";"FR_europa";"Europa_north";"EURO_N";40.36058;-22.32903;"EURO1";"FR_europa_TID_01";72;"rosette";"MAPOR";NA
+"65";"MAEUROS012";"euro12";"2019-04-08";"12:45:00";"FR_europa";"Europa_north";"EURO_N";40.37794;-22.3295;"EURO1";"FR_europa_TID_01";15;"rosette";"MAPOR";NA
+"66";"MAEUROS013";"euro13";"2019-04-08";"12:48:00";"FR_europa";"Europa_north";"EURO_N";40.37848;-22.32853;"EURO1";"FR_europa_TID_01";45;"rosette";"MAPOR";NA
+"67";"MAEUROS014";"euro14";"2019-04-08";"12:53:00";"FR_europa";"Europa_north";"EURO_N";40.37897;-22.32808;"EURO1";"FR_europa_TID_01";70;"rosette";"MAPOR";"rosette accroché"
+"68";"MAEURUV001";"ES1";"2019-04-08";"14:11:00";"FR_europa";"Europa_north";"EURO_N";40.35929;-22.33183;"EURO1";"FR_europa_TID_01";8.6;"RUV";"MAPOR";NA
+"69";"MAEURUV002";"ES2";"2019-04-08";"14:20:00";"FR_europa";"Europa_north";"EURO_N";40.3593;-22.3304;"EURO1";"FR_europa_TID_01";18;"RUV";"MAPOR";NA
+"70";"MAEURUV003";"ES3";"2019-04-08";"14:29:00";"FR_europa";"Europa_north";"EURO_N";40.35934;-22.32983;"EURO1";"FR_europa_TID_01";24.7;"RUV";"MAPOR";NA
+"71";"MAEURUV004";"ES4";"2019-04-08";"14:48:00";"FR_europa";"Europa_north";"EURO_N";40.35944;-22.32959;"EURO1";"FR_europa_TID_01";40;"RUV";"MAPOR";"boué sous l'eau, remonté anticipé"
+"72";"MAEURUV005";"ES5";"2019-04-08";"15:00:00";"FR_europa";"Europa_north";"EURO_N";40.35959;-22.3293;"EURO1";"FR_europa_TID_01";66;"RUV";"MAPOR";"boué qui a coulé imédiatement, donc remonté rapidement"
+"73";"MAEURUV006";"ES6";"2019-04-09";"10:10:00";"FR_europa";"Europa_north";"EURO_N";40.3593;-22.32981;"EURO3";"FR_europa_TID_02";25.2;"RUV";"MAPOR";NA
+"74";"MAEURUV007";"ES7";"2019-04-09";"10:20:00";"FR_europa";"Europa_north";"EURO_N";40.35933;-22.33036;"EURO3";"FR_europa_TID_02";18.5;"RUV";"MAPOR";NA
+"75";"MAEURUV008";"ES8";"2019-04-09";"10:26:00";"FR_europa";"Europa_north";"EURO_N";40.35927;-22.33174;"EURO3";"FR_europa_TID_02";8.5;"RUV";"MAPOR";NA
+"76";"MAEURUV009";"ES9";"2019-04-09";"10:33:00";"FR_europa";"Europa_north";"EURO_N";40.35942;-22.32958;"EURO3";"FR_europa_TID_02";43;"RUV";"MAPOR";NA
+"77";"MAEURUV010";"ES10";"2019-04-09";"10:43:00";"FR_europa";"Europa_north";"EURO_N";40.35962;-22.32935;"EURO3";"FR_europa_TID_02";63;"RUV";"MAPOR";"ligne prise dans l'hélice"
+"78";"MAEURUV011";"ES11";"2019-04-09";"11:03:00";"FR_europa";"Europa_north";"EURO_N";40.35964;-22.3292;"EURO3";"FR_europa_TID_02";72;"RUV";"MAPOR";NA
+"79";"MAEURUV012";"ES12";"2019-04-09";"13:02:00";"FR_europa";"Europa_north";"EURO_N";40.33195;-22.34172;"EURO4";"FR_europa_TID_02";73;"RUV";"MAPOR";"remonté car en dérive"
+"80";"MAEURUV013";"ES13";"2019-04-09";"13:14:00";"FR_europa";"Europa_north";"EURO_N";40.33195;-22.34196;"EURO4";"FR_europa_TID_02";61;"RUV";"MAPOR";"remonté car en dérive"
+"81";"MAEURUV014";"ES14";"2019-04-09";"13:38:00";"FR_europa";"Europa_north";"EURO_N";40.33214;-22.34209;"EURO4";"FR_europa_TID_02";35;"RUV";"MAPOR";"remonté car en dérive"
+"82";"MAEURUV015";"ES15";"2019-04-09";"13:54:00";"FR_europa";"Europa_north";"EURO_N";40.33145;-22.34226;"EURO4";"FR_europa_TID_02";50;"RUV";"MAPOR";NA
+"83";"MAEURUV016";"ES16";"2019-04-09";"14:20:00";"FR_europa";"Europa_north";"EURO_N";40.33089;-22.3421;"EURO4";"FR_europa_TID_02";60;"RUV";"MAPOR";"remonté car en dérive"
+"84";"MAEURUV017";"ES17";"2019-04-09";"14:28:00";"FR_europa";"Europa_north";"EURO_N";40.33119;-22.34266;"EURO4";"FR_europa_TID_02";30;"RUV";"MAPOR";NA
+"85";"MAEURUV018";"ES18";"2019-04-09";"14:35:00";"FR_europa";"Europa_north";"EURO_N";40.33169;-22.34292;"EURO4";"FR_europa_TID_02";13;"RUV";"MAPOR";"fibre optique débranché"
+"86";"MAEURUV019";"ES19";"2019-04-09";"14:38:00";"FR_europa";"Europa_north";"EURO_N";40.33204;-22.34328;"EURO4";"FR_europa_TID_02";7;"RUV";"MAPOR";NA
+"87";"MAEURUV020";"ES20";"2019-04-10";"11:00:00";"FR_europa";"Europa_north";"EURO_N";40.37742;-22.33063;"EURO6";"FR_europa_TID_03";6;"RUV";"MAPOR";"repose rapidos et pris c'est mis à l'eau"
+"88";"MAEURUV021";"ES21";"2019-04-10";"11:10:00";"FR_europa";"Europa_north";"EURO_N";40.37779;-22.32905;"EURO6";"FR_europa_TID_03";19.2;"RUV";"MAPOR";NA
+"89";"MAEURUV022";"ES22";"2019-04-10";"11:18:00";"FR_europa";"Europa_north";"EURO_N";40.37864;-22.32873;"EURO6";"FR_europa_TID_03";32;"RUV";"MAPOR";NA
+"90";"MAEURUV023";"ES23";"2019-04-10";"11:28:00";"FR_europa";"Europa_north";"EURO_N";40.37996;-22.32845;"EURO6";"FR_europa_TID_03";52.3;"RUV";"MAPOR";"remonté car en dérive"
+"91";"MAEURUV024";"ES24";"2019-04-10";"11:40:00";"FR_europa";"Europa_north";"EURO_N";40.38286;-22.32849;"EURO6";"FR_europa_TID_03";68;"RUV";"MAPOR";"gopro droite 4 arrété"
+"92";"MAEURUV025";"ES25";"2019-04-10";"11:58:00";"FR_europa";"Europa_north";"EURO_N";40.38248;-22.32881;"EURO6";"FR_europa_TID_03";50;"RUV";"MAPOR";NA
+"93";"MAEURUV026";"ES26";"2019-04-10";"14:02:00";"FR_europa";"Europa_north";"EURO_N";40.3595;-22.32926;"EURO7";"FR_europa_TID_03";74.9;"RUV";"MAPOR";NA
+"94";"MAEURUV027";"ES27";"2019-04-10";"14:13:00";"FR_europa";"Europa_north";"EURO_N";40.35947;-22.32957;"EURO7";"FR_europa_TID_03";56;"RUV";"MAPOR";NA
+"95";"MAEURUV028";"ES28";"2019-04-10";"14:20:00";"FR_europa";"Europa_north";"EURO_N";40.35935;-22.32988;"EURO7";"FR_europa_TID_03";24;"RUV";"MAPOR";NA
+"96";"MAEURUV029";"ES29";"2019-04-10";"14:26:00";"FR_europa";"Europa_north";"EURO_N";40.35925;-22.33037;"EURO7";"FR_europa_TID_03";18;"RUV";"MAPOR";NA
+"97";"MAEURUV030";"ES30";"2019-04-10";"14:32:00";"FR_europa";"Europa_north";"EURO_N";40.35927;-22.33187;"EURO7";"FR_europa_TID_03";8.2;"RUV";"MAPOR";NA
+"98";"MAEURUV031";"ES31";"2019-04-10";"14:57:00";"FR_europa";"Europa_north";"EURO_N";40.35937;-22.32957;"EURO7";"FR_europa_TID_03";52.8;"RUV";"MAPOR";NA
+"99";"MAEURUV032";"ES32";"2019-04-10";"15:18:00";"FR_europa";"Europa_north";"EURO_N";40.35947;-22.32926;"EURO7";"FR_europa_TID_03";70;"RUV";"MAPOR";NA
+"100";"MAEURUV033";"ES33";"2019-04-11";"09:54:00";"FR_europa";"Europa_north";"EURO_N";40.38296;-22.32838;"EURO9";"FR_europa_TID_04";72;"RUV";"MAPOR";"remonté car en dérive"
+"101";"MAEURUV034";"ES34";"2019-04-11";"10:04:00";"FR_europa";"Europa_north";"EURO_N";40.38239;-22.32895;"EURO9";"FR_europa_TID_04";34.5;"RUV";"MAPOR";NA
+"102";"MAEURUV035";"ES35";"2019-04-11";"10:13:00";"FR_europa";"Europa_north";"EURO_N";40.3824;-22.32911;"EURO9";"FR_europa_TID_04";29.6;"RUV";"MAPOR";NA
+"103";"MAEURUV036";"ES36";"2019-04-11";"10:30:00";"FR_europa";"Europa_north";"EURO_N";40.38294;-22.32861;"EURO9";"FR_europa_TID_04";57.4;"RUV";"MAPOR";"attaché au fond donc tentative de décrochage pendant 1h avant d'y arriver"
+"104";"MAEURUV037";"ES37";"2019-04-11";"10:39:00";"FR_europa";"Europa_north";"EURO_N";40.38194;-22.32966;"EURO9";"FR_europa_TID_04";18.7;"RUV";"MAPOR";NA
+"105";"MAEURUV038";"ES38";"2019-04-11";"10:46:00";"FR_europa";"Europa_north";"EURO_N";40.38096;-22.33117;"EURO9";"FR_europa_TID_04";6.8;"RUV";"MAPOR";NA
+"106";"MAEURUV039";"ES39";"2019-04-11";"13:39:00";"FR_europa";"Europa_north";"EURO_N";40.35805;-22.33241;"EURO10";"FR_europa_TID_04";6.3;"RUV";"MAPOR";NA
+"107";"MAEURUV040";"ES40";"2019-04-11";"13:45:00";"FR_europa";"Europa_north";"EURO_N";40.35802;-22.33057;"EURO10";"FR_europa_TID_04";20;"RUV";"MAPOR";NA
+"108";"MAEURUV041";"ES41";"2019-04-11";"13:51:00";"FR_europa";"Europa_north";"EURO_N";40.35818;-22.33014;"EURO10";"FR_europa_TID_04";28.6;"RUV";"MAPOR";NA
+"109";"MAEURUV042";"ES42";"2019-04-11";"14:00:00";"FR_europa";"Europa_north";"EURO_N";40.35878;-22.32985;"EURO10";"FR_europa_TID_04";39;"RUV";"MAPOR";NA
+"110";"MAEURUV043";"ES43";"2019-04-11";"14:06:00";"FR_europa";"Europa_north";"EURO_N";40.35963;-22.32925;"EURO10";"FR_europa_TID_04";66;"RUV";"MAPOR";NA
+"111";"MAJULONG006";"long6";"2019-04-13";"11:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75455;-17.02681;"JUAN1";"FR_juan_nova_TID_01";12;"RUV";"MAPOR";"système déposé puis corde 5m passé devant chaque caméra"
+"112";"MAJULONG007";"long6bis";"2019-04-13";"15:45:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75455;-17.02681;"JUAN3";"FR_juan_nova_TID_01";12;"RUV";"MAPOR";"système échangé avec la vidéo de long6 (même position pour capturer la soirée)"
+"113";"MAJULONG008";"long7";"2019-04-14";"09:10:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75455;-17.02681;"JUAN4";"FR_juan_nova_TID_02";12;"RUV";"MAPOR";"système échangé avec la vidéo de long6bis (même position)"
+"114";"MAJULONG009";"long8";"2019-04-16";"09:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.68948;-17.02203;"JUAN8";"FR_juan_nova_TID_04";6;"RUV";"MAPOR";"calibration distance et cadrat"
+"115";"MAJURUV001";"JNS1";"2019-04-13";"11:46:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75318;-17.02412;"JUAN2";"FR_juan_nova_TID_01";9.5;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"116";"MAJURUV002";"JNS2";"2019-04-13";"12:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75522;-17.01851;"JUAN2";"FR_juan_nova_TID_01";11.1;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"117";"MAJURUV003";"JNS3";"2019-04-13";"12:20:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74786;-17.00413;"JUAN2";"FR_juan_nova_TID_01";13.9;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"118";"MAJURUV004";"JNS4";"2019-04-13";"12:38:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74787;-17.0175;"JUAN2";"FR_juan_nova_TID_01";13.3;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"119";"MAJURUV005";"JNS5";"2019-04-13";"12:53:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74598;-17.03668;"JUAN2";"FR_juan_nova_TID_01";3.7;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"120";"MAJURUV006";"JNS6";"2019-04-13";"13:03:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.7436;-17.04006;"JUAN2";"FR_juan_nova_TID_01";4.9;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"121";"MAJURUV007";"JNS7";"2019-04-13";"14:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.7532;-17.02414;"JUAN3";"FR_juan_nova_TID_01";10.2;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"122";"MAJURUV008";"JNS8";"2019-04-13";"14:18:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75521;-17.0185;"JUAN3";"FR_juan_nova_TID_01";10.5;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"123";"MAJURUV009";"JNS9";"2019-04-13";"14:42:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74787;-17.0042;"JUAN3";"FR_juan_nova_TID_01";14.5;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"124";"MAJURUV010";"JNS10";"2019-04-13";"15:03:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74788;-17.01753;"JUAN3";"FR_juan_nova_TID_01";13.7;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"125";"MAJURUV011";"JNS11";"2019-04-13";"15:20:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74597;-17.03664;"JUAN3";"FR_juan_nova_TID_01";2.9;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"126";"MAJURUV012";"JNS12";"2019-04-13";"15:30:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.74359;-17.04006;"JUAN3";"FR_juan_nova_TID_01";4;"RUV";"MAPOR";"Yann partie a l'eau pour bien placer la caméra"
+"127";"MAJURUV013";"JNS13";"2019-04-14";"09:40:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.73252;-17.01657;"JUAN5";"FR_juan_nova_TID_02";9;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"128";"MAJURUV014";"JNS14";"2019-04-14";"09:56:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.72809;-17.00731;"JUAN5";"FR_juan_nova_TID_02";14.6;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"129";"MAJURUV015";"JNS15";"2019-04-14";"10:17:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.72607;-16.99785;"JUAN5";"FR_juan_nova_TID_02";15.3;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"130";"MAJURUV016";"JNS16";"2019-04-14";"10:37:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.73324;-16.99636;"JUAN5";"FR_juan_nova_TID_02";15.8;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"131";"MAJURUV017";"JNS17";"2019-04-14";"10:53:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.73675;-16.99471;"JUAN5";"FR_juan_nova_TID_02";17.4;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"132";"MAJURUV018";"JNS18";"2019-04-14";"11:19:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.73958;-16.98995;"JUAN5";"FR_juan_nova_TID_02";17.8;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"133";"MAJURUV019";"JNS19";"2019-04-14";"13:52:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.75731;-17.00472;"JUAN6";"FR_juan_nova_TID_02";17.9;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"134";"MAJURUV020";"JNS20";"2019-04-14";"14:08:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.76947;-17.00512;"JUAN6";"FR_juan_nova_TID_02";14.1;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"135";"MAJURUV021";"JNS21";"2019-04-14";"14:23:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.76552;-17.01885;"JUAN6";"FR_juan_nova_TID_02";13.9;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"136";"MAJURUV022";"JNS22";"2019-04-14";"14:41:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.76782;-17.02402;"JUAN6";"FR_juan_nova_TID_02";18;"RUV";"MAPOR";"Elliott a posé manuellement cette caméra sur un site ou il y a du poisson"
+"137";"MAJURUV023";"JNS23";"2019-04-15";"09:18:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65763;-17.0164;"JUAN7";"FR_juan_nova_TID_03";16.2;"RUV";"MAPOR";"trop de courant pose raté (plus de 2 nœud de courant)"
+"138";"MAJURUV024";"JNS24";"2019-04-15";"10:35:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65936;-16.96499;"JUAN7";"FR_juan_nova_TID_03";24.8;"RUV";"MAPOR";"pose raté sur du sable"
+"139";"MAJURUV025";"JNS25";"2019-04-15";"11:04:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66038;-16.9634;"JUAN7";"FR_juan_nova_TID_03";20.9;"RUV";"MAPOR";"Elliott a positionné cette caméra, Elliott a repositionné cette caméra a 11:47"
+"140";"MAJURUV026";"JNS26";"2019-04-15";"11:21:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66018;-16.96261;"JUAN7";"FR_juan_nova_TID_03";27.7;"RUV";"MAPOR";"caméra de droite remplacé par caméra 7"
+"141";"MAJURUV027";"JNS27";"2019-04-15";"11:31:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65969;-16.96279;"JUAN7";"FR_juan_nova_TID_03";48;"RUV";"MAPOR";NA
+"142";"MAJURUV028";"JNS28";"2019-04-15";"11:42:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65927;-16.96205;"JUAN7";"FR_juan_nova_TID_03";70.5;"RUV";"MAPOR";NA
+"143";"MAJURUV029";"JNS29";"2019-04-15";"11:58:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66196;-16.96457;"JUAN7";"FR_juan_nova_TID_03";16.5;"RUV";"MAPOR";"11:58 Elliott qui sonde pour déposer la caméra"
+"144";"MAJURUV030";"JNS30";"2019-04-15";"13:14:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66031;-16.96341;"JUAN7";"FR_juan_nova_TID_03";21.8;"RUV";"MAPOR";"vidéo remis en bas du petit tombant par Elliott"
+"145";"MAJURUV031";"JNS31";"2019-04-15";"13:32:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66016;-16.9625;"JUAN7";"FR_juan_nova_TID_03";28.9;"RUV";"MAPOR";NA
+"146";"MAJURUV032";"JNS32";"2019-04-15";"13:49:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65971;-16.96277;"JUAN7";"FR_juan_nova_TID_03";45;"RUV";"MAPOR";NA
+"147";"MAJURUV033";"JNS33";"2019-04-15";"14:07:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.65925;-16.96203;"JUAN7";"FR_juan_nova_TID_03";70.7;"RUV";"MAPOR";NA
+"148";"MAJURUV034";"JNS34";"2019-04-15";"14:23:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.66195;-16.96455;"JUAN7";"FR_juan_nova_TID_03";14.4;"RUV";"MAPOR";NA
+"149";"MAJURUV035";"JNS35";"2019-04-16";"10:00:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.69738;-17.00949;"JUAN8";"FR_juan_nova_TID_04";10;"RUV";"MAPOR";"posé par Yann"
+"150";"MAJURUV036";"JNS36";"2019-04-16";"10:12:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70064;-17.0039;"JUAN8";"FR_juan_nova_TID_04";14.1;"RUV";"MAPOR";"posé par Yann"
+"151";"MAJURUV037";"JNS37";"2019-04-16";"10:23:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70315;-16.99641;"JUAN8";"FR_juan_nova_TID_04";14.8;"RUV";"MAPOR";NA
+"152";"MAJURUV038";"JNS38";"2019-04-16";"10:34:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70268;-16.99208;"JUAN8";"FR_juan_nova_TID_04";14.3;"RUV";"MAPOR";NA
+"153";"MAJURUV039";"JNS39";"2019-04-16";"10:49:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70478;-16.48567;"JUAN8";"FR_juan_nova_TID_04";15;"RUV";"MAPOR";NA
+"154";"MAJURUV040";"JNS40";"2019-04-16";"11:03:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70358;-16.97828;"JUAN8";"FR_juan_nova_TID_04";10.4;"RUV";"MAPOR";NA
+"155";"MAJURUV041";"JNS41";"2019-04-16";"12:22:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70475;-17.01017;"JUAN9";"FR_juan_nova_TID_04";9.6;"RUV";"MAPOR";NA
+"156";"MAJURUV042";"JNS42";"2019-04-16";"12:44:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.7088;-17.00359;"JUAN9";"FR_juan_nova_TID_04";11.5;"RUV";"MAPOR";NA
+"157";"MAJURUV043";"JNS43";"2019-04-16";"13:30:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.71042;-16.9966;"JUAN9";"FR_juan_nova_TID_04";18;"RUV";"MAPOR";NA
+"158";"MAJURUV044";"JNS44";"2019-04-16";"13:59:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.70871;-16.98982;"JUAN9";"FR_juan_nova_TID_04";18.9;"RUV";"MAPOR";NA
+"159";"MAJURUV045";"JNS45";"2019-04-16";"14:23:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.6975;-16.99514;"JUAN9";"FR_juan_nova_TID_04";18.5;"RUV";"MAPOR";NA
+"160";"MAJURUV046";"JNS46";"2019-04-16";"14:55:00";"FR_juan_de_nova";"Juan_de_Nova_lagon";"JUAN_N";42.69442;-17.00934;"JUAN9";"FR_juan_nova_TID_04";10.8;"RUV";"MAPOR";NA
+"161";"MA_CMB_025";"M25";"2019-02-05";"13:53:00";"YT";"Chira_moiba_be";"YT_CMB";44.98468;-12.72454;"NA";"YT_TID_003";8;"rosette";"MAPOR";NA
+"162";"MA_CMB_026";"M26";"2019-02-05";"13:57:00";"YT";"Chira_moiba_be";"YT_CMB";44.98384;-12.72448;"NA";"YT_TID_003";20;"rosette";"MAPOR";NA
+"163";"MA_CMB_027";"M27";"2019-02-05";"14:01:00";"YT";"Chira_moiba_be";"YT_CMB";44.98363;-12.72448;"NA";"YT_TID_003";38;"rosette";"MAPOR";NA
+"164";"MA_CMB_028";"M28";"2019-02-05";"14:05:00";"YT";"Chira_moiba_be";"YT_CMB";44.98323;-12.72446;"NA";"YT_TID_003";63;"rosette";"MAPOR";NA
+"165";"MA_CMB_029";"M29";"2019-02-05";"14:12:00";"YT";"Chira_moiba_be";"YT_CMB";44.98285;-12.72429;"NA";"YT_TID_003";80;"rosette";"MAPOR";NA
+"166";"MA_CMB_030";"M30";"2019-02-05";"14:20:00";"YT";"Chira_moiba_be";"YT_CMB";44.98254;-12.7242;"NA";"YT_TID_003";100;"rosette";"MAPOR";NA
+"167";"MA_CTJ_063";"M63";"2019-02-06";"14:36:00";"YT";"Chira_titi_jossi";"YT_CTJ";44.98848;-12.99657;"NA";"YT_TID_004";12;"rosette";"MAPOR";NA
+"168";"MA_CTJ_064";"M64";"2019-02-06";"14:40:00";"YT";"Chira_titi_jossi";"YT_CTJ";44.98822;-12.99651;"NA";"YT_TID_004";30;"rosette";"MAPOR";NA
+"169";"MA_CTJ_065";"M65";"2019-02-06";"14:50:00";"YT";"Chira_titi_jossi";"YT_CTJ";44.9879;-12.99662;"NA";"YT_TID_004";50;"rosette";"MAPOR";NA
+"170";"MA_CTJ_066";"M66";"2019-02-06";"14:56:00";"YT";"Chira_titi_jossi";"YT_CTJ";44.98739;-12.99686;"NA";"YT_TID_004";92;"rosette";"MAPOR";NA
+"171";"MA_DJO_044";"M44";"2019-02-06";"11:14:00";"YT";"Djole";"YT_DJO";44.96275;-12.91583;"NA";"YT_TID_004";13;"rosette";"MAPOR";NA
+"172";"MA_DJO_045";"M45";"2019-02-06";"11:17:00";"YT";"Djole";"YT_DJO";44.9619;-12.91594;"NA";"YT_TID_004";36;"rosette";"MAPOR";NA
+"173";"MA_DJO_046";"M46";"2019-02-06";"11:22:00";"YT";"Djole";"YT_DJO";44.96141;-12.91576;"NA";"YT_TID_004";70;"rosette";"MAPOR";NA
+"174";"MA_DJO_047";"M47";"2019-02-06";"11:28:00";"YT";"Djole";"YT_DJO";44.96056;-12.91559;"NA";"YT_TID_004";110;"rosette";"MAPOR";NA
+"175";"MA_GMO_040";"M40";"2019-02-06";"10:40:00";"YT";"Gnouma_moiba";"YT_GMO";44.9536;-12.89555;"NA";"YT_TID_004";9;"rosette";"MAPOR";NA
+"176";"MA_GMO_041";"M41";"2019-02-06";"10:42:00";"YT";"Gnouma_moiba";"YT_GMO";44.95355;-12.89576;"NA";"YT_TID_004";31;"rosette";"MAPOR";NA
+"177";"MA_GMO_042";"M42";"2019-02-06";"10:48:00";"YT";"Gnouma_moiba";"YT_GMO";44.95254;-12.89671;"NA";"YT_TID_004";50;"rosette";"MAPOR";NA
+"178";"MA_GMO_043";"M43";"2019-02-06";"10:58:00";"YT";"Gnouma_moiba";"YT_GMO";44.95178;-12.89712;"NA";"YT_TID_004";90;"rosette";"MAPOR";NA
+"179";"MA_GMO_130";"R8.4";"2019-03-08";"14:19:00";"YT";"Gnouma_moiba";"YT_GMO";44.95199;-12.89744;"YT_GMO_001";"YT_TID_011";86;"RUV";"MAPOR";NA
+"180";"MA_GMO_131";"R8.3";"2019-03-08";"14:08:00";"YT";"Gnouma_moiba";"YT_GMO";44.9526;-12.89662;"YT_GMO_001";"YT_TID_011";46;"RUV";"MAPOR";NA
+"181";"MA_GMO_132";"R8.2";"2019-03-08";"13:59:00";"YT";"Gnouma_moiba";"YT_GMO";44.95345;-12.89564;"YT_GMO_001";"YT_TID_011";27;"RUV";"MAPOR";NA
+"182";"MA_GMO_133";"R8.1";"2019-03-08";"13:52:00";"YT";"Gnouma_moiba";"YT_GMO";44.95359;-12.89553;"YT_GMO_001";"YT_TID_011";11;"RUV";"MAPOR";NA
+"183";"MA_GMO_152";"R8.5";"2019-03-15";"13:04:00";"YT";"Gnouma_moiba";"YT_GMO";44.95201;-12.89742;"YT_GMO_002";"YT_TID_013";84.5;"RUV";"MAPOR";NA
+"184";"MA_GMO_153";"R8.6";"2019-03-15";"13:14:00";"YT";"Gnouma_moiba";"YT_GMO";44.95262;-12.89659;"YT_GMO_002";"YT_TID_013";46;"RUV";"MAPOR";NA
+"185";"MA_GMO_154";"R8.7";"2019-03-15";"13:21:00";"YT";"Gnouma_moiba";"YT_GMO";44.9534;-12.8956;"YT_GMO_002";"YT_TID_013";28.9;"RUV";"MAPOR";NA
+"186";"MA_GMO_155";"R8.8";"2019-03-15";"13:26:00";"YT";"Gnouma_moiba";"YT_GMO";44.9536;-12.8955;"YT_GMO_002";"YT_TID_013";10.2;"RUV";"MAPOR";NA
+"187";"MA_GMO_169";"R8.12";"2019-03-18";"12:48:00";"YT";"Gnouma_moiba";"YT_GMO";44.95359;-12.89548;"YT_GMO_003";"YT_TID_014";12;"RUV";"MAPOR";NA
+"188";"MA_GMO_170";"R8.11";"2019-03-18";"12:45:00";"YT";"Gnouma_moiba";"YT_GMO";44.95342;-12.89562;"YT_GMO_003";"YT_TID_014";25;"RUV";"MAPOR";NA
+"189";"MA_GMO_171";"R8.10";"2019-03-18";"12:38:00";"YT";"Gnouma_moiba";"YT_GMO";44.95261;-12.89664;"YT_GMO_003";"YT_TID_014";47.6;"RUV";"MAPOR";NA
+"190";"MA_GMO_172";"R8.9";"2019-03-18";"12:30:00";"YT";"Gnouma_moiba";"YT_GMO";44.95199;-12.89742;"YT_GMO_003";"YT_TID_014";93;"RUV";"MAPOR";NA
+"191";"MA_GMO_199";"R8.13";"2019-03-20";"13:48:00";"YT";"Gnouma_moiba";"YT_GMO";44.95361;-12.89547;"YT_GMO_004";"YT_TID_016";8.6;"RUV";"MAPOR";NA
+"192";"MA_GMO_200";"R8.14";"2019-03-20";"13:56:00";"YT";"Gnouma_moiba";"YT_GMO";44.95341;-12.8956;"YT_GMO_004";"YT_TID_016";28.2;"RUV";"MAPOR";NA
+"193";"MA_GMO_201";"R8.15";"2019-03-20";"14:04:00";"YT";"Gnouma_moiba";"YT_GMO";44.95261;-12.89661;"YT_GMO_004";"YT_TID_016";47;"RUV";"MAPOR";NA
+"194";"MA_GMO_202";"R8.16";"2019-03-20";"14:13:00";"YT";"Gnouma_moiba";"YT_GMO";44.95201;-12.89744;"YT_GMO_004";"YT_TID_016";85;"RUV";"MAPOR";NA
+"195";"MA_JOS_058";"M58";"2019-02-06";"13:52:00";"YT";"Jossi";"YT_JOS";44.97791;-12.97081;"NA";"YT_TID_004";13;"rosette";"MAPOR";NA
+"196";"MA_JOS_059";"M59";"2019-02-06";"13:55:00";"YT";"Jossi";"YT_JOS";44.97763;-12.97091;"NA";"YT_TID_004";33;"rosette";"MAPOR";NA
+"197";"MA_JOS_060";"M60";"2019-02-06";"13:59:00";"YT";"Jossi";"YT_JOS";44.97724;-12.97113;"NA";"YT_TID_004";44;"rosette";"MAPOR";NA
+"198";"MA_JOS_061";"M61";"2019-02-06";"14:11:00";"YT";"Jossi";"YT_JOS";44.977;-12.97139;"NA";"YT_TID_004";78;"rosette";"MAPOR";NA
+"199";"MA_JOS_062";"M62";"2019-02-06";"14:17:00";"YT";"Jossi";"YT_JOS";44.97651;-12.97136;"NA";"YT_TID_004";100;"rosette";"MAPOR";NA
+"200";"MA_JOS_096";"R12.1";"2019-02-28";"10:19:00";"YT";"Jossi";"YT_JOS";44.97702;-12.97109;"YT_JOS_001";"YT_TID_008";65;"RUV";"MAPOR";NA
+"201";"MA_JOS_097";"R12.2";"2019-02-28";"10:30:00";"YT";"Jossi";"YT_JOS";44.97782;-12.97073;"YT_JOS_001";"YT_TID_008";12;"RUV";"MAPOR";NA
+"202";"MA_JOS_098";"R12.3";"2019-02-28";"10:42:00";"YT";"Jossi";"YT_JOS";44.97769;-12.97082;"YT_JOS_001";"YT_TID_008";24;"RUV";"MAPOR";NA
+"203";"MA_JOS_099";"R12.4";"2019-02-28";"10:50:00";"YT";"Jossi";"YT_JOS";44.97724;-12.97093;"YT_JOS_001";"YT_TID_008";42;"RUV";"MAPOR";NA
+"204";"MA_JOS_122";"R12.5";"2019-03-08";"08:03:00";"YT";"Jossi";"YT_JOS";44.97786;-12.97072;"YT_JOS_002";"YT_TID_011";12;"RUV";"MAPOR";NA
+"205";"MA_JOS_123";"R12.6";"2019-03-08";"08:11:00";"YT";"Jossi";"YT_JOS";44.97768;-12.97081;"YT_JOS_002";"YT_TID_011";27;"RUV";"MAPOR";NA
+"206";"MA_JOS_124";"R12.7";"2019-03-08";"08:19:00";"YT";"Jossi";"YT_JOS";44.97724;-12.97111;"YT_JOS_002";"YT_TID_011";43;"RUV";"MAPOR";NA
+"207";"MA_JOS_125";"R12.8";"2019-03-08";"08:30:00";"YT";"Jossi";"YT_JOS";44.97663;-12.97156;"YT_JOS_002";"YT_TID_011";90;"RUV";"MAPOR";NA
+"208";"MA_JOS_156";"R12.9";"2019-03-15";"14:52:00";"YT";"Jossi";"YT_JOS";44.97779;-12.97073;"YT_JOS_003";"YT_TID_013";11;"RUV";"MAPOR";NA
+"209";"MA_JOS_157";"R12.10";"2019-03-15";"14:57:00";"YT";"Jossi";"YT_JOS";44.97767;-12.97081;"YT_JOS_003";"YT_TID_013";25;"RUV";"MAPOR";NA
+"210";"MA_JOS_158";"R12.11";"2019-03-15";"15:03:00";"YT";"Jossi";"YT_JOS";44.97722;-12.97107;"YT_JOS_003";"YT_TID_013";42.7;"RUV";"MAPOR";NA
+"211";"MA_JOS_159";"R12.12";"2019-03-15";"15:12:00";"YT";"Jossi";"YT_JOS";44.97697;-12.97117;"YT_JOS_003";"YT_TID_013";72;"RUV";"MAPOR";NA
+"212";"MA_JOS_173";"R12.13";"2019-03-18";"14:11:00";"YT";"Jossi";"YT_JOS";44.97786;-12.9707;"YT_JOS_004";"YT_TID_014";11;"RUV";"MAPOR";NA
+"213";"MA_JOS_174";"R12.14";"2019-03-18";"14:16:00";"YT";"Jossi";"YT_JOS";44.9777;-12.97082;"YT_JOS_004";"YT_TID_014";24.1;"RUV";"MAPOR";NA
+"214";"MA_JOS_175";"R12.15";"2019-03-18";"14:23:00";"YT";"Jossi";"YT_JOS";44.97723;-12.97109;"YT_JOS_004";"YT_TID_014";44.2;"RUV";"MAPOR";NA
+"215";"MA_JOS_176";"R12.16";"2019-03-18";"14:29:00";"YT";"Jossi";"YT_JOS";44.97699;-12.97114;"YT_JOS_004";"YT_TID_014";69;"RUV";"MAPOR";NA
+"216";"MA_JOS_195";"R12.20";"2019-03-20";"12:23:00";"YT";"Jossi";"YT_JOS";44.97784;-12.97068;"YT_JOS_005";"YT_TID_016";9;"RUV";"MAPOR";NA
+"217";"MA_JOS_196";"R12.19";"2019-03-20";"12:18:00";"YT";"Jossi";"YT_JOS";44.97723;-12.9708;"YT_JOS_005";"YT_TID_016";21;"RUV";"MAPOR";NA
+"218";"MA_JOS_197";"R12.18";"2019-03-20";"12:11:00";"YT";"Jossi";"YT_JOS";44.97723;-12.97106;"YT_JOS_005";"YT_TID_016";41.8;"RUV";"MAPOR";NA
+"219";"MA_JOS_198";"R12.17";"2019-03-20";"12:01:00";"YT";"Jossi";"YT_JOS";44.977;-12.97117;"YT_JOS_005";"YT_TID_016";68;"RUV";"MAPOR";NA
+"220";"MA_MDZ_053";"M53";"2019-02-06";"13:11:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96697;-12.93975;"NA";"YT_TID_004";12;"rosette";"MAPOR";NA
+"221";"MA_MDZ_054";"M54";"2019-02-06";"13:14:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96684;-12.93991;"NA";"YT_TID_004";27;"rosette";"MAPOR";NA
+"222";"MA_MDZ_055";"M55";"2019-02-06";"13:18:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96647;-12.94046;"NA";"YT_TID_004";41;"rosette";"MAPOR";NA
+"223";"MA_MDZ_056";"M56";"2019-02-06";"13:23:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96613;-12.94042;"NA";"YT_TID_004";71;"rosette";"MAPOR";NA
+"224";"MA_MDZ_057";"M57";"2019-02-06";"13:30:00";"YT";"Mwamba_dziani";"YT_MDZ";44.96571;-12.94073;"NA";"YT_TID_004";90;"rosette";"MAPOR";NA
+"225";"MA_MFO2_012";"M12";"2019-02-05";"12:17:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96877;-12.69394;"NA";"YT_TID_003";10;"rosette";"MAPOR";NA
+"226";"MA_MFO2_013";"M13";"2019-02-05";"12:21:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96868;-12.69368;"NA";"YT_TID_003";23;"rosette";"MAPOR";NA
+"227";"MA_MFO2_014";"M14";"2019-02-05";"12:27:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96849;-12.69417;"NA";"YT_TID_003";37;"rosette";"MAPOR";NA
+"228";"MA_MFO2_015";"M15";"2019-02-05";"12:30:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.9681;-12.69441;"NA";"YT_TID_003";41.2;"rosette";"MAPOR";NA
+"229";"MA_MFO2_016";"M16";"2019-02-05";"12:33:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96781;-12.69463;"NA";"YT_TID_003";44;"rosette";"MAPOR";NA
+"230";"MA_MFO2_017";"M17";"2019-02-05";"12:37:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96762;-12.69468;"NA";"YT_TID_003";63.6;"rosette";"MAPOR";NA
+"231";"MA_MFO2_018";"M18";"2019-02-05";"12:45:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96719;-12.69463;"NA";"YT_TID_003";76.1;"rosette";"MAPOR";NA
+"232";"MA_MFO2_019";"M19";"2019-02-05";"12:52:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96674;-12.69499;"NA";"YT_TID_003";100;"rosette";"MAPOR";NA
+"233";"MA_MFO2_020";"M20";"2019-02-05";"13:03:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.97043;-12.69727;"NA";"YT_TID_003";9;"rosette";"MAPOR";NA
+"234";"MA_MFO2_021";"M21";"2019-02-05";"13:06:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.97021;-12.6974;"NA";"YT_TID_003";24.2;"rosette";"MAPOR";NA
+"235";"MA_MFO2_022";"M22";"2019-02-05";"13:09:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96996;-12.6976;"NA";"YT_TID_003";42;"rosette";"MAPOR";NA
+"236";"MA_MFO2_023";"M23";"2019-02-05";"13:13:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96903;-12.69783;"NA";"YT_TID_003";56;"rosette";"MAPOR";NA
+"237";"MA_MFO2_024";"M24";"2019-02-05";"13:19:00";"YT";"Mwamba_foungou_2";"YT_MFO2";44.96856;-12.69774;"NA";"YT_TID_003";86;"rosette";"MAPOR";NA
+"238";"MA_MHA_031";"M31";"2019-02-05";"14:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98372;-12.73275;"NA";"YT_TID_003";10;"rosette";"MAPOR";NA
+"239";"MA_MHA_032";"M32";"2019-02-05";"14:36:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98335;-12.73279;"NA";"YT_TID_003";30;"rosette";"MAPOR";NA
+"240";"MA_MHA_033";"M33";"2019-02-05";"14:40:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98303;-12.73278;"NA";"YT_TID_003";65;"rosette";"MAPOR";NA
+"241";"MA_MHA_034";"M34";"2019-02-05";"14:43:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98177;-12.73246;"NA";"YT_TID_003";80;"rosette";"MAPOR";NA
+"242";"MA_MHA_067";"M67";"2019-02-25";"15:48:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98319;-12.7328;"NA";"YT_TID_005";29.8;"rosette";"MAPOR";NA
+"243";"MA_MHA_068";"M68";"2019-02-25";"15:52:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98308;-12.73279;"NA";"YT_TID_005";41;"rosette";"MAPOR";NA
+"244";"MA_MHA_069";"M69";"2019-02-25";"15:58:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98308;-12.73279;"NA";"YT_TID_005";41;"rosette";"MAPOR";NA
+"245";"MA_MHA_070";"M70";"2019-02-25";"16:03:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98283;-12.73277;"NA";"YT_TID_005";62;"rosette";"MAPOR";NA
+"246";"MA_MHA_071";"M71";"2019-02-25";"16:08:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73281;"NA";"YT_TID_005";62;"rosette";"MAPOR";NA
+"247";"MA_MHA_072";"M72";"2019-02-25";"16:19:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98267;-12.73272;"NA";"YT_TID_005";71;"rosette";"MAPOR";NA
+"248";"MA_MHA_073";"M73";"2019-02-25";"16:25:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9823;-12.7326;"NA";"YT_TID_005";76;"rosette";"MAPOR";NA
+"249";"MA_MHA_074";"M74";"2019-02-25";"16:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98182;-12.73248;"NA";"YT_TID_005";79;"rosette";"MAPOR";NA
+"250";"MA_MHA_075";"C1";"2019-02-26";"13:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98364;-12.7327;"YT_MHA_001";"YT_TID_006";15.1;"RUV";"MAPOR";NA
+"251";"MA_MHA_076";"C2";"2019-02-26";"13:34:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98317;-12.73281;"YT_MHA_001";"YT_TID_006";31;"RUV";"MAPOR";NA
+"252";"MA_MHA_077";"C3";"2019-02-26";"13:47:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98285;-12.73279;"YT_MHA_001";"YT_TID_006";50;"RUV";"MAPOR";NA
+"253";"MA_MHA_078";"C4";"2019-02-26";"14:00:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98186;-12.73243;"YT_MHA_001";"YT_TID_006";81;"RUV";"MAPOR";NA
+"254";"MA_MHA_079";"C5";"2019-02-26";"15:37:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98364;-12.73264;"YT_MHA_001";"YT_TID_006";17;"RUV";"MAPOR";NA
+"255";"MA_MHA_080";"C6";"2019-02-26";"15:52:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98318;-12.73281;"YT_MHA_001";"YT_TID_006";31.1;"RUV";"MAPOR";NA
+"256";"MA_MHA_081";"C7";"2019-02-26";"16:05:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98286;-12.73278;"YT_MHA_001";"YT_TID_006";9.3;"RUV";"MAPOR";NA
+"257";"MA_MHA_082";"C8";"2019-02-26";"16:25:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98185;-12.73245;"YT_MHA_001";"YT_TID_006";77;"RUV";"MAPOR";NA
+"258";"MA_MHA_083";"C9";"2019-02-27";"10:17:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9818;-12.73248;"YT_MHA_002";"YT_TID_007";82.5;"RUV";"MAPOR";NA
+"259";"MA_MHA_084";"C10";"2019-02-27";"10:23:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9831;-12.73279;"YT_MHA_002";"YT_TID_007";65;"RUV";"MAPOR";NA
+"260";"MA_MHA_085";"C11";"2019-02-27";"10:33:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98339;-12.73277;"YT_MHA_002";"YT_TID_007";30;"RUV";"MAPOR";NA
+"261";"MA_MHA_086";"C12";"2019-02-27";"10:40:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98378;-12.73267;"YT_MHA_002";"YT_TID_007";11;"RUV";"MAPOR";NA
+"262";"MA_MHA_087";"C13";"2019-02-27";"12:32:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98179;-12.73249;"YT_MHA_002";"YT_TID_007";80;"RUV";"MAPOR";NA
+"263";"MA_MHA_088";"C14";"2019-02-27";"12:47:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98296;-12.73276;"YT_MHA_002";"YT_TID_007";43;"RUV";"MAPOR";NA
+"264";"MA_MHA_089";"C15";"2019-02-27";"13:02:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98346;-12.7328;"YT_MHA_002";"YT_TID_007";26;"RUV";"MAPOR";NA
+"265";"MA_MHA_090";"C16";"2019-02-27";"13:18:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9837;-12.73265;"YT_MHA_002";"YT_TID_007";12;"RUV";"MAPOR";NA
+"266";"MA_MHA_091";"C17";"2019-02-27";"14:45:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98181;-12.73245;"YT_MHA_002";"YT_TID_007";83;"RUV";"MAPOR";NA
+"267";"MA_MHA_092";"C18";"2019-02-27";"14:58:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73479;"YT_MHA_002";"YT_TID_007";62;"RUV";"MAPOR";NA
+"268";"MA_MHA_093";"C19";"2019-02-27";"15:15:00";"YT";"Mwamba_harrabou";"YT_MHA";44.99342;-12.73278;"YT_MHA_002";"YT_TID_007";28;"RUV";"MAPOR";NA
+"269";"MA_MHA_094";"C20";"2019-02-27";"15:29:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73267;"YT_MHA_002";"YT_TID_007";10;"RUV";"MAPOR";NA
+"270";"MA_MHA_095";"C17bis";"2019-02-27";"14:45:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9829;-12.73795;"YT_MHA_002";"YT_TID_007";80;"RUV";"MAPOR";NA
+"271";"MA_MHA_100";"C21";"2019-03-01";"10:07:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98369;-12.7327;"YT_MHA_003";"YT_TID_009";11;"RUV";"MAPOR";NA
+"272";"MA_MHA_101";"C22";"2019-03-01";"10:16:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9834;-12.73281;"YT_MHA_003";"YT_TID_009";29.4;"RUV";"MAPOR";NA
+"273";"MA_MHA_102";"C23";"2019-03-01";"10:25:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73279;"YT_MHA_003";"YT_TID_009";40;"RUV";"MAPOR";NA
+"274";"MA_MHA_103";"C24";"2019-03-01";"10:33:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98172;-12.73258;"YT_MHA_003";"YT_TID_009";84;"RUV";"MAPOR";NA
+"275";"MA_MHA_104";"C25";"2019-03-01";"10:49:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98181;-12.73246;"YT_MHA_003";"YT_TID_009";79.6;"RUV";"MAPOR";NA
+"276";"MA_MHA_105";"C26";"2019-03-01";"12:18:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98369;-12.73268;"YT_MHA_003";"YT_TID_009";14;"RUV";"MAPOR";NA
+"277";"MA_MHA_106";"C27";"2019-03-01";"12:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98343;-12.73278;"YT_MHA_003";"YT_TID_009";30;"RUV";"MAPOR";NA
+"278";"MA_MHA_107";"C28";"2019-03-01";"12:42:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73277;"YT_MHA_003";"YT_TID_009";47;"RUV";"MAPOR";NA
+"279";"MA_MHA_108";"C29";"2019-03-01";"13:03:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98182;-12.73247;"YT_MHA_003";"YT_TID_009";80;"RUV";"MAPOR";NA
+"280";"MA_MHA_109";"C30";"2019-03-01";"14:33:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98372;-12.73268;"YT_MHA_003";"YT_TID_009";12.9;"RUV";"MAPOR";NA
+"281";"MA_MHA_110";"C31";"2019-03-01";"14:44:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98342;-12.73277;"YT_MHA_003";"YT_TID_009";30;"RUV";"MAPOR";NA
+"282";"MA_MHA_111";"C32";"2019-03-01";"14:58:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98298;-12.73277;"YT_MHA_003";"YT_TID_009";63;"RUV";"MAPOR";NA
+"283";"MA_MHA_112";"C33";"2019-03-01";"15:13:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98184;-12.73249;"YT_MHA_003";"YT_TID_009";80;"RUV";"MAPOR";NA
+"284";"MA_MHA_113";"C34";"2019-03-07";"08:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98186;-12.73242;"YT_MHA_004";"YT_TID_010";77;"RUV";"MAPOR";NA
+"285";"MA_MHA_114";"C35";"2019-03-07";"08:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73273;"YT_MHA_004";"YT_TID_010";44;"RUV";"MAPOR";NA
+"286";"MA_MHA_115";"C36";"2019-03-07";"08:36:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98343;-12.73279;"YT_MHA_004";"YT_TID_010";28;"RUV";"MAPOR";NA
+"287";"MA_MHA_116";"C37";"2019-03-07";"08:42:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98374;-12.73264;"YT_MHA_004";"YT_TID_010";10;"RUV";"MAPOR";NA
+"288";"MA_MHA_117";"C38";"2019-03-07";"09:24:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98184;-12.73248;"YT_MHA_004";"YT_TID_010";81;"RUV";"MAPOR";NA
+"289";"MA_MHA_118";"C39";"2019-03-07";"10:21:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98184;-12.73247;"YT_MHA_004";"YT_TID_010";78;"RUV";"MAPOR";NA
+"290";"MA_MHA_119";"C40";"2019-03-07";"10:57:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73276;"YT_MHA_004";"YT_TID_010";40;"RUV";"MAPOR";NA
+"291";"MA_MHA_120";"C41";"2019-03-07";"11:08:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98343;-12.73283;"YT_MHA_004";"YT_TID_010";28;"RUV";"MAPOR";NA
+"292";"MA_MHA_121";"C42";"2019-03-07";"11:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9837;-12.73271;"YT_MHA_004";"YT_TID_010";10;"RUV";"MAPOR";NA
+"293";"MA_MHA_134";"C43";"2019-03-09";"08:59:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98184;-12.73242;"YT_MHA_005";"YT_TID_012";80;"RUV";"MAPOR";NA
+"294";"MA_MHA_135";"C44";"2019-03-09";"09:10:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98298;-12.73276;"YT_MHA_005";"YT_TID_012";60;"RUV";"MAPOR";NA
+"295";"MA_MHA_136";"C45";"2019-03-09";"09:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98349;-12.73272;"YT_MHA_005";"YT_TID_012";24;"RUV";"MAPOR";NA
+"296";"MA_MHA_137";"C46";"2019-03-09";"09:24:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98371;-12.73269;"YT_MHA_005";"YT_TID_012";11;"RUV";"MAPOR";NA
+"297";"MA_MHA_138";"C47";"2019-03-09";"09:43:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98302;-12.73276;"YT_MHA_005";"YT_TID_012";44;"RUV";"MAPOR";NA
+"298";"MA_MHA_139";"C48";"2019-03-09";"10:14:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98185;-12.73244;"YT_MHA_005";"YT_TID_012";77;"RUV";"MAPOR";NA
+"299";"MA_MHA_140";"C49";"2019-03-09";"11:40:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73268;"YT_MHA_005";"YT_TID_012";10;"RUV";"MAPOR";NA
+"300";"MA_MHA_141";"C50";"2019-03-09";"11:57:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9835;-12.7328;"YT_MHA_005";"YT_TID_012";24;"RUV";"MAPOR";NA
+"301";"MA_MHA_142";"C51";"2019-03-09";"12:17:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73277;"YT_MHA_005";"YT_TID_012";44;"RUV";"MAPOR";NA
+"302";"MA_MHA_143";"C52";"2019-03-09";"12:47:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98187;-12.73243;"YT_MHA_005";"YT_TID_012";76;"RUV";"MAPOR";NA
+"303";"MA_MHA_203";"C56";"2019-03-21";"08:56:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73264;"YT_MHA_006";"YT_TID_017";9;"RUV";"MAPOR";NA
+"304";"MA_MHA_204";"C55";"2019-03-21";"08:50:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98348;-12.73277;"YT_MHA_006";"YT_TID_017";24;"RUV";"MAPOR";NA
+"305";"MA_MHA_205";"C54";"2019-03-21";"08:40:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98302;-12.73276;"YT_MHA_006";"YT_TID_017";62;"RUV";"MAPOR";NA
+"306";"MA_MHA_206";"C53";"2019-03-21";"08:27:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98185;-12.73242;"YT_MHA_006";"YT_TID_017";77;"RUV";"MAPOR";NA
+"307";"MA_MHA_207";"C57";"2019-03-21";"10:41:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98174;-12.7325;"YT_MHA_006";"YT_TID_017";80;"RUV";"MAPOR";NA
+"308";"MA_MHA_208";"C58";"2019-03-21";"10:58:00";"YT";"Mwamba_harrabou";"YT_MHA";44.983;-12.73273;"YT_MHA_006";"YT_TID_017";36;"RUV";"MAPOR";NA
+"309";"MA_MHA_209";"C59";"2019-03-21";"11:13:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98346;-12.73282;"YT_MHA_006";"YT_TID_017";26;"RUV";"MAPOR";NA
+"310";"MA_MHA_210";"C60";"2019-03-21";"11:22:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98369;-12.73265;"YT_MHA_006";"YT_TID_017";11;"RUV";"MAPOR";NA
+"311";"MA_MHA_211";"C61";"2019-03-21";"13:02:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98175;-12.7325;"YT_MHA_006";"YT_TID_017";83;"RUV";"MAPOR";NA
+"312";"MA_MHA_212";"C62";"2019-03-21";"13:20:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98302;-12.73276;"YT_MHA_006";"YT_TID_017";63;"RUV";"MAPOR";NA
+"313";"MA_MHA_213";"C63";"2019-03-21";"13:35:00";"YT";"Mwamba_harrabou";"YT_MHA";44.9835;-12.73277;"YT_MHA_006";"YT_TID_017";27;"RUV";"MAPOR";NA
+"314";"MA_MHA_214";"C64";"2019-03-21";"13:44:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98371;-12.73268;"YT_MHA_006";"YT_TID_017";12;"RUV";"MAPOR";NA
+"315";"MA_MHA_215";"C65";"2019-03-21";"14:51:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98187;-12.73245;"YT_MHA_006";"YT_TID_017";79;"RUV";"MAPOR";NA
+"316";"MA_MHA_216";"C66";"2019-03-23";"08:28:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98175;-12.73249;"YT_MHA_007";"YT_TID_018";82.1;"RUV";"MAPOR";NA
+"317";"MA_MHA_217";"C67";"2019-03-23";"08:34:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73268;"YT_MHA_007";"YT_TID_018";10;"RUV";"MAPOR";NA
+"318";"MA_MHA_218";"C68";"2019-03-23";"08:42:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98353;-12.73274;"YT_MHA_007";"YT_TID_018";23;"RUV";"MAPOR";NA
+"319";"MA_MHA_219";"C69";"2019-03-23";"08:48:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98302;-12.73272;"YT_MHA_007";"YT_TID_018";37;"RUV";"MAPOR";NA
+"320";"MA_MHA_220";"C70";"2019-03-23";"10:45:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98373;-12.73266;"YT_MHA_007";"YT_TID_018";8.1;"RUV";"MAPOR";NA
+"321";"MA_MHA_221";"C71";"2019-03-23";"10:55:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98351;-12.73275;"YT_MHA_007";"YT_TID_018";23;"RUV";"MAPOR";NA
+"322";"MA_MHA_222";"C72";"2019-03-23";"11:08:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98301;-12.73277;"YT_MHA_007";"YT_TID_018";42;"RUV";"MAPOR";NA
+"323";"MA_MHA_223";"C73";"2019-03-23";"11:25:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98174;-12.73247;"YT_MHA_007";"YT_TID_018";80;"RUV";"MAPOR";NA
+"324";"MA_MHA_224";"C74";"2019-03-23";"12:57:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98376;-12.73271;"YT_MHA_007";"YT_TID_018";9;"RUV";"MAPOR";NA
+"325";"MA_MHA_225";"C75";"2019-03-23";"13:30:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98351;-12.73278;"YT_MHA_007";"YT_TID_018";25;"RUV";"MAPOR";NA
+"326";"MA_MHA_226";"C76";"2019-03-23";"13:59:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98175;-12.73247;"YT_MHA_007";"YT_TID_018";87;"RUV";"MAPOR";NA
+"327";"MA_MHA_227";"C77";"2019-03-23";"15:15:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98188;-12.73246;"YT_MHA_007";"YT_TID_018";82;"RUV";"MAPOR";NA
+"328";"MA_MKO_035";"M35";"2019-02-05";"14:55:00";"YT";"Mwamba_koutri";"YT_MKO";44.98486;-12.75348;"NA";"YT_TID_003";9.1;"rosette";"MAPOR";NA
+"329";"MA_MKO_036";"M36";"2019-02-05";"14:58:00";"YT";"Mwamba_koutri";"YT_MKO";44.98444;-12.75329;"NA";"YT_TID_003";29;"rosette";"MAPOR";NA
+"330";"MA_MKO_037";"M37";"2019-02-05";"15:01:00";"YT";"Mwamba_koutri";"YT_MKO";44.98405;-12.75298;"NA";"YT_TID_003";66;"rosette";"MAPOR";NA
+"331";"MA_MKO_038";"M38";"2019-02-05";"15:07:00";"YT";"Mwamba_koutri";"YT_MKO";44.98368;-12.75298;"NA";"YT_TID_003";82;"rosette";"MAPOR";NA
+"332";"MA_MKO_039";"M39";"2019-02-05";"15:18:00";"YT";"Mwamba_koutri";"YT_MKO";44.9903;-12.76294;"NA";"YT_TID_003";54;"rosette";"MAPOR";NA
+"333";"MA_MMA_001";"M01";"2019-02-05";"11:14:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95404;-12.67381;"NA";"YT_TID_003";9.4;"rosette";"MAPOR";NA
+"334";"MA_MMA_002";"M02";"2019-02-05";"11:19:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95367;-12.67392;"NA";"YT_TID_003";36;"rosette";"MAPOR";NA
+"335";"MA_MMA_003";"M03";"2019-02-05";"11:23:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95322;-12.67406;"NA";"YT_TID_003";42.5;"rosette";"MAPOR";NA
+"336";"MA_MMA_004";"M04";"2019-02-05";"11:27:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95276;-12.67419;"NA";"YT_TID_003";55;"rosette";"MAPOR";NA
+"337";"MA_MMA_005";"M05";"2019-02-05";"11:32:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95237;-12.67439;"NA";"YT_TID_003";74.4;"rosette";"MAPOR";NA
+"338";"MA_MMA_006";"M06";"2019-02-05";"11:39:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95184;-12.67445;"NA";"YT_TID_003";100;"rosette";"MAPOR";NA
+"339";"MA_MMA_007";"M07";"2019-02-05";"11:46:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95588;-12.67569;"NA";"YT_TID_003";7;"rosette";"MAPOR";NA
+"340";"MA_MMA_008";"M08";"2019-02-05";"11:49:00";"YT";"Mwamba_maricabou";"YT_MMA";44.9555;-12.67587;"NA";"YT_TID_003";30.5;"rosette";"MAPOR";NA
+"341";"MA_MMA_009";"M09";"2019-02-05";"11:52:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95504;-12.67631;"NA";"YT_TID_003";46;"rosette";"MAPOR";NA
+"342";"MA_MMA_010";"M10";"2019-02-05";"11:55:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95495;-12.67654;"NA";"YT_TID_003";76;"rosette";"MAPOR";NA
+"343";"MA_MMA_011";"M11";"2019-02-05";"12:00:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95465;-12.6769;"NA";"YT_TID_003";100;"rosette";"MAPOR";NA
+"344";"MA_MMA_144";"R2.1";"2019-03-15";"08:46:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95462;-12.67673;"YT_MMA_001";"YT_TID_013";90;"RUV";"MAPOR";NA
+"345";"MA_MMA_145";"R2.2";"2019-03-15";"08:53:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95479;-12.67636;"YT_MMA_001";"YT_TID_013";54;"RUV";"MAPOR";NA
+"346";"MA_MMA_146";"R2.3";"2019-03-15";"09:03:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95507;-12.67567;"YT_MMA_001";"YT_TID_013";40;"RUV";"MAPOR";NA
+"347";"MA_MMA_147";"R2.4";"2019-03-15";"09:08:00";"YT";"Mwamba_maricabou";"YT_MMA";44.9552;-12.67498;"YT_MMA_001";"YT_TID_013";9.5;"RUV";"MAPOR";NA
+"348";"MA_MMA_148";"R3.1";"2019-03-15";"10:37:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96889;-12.69396;"YT_MFO2_001";"YT_TID_013";9;"RUV";"MAPOR";NA
+"349";"MA_MMA_149";"R3.2";"2019-03-15";"10:42:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96863;-12.69405;"YT_MFO2_001";"YT_TID_013";28.6;"RUV";"MAPOR";NA
+"350";"MA_MMA_150";"R3.3";"2019-03-15";"10:48:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96767;-12.6946;"YT_MFO2_001";"YT_TID_013";47;"RUV";"MAPOR";NA
+"351";"MA_MMA_151";"R3.4";"2019-03-15";"10:54:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9669;-12.69492;"YT_MFO2_001";"YT_TID_013";86.2;"RUV";"MAPOR";NA
+"352";"MA_MMA_160";"R2.8";"2019-03-18";"08:49:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95523;-12.67504;"YT_MMA_002";"YT_TID_014";10;"RUV";"MAPOR";NA
+"353";"MA_MMA_161";"R2.7";"2019-03-18";"08:45:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95511;-12.67561;"YT_MMA_002";"YT_TID_014";2.2;"RUV";"MAPOR";NA
+"354";"MA_MMA_162";"R2.6";"2019-03-18";"08:38:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95481;-12.67636;"YT_MMA_002";"YT_TID_014";51;"RUV";"MAPOR";NA
+"355";"MA_MMA_163";"R2.5";"2019-03-18";"08:30:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95462;-12.6767;"YT_MMA_002";"YT_TID_014";80;"RUV";"MAPOR";NA
+"356";"MA_MMA_164";"R3.8";"2019-03-18";"10:25:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9665;-12.69491;"YT_MFO2_002";"YT_TID_014";96;"RUV";"MAPOR";NA
+"357";"MA_MMA_165";"R3.7";"2019-03-18";"10:15:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9677;-12.69463;"YT_MFO2_002";"YT_TID_014";45.5;"RUV";"MAPOR";NA
+"358";"MA_MMA_166";"R3.6";"2019-03-18";"10:09:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9686;-12.69405;"YT_MFO2_002";"YT_TID_014";29.3;"RUV";"MAPOR";NA
+"359";"MA_MMA_167";"R3.5";"2019-03-18";"10:03:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96889;-12.69404;"YT_MFO2_002";"YT_TID_014";7.8;"RUV";"MAPOR";NA
+"360";"MA_MMA_168";"R3.9";"2019-03-18";"10:42:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96685;-12.695;"YT_MFO2_002";"YT_TID_014";87;"RUV";"MAPOR";NA
+"361";"MA_MMA_177";"R2.9";"2019-03-19";"08:23:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95464;-12.67668;"YT_MMA_003";"YT_TID_015";78;"RUV";"MAPOR";NA
+"362";"MA_MMA_178";"R2.10";"2019-03-19";"08:35:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95469;-12.67629;"YT_MMA_003";"YT_TID_015";51;"RUV";"MAPOR";NA
+"363";"MA_MMA_179";"R2.11";"2019-03-19";"08:41:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95509;-12.67553;"YT_MMA_003";"YT_TID_015";28;"RUV";"MAPOR";NA
+"364";"MA_MMA_180";"R2.12";"2019-03-19";"08:46:00";"YT";"Mwamba_maricabou";"YT_MMA";44.95518;-12.67503;"YT_MMA_003";"YT_TID_015";9;"RUV";"MAPOR";NA
+"365";"MA_MMA_181";"R3.10";"2019-03-19";"10:04:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96881;-12.69399;"YT_MFO2_003";"YT_TID_015";9;"RUV";"MAPOR";NA
+"366";"MA_MMA_182";"R3.11";"2019-03-19";"10:12:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.9686;-12.69404;"YT_MFO2_003";"YT_TID_015";28;"RUV";"MAPOR";NA
+"367";"MA_MMA_183";"R3.12";"2019-03-19";"10:18:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96765;-12.69459;"YT_MFO2_003";"YT_TID_015";45;"RUV";"MAPOR";NA
+"368";"MA_MMA_184";"R3.13";"2019-03-19";"10:26:00";"YT";"Mwamba_maricabou";"YT_MFO2";44.96678;-12.69494;"YT_MFO2_003";"YT_TID_015";91;"RUV";"MAPOR";NA
+"369";"MA_MMB_048";"M48";"2019-02-06";"11:41:00";"YT";"Mlongo_mbole";"YT_MMB";44.964;-12.92117;"NA";"YT_TID_004";11;"rosette";"MAPOR";NA
+"370";"MA_MMB_049";"M49";"2019-02-06";"11:45:00";"YT";"Mlongo_mbole";"YT_MMB";44.96373;-12.92115;"NA";"YT_TID_004";33;"rosette";"MAPOR";NA
+"371";"MA_MMB_050";"M50";"2019-02-06";"11:49:00";"YT";"Mlongo_mbole";"YT_MMB";44.96351;-12.92099;"NA";"YT_TID_004";53;"rosette";"MAPOR";NA
+"372";"MA_MMB_051";"M51";"2019-02-06";"11:55:00";"YT";"Mlongo_mbole";"YT_MMB";44.96297;-12.92086;"NA";"YT_TID_004";71;"rosette";"MAPOR";NA
+"373";"MA_MMB_052";"M52";"2019-02-06";"12:04:00";"YT";"Mlongo_mbole";"YT_MMB";44.96222;-12.92052;"NA";"YT_TID_004";92;"rosette";"MAPOR";NA
+"374";"MA_MWD_001";"A1";"2018-11-28";"10:37:00";"YT";"Mwamba_dziani";"YT_MWD";44.97357;-12.95552;"NA";"YT_TID_001";19.5;"RUV";"MAPOR";"thunk blinking light"
+"375";"MA_MWD_002";"D1";"2018-11-28";"11:18:00";"YT";"Mwamba_dziani";"YT_MWD";44.9718;-12.95711;"NA";"YT_TID_001";78.6;"RUV";"MAPOR";"thunk blinking light"
+"376";"MA_MWD_003";"C1";"2018-11-28";"11:07:00";"YT";"Mwamba_dziani";"YT_MWD";44.97234;-12.95672;"NA";"YT_TID_001";55;"RUV";"MAPOR";"thunk blinking light. Depth more around 50-68 range, not sure."
+"377";"MA_MWD_004";"B1";"2018-11-28";"10:51:00";"YT";"Mwamba_dziani";"YT_MWD";44.97289;-12.95606;"NA";"YT_TID_001";34.2;"RUV";"MAPOR";NA
+"378";"MA_MWD_005";"A2";"2018-11-28";"12:13:00";"YT";"Mwamba_dziani";"YT_MWD";44.97363;-12.95549;"NA";"YT_TID_001";18.6;"RUV";"MAPOR";"Dauphin sur site, reste 2h36 donc rien changé!"
+"379";"MA_MWD_006";"A3";"2018-11-29";"11:19:00";"YT";"Mwamba_dziani";"YT_MWD";44.9735;-12.95559;"NA";"YT_TID_002";19.5;"RUV";"MAPOR";"pas de fibre synchro"
+"380";"MA_MWD_007";"C2";"2018-11-29";"10:53:00";"YT";"Mwamba_dziani";"YT_MWD";44.97253;-12.95716;"NA";"YT_TID_002";61;"RUV";"MAPOR";"semble courant ver le nord, dépôt pied du mur mais haut a 50m, pas de fibre de synchro"
+"381";"MA_MWD_008";"B2";"2018-11-29";"11:10:00";"YT";"Mwamba_dziani";"YT_MWD";44.97298;-12.95654;"NA";"YT_TID_002";36;"RUV";"MAPOR";"semble courant ver le nord, pas de fibre synchro"
+"382";"MA_MWD_009";"D2";"2018-11-29";"10:41:00";"YT";"Mwamba_dziani";"YT_MWD";44.97177;-12.95734;"NA";"YT_TID_002";81.1;"RUV";"MAPOR";"semble courant ver le nord, passage de dauphin electra a 12:41"
+"383";"MA_MWD_010";"D3";"2018-11-29";"12:59:00";"YT";"Mwamba_dziani";"YT_MWD";44.97175;-12.95729;"NA";"YT_TID_002";80;"RUV";"MAPOR";"semble courant ver le nord"
+"384";"MA_MWD_011";"C3";"2018-11-29";"13:15:00";"YT";"Mwamba_dziani";"YT_MWD";44.97247;-12.95698;"NA";"YT_TID_002";59.7;"RUV";"MAPOR";"semble courant ver le nord, pas de fibre synchro"
+"385";"MA_MWD_012";"B3";"2018-11-29";"13:31:00";"YT";"Mwamba_dziani";"YT_MWD";44.97296;-12.95642;"NA";"YT_TID_002";34.7;"RUV";"MAPOR";"posé, tiré et reposé, pas de fibre synchro"
+"386";"MA_MWD_013";"A4";"2018-11-29";"13:49:00";"YT";"Mwamba_dziani";"YT_MWD";44.97355;-12.9555;"NA";"YT_TID_002";18.7;"RUV";"MAPOR";"pas de fibre synchro"
+"387";"MA_VVM_126";"R14.1";"2019-03-08";"11:02:00";"YT";"Vara_vara_mati";"YT_VVM";45.13173;-13.07748;"YT_VVM_001";"YT_TID_011";90;"RUV";"MAPOR";NA
+"388";"MA_VVM_127";"R14.2";"2019-03-08";"11:10:00";"YT";"Vara_vara_mati";"YT_VVM";45.13204;-13.0765;"YT_VVM_001";"YT_TID_011";40;"RUV";"MAPOR";NA
+"389";"MA_VVM_128";"R14.3";"2019-03-08";"11:14:00";"YT";"Vara_vara_mati";"YT_VVM";45.13242;-13.07539;"YT_VVM_001";"YT_TID_011";25;"RUV";"MAPOR";NA
+"390";"MA_VVM_129";"R14.4";"2019-03-08";"11:28:00";"YT";"Vara_vara_mati";"YT_VVM";45.13264;-13.07518;"YT_VVM_001";"YT_TID_011";9;"RUV";"MAPOR";NA
+"391";"MA_VVM_185";"R14.5";"2019-03-19";"13:10:00";"YT";"Vara_vara_mati";"YT_VVM";45.13172;-13.07747;"YT_VVM_002";"YT_TID_015";110;"RUV";"MAPOR";NA
+"392";"MA_VVM_186";"R14.6";"2019-03-19";"13:21:00";"YT";"Vara_vara_mati";"YT_VVM";45.13195;-13.07648;"YT_VVM_002";"YT_TID_015";42.7;"RUV";"MAPOR";NA
+"393";"MA_VVM_187";"R14.7";"2019-03-19";"13:26:00";"YT";"Vara_vara_mati";"YT_VVM";45.13243;-13.07536;"YT_VVM_002";"YT_TID_015";27.7;"RUV";"MAPOR";NA
+"394";"MA_VVM_188";"R14.8";"2019-03-19";"13:33:00";"YT";"Vara_vara_mati";"YT_VVM";45.13264;-13.07513;"YT_VVM_002";"YT_TID_015";8;"RUV";"MAPOR";NA
+"395";"MA_VVM_189";"R14.9";"2019-03-20";"08:28:00";"YT";"Vara_vara_mati";"YT_VVM";45.13264;-13.07517;"YT_VVM_003";"YT_TID_016";10;"RUV";"MAPOR";NA
+"396";"MA_VVM_190";"R14.10";"2019-03-20";"08:33:00";"YT";"Vara_vara_mati";"YT_VVM";45.13246;-13.07537;"YT_VVM_003";"YT_TID_016";26;"RUV";"MAPOR";NA
+"397";"MA_VVM_191";"R14.11";"2019-03-20";"08:44:00";"YT";"Vara_vara_mati";"YT_VVM";45.13204;-13.07651;"YT_VVM_003";"YT_TID_016";65;"RUV";"MAPOR";NA
+"398";"MA_VVM_192";"R14.12";"2019-03-20";"08:57:00";"YT";"Vara_vara_mati";"YT_VVM";45.13177;-13.07748;"YT_VVM_003";"YT_TID_016";91;"RUV";"MAPOR";NA
+"399";"MA_VVM_193";"R14.13";"2019-03-20";"09:17:00";"YT";"Vara_vara_mati";"YT_VVM";45.1321;-13.07632;"YT_VVM_003";"YT_TID_016";37.3;"RUV";"MAPOR";NA
+"400";"MA_VVM_194";"R14.14";"2019-03-20";"10:05:00";"YT";"Vara_vara_mati";"YT_VVM";45.13181;-13.07746;"YT_VVM_003";"YT_TID_016";90;"RUV";"MAPOR";NA
+"401";"YT_CUR_01";"couranto1";"2018-11-26";"14:40:00";"YT";"Nangajou";"YT_NAN";44.97392;-12.95538;NA;NA;28.24;"Current_meter";"MAPOR";"couranto posé sur un patch de sable"
+"402";"YT_CUR_02";"couranto2";"2019-02-25";"12:00:00";"YT";"Mwamba_harrabou";"YT_MHA";44.98336;-12.73312;NA;NA;30.64;"Current_meter";"MAPOR";"couranto posé sur un patch de sable calé avec une patate pour le rendre vertical"
+"403";"YT_IBL_01";"Ile_blanche1";"2019-05-13";"08:30:00";"YT";"Ile_blanche";"YT_IBL";45.17066;-12.71617;NA;NA;2.94;"RUV";"CARBODIS";"camera posé face a structure carbodis"
+"404";"YT_SUR_01";"Surprise1";"2019-05-01";"08:00:00";"YT";"Surprise";"YT_SUR";45.14253;-12.63601;NA;NA;2.28;"RUV";"CARBODIS";"film longue durée pas marché, posé face a la structure Carbodis"
+"405";"YT_SUR_02";"Surprise2";"2019-05-02";"08:30:00";"YT";"Surprise";"YT_SUR";45.14253;-12.63601;NA;NA;2.28;"RUV";"CARBODIS";"camera posé face a structure carbodis"

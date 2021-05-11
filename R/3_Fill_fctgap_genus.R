@@ -1,6 +1,3 @@
-#A CHECKER Forcipiger Scaridae Naso
-
-
 
 
 pkgs <- c('ade4','ggplot2','betapart','harrypotter','dplyr','cluster','ape','bbmle',
@@ -12,14 +9,14 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 #Fill gap ---
 #####################
-tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:10)],by.x="row.names",by.y="Row.names")#
+tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:12)],by.x="row.names",by.y="Row.names")#
 rownames(tab) <- tab[,1]
 
-dat_complet<-melt(tab, id.vars = c(1,320:322))
+dat_complet<-melt(tab, id.vars = c(1,320:324))
 dat_complet <- dat_complet[dat_complet$value >0,]
 dat_complet  <- data.frame(merge(dat_complet,fish_traits,by.x="variable",by.y="Species",all.x=T))
 
-colnames(dat_complet)[c(1,6)] <- c("Species", "Abundance")
+colnames(dat_complet)[c(1,8)] <- c("Species", "Abundance")
 
 
 dat_complet$clean_diet <- NA

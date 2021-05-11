@@ -46,19 +46,9 @@ d <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_entropy)) +
   theme_bw()+ylab("Alpha-entropy fonct")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
-e <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_phylo_richess)) + 
-  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Alpha-richness phylo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-f <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_phylo_entropy)) + 
-  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Alpha-entropy phylo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
 title <- textGrob("Alpha Hill",
                   gp=gpar(fontsize=20,fontface=2))
-grid.arrange(a,b,c,d,e,f,ncol=2,top = title)
+grid.arrange(a,b,c,d,ncol=2,top = title)
 
 
 

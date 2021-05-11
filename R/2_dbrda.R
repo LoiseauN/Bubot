@@ -31,7 +31,7 @@ species_site_scale <- species_site_scale[,which(colnames(species_site_scale)!="u
 hab_pc_site_scale <- habit.score
 rownames(hab_pc_site_scale) <- rownames(species_site_scale)
 
-hab_pc_site_scale<- merge(hab_pc_site_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth")]),by.x="row.names",by.y="Sample.name") 
+hab_pc_site_scale<- merge(hab_pc_site_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth","temperature")]),by.x="row.names",by.y="Sample.name") 
 hab_pc_site_scale<-hab_pc_site_scale[,-1]
 hab_pc_site_scale<- aggregate(. ~ Sample.code, data = hab_pc_site_scale, mean)
 
@@ -51,7 +51,7 @@ rownames(hab_pc_site_scale) <- hab_pc_site_scale[,1]
 hab_pc_site_scale<- hab_pc_site_scale[,-1]
 
 
-for(i in 7:9){hab_pc_site_scale[,i] <-as.factor(hab_pc_site_scale[,i]) } 
+for(i in 8:10){hab_pc_site_scale[,i] <-as.factor(hab_pc_site_scale[,i]) } 
 
 species_site_scale <- species.site.matrix$species.matrix
 species_site_scale <- merge(species_site_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code")]),by.x="row.names",by.y="Sample.name") 
@@ -62,6 +62,7 @@ species_site_scale <- species_site_scale[,-1]
 species_site_scale <- species_site_scale[,which(colnames(species_site_scale)!="unknown_fish")]
 species_site_scale <- species_site_scale[apply(species_site_scale,1,sum)>0,]
 hab_pc_site_scale <- hab_pc_site_scale[rownames(hab_pc_site_scale) %in% rownames(species_site_scale) ,]
+species_site_scale <- species_site_scale[rownames(species_site_scale) %in% rownames(hab_pc_site_scale) ,]
 
 
 ### dbrda
@@ -178,7 +179,7 @@ rownames(hab_pc_video_scale) <- rownames(species_video_scale)
 species_video_scale <- species_video_scale[apply(species_video_scale,1,sum)>0,]
 hab_pc_video_scale <- hab_pc_video_scale[rownames(hab_pc_video_scale) %in% rownames(species_video_scale),]
 
-hab_pc_video_scale <- merge(hab_pc_video_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth")]),by.x="row.names",by.y="Sample.name") 
+hab_pc_video_scale <- merge(hab_pc_video_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth","temperature")]),by.x="row.names",by.y="Sample.name") 
 
 
 hab_pc_video_scale$classDepth <- NA
@@ -193,7 +194,7 @@ for (i in 1: nrow(hab_pc_video_scale)){
 }
 
 hab_pc_video_scale <- merge(hab_pc_video_scale,sites,by.x="Sample.code",by.y="Sample_code")
-for(i in 9:11){hab_pc_video_scale[,i] <-as.factor(hab_pc_video_scale[,i]) } 
+for(i in 10:12){hab_pc_video_scale[,i] <-as.factor(hab_pc_video_scale[,i]) } 
 
 ### dbrda
 

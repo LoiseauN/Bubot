@@ -625,6 +625,10 @@ species.matrix=function(DB.connection="yes",work.folder,Max.N,biomass.calc="no")
   # replace the no glog data by sounder data
   depth.sample[is.na(depth.sample)]=depth.sample.bis[is.na(depth.sample)]
   
+  # get the glog temperature
+  temperature.sample=RUV_sampling$temperature[match(sample.code,RUV_sampling$X.sampling_code)]
+  
+  
   # get the gps position
   latitude=Sampling_type$latitude[match(sample.code,Sampling_type$X.sampling_code)]
   longitude=Sampling_type$longitude[match(sample.code,Sampling_type$X.sampling_code)]
@@ -662,6 +666,7 @@ species.matrix=function(DB.connection="yes",work.folder,Max.N,biomass.calc="no")
                        Sample.replicate=sample.replicate,
                        Field.code=Field.code,
                        depth=depth.sample,
+                       temperature=temperature.sample,
                        latitude=latitude,
                        longitude=longitude,
                        Date=date,
@@ -719,6 +724,263 @@ species.matrix=function(DB.connection="yes",work.folder,Max.N,biomass.calc="no")
                      species.data=species.classification)
 }
 ####################################################################################################
+
+
+
+
+
+
+
+#####################################################################################################
+######################################## function 4 #################################################
+#####################################################################################################
+
+
+
+#######################################################################################################
+####################### This is a function to get a summary on samples info ###########################
+#######################################################################################################
+#                                                                                                     #
+#                                     FUNCTION NAME : "sample.summary"                                #
+#                                                                                                     #
+#                                                                                                     #
+#                                                                                                     #
+#    Warning package Rcurl should be installed before running this function. This function ping the   #
+#    server using function "url.exists" to know if we can connect to the database                     #
+#
+#   In this function by default we try to connect to the database and it will connect if we have      #
+#    access to the server. If we want to force not to connect to the server we should set             #
+#      connect.DB=FALSE                                                                               #
+#
+# This function input are the technique (tool) used to analyse video which are webfish and wave       #
+#    ex : measurement.method=c("webfish","wave") the default is webfish and wave, for now this        #
+#         this input should stay as it is or changed as c("vidsync") but do not mix the two           #
+#                                                                                                     #
+#                                                                                                     #
+#                                                                                                     #
+# A second input is the island selection in this case Mayotte, Europa and Juan de Nova                #
+#    ex : island=c("Mayotte","Europa","Juan_de_Nova") any of the island can be removed or added       #
+#         the default is all the island are loaded                                                    #
+#                                                                                                     #
+#                                                                                                     #
+# Finally it is requested to give a working directory in which a Data_dump folder will automatically  #
+# be created to store localy database table to be able to work off line                               #
+#    ex: work.folder="D:/Dropbox/work/research_projects/MAPOR/R_analyses" be carefull, the / might    #
+#        need to be changed under linux I'm not sure                                                  #
+#                                                                                                     #
+#                                                                                                     #
+#                                                                                                     #
+# There is also an option to connect to the database or work only locally (faster). But the first     #
+# running of the code need to be done while connected to internet                                     #
+#     ex: input : DB.connection="yes" will allow an internet connection, anything else than "yes"     #
+#         will force the local working only. The default is a connection ("yes")                      #
+#                                                                                                     #
+#                                                                                                     #
+# The output of that function is just a vector of event numbers that will allow to select obervations #
+# in the original database (RUV_data table)                                                           #
+#                                                                                                     #
+#                                                                                                     #
+#######################################################################################################
+#######################################################################################################
+
+
+# start the function
+sample.summary=function(connect.DB=TRUE,work.folder,max.distance=500) {
+  
+  
+  # by default we do not connect to the database unless connect.DB is set to "yes" which is the default 
+  # in the function sample.summary
+  
+  DB.connection=FALSE
+  if(connect.DB) {
+    # figure out if there is a connection to the server using the package Rcurl
+    library(RCurl)
+    DB.connection=url.exists("162.38.198.139",timeout=5)
+  }
+  
+  # collect data from database
+  
+  if (DB.connection) {
+    # verify that required packages exist, and install them if not
+    if (!require(DBI)) install.packages('DBI')
+    if (!require(RMySQL)) install.packages('RMySQL')
+    # open required packages
+    library(DBI)
+    library(RMySQL)
+    
+    # load MySQL drivers
+    drv=dbDriver("MySQL")
+    
+    # get connection to the database
+    con = dbConnect(drv, user="UVC.reader", dbname="Underwater Visual Census",password="Mayfish976",host="162.38.198.139")
+    
+    # collect the different table available
+    Table.name=dbListTables(con)
+    
+    # load the tables
+    Sampling_type=dbReadTable(con, "Sampling_type")
+    RUV_sampling=dbReadTable(con, "RUV_sampling")
+    RUV_video_info=dbReadTable(con, "RUV_video_info")
+    
+    # set working directory
+    setwd(work.folder)
+    # create a data_dump folder
+    dir.create("Data_dump",showWarnings = F)
+    
+    # save the data locally in case of offline work
+    setwd(paste(work.folder,"/Data_dump",sep=""))
+    # write all the tables
+    write.table(Sampling_type,"Sampling_type.txt",sep=";")
+    write.table(RUV_sampling,"RUV_sampling.txt",sep=";")
+    write.table(RUV_video_info,"RUV_video_info.txt",sep=";")
+  } # close the if condition
+  
+  # set the dump directory
+  setwd(paste(work.folder,"/Data_dump",sep=""))
+  
+  # reopen these files
+  Sampling_type=read.table("Sampling_type.txt",sep=";",header = T)
+  RUV_sampling=read.table("RUV_sampling.txt",sep=";",header = T)
+  RUV_data=read.table("RUV_data.txt",sep=";",header = T)
+  RUV_treatment_metadata=read.table("RUV_treatment_metadata.txt",sep=";",header = T)
+  RUV_video_info=read.table("RUV_video_info.txt",sep=";",header = T)
+  Especes=read.table("Especes.txt",sep=";",header = T)
+  Habitat=read.table("Habitat.txt",sep=";",header = T)
+  
+  # get back to the original working directory
+  setwd(work.folder)
+  
+  
+  
+  #######################################################################################################
+  ############# first work is to attribute a site name based on distances among gps coordinates #########
+  ####################### and a distance after which we consider it to be another site ##################
+  #######################################################################################################
+  
+  
+  # verify that required packages exist, and install them if not
+  if (!require(geosphere)) install.packages('geosphere')
+  # open required packages
+  library(geosphere)
+  
+  # measure all distances among samples
+  
+  sampling_code=Sampling_type$X.sampling_code
+  n=length(sampling_code)
+  distances.sample=matrix(nrow = n,ncol = n,dimnames = list(sampling_code,sampling_code))
+  
+  for (i in 1:n) {
+    for (j in 1:n) {
+      distances.sample[i,j]=distm(c(Sampling_type$longitude[i],Sampling_type$latitude[i]),
+                                  c(Sampling_type$longitude[j],Sampling_type$latitude[j]),fun=distHaversine)
+    }
+  }
+  
+  # make a vector of site name
+  site.name.prelim=vector(length=n)
+  site.name=vector(length=n)
+  # get code for sites
+  for (i in n:1) {
+    site.name.prelim[distances.sample[i,]<max.distance]=paste("S",i,sep="")
+    #sampling_code[distances.sample[i,]<max.distance]
+  }
+  
+  # clean up the code names
+  siten=unique(site.name.prelim)
+  nsit=length(siten)
+  for (i in 1:nsit) {
+    site.name[site.name.prelim==siten[i]]=paste("S",i,sep="")
+  }
+  
+  # collect the depth
+  depth=vector(length=n)
+  depth=RUV_sampling$depth[match(Sampling_type$X.sampling_code,RUV_sampling$X.sampling_code)]
+  depth[is.na(depth)]=Sampling_type$depth[is.na(depth)]
+  
+  # collect sample, country and code in a matrix
+  sample.correspondance=cbind(sampling_code,country=Sampling_type$country,site.name,depth,date=Sampling_type$date)
+  
+  
+  ######################################################################################
+  ########## collect time filmed (usefull) per sample (time start, time end) ###########
+  ######################################################################################
+  
+  ######################################################################################################
+  ######### create two functions to deal with time #####################################################
+  ######################################################################################################
+  secondsToString <- function(x){
+    # display that time in h:min:sec format
+    h=floor(x/(60*60))
+    min=floor(((x/(60*60))-h)*60)
+    sec=round(((((x/(60*60))-h)*60)-min)*60,1)
+    # paste all this in a character string
+    paste(h,":",min,":",sec,sep="")
+  }
+  
+  StringToSeconds <- function (x) {
+    times=as.numeric(unlist(strsplit(x,":")))
+    times[1]*60*60+times[2]*60+times[3]
+  }
+  #####################################################################################################
+  
+  sample.times=data.frame(sample_code="xx",time_start="xx",time_end="xx")
+  
+  # make a loop to fill that vector
+  for (i in 1:length(sampling_code)) {
+    
+    # get the time of the drop
+    time.drop=RUV_sampling$time_in[RUV_sampling$X.sampling_code==sampling_code[i]]
+    
+    # get the total usable length of the stereoscopic video
+    
+    # make a vector to select dataset
+    select=RUV_video_info$Sampling_code==sampling_code[i]
+    
+    # propose a condition if there are data for that sample
+    if (any(select)) {
+      # select dataset 
+      video.info=RUV_video_info[select,]
+      
+      # get the left and right total usable length
+      left.length=sum(unlist(lapply(video.info$Usable_time[video.info$Video_side=="Left"],StringToSeconds)))
+      right.length=sum(unlist(lapply(video.info$Usable_time[video.info$Video_side=="Right"],StringToSeconds)))
+      
+      # find if the shortest video is the right or the left
+      if (left.length <= right.length) side="Left" else side="Right"
+      
+      # get the offset from start of camera and video drop
+      off=max(unlist(lapply(video.info$Camera_landing_time[video.info$Video_side==side],StringToSeconds)))
+      
+      if(length(video.info$Video_side[video.info$Video_side=="Left"])==0 | 
+         length(video.info$Video_side[video.info$Video_side=="Right"])==0) {
+        off=0
+        left.length=0
+        right.length=0
+      }
+      
+      # collect effective begining time and end time for the stereo sample
+      time.start=secondsToString(StringToSeconds(time.drop)+off)
+      time.end=secondsToString(StringToSeconds(time.start)+min(left.length,right.length))
+      
+      # save these times with the sample code
+      sample.times=rbind(sample.times,c(sampling_code[i],time.start,time.end))
+      
+    } else {
+      # if no data save NAs for the given sample code
+      sample.times=rbind(sample.times,c(sampling_code[i],NA,NA))
+    }
+    
+  }
+  
+  # remove the first line
+  sample.times=sample.times[2:(length(sampling_code)+1),]
+  
+  # collect all the interesting info in one dataframe
+  
+  sample.summary=cbind(sample.correspondance,sample.times[,2:3])
+  sample.summary
+}
+
 
 
 
