@@ -132,7 +132,6 @@ alpha_div <- alpha_div[,-1]
 alpha_div <- merge(alpha_div,hab_pc_site_scale,by = "row.names",
                        all.x= T)
 
-hab_pc_site_scale[!rownames(hab_pc_site_scale) %in% rownames(alpha_div),]
 
 rownames(alpha_div) <- alpha_div[,1]
 alpha_div <- alpha_div[,-1]

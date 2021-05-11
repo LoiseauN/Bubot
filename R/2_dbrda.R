@@ -46,7 +46,7 @@ for (i in 1: nrow(hab_pc_site_scale)){
   
 }
 
-hab_pc_site_scale<- merge(hab_pc_site_scale,sites,by.x="Sample.code",by.y="Sample_code")
+hab_pc_site_scale<- merge(hab_pc_site_scale,sites,by.x="Sample.code",by.y="Sample_code",all.x=T)
 rownames(hab_pc_site_scale) <- hab_pc_site_scale[,1]
 hab_pc_site_scale<- hab_pc_site_scale[,-1]
 
