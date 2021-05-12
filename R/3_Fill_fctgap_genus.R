@@ -9,14 +9,14 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 #Fill gap ---
 #####################
-tab <- merge(species_video_scale,hab_pc_video_scale[,c(2,8:12)],by.x="row.names",by.y="Row.names")#
+tab <- merge(species_video_scale,hab_pc_video_scale[,c(1,2,8:12)],by.x="row.names",by.y="Row.names")#
 rownames(tab) <- tab[,1]
 
-dat_complet<-melt(tab, id.vars = c(1,320:324))
+dat_complet<-reshape2::melt(tab, id.vars = c(1,320:325))
 dat_complet <- dat_complet[dat_complet$value >0,]
 dat_complet  <- data.frame(merge(dat_complet,fish_traits,by.x="variable",by.y="Species",all.x=T))
 
-colnames(dat_complet)[c(1,8)] <- c("Species", "Abundance")
+colnames(dat_complet)[c(1,2,3,9)] <- c("Species", "Station", "Site","Abundance")
 
 
 dat_complet$clean_diet <- NA
@@ -274,7 +274,8 @@ dat_complet <- dat_complet[,colnames(dat_complet) %notin% c("Familly","Genus")]
 dat_complet <- merge(dat_complet,taxo_correct, by="Species",all.x= T)
 
 #Clean order and names
-dat_complet <- data.frame(surveys = dat_complet$Row.names,
+dat_complet <- data.frame(surveys = dat_complet$Station,
+                          site = dat_complet$Site,
                             depth = dat_complet$depth,
                             classDepth   = dat_complet$classDepth,
                             island = dat_complet$island,

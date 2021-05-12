@@ -15,8 +15,8 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
 #At the site scale
 
   #Biomass matrix
-    biomass_mat = melt( dat_complet , id.vars = c( "site" , "species" ) , measure.vars = "Groupweigth" )
-    biomass_mat = dcast( biomass_mat , site~species,sum,na.rm=T)
+    biomass_mat = reshape2::melt(dat_complet , id.vars = c( "site" , "species" ) , measure.vars = "Groupweigth")
+    biomass_mat = reshape2::dcast( biomass_mat , site~species,sum,na.rm=T)
     rownames(biomass_mat) <- biomass_mat[,1]
     biomass_mat <- biomass_mat[,-1]
     
@@ -131,7 +131,6 @@ alpha_div <- alpha_div[,-1]
 
 alpha_div <- merge(alpha_div,hab_pc_site_scale,by = "row.names",
                        all.x= T)
-
 
 rownames(alpha_div) <- alpha_div[,1]
 alpha_div <- alpha_div[,-1]

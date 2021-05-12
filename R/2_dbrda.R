@@ -33,8 +33,8 @@ rownames(hab_pc_site_scale) <- rownames(species_site_scale)
 
 hab_pc_site_scale<- merge(hab_pc_site_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth","temperature")]),by.x="row.names",by.y="Sample.name") 
 hab_pc_site_scale<-hab_pc_site_scale[,-1]
-hab_pc_site_scale<- aggregate(. ~ Sample.code, data = hab_pc_site_scale, mean)
-
+hab_pc_site_scale<- aggregate(. ~ Sample.code, data = hab_pc_site_scale, mean,na.action = NULL)
+#
 hab_pc_site_scale$classDepth <- NA
 
 for (i in 1: nrow(hab_pc_site_scale)){
@@ -46,7 +46,7 @@ for (i in 1: nrow(hab_pc_site_scale)){
   
 }
 
-hab_pc_site_scale<- merge(hab_pc_site_scale,sites,by.x="Sample.code",by.y="Sample_code",all.x=T)
+hab_pc_site_scale<- merge(hab_pc_site_scale,sites,by.x="Sample.code",by.y="Sample_code")
 rownames(hab_pc_site_scale) <- hab_pc_site_scale[,1]
 hab_pc_site_scale<- hab_pc_site_scale[,-1]
 
