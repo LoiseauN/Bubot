@@ -86,24 +86,9 @@ d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) +
   theme_bw()+ylab("Beta-entropy fonct")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
-e <- ggplot(ResHill, aes(x=depth, y=phylo_rich_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=phylo_rich_m-phylo_rich_sd, ymax=phylo_rich_m+phylo_rich_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-richness phylo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-f <- ggplot(ResHill, aes(x=depth, y=phylo_entro_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=phylo_entro_m-phylo_entro_sd, ymax=phylo_entro_m+phylo_entro_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-entropy phylo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
-
 title <- textGrob("Depth Decay",
                   gp=gpar(fontsize=20,fontface=2))
-grid.arrange(a,b,c,d,e,f,ncol=2,top = title)
+grid.arrange(a,b,c,d,ncol=2,top = title)
 
 
 alpha_div_all

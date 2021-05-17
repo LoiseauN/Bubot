@@ -148,7 +148,7 @@ p <- ggplot(GDM_results2, aes(x = Component, y = Contribution))+
 #tu as donc autant de points que de vidéos profondes (et donc aucun point entre 0 et 10 sur l'axe des X)
 
 #Plot distance decay en fonction des profondeurs
-coord_depth <- species.site.matrix$site.data[,c(2,5:8)]
+coord_depth <- species.site.matrix$site.data[,c(2,5,7,8)]
 coord_depth<- aggregate(. ~ Sample.code, data = coord_depth, mean)
 rownames(coord_depth) <- coord_depth[,1]
 
