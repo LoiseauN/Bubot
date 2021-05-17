@@ -147,11 +147,16 @@ p <- ggplot(GDM_results2, aes(x = Component, y = Contribution))+
 #Puis tu fais leur moyenne  (et sd) et tu représentes le graph Depth vs beta.
 #tu as donc autant de points que de vidéos profondes (et donc aucun point entre 0 et 10 sur l'axe des X)
 
+#Plot distance decay en fonction des profondeurs
+coord_depth <- species.site.matrix$site.data[,c(2,5:8)]
+coord_depth<- aggregate(. ~ Sample.code, data = coord_depth, mean)
+rownames(coord_depth) <- coord_depth[,1]
 
-coord_depth_mayot <- coord_depth[rownames(coord_depth) %in% rownames(alpha_div_all),]
-#coord_depth_mayot <- coord_depth
-From1to10depth <- subset(coord_depth_mayot, coord_depth_mayot$depth<=10)
-From10toInfdepth <- subset(coord_depth_mayot, coord_depth_mayot$depth>10)
+
+coord_depth <- coord_depth[rownames(coord_depth) %in% rownames(alpha_div_all),]
+#coord_depth <- coord_depth
+From1to10depth <- subset(coord_depth, coord_depth$depth<=10)
+From10toInfdepth <- subset(coord_depth, coord_depth$depth>10)
 
 ResHill <- matrix(NA,nrow(From10toInfdepth),12)
 rownames(ResHill) <- rownames(From10toInfdepth) 
