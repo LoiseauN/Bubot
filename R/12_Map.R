@@ -1,142 +1,60 @@
-
-
-require(rgdal)
-
-#Parametre
-#color_ocean   <- "darkcyan" 
-color_ocean   <- "#303946"
-
-color_ocean   <- "#95D8EB" 
-
+library(mapsf)
+library(rgdal)
+library(sf)
 shape <- readOGR(dsn = ".", layer = "mayotte")
-sp::proj4string(shape) <- CRS("+proj=cea +lon_0=0 +lat_ts=30 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs")
-
-reef <- subset(shape,shape$reef==1)
-land <- subset(shape,shape$land==1)
-lagoon <- subset(shape,shape$land==0)
 coord <- coord_depth[,c(4:3)]
 coords_site <- SpatialPointsDataFrame(coords=coord[,1:2],data = coord,
                                       proj4string=CRS(proj4string(shape)))
 
-head(shape@data)
 
-par(
-  xaxs     = "i",
-  yaxs     = "i",
-  family   =  "serif",
-  mar      = rep(1, 4),
-  cex.axis = 1.25,
-  mgp      = c(2, .5, 0),
-  tcl      = -0.25,
-  xpd      = FALSE,
-  new      = FALSE,
-  fig      = c(0, 1, 0, 1),
-  col      = "#666666",
-  col.axis = "#666666",
-  fg       = "#666666",
-  mfcol    = c(1, 1)
-)
-plot(border, border = T, col = color_ocean)
+mtq <-st_as_sf(shape)
+mtq <-st_transform(mtq, CRS("+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
 
-## Plot Ocean Background ----
+coords_site <- st_as_sf(coords_site)
+coords_site <-st_transform(coords_site, CRS("+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
 
 
-border <- as(raster::extent(c(44.85, 45.35, -13.17628, -12.41611)), "SpatialPolygons")
-
-sp::proj4string(border) <- proj4string(shape)
-
-plot(border, border = T, col = color_ocean)
-
-## Add Figure Box ----
-
-par(xpd = TRUE)
-
-plot(border, border = par()$col, lwd = 4, add = TRUE)
-plot(border, border = "white", lwd = 2, add = TRUE)
-
-par(xpd = FALSE)
-
-## Add map  ----
-plot(shape, 
-     main = "Sampling Sites", add = TRUE)
-plot(lagoon, 
-     add = TRUE,
-     col = "#1C3E5A")#95D8EB
-plot(land, 
-     add = TRUE,
-     col = "#42D185")#chartreuse3
-plot(reef, 
-     add = TRUE,
-     col = "coral2")#
-plot(coords_site, 
-     add = TRUE,
-     col = "red",pch= 21,cex=1.8)
-
-
-## Add axis Box ----
-grd <- addGraticules(prj        = "+proj=cea +lon_0=0 +lat_ts=30 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs",
-                     parallels  = seq(-13.17628, -12.41611, length.out = 8) ,
-                     meridians  = seq( 44.85,  45.35, length.out = 8),
-                     line.color = "#aaaaaa",
-                     line.size  =10,
-                     line.type  = 1,
-                     add        = FALSE
-)
-
-grd[[1]]$label <- round(grd[[1]]$label,2)
-grd[[2]]$label <- round(grd[[2]]$label,2)
-
-par(mgp = c(3, 6, 0))
-axis(
-  side     = 1,
-  at       = grd[[1]][ , "label"],
-  labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 1)
-
-
-axis(
-  side     = 1,
-  at       = grd[[1]][ , "label"],
-  labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 0
-)
-
-par(mgp = c(0.5, -0.45, 0))
-axis(
-  side     = 4,
-  at       = grd[[2]][ , "y"],
-  labels   = paste0(grd[[2]][ , "label"], "°", grd[[2]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 0
-)
-
-par(mgp = c(0.5, 0, 0))
-axis(
-  side     = 3,
-  at       = grd[[1]][ , "x"],
-  labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 0
-)
-
-par(mgp = c(0.5, -0.35, 0))
-axis(
-  side     = 2,
-  at       = grd[[2]][ , "y"],
-  labels   = paste0(grd[[2]][ , "label"], "°", grd[[2]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 1
-)
+#coords_site <- sf::st_as_sf(coord, coords = c("longitude","latitude"))
+#coords_site
+#coords_site <-st_transform(coords_site, CRS("+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
 
 
 
 
-par(xpd = TRUE)
 
-plot(border, border = par()$col, lwd = 4, add = TRUE)
-plot(border, border = "white", lwd = 2, add = TRUE)
 
-par(xpd = FALSE)
+
+mtq$var <- NA
+for (i in 1:nrow(mtq)){
+  if(mtq$land[i]==1)     mtq$var[i] <- "land"     
+  if(mtq$land[i]==0)     mtq$var[i] <- "sea"    
+  if(mtq$reef[i]==1)     mtq$var[i] <- "reef"    
+}
+
+mf_theme("dark")
+mf_map(x = mtq, var = "var", type = "typo",
+       pal = c("chartreuse3","chocolate3","#95D8EB"),leg_title ="")
+
+
+mf_map(x = coords_site, 
+       col="red",add=T,pch=21,cex=1.5,fill="black")
+
+# Start an inset map
+mf_inset_on(x = "worldmap", pos = "right")
+# Plot the position of the sample dataset on a worlmap
+mf_worldmap(lat = -12.831620255852416, lon= 45.15714512616048, col = "#0E3F5C")
+# Close the inset
+mf_inset_off()
+# Plot a title
+mf_title("Mayotte Sampling Sites")
+# Plot a north arrow
+mf_arrow('topleft')
+# Plot a scale bar
+mf_scale(size = 5,lwd=2,cex=1.5)
+
+
+
+
+
+
 
