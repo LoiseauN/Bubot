@@ -1,5 +1,4 @@
 
-
 require(rgdal)
 
 #Parametre
@@ -7,7 +6,7 @@ require(rgdal)
 color_ocean   <- "#303946"
 
 color_ocean   <- "#95D8EB" 
-
+require(rgdal)
 shape <- readOGR(dsn = ".", layer = "mayotte")
 sp::proj4string(shape) <- CRS("+proj=cea +lon_0=0 +lat_ts=30 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs")
 
@@ -21,20 +20,20 @@ coords_site <- SpatialPointsDataFrame(coords=coord[,1:2],data = coord,
 head(shape@data)
 
 par(
-  xaxs     = "i",
-  yaxs     = "i",
-  family   =  "serif",
-  mar      = rep(1, 4),
-  cex.axis = 1.25,
-  mgp      = c(2, .5, 0),
-  tcl      = -0.25,
-  xpd      = FALSE,
-  new      = FALSE,
-  fig      = c(0, 1, 0, 1),
-  col      = "#666666",
-  col.axis = "#666666",
-  fg       = "#666666",
-  mfcol    = c(1, 1)
+        xaxs     = "i",
+        yaxs     = "i",
+        family   =  "serif",
+        mar      = rep(1, 4),
+        cex.axis = 1.25,
+        mgp      = c(2, .5, 0),
+        tcl      = -0.25,
+        xpd      = FALSE,
+        new      = FALSE,
+        fig      = c(0, 1, 0, 1),
+        col      = "#666666",
+        col.axis = "#666666",
+        fg       = "#666666",
+        mfcol    = c(1, 1)
 )
 plot(border, border = T, col = color_ocean)
 
@@ -88,46 +87,46 @@ grd[[2]]$label <- round(grd[[2]]$label,2)
 
 par(mgp = c(3, 6, 0))
 axis(
-  side     = 1,
-  at       = grd[[1]][ , "label"],
-  labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 1)
+        side     = 1,
+        at       = grd[[1]][ , "label"],
+        labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
+        cex.axis = 0.75,
+        lwd      = 1)
 
 
 axis(
-  side     = 1,
-  at       = grd[[1]][ , "label"],
-  labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 0
+        side     = 1,
+        at       = grd[[1]][ , "label"],
+        labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
+        cex.axis = 0.75,
+        lwd      = 0
 )
 
 par(mgp = c(0.5, -0.45, 0))
 axis(
-  side     = 4,
-  at       = grd[[2]][ , "y"],
-  labels   = paste0(grd[[2]][ , "label"], "°", grd[[2]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 0
+        side     = 4,
+        at       = grd[[2]][ , "y"],
+        labels   = paste0(grd[[2]][ , "label"], "°", grd[[2]][ , "direction"]),
+        cex.axis = 0.75,
+        lwd      = 0
 )
 
 par(mgp = c(0.5, 0, 0))
 axis(
-  side     = 3,
-  at       = grd[[1]][ , "x"],
-  labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 0
+        side     = 3,
+        at       = grd[[1]][ , "x"],
+        labels   = paste0(grd[[1]][ , "label"], "°", grd[[1]][ , "direction"]),
+        cex.axis = 0.75,
+        lwd      = 0
 )
 
 par(mgp = c(0.5, -0.35, 0))
 axis(
-  side     = 2,
-  at       = grd[[2]][ , "y"],
-  labels   = paste0(grd[[2]][ , "label"], "°", grd[[2]][ , "direction"]),
-  cex.axis = 0.75,
-  lwd      = 1
+        side     = 2,
+        at       = grd[[2]][ , "y"],
+        labels   = paste0(grd[[2]][ , "label"], "°", grd[[2]][ , "direction"]),
+        cex.axis = 0.75,
+        lwd      = 1
 )
 
 
