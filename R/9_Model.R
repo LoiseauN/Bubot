@@ -44,7 +44,7 @@ Rsqr_mod_alphaFct_entro <- 1 - (mod_alphaFct_entro$deviance/mod_alphaFct_entro$n
 
 ##GDM
 
-hab_pc_site_scale <- merge(hab_pc_site_scale,species.site.matrix$site.data[,c(2,6:7)],by.x="row.names",
+hab_pc_site_scale <- merge(hab_pc_site_scale,species.site.matrix$site.data[,c(2,7:8)],by.x="row.names",
                            by.y="Sample.code",all.x=T)
 
 hab_pc_site_scale <- unique(hab_pc_site_scale)
@@ -53,7 +53,7 @@ hab_pc_site_scale  <- hab_pc_site_scale[,-1]
 hab_pc_site_scale <- hab_pc_site_scale[rownames(hab_pc_site_scale) %in% rownames(alpha_div_all),]
 
 
-hab_selec<-cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c(1,2,6,10,11)])
+hab_selec<-cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c(1,2,6,11,12)])
 
 colnames(hab_selec)<-c("site","PC1","PC2","depth","Lat", "Long")
 
@@ -83,9 +83,7 @@ for(i in 1:4){ #nrow(GDM_results)
   Mod <- gdm(exFormat3, geo=T)
   GDM_results[i,1]<-Mod$explained
   
-  dissim <-  as.data.frame(mat)
-  site<- as.factor(rownames(dissim))
-  dissim<- cbind(site, dissim)
+
   exFormat3 <- formatsitepair(dissim, 
                               bioFormat = 3, 
                               XColumn="Long", 
@@ -98,9 +96,7 @@ for(i in 1:4){ #nrow(GDM_results)
 
   
   
-  dissim <-  as.data.frame(mat)
-  site<- as.factor(rownames(dissim))
-  dissim<- cbind(site, dissim)
+
   exFormat3 <- formatsitepair(dissim, 
                               bioFormat = 3, 
                               XColumn="Long", 
@@ -111,9 +107,7 @@ for(i in 1:4){ #nrow(GDM_results)
   Mod <- gdm(exFormat3, geo=T)
   GDM_results[i,3]<-((GDM_results[i,1]-Mod$explained)/GDM_results[i,1])*100
   
-  dissim <-  as.data.frame(mat)
-  site<- as.factor(rownames(dissim))
-  dissim<- cbind(site, dissim)
+ #Contribution 
   exFormat3 <- formatsitepair(dissim, 
                               bioFormat = 3, 
                               XColumn="Long", 

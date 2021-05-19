@@ -91,7 +91,7 @@ title <- textGrob("Depth Decay",
 grid.arrange(a,b,c,d,ncol=2,top = title)
 
 
-alpha_div_all
+
 
 ggplot(ResHill, aes(x=depth, y=phylo_entro_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
