@@ -18,12 +18,6 @@ coords_site <-st_transform(coords_site, CRS("+proj=robin +lon_0=0 +x_0=0 +y_0=0 
 #coords_site
 #coords_site <-st_transform(coords_site, CRS("+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs"))
 
-
-
-
-
-
-
 mtq$var <- NA
 for (i in 1:nrow(mtq)){
   if(mtq$land[i]==1)     mtq$var[i] <- "land"     
