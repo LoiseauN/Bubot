@@ -28,6 +28,14 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
     biomass_mat <- biomass_mat[rownames(biomass_mat) %in% rownames(preabs_mat),]
     biomass_mat <- biomass_mat[,colnames(biomass_mat) %in% colnames(preabs_mat)]
     
+    #Number at the genus and species and family lever
+    abundance_mat = reshape2::melt(dat_complet , id.vars = c( "site" , "species" ) , measure.vars = "abundance")
+    abundance_mat = reshape2::dcast( abundance_mat , site~species,sum,na.rm=T)
+    rownames(abundance_mat) <- abundance_mat[,1]
+    abundance_mat <- abundance_mat[,-1]
+    abundance_mat <- abundance_mat[rownames(abundance_mat) %in% rownames(biomass_mat),]
+    abundance_mat <- abundance_mat[,colnames(abundance_mat) %in% colnames(biomass_mat)]
+
 #Traits matrix
     trait_mat <- dat_complet[,c("species","mobility","activity","schooling","position","clean_diet",
                              "maxLengthTL_Fishbase")]

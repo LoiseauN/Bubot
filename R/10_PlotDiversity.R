@@ -3,6 +3,29 @@ nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
+
+#Some values
+
+
+sum(abundance_mat[,colnames(abundance_mat) %in% dat_complet$genus])
+sum(abundance_mat[,colnames(abundance_mat) %in% dat_complet$family])
+
+dim(abundance_mat[,colnames(abundance_mat) %in% dat_complet$genus])
+dim(abundance_mat[,colnames(abundance_mat) %in% dat_complet$family])
+
+# Number per detph class
+summa<- matrix(NA,5,4)
+rownames(summa) <- unique(alpha_div_all$classDepth)
+for (i in 1:length(unique(alpha_div_all$classDepth))){
+  summa[i,1] <- mean(subset(alpha_div_all,alpha_div_all$classDepth == unique(alpha_div_all$classDepth)[i])$sp_richn)
+  summa[i,2] <- sd(subset(alpha_div_all,alpha_div_all$classDepth == unique(alpha_div_all$classDepth)[i])$sp_richn)
+  summa[i,3] <- max(subset(alpha_div_all,alpha_div_all$classDepth == unique(alpha_div_all$classDepth)[i])$sp_richn)
+  summa[i,4] <- min(subset(alpha_div_all,alpha_div_all$classDepth == unique(alpha_div_all$classDepth)[i])$sp_richn)
+
+  }
+
+
+
 # Plot alpha
 ind <- c("sp_richn","fdis","fmpd","fnnd","feve","fric","fdiv","fori","fspe",
          "biomass","hill_taxo_entropy","hill_fonct_richess",
