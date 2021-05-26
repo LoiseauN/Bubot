@@ -7,40 +7,148 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 
-mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
 performance::check_normality(mod_biomass)
 performance::check_heteroscedasticity(mod_biomass)
-performance::check_model(mod_biomass)
-performance::model_performance(mod_biomass)
+#performance::check_model(mod_biomass)
+#performance::model_performance(mod_biomass)
 Rsqr_mod_biomass <- 1 - (mod_biomass$deviance/mod_biomass$null.deviance )
 
-mod_alphaS <- glm(sp_richn ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
-mod_alphaentro <- glm(alpha_hill_taxo_entropy ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+relativ_import_biomass <- calc.relimp(mod_biomass)
+relativ_import_biomass <- relativ_import_biomass@lmg *100
+
+mod_alphaS <- glm(sp_richn ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
+mod_alphaentro <- glm(alpha_hill_taxo_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
 performance::check_normality(mod_alphaS)
 performance::check_heteroscedasticity(mod_alphaS)
-performance::check_model(mod_alphaS)
-performance::model_performance(mod_alphaS)
+#performance::check_model(mod_alphaS)
+#performance::model_performance(mod_alphaS)
 Rsqr_mod_alphaS <- 1 - (mod_alphaS$deviance/mod_alphaS$null.deviance )
+
+relativ_import_alphaS <- calc.relimp(mod_alphaS)
+relativ_import_alphaS <- relativ_import_alphaS@lmg *100
 
 performance::check_normality(mod_alphaentro)
 performance::check_heteroscedasticity(mod_alphaentro)
-performance::check_model(mod_alphaentro)
-performance::model_performance(mod_alphaentro)
+#performance::check_model(mod_alphaentro)
+#performance::model_performance(mod_alphaentro)
 Rsqr_mod_alphaentro <- 1 - (mod_alphaentro$deviance/mod_alphaentro$null.deviance )
 
-mod_alphaFct <- glm(alpha_hill_fonct_richess ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
-mod_alphaFct_entro <- glm(alpha_hill_fonct_entropy ~  depth + PC1_hab + PC2_hab, data = alpha_div_all)
+relativ_import_alphaentro <- calc.relimp(mod_alphaentro)
+relativ_import_alphaentro <- relativ_import_alphaentro@lmg *100
+
+mod_alphaFct <- glm(alpha_hill_fonct_richess ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
+mod_alphaFct_entro <- glm(alpha_hill_fonct_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
 performance::check_normality(mod_alphaFct)
 performance::check_heteroscedasticity(mod_alphaFct)
-performance::check_model(mod_alphaFct)
-performance::model_performance(mod_alphaFct)
+#performance::check_model(mod_alphaFct)
+#performance::model_performance(mod_alphaFct)
 Rsqr_mod_alphaFct <- 1 - (mod_alphaFct$deviance/mod_alphaFct$null.deviance )
+
+relativ_import_alphaFct <- calc.relimp(mod_alphaFct)
+relativ_import_alphaFct <- relativ_import_alphaFct@lmg *100
 
 performance::check_normality(mod_alphaFct_entro)
 performance::check_heteroscedasticity(mod_alphaFct_entro)
-performance::check_model(mod_alphaFct_entro)
-performance::model_performance(mod_alphaFct_entro)
+#performance::check_model(mod_alphaFct_entro)
+#performance::model_performance(mod_alphaFct_entro)
 Rsqr_mod_alphaFct_entro <- 1 - (mod_alphaFct_entro$deviance/mod_alphaFct_entro$null.deviance )
+
+relativ_import_alphaFct_entro <- calc.relimp(mod_alphaFct_entro)
+relativ_import_alphaFct_entro <- relativ_import_alphaFct_entro@lmg *100
+
+##Plot relative importance
+relativ_import_alphaS <- data.frame(indice = as.factor(rep("Taxonomic richness",5)), 
+                             var = as.factor(names(relativ_import_alphaS)),
+                             contribution = c(t(relativ_import_alphaS)[1,]))
+relativ_import_alphaS <- relativ_import_alphaS %>%
+  arrange(contribution) %>%
+  tail(20) %>%
+  mutate(var=factor(var, var)) %>%
+  ggplot( aes(x=var, y=contribution) ) +
+  geom_segment( aes(x=var ,xend=var, y=0, yend=contribution), color="grey") +
+  geom_point(size=3, color="#69b3a2") +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none"
+  ) +
+  xlab("Variables") +
+  ylab("")+
+  ggtitle("Species Richness")
+
+#----
+relativ_import_alphaentro <- data.frame(indice = as.factor(rep("Taxonomic richness",5)), 
+                                    var = as.factor(names(relativ_import_alphaentro)),
+                                    contribution = c(t(relativ_import_alphaentro)[1,]))
+relativ_import_alphaentro <- relativ_import_alphaentro %>%
+  arrange(contribution) %>%
+  tail(20) %>%
+  mutate(var=factor(var, var)) %>%
+  ggplot( aes(x=var, y=contribution) ) +
+  geom_segment( aes(x=var ,xend=var, y=0, yend=contribution), color="grey") +
+  geom_point(size=3, color="#69b3a2") +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none"
+  ) +
+  xlab("") +
+  ylab("")+
+  ggtitle("Species Entropy")
+
+
+#----
+relativ_import_alphaFct <- data.frame(indice = as.factor(rep("Taxonomic richness",5)), 
+                                    var = as.factor(names(relativ_import_alphaFct)),
+                                    contribution = c(t(relativ_import_alphaFct)[1,]))
+relativ_import_alphaFct <- relativ_import_alphaFct %>%
+  arrange(contribution) %>%
+  tail(20) %>%
+  mutate(var=factor(var, var)) %>%
+  ggplot( aes(x=var, y=contribution) ) +
+  geom_segment( aes(x=var ,xend=var, y=0, yend=contribution), color="grey") +
+  geom_point(size=3, color="#69b3a2") +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none"
+  ) +
+  xlab("Variables") +
+  ylab("Contribution")+
+  ggtitle("Functional Richness")
+
+#----
+relativ_import_alphaFct_entro <- data.frame(indice = as.factor(rep("Taxonomic richness",5)), 
+                                    var = as.factor(names(relativ_import_alphaFct_entro)),
+                                    contribution = c(t(relativ_import_alphaFct_entro)[1,]))
+relativ_import_alphaFct_entro <- relativ_import_alphaFct_entro %>%
+  arrange(contribution) %>%
+  tail(20) %>%
+  mutate(var=factor(var, var)) %>%
+  ggplot( aes(x=var, y=contribution) ) +
+  geom_segment( aes(x=var ,xend=var, y=0, yend=contribution), color="grey") +
+  geom_point(size=3, color="#69b3a2") +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none"
+  ) +
+  xlab("") +
+  ylab("Contribution")+
+  ggtitle("Functional Entropy")
+
+grid.arrange(relativ_import_alphaS,relativ_import_alphaentro,relativ_import_alphaFct,relativ_import_alphaFct_entro,
+             nrow=2)
+
 
 ##GDM
 

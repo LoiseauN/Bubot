@@ -16,6 +16,7 @@ dim(abundance_mat[,colnames(abundance_mat) %in% dat_complet$family])
 # Number per detph class
 summa<- matrix(NA,5,4)
 rownames(summa) <- unique(alpha_div_all$classDepth)
+colnames(summa) <- c("mean","sd","max","min")
 for (i in 1:length(unique(alpha_div_all$classDepth))){
   summa[i,1] <- mean(subset(alpha_div_all,alpha_div_all$classDepth == unique(alpha_div_all$classDepth)[i])$sp_richn)
   summa[i,2] <- sd(subset(alpha_div_all,alpha_div_all$classDepth == unique(alpha_div_all$classDepth)[i])$sp_richn)
@@ -85,7 +86,7 @@ a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) +
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-richness taxo")+
+  theme_bw()+ylab("Beta-richness taxo")+ylab("Depth Distance")
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
