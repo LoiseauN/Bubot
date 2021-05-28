@@ -99,7 +99,6 @@ save(sizeBUBOT_clean,file=file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 load(file= file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 load(file= file.path(outputs_dir,"sizeRLS_clean.RData"))
 
-
 dat_complet$size <- NA
 
 for (i in 1:nrow(dat_complet)){

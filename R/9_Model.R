@@ -16,6 +16,7 @@ Rsqr_mod_biomass <- 1 - (mod_biomass$deviance/mod_biomass$null.deviance )
 
 relativ_import_biomass <- calc.relimp(mod_biomass)
 relativ_import_biomass <- relativ_import_biomass@lmg *100
+visreg::visreg(mod_biomass, "depth")
 
 mod_alphaS <- glm(sp_richn ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
 mod_alphaentro <- glm(alpha_hill_taxo_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
@@ -27,6 +28,7 @@ Rsqr_mod_alphaS <- 1 - (mod_alphaS$deviance/mod_alphaS$null.deviance )
 
 relativ_import_alphaS <- calc.relimp(mod_alphaS)
 relativ_import_alphaS <- relativ_import_alphaS@lmg *100
+visreg::visreg(mod_alphaS, "depth")
 
 performance::check_normality(mod_alphaentro)
 performance::check_heteroscedasticity(mod_alphaentro)
@@ -36,6 +38,8 @@ Rsqr_mod_alphaentro <- 1 - (mod_alphaentro$deviance/mod_alphaentro$null.deviance
 
 relativ_import_alphaentro <- calc.relimp(mod_alphaentro)
 relativ_import_alphaentro <- relativ_import_alphaentro@lmg *100
+visreg::visreg(mod_alphaentro, "depth")
+
 
 mod_alphaFct <- glm(alpha_hill_fonct_richess ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
 mod_alphaFct_entro <- glm(alpha_hill_fonct_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
@@ -47,6 +51,8 @@ Rsqr_mod_alphaFct <- 1 - (mod_alphaFct$deviance/mod_alphaFct$null.deviance )
 
 relativ_import_alphaFct <- calc.relimp(mod_alphaFct)
 relativ_import_alphaFct <- relativ_import_alphaFct@lmg *100
+visreg::visreg(mod_alphaFct, "depth")
+
 
 performance::check_normality(mod_alphaFct_entro)
 performance::check_heteroscedasticity(mod_alphaFct_entro)
@@ -56,6 +62,9 @@ Rsqr_mod_alphaFct_entro <- 1 - (mod_alphaFct_entro$deviance/mod_alphaFct_entro$n
 
 relativ_import_alphaFct_entro <- calc.relimp(mod_alphaFct_entro)
 relativ_import_alphaFct_entro <- relativ_import_alphaFct_entro@lmg *100
+
+visreg::visreg(mod_alphaFct_entro, "depth")
+
 
 ##Plot relative importance
 relativ_import_alphaS <- data.frame(indice = as.factor(rep("Taxonomic richness",5)), 
@@ -161,14 +170,16 @@ hab_pc_site_scale  <- hab_pc_site_scale[,-1]
 hab_pc_site_scale <- hab_pc_site_scale[rownames(hab_pc_site_scale) %in% rownames(alpha_div_all),]
 
 
-hab_selec<-cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c(1,2,6,11,12)])
+hab_selec<-cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c("PC1","PC2","PC3","PC4",
+                                                                  "depth","latitude","longitude")])
 
-colnames(hab_selec)<-c("site","PC1","PC2","depth","Lat", "Long")
+colnames(hab_selec)<-c("site","PC1","PC2","PC3","PC4","depth","Lat", "Long")
 
-GDM_results<-matrix(NA,4,4)
+GDM_results<-matrix(NA,4,6)
 rownames(GDM_results)<-c("beta_hill_taxo_richess","beta_hill_taxo_entropy",
                          "beta_hill_fonct_richess","beta_hill_fonct_entropy")
-colnames(GDM_results)<-c("DevianceExplained","contrib_PC1","contrib_PC2","contrib_depth")
+colnames(GDM_results)<-c("DevianceExplained","contrib_PC1","contrib_PC2",
+                         "contrib_PC3","contrib_PC4","contrib_depth")
 
 
 for(i in 1:4){ #nrow(GDM_results)
@@ -226,22 +237,126 @@ for(i in 1:4){ #nrow(GDM_results)
   Mod <- gdm(exFormat3, geo=T)
   GDM_results[i,4]<-((GDM_results[i,1]-Mod$explained)/GDM_results[i,1])*100
   
+  exFormat3 <- formatsitepair(dissim, 
+                              bioFormat = 3, 
+                              XColumn="Long", 
+                              YColumn="Lat", 
+                              predData=hab_selec[,-5], 
+                              siteColumn="site")
+  
+  Mod <- gdm(exFormat3, geo=T)
+  GDM_results[i,5]<-((GDM_results[i,1]-Mod$explained)/GDM_results[i,1])*100
+  
+  
+  exFormat3 <- formatsitepair(dissim, 
+                              bioFormat = 3, 
+                              XColumn="Long", 
+                              YColumn="Lat", 
+                              predData=hab_selec[,-6], 
+                              siteColumn="site")
+  
+  Mod <- gdm(exFormat3, geo=T)
+  GDM_results[i,6]<-((GDM_results[i,1]-Mod$explained)/GDM_results[i,1])*100
+  
   
 }
   
-GDM_results2 <- data.frame(Component = c(rep("beta_hill_taxo_richess",3),
-                 rep("beta_hill_taxo_entropy",3),
-                 rep("beta_hill_fonct_richess",3),
-                 rep("beta_hill_fonct_entropy",3)),
-                 drivers = rep(c("PC1","PC2","depth"),4),
-                 Contribution = c(GDM_results[1,2:4],
-                             GDM_results[2,2:4],
-                             GDM_results[3,2:4],
-                             GDM_results[4,2:4]))
+GDM_beta_hill_taxo_richess <- data.frame(
+                 var = c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","depth"),
+                 contribution = GDM_results[1,2:6])
+
+GDM_beta_hill_taxo_entropy <- data.frame(
+  var = c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","depth"),
+  contribution = GDM_results[2,2:6])
+
+GDM_beta_hill_fonct_richess <- data.frame(
+  var = c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","depth"),
+  contribution = GDM_results[3,2:6])
+
+GDM_beta_hill_fonct_entropy <- data.frame(
+  var = c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","depth"),
+  contribution = GDM_results[4,2:6])
                  
-p <- ggplot(GDM_results2, aes(x = Component, y = Contribution))+
-  geom_col(aes(fill = drivers), width = 0.7)+
-  coord_flip()+ theme_bw()
+GDM_beta_hill_taxo_richess_plot <- GDM_beta_hill_taxo_richess %>%
+  arrange(contribution) %>%
+  tail(20) %>%
+  mutate(var=factor(var, var)) %>%
+  ggplot( aes(x=var, y=contribution) ) +
+  geom_segment( aes(x=var ,xend=var, y=0, yend=contribution), color="grey") +
+  geom_point(size=3, color="#69b3a2") +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none"
+  ) +
+  xlab("Contribution") +
+  ylab("Variables")+
+  ggtitle("Beta Taxonomic Richness")
+
+
+GDM_beta_hill_taxo_entropy_plot <- GDM_beta_hill_taxo_entropy %>%
+  arrange(contribution) %>%
+  tail(20) %>%
+  mutate(var=factor(var, var)) %>%
+  ggplot( aes(x=var, y=contribution) ) +
+  geom_segment( aes(x=var ,xend=var, y=0, yend=contribution), color="grey") +
+  geom_point(size=3, color="#69b3a2") +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none"
+  ) +
+  xlab("") +
+  ylab("Contribution")+
+  ggtitle("Beta Taxonomic Entropy")
+
+
+GDM_beta_hill_fonct_richess_plot <- GDM_beta_hill_fonct_richess %>%
+  arrange(contribution) %>%
+  tail(20) %>%
+  mutate(var=factor(var, var)) %>%
+  ggplot( aes(x=var, y=contribution) ) +
+  geom_segment( aes(x=var ,xend=var, y=0, yend=contribution), color="grey") +
+  geom_point(size=3, color="#69b3a2") +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none"
+  ) +
+  xlab("") +
+  ylab("Contribution")+
+  ggtitle("Beta Functional Richness")
+
+
+GDM_beta_hill_fonct_entropy_plot <- GDM_beta_hill_fonct_entropy %>%
+  arrange(contribution) %>%
+  tail(20) %>%
+  mutate(var=factor(var, var)) %>%
+  ggplot( aes(x=var, y=contribution) ) +
+  geom_segment( aes(x=var ,xend=var, y=0, yend=contribution), color="grey") +
+  geom_point(size=3, color="#69b3a2") +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    legend.position="none"
+  ) +
+  xlab("") +
+  ylab("Contribution")+
+  ggtitle("Beta Functional Entropy")
+
+grid.arrange(GDM_beta_hill_taxo_richess_plot,
+             GDM_beta_hill_taxo_entropy_plot,
+             GDM_beta_hill_fonct_richess_plot,
+             GDM_beta_hill_fonct_entropy_plot,
+             nrow=2)
 
 #To make a table summarizing all models for supplementary
 aov_cluster_table_df <- rbind(aov_logNC, aov_PropSin,aov_PropC1)
