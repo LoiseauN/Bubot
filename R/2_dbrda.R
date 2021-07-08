@@ -41,8 +41,7 @@ for (i in 1: nrow(hab_pc_site_scale)){
   if(hab_pc_site_scale$depth[i]<20){ hab_pc_site_scale$classDepth[i] <- "[0-20["}
   if(hab_pc_site_scale$depth[i]>=20 & hab_pc_site_scale$depth[i]<40){ hab_pc_site_scale$classDepth[i] <- "[20-40["}
   if(hab_pc_site_scale$depth[i]>=40 & hab_pc_site_scale$depth[i]<60){ hab_pc_site_scale$classDepth[i] <- "[40-60["}
-  if(hab_pc_site_scale$depth[i]>=60 & hab_pc_site_scale$depth[i]<80){ hab_pc_site_scale$classDepth[i] <- "[60-80["}
-  if(hab_pc_site_scale$depth[i]>=80){ hab_pc_site_scale$classDepth[i] <- ">80"}
+  if(hab_pc_site_scale$depth[i]>=60 <- ">60"}
   
 }
 
@@ -145,7 +144,7 @@ ggplot(site_scores_environment, aes(x= CAP1, y = CAP2)) +
                 alpha = 0.2, show.legend = FALSE) +
   
   scale_fill_hp(discrete = TRUE, option = "HarryPotter", name = "classDepth",
-                labels = c("[0-20[","[20-40[", "[40-60[", "[60-80[",">80")) +
+                labels = c("[0-20[","[20-40[", "[40-60[", ">60",">80")) +
   
   scale_shape_manual(values = c(25:21),
                      

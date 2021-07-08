@@ -1,4 +1,4 @@
-pkgs <- c('reshape2','mFD','viridis','data.table','ggplot2')
+pkgs <- c('reshape2','mFD','viridis','data.table','ggplot2','grid')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
@@ -14,7 +14,7 @@ dim(abundance_mat[,colnames(abundance_mat) %in% dat_complet$genus])
 dim(abundance_mat[,colnames(abundance_mat) %in% dat_complet$family])
 
 # Number per detph class
-summa<- matrix(NA,5,4)
+summa<- matrix(NA,4,4)
 rownames(summa) <- unique(alpha_div_all$classDepth)
 colnames(summa) <- c("mean","sd","max","min")
 for (i in 1:length(unique(alpha_div_all$classDepth))){
@@ -44,35 +44,37 @@ ggplot(df,aes(x = depth, y = value, color = variable )) +
     theme(legend.position = "none")
 
 
-biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=biomass)) + 
+biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=log10(biomass))) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Biomass")+
+  theme_bw()+ylab("Biomass")+xlab("Depth (m)")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 
 a <- ggplot(alpha_div_all, aes(x=depth, y=sp_richn)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-   theme_bw()+ylab("Alpha-richness taxo")+
+   theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")+
+  theme(plot.title = element_text(hjust = 0.5))+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 b <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_taxo_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Alpha-entropy taxo")+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Structure")+
+  theme(plot.title = element_text(hjust = 0.5))+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 c <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_richess)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Alpha-richness fonct")+
+  theme_bw()+ylab("Functional")+xlab("Depth (m)")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 d <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Alpha-entropy fonct")+
+  theme_bw()+ylab("")+xlab("Depth (m)")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
-title <- textGrob("Alpha Hill",
-                  gp=gpar(fontsize=20,fontface=2))
-grid.arrange(a,b,c,d,ncol=2,top = title)
+#title <- textGrob("Alpha Hill",
+#                  gp=gpar(fontsize=20,fontface=2))
+grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
 
 
@@ -86,35 +88,35 @@ a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) +
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-richness taxo")+ylab("Depth Distance")
+  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Dissimiliarity composition")+
+  theme(plot.title = element_text(hjust = 0.5))+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=taxo_entro_m-taxo_entro_sd, ymax=taxo_entro_m+taxo_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-entropy taxo")+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Dissimiliarity structure")+
+  theme(plot.title = element_text(hjust = 0.5))+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=fct_rich_m-fct_rich_sd, ymax=fct_rich_m+fct_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-richness fonct")+
+  theme_bw()+ylab("Functional")+xlab("Difference Depth (m)")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=fct_entro_m-fct_entro_sd, ymax=fct_entro_m+fct_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-entropy fonct")+
+  theme_bw()+ylab("")+xlab("Difference Depth (m)")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
-title <- textGrob("Depth Decay",
-                  gp=gpar(fontsize=20,fontface=2))
-grid.arrange(a,b,c,d,ncol=2,top = title)
-
-
+#title <- textGrob("Depth Decay",
+ #                 gp=gpar(fontsize=20,fontface=2))
+grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
 
 ggplot(ResHill, aes(x=depth, y=phylo_entro_m)) + 
@@ -207,16 +209,18 @@ library(mFD)
 # color code for depth ----
 
 hab_depth<-c("[0-20[","[20-40[","[40-60[",
-             "[60-80[",">80")
+             ">60")
+
+hab_depth<-c("0-20m","20-40m","40-60m",
+             ">60m")
 
 vcolors <- col2rgb(c("cyan2","deepskyblue",
-                     "deepskyblue3","dodgerblue3","dodgerblue4"))
+                     "deepskyblue3","dodgerblue4"))
 
 
 vcolors <- apply(vcolors, 2, function(x) {
   rgb(red = x[1], green = x[2], blue = x[3], maxColorValue = 255)
 })
-
 
 
 
@@ -263,7 +267,7 @@ for (z in 1:length(pairs_axes))
     # background with axes range set + title
     ggplot_v<-background.plot(range_faxes=range_axes,
                               faxes_nm=paste0("PC", xy), 
-                              color_bg="#FFA5001E")
+                              color_bg="white")
     ggplot_v<-ggplot_v + labs(subtitle=v)
     
     # convex hull of species pool
@@ -271,7 +275,7 @@ for (z in 1:length(pairs_axes))
                         sp_coord2D=pool_coord[,xy],
                         vertices_nD=pool_vert_nm,
                         plot_pool=FALSE,
-                        color_ch=NA, fill_ch="white", alpha_ch=1
+                        color_ch=NA, fill_ch="gray90", alpha_ch=1
     )
     
     # plot convex hull of assemblage but not species
@@ -310,9 +314,9 @@ for (z in 1:length(pairs_axes))
   }# end of v
   
   
-  # patchwork of plots : 4 habitats (rows) * 3 columns (pH)
-  FD_xy<- (ggplot_list[[1]] + ggplot_list[[2]] + ggplot_list[[3]] ) / 
-    (ggplot_list[[4]] + ggplot_list[[5]])
+  # patchwork of plots : 2 habitats (rows) * 2 columns (pH)
+  FD_xy<- (ggplot_list[[1]] + ggplot_list[[2]] ) / 
+    (ggplot_list[[3]]+  ggplot_list[[4]] )
   
   
   # saving as png ----
