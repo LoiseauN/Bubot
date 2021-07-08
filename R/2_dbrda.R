@@ -41,7 +41,7 @@ for (i in 1: nrow(hab_pc_site_scale)){
   if(hab_pc_site_scale$depth[i]<20){ hab_pc_site_scale$classDepth[i] <- "[0-20["}
   if(hab_pc_site_scale$depth[i]>=20 & hab_pc_site_scale$depth[i]<40){ hab_pc_site_scale$classDepth[i] <- "[20-40["}
   if(hab_pc_site_scale$depth[i]>=40 & hab_pc_site_scale$depth[i]<60){ hab_pc_site_scale$classDepth[i] <- "[40-60["}
-  if(hab_pc_site_scale$depth[i]>=60 <- ">60"}
+  if(hab_pc_site_scale$depth[i]>=60 <- hab_pc_site_scale$classDepth[i]">60"}
   
 }
 
