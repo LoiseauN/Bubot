@@ -7,6 +7,8 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 #Compute all indices
 load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
+
+
 #load("~/Documents/Bubot/Bubot_Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 

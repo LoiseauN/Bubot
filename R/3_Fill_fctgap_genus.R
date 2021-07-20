@@ -16,7 +16,7 @@ dat_complet<-reshape2::melt(tab, id.vars = c(1,320:325))
 dat_complet <- dat_complet[dat_complet$value >0,]
 dat_complet  <- data.frame(merge(dat_complet,fish_traits,by.x="variable",by.y="Species",all.x=T))
 
-colnames(dat_complet)[c(1,2,3,9)] <- c("Species", "Station", "Site","Abundance")
+colnames(dat_complet)[c(1,2,3,7,9)] <- c("Species", "Station", "Site","island","Abundance")
 
 
 dat_complet$clean_diet <- NA
@@ -424,7 +424,7 @@ dat_complet$activity <- factor(dat_complet$activity)
                                                              "Pseudochromidae",
                                                              "Siganidae"),]
     
-save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+#save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
     
 
  

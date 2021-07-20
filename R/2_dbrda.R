@@ -41,7 +41,7 @@ for (i in 1: nrow(hab_pc_site_scale)){
   if(hab_pc_site_scale$depth[i]<20){ hab_pc_site_scale$classDepth[i] <- "[0-20["}
   if(hab_pc_site_scale$depth[i]>=20 & hab_pc_site_scale$depth[i]<40){ hab_pc_site_scale$classDepth[i] <- "[20-40["}
   if(hab_pc_site_scale$depth[i]>=40 & hab_pc_site_scale$depth[i]<60){ hab_pc_site_scale$classDepth[i] <- "[40-60["}
-  if(hab_pc_site_scale$depth[i]>=60 <- hab_pc_site_scale$classDepth[i]">60"}
+  if(hab_pc_site_scale$depth[i]>=60) {hab_pc_site_scale$classDepth[i]  <- ">60"}
   
 }
 
@@ -120,7 +120,7 @@ site_scores_environment <- cbind(site_scores,hab_pc_site_scale) %>%   # merge
 
 # set correct factor level order
 
-site_scores_environment$classDepth <- factor(site_scores_environment$classDepth, levels=c("[0-20[","[20-40[", "[40-60[", "[60-80[",">80"))
+site_scores_environment$classDepth <- factor(site_scores_environment$classDepth, levels=c("[0-20[","[20-40[","[40-60[",">60"))
 
 site_scores_environment$island <- factor(site_scores_environment$island, levels=c("Europa","Juan_de_nova","Mayotte"))
 
@@ -181,14 +181,14 @@ hab_pc_video_scale <- hab_pc_video_scale[rownames(hab_pc_video_scale) %in% rowna
 hab_pc_video_scale <- merge(hab_pc_video_scale,data.frame(species.site.matrix$site.data[,c("Sample.name","Sample.code","depth","temperature")]),by.x="row.names",by.y="Sample.name") 
 
 
+
 hab_pc_video_scale$classDepth <- NA
 
 for (i in 1: nrow(hab_pc_video_scale)){
   if(hab_pc_video_scale$depth[i]<20){ hab_pc_video_scale$classDepth[i] <- "[0-20["}
   if(hab_pc_video_scale$depth[i]>=20 & hab_pc_video_scale$depth[i]<40){ hab_pc_video_scale$classDepth[i] <- "[20-40["}
   if(hab_pc_video_scale$depth[i]>=40 & hab_pc_video_scale$depth[i]<60){ hab_pc_video_scale$classDepth[i] <- "[40-60["}
-  if(hab_pc_video_scale$depth[i]>=60 & hab_pc_video_scale$depth[i]<80){ hab_pc_video_scale$classDepth[i] <- "[60-80["}
-  if(hab_pc_video_scale$depth[i]>=80){ hab_pc_video_scale$classDepth[i] <- ">80"}
+  if(hab_pc_video_scale$depth[i]>=60) {hab_pc_video_scale$classDepth[i]  <- ">60"}
   
 }
 
@@ -251,7 +251,7 @@ site_scores_environment <- cbind(site_scores,hab_pc_video_scale) %>%   # merge
 
 # set correct factor level order
 
-site_scores_environment$classDepth <- factor(site_scores_environment$classDepth, levels=c("[0-20[","[20-40[", "[40-60[", "[60-80[",">80"))
+site_scores_environment$classDepth <- factor(site_scores_environment$classDepth, levels=c("[0-20[","[20-40[","[40-60[",">60"))
 
 site_scores_environment$island <- factor(site_scores_environment$island, levels=c("Europa","Juan_de_nova","Mayotte"))
 
