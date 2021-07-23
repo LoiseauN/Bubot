@@ -225,3 +225,66 @@ alpha_div_sensibility <- merge(alpha_div_sensibility,hab_pc_site_scale,by = "row
 
 rownames(alpha_div_sensibility) <- alpha_div_sensibility[,1]
 alpha_div_sensibility <- alpha_div_sensibility[,-1]
+
+
+
+#######################
+biomass_mat_sensibility0_1<- biomass_mat_sensibility
+biomass_mat_sensibility0_1[biomass_mat_sensibility0_1>0] <-1
+
+alpha_hill_taxo_entropy  <- mFD::alpha.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility),
+                                                sp_dist  = sp_dist_traits,
+                                                q        = 1,
+                                                tau      = "min")$asb_FD_Hill
+
+alpha_hill_fonct_richess <- mFD::alpha.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility0_1),
+                                                sp_dist  = sp_dist_traits,
+                                                q        = 0,
+                                                tau      = "mean")$asb_FD_Hill
+
+alpha_hill_fonct_entropy <- mFD::alpha.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility),
+                                                sp_dist  = sp_dist_traits,
+                                                q        = 1,
+                                                tau      = "mean")$asb_FD_Hill
+
+alpha_hill_all <- data.frame(hill_taxo_entropy  = alpha_hill_taxo_entropy[,1],
+                             hill_fonct_richess = alpha_hill_fonct_richess[,1],
+                             hill_fonct_entropy = alpha_hill_fonct_entropy[,1])
+
+
+colnames(alpha_hill_all) <- c("alpha_hill_taxo_entropy",
+                              "alpha_hill_fonct_richess","alpha_hill_fonct_entropy")
+
+
+alpha_div_sensibility <- merge(alpha_div_sensibility,alpha_hill_all,by="row.names")
+rownames(alpha_div_sensibility) <- alpha_div_sensibility[,1]
+alpha_div_sensibility <- alpha_div_sensibility[,-c(1)]
+
+colnames(alpha_div_all)[c(15:19)] <- c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","PC5_hab")
+
+
+
+#######################
+a <- ggplot(alpha_div_sensibility, aes(x=depth, y=sp_richn)) + 
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
+  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+b <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_taxo_entropy)) + 
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Structure")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+c <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_fonct_richess)) + 
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
+  theme_bw()+ylab("Functional")+xlab("Depth (m)")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+d <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_fonct_entropy)) + 
+  geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
+  theme_bw()+ylab("")+xlab("Depth (m)")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+grid.arrange(a,b,c,d,ncol=2)#,top = title)
+

@@ -5,7 +5,9 @@ nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 #Model Alpha : 
 
-
+mod_biomass = lmer(biomass~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
+                     control = lmerControl(optimizer = "optimx", calc.derivs = T,
+                                           optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
 
 mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
 performance::check_normality(mod_biomass)
@@ -16,8 +18,10 @@ Rsqr_mod_biomass <- 1 - (mod_biomass$deviance/mod_biomass$null.deviance )
 
 relativ_import_biomass <- calc.relimp(mod_biomass)
 relativ_import_biomass <- relativ_import_biomass@lmg *100
-visreg::visreg(mod_biomass, "depth")
+a <- visreg::visreg(mod_biomass, "depth", ylab= "Biomass", xlab = "Depth")
 
+
+par(mfrow=c(2,2))
 mod_alphaS <- glm(sp_richn ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
 mod_alphaentro <- glm(alpha_hill_taxo_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
 performance::check_normality(mod_alphaS)
@@ -28,7 +32,11 @@ Rsqr_mod_alphaS <- 1 - (mod_alphaS$deviance/mod_alphaS$null.deviance )
 
 relativ_import_alphaS <- calc.relimp(mod_alphaS)
 relativ_import_alphaS <- relativ_import_alphaS@lmg *100
-visreg::visreg(mod_alphaS, "depth")
+b <- visreg::visreg(mod_alphaS, "depth", ylab="Taxonomic" , xlab = "", gg=T)+
+theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  geom_smooth(method = lm,colour="orange",fill="orange")
+
 
 performance::check_normality(mod_alphaentro)
 performance::check_heteroscedasticity(mod_alphaentro)
@@ -38,7 +46,7 @@ Rsqr_mod_alphaentro <- 1 - (mod_alphaentro$deviance/mod_alphaentro$null.deviance
 
 relativ_import_alphaentro <- calc.relimp(mod_alphaentro)
 relativ_import_alphaentro <- relativ_import_alphaentro@lmg *100
-visreg::visreg(mod_alphaentro, "depth")
+b <- visreg::visreg(mod_alphaentro, "depth", ylab="" , xlab = "", gg=T)
 
 
 mod_alphaFct <- glm(alpha_hill_fonct_richess ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
@@ -52,6 +60,7 @@ Rsqr_mod_alphaFct <- 1 - (mod_alphaFct$deviance/mod_alphaFct$null.deviance )
 relativ_import_alphaFct <- calc.relimp(mod_alphaFct)
 relativ_import_alphaFct <- relativ_import_alphaFct@lmg *100
 visreg::visreg(mod_alphaFct, "depth")
+d <- visreg::visreg(mod_alphaFct, "depth", ylab= "", xlab = "Depth")
 
 
 performance::check_normality(mod_alphaFct_entro)
@@ -64,6 +73,12 @@ relativ_import_alphaFct_entro <- calc.relimp(mod_alphaFct_entro)
 relativ_import_alphaFct_entro <- relativ_import_alphaFct_entro@lmg *100
 
 visreg::visreg(mod_alphaFct_entro, "depth")
+visreg::visreg(mod_alphaFct_entro, "depth", ylab= "", xlab = "Depth") + ggstyle
+
+
+
+
+
 
 
 ##Plot relative importance

@@ -52,7 +52,7 @@ biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=log10(biomass))) +
 
 a <- ggplot(alpha_div_all, aes(x=depth, y=sp_richn)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-   theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")+
+  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")
   theme(plot.title = element_text(hjust = 0.5))+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
