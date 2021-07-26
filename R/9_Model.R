@@ -1,83 +1,102 @@
 
-pkgs <- c('forestmodel','gdm')
+pkgs <- c('forestmodel','gdm','relaimpo')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
-#Model Alpha : 
-
-mod_biomass = lmer(biomass~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
-                     control = lmerControl(optimizer = "optimx", calc.derivs = T,
-                                           optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
-
-mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
-performance::check_normality(mod_biomass)
-performance::check_heteroscedasticity(mod_biomass)
-#performance::check_model(mod_biomass)
-#performance::model_performance(mod_biomass)
-Rsqr_mod_biomass <- 1 - (mod_biomass$deviance/mod_biomass$null.deviance )
-
-relativ_import_biomass <- calc.relimp(mod_biomass)
-relativ_import_biomass <- relativ_import_biomass@lmg *100
-a <- visreg::visreg(mod_biomass, "depth", ylab= "Biomass", xlab = "Depth")
-
-
-par(mfrow=c(2,2))
-mod_alphaS <- glm(sp_richn ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
-mod_alphaentro <- glm(alpha_hill_taxo_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
-performance::check_normality(mod_alphaS)
-performance::check_heteroscedasticity(mod_alphaS)
-#performance::check_model(mod_alphaS)
-#performance::model_performance(mod_alphaS)
-Rsqr_mod_alphaS <- 1 - (mod_alphaS$deviance/mod_alphaS$null.deviance )
-
-relativ_import_alphaS <- calc.relimp(mod_alphaS)
-relativ_import_alphaS <- relativ_import_alphaS@lmg *100
-b <- visreg::visreg(mod_alphaS, "depth", ylab="Taxonomic" , xlab = "", gg=T)+
-theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")+
-  theme(plot.title = element_text(hjust = 0.5))+
-  geom_smooth(method = lm,colour="orange",fill="orange")
-
-
-performance::check_normality(mod_alphaentro)
-performance::check_heteroscedasticity(mod_alphaentro)
-#performance::check_model(mod_alphaentro)
-#performance::model_performance(mod_alphaentro)
-Rsqr_mod_alphaentro <- 1 - (mod_alphaentro$deviance/mod_alphaentro$null.deviance )
-
-relativ_import_alphaentro <- calc.relimp(mod_alphaentro)
-relativ_import_alphaentro <- relativ_import_alphaentro@lmg *100
-b <- visreg::visreg(mod_alphaentro, "depth", ylab="" , xlab = "", gg=T)
-
-
-mod_alphaFct <- glm(alpha_hill_fonct_richess ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
-mod_alphaFct_entro <- glm(alpha_hill_fonct_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
-performance::check_normality(mod_alphaFct)
-performance::check_heteroscedasticity(mod_alphaFct)
-#performance::check_model(mod_alphaFct)
-#performance::model_performance(mod_alphaFct)
-Rsqr_mod_alphaFct <- 1 - (mod_alphaFct$deviance/mod_alphaFct$null.deviance )
-
-relativ_import_alphaFct <- calc.relimp(mod_alphaFct)
-relativ_import_alphaFct <- relativ_import_alphaFct@lmg *100
-visreg::visreg(mod_alphaFct, "depth")
-d <- visreg::visreg(mod_alphaFct, "depth", ylab= "", xlab = "Depth")
-
-
-performance::check_normality(mod_alphaFct_entro)
-performance::check_heteroscedasticity(mod_alphaFct_entro)
-#performance::check_model(mod_alphaFct_entro)
-#performance::model_performance(mod_alphaFct_entro)
-Rsqr_mod_alphaFct_entro <- 1 - (mod_alphaFct_entro$deviance/mod_alphaFct_entro$null.deviance )
-
-relativ_import_alphaFct_entro <- calc.relimp(mod_alphaFct_entro)
-relativ_import_alphaFct_entro <- relativ_import_alphaFct_entro@lmg *100
-
-visreg::visreg(mod_alphaFct_entro, "depth")
-visreg::visreg(mod_alphaFct_entro, "depth", ylab= "", xlab = "Depth") + ggstyle
 
 
 
+#Model Biomass : ---------------
+        
+        mod_biomass = lmer(biomass~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
+                             control = lmerControl(optimizer = "optimx", calc.derivs = T,
+                                                   optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
+        
+        mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
+        performance::check_normality(mod_biomass)
+        performance::check_heteroscedasticity(mod_biomass)
+        #performance::check_model(mod_biomass)
+        #performance::model_performance(mod_biomass)
+        Rsqr_mod_biomass <- 1 - (mod_biomass$deviance/mod_biomass$null.deviance )
+        
+        relativ_import_biomass <- calc.relimp(mod_biomass)
+        relativ_import_biomass <- relativ_import_biomass@lmg *100
 
+        plot_biomass <- visreg(mod_biomass, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+          geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
+          theme_bw()+ylab("Biomass")+xlab("Depth (m)")+
+        scale_color_manual(values=c("orange")) 
+        
+        
+#Model Taxonomic : ---------------
+      mod_alphaS <- glm(sp_richn ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
+      mod_alphaentro <- glm(alpha_hill_taxo_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
+      performance::check_normality(mod_alphaS)
+      performance::check_heteroscedasticity(mod_alphaS)
+      #performance::check_model(mod_alphaS)
+      #performance::model_performance(mod_alphaS)
+      Rsqr_mod_alphaS <- 1 - (mod_alphaS$deviance/mod_alphaS$null.deviance )
+      
+      relativ_import_alphaS <- calc.relimp(mod_alphaS)
+      relativ_import_alphaS <- relativ_import_alphaS@lmg *100
+      
+      performance::check_normality(mod_alphaentro)
+      performance::check_heteroscedasticity(mod_alphaentro)
+      #performance::check_model(mod_alphaentro)
+      #performance::model_performance(mod_alphaentro)
+      Rsqr_mod_alphaentro <- 1 - (mod_alphaentro$deviance/mod_alphaentro$null.deviance )
+      
+      relativ_import_alphaentro <- calc.relimp(mod_alphaentro)
+      relativ_import_alphaentro <- relativ_import_alphaentro@lmg *100
+
+
+#Model Functional : ---------------
+        mod_alphaFct <- glm(alpha_hill_fonct_richess ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
+        mod_alphaFct_entro <- glm(alpha_hill_fonct_entropy ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
+        performance::check_normality(mod_alphaFct)
+        performance::check_heteroscedasticity(mod_alphaFct)
+        #performance::check_model(mod_alphaFct)
+        #performance::model_performance(mod_alphaFct)
+        Rsqr_mod_alphaFct <- 1 - (mod_alphaFct$deviance/mod_alphaFct$null.deviance )
+        
+        relativ_import_alphaFct <- calc.relimp(mod_alphaFct)
+        relativ_import_alphaFct <- relativ_import_alphaFct@lmg *100
+        
+        performance::check_normality(mod_alphaFct_entro)
+        performance::check_heteroscedasticity(mod_alphaFct_entro)
+        #performance::check_model(mod_alphaFct_entro)
+        #performance::model_performance(mod_alphaFct_entro)
+        Rsqr_mod_alphaFct_entro <- 1 - (mod_alphaFct_entro$deviance/mod_alphaFct_entro$null.deviance )
+        
+        relativ_import_alphaFct_entro <- calc.relimp(mod_alphaFct_entro)
+        relativ_import_alphaFct_entro <- relativ_import_alphaFct_entro@lmg *100
+        
+        
+
+
+#PLot Visreg
+a <- visreg(mod_alphaS, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+  geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
+  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")
+  scale_color_manual(values=c("orange")) 
+
+b <- visreg(mod_alphaentro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+  geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Structure")+
+  scale_color_manual(values=c("orange")) 
+
+c <- visreg(mod_alphaFct, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+  geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
+  theme_bw()+ylab("Functional")+xlab("Depth (m)")+
+  scale_color_manual(values=c("orange")) 
+
+d <- visreg(mod_alphaFct_entro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+  geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
+  theme_bw()+ylab("")+xlab("Depth (m)")+
+  scale_color_manual(values=c("orange")) 
+
+
+grid.arrange(a,b,c,d,ncol=2)
 
 
 

@@ -187,6 +187,8 @@ tr_faxes$tr_faxes_plot
 
 
 #Compute Functional diversity
+rownames(biomass_mat_classDepth) <- c("0-20m","20-40m","40-60m",
+                                      ">60m")
 alpha_fd_indices <- mFD::alpha.fd.multidim(sp_faxes_coord[, c("PC1", "PC2", "PC3", "PC4")],
                                            asb_sp_w      = as.matrix(biomass_mat_classDepth),
                                            ind_vect      = c("fdis", "fmpd", "fnnd", "feve", "fric", "fdiv", "fori", "fspe"),
@@ -208,8 +210,8 @@ library(mFD)
 
 # color code for depth ----
 
-hab_depth<-c("[0-20[","[20-40[","[40-60[",
-             ">60")
+#hab_depth<-c("[0-20[","[20-40[","[40-60[",
+    #         ">60")
 
 hab_depth<-c("0-20m","20-40m","40-60m",
              ">60m")
