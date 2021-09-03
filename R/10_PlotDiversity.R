@@ -80,12 +80,12 @@ grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
 
 ###PLot Distance decay
-ResHill<- Decay_Hill_10toInfdepth
+ResHill<- Decay_Hill_20toInfdepth
 ResHill <- as.data.frame(ResHill)
-ResHill <- merge(ResHill,From10toInfdepth, by="row.names",all.x=T)
+ResHill <- merge(ResHill,Decay_Hill_20toInfdepth, by="row.names",all.x=T)
 
 a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
   geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
   theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Dissimiliarity composition")+
@@ -93,7 +93,7 @@ a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) +
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
   geom_errorbar(aes(ymin=taxo_entro_m-taxo_entro_sd, ymax=taxo_entro_m+taxo_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
   theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Dissimiliarity structure")+
