@@ -44,18 +44,18 @@ ggplot(df,aes(x = depth, y = value, color = variable )) +
     theme(legend.position = "none")
 
 
-biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=log10(biomass))) + 
+biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=(biomass))) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Biomass")+xlab("Depth (m)")+
+  theme_bw()+ylab("Biomass (g/m2)")+xlab("Depth (m)")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 
 
 a <- ggplot(alpha_div_all, aes(x=depth, y=sp_richn)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")
+  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")+
   theme(plot.title = element_text(hjust = 0.5))+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
+ 
 b <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_taxo_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Structure")+
@@ -82,7 +82,7 @@ grid.arrange(a,b,c,d,ncol=2)#,top = title)
 ###PLot Distance decay
 ResHill<- Decay_Hill_20toInfdepth
 ResHill <- as.data.frame(ResHill)
-ResHill <- merge(ResHill,Decay_Hill_20toInfdepth, by="row.names",all.x=T)
+ResHill <- merge(ResHill,coord_depth, by="row.names",all.x=T)
 
 a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
@@ -117,15 +117,6 @@ d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) +
 #title <- textGrob("Depth Decay",
  #                 gp=gpar(fontsize=20,fontface=2))
 grid.arrange(a,b,c,d,ncol=2)#,top = title)
-
-
-ggplot(ResHill, aes(x=depth, y=phylo_entro_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
-  geom_errorbar(aes(ymin=phylo_entro_m-phylo_entro_sd, ymax=phylo_entro_m+phylo_entro_sd), width=.2,
-                position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Beta-entropy phylo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-
 
 
 

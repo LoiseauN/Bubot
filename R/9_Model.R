@@ -8,11 +8,12 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
  load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div_all.RData")
 
 #Model Biomass : ---------------
-        
+ anova(mod_biomass)
         mod_biomass = lmer(biomass~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
                              control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                                    optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
- relativ_import_biomass <- MuMIn::r.squaredGLMM(mod_biomass)
+ 
+      
  
         #mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
         performance::check_normality(mod_biomass)
@@ -98,22 +99,22 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 #PLot Visreg
-a <- visreg(mod_alphaS, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+a <- visreg::visreg(mod_alphaS, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
   theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")
   scale_color_manual(values=c("orange")) 
 
-b <- visreg(mod_alphaentro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+b <- visreg::visreg(mod_alphaentro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
   theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Structure")+
   scale_color_manual(values=c("orange")) 
 
-c <- visreg(mod_alphaFct, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+c <- visreg::visreg(mod_alphaFct, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
   theme_bw()+ylab("Functional")+xlab("Depth (m)")+
   scale_color_manual(values=c("orange")) 
 
-d <- visreg(mod_alphaFct_entro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
+d <- visreg::visreg(mod_alphaFct_entro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
   theme_bw()+ylab("")+xlab("Depth (m)")+
   scale_color_manual(values=c("orange")) 
@@ -553,6 +554,45 @@ for(j in 1:nrow(From20toInfdepth)){
 Decay_Hill_20toInfdepth <- ResHill
 save(Decay_Hill_20toInfdepth,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/Decay_Hill_20toInfdepth.RData")
 
+
+###PLot Distance decay
+ResHill<- Decay_Hill_20toInfdepth
+ResHill <- as.data.frame(ResHill)
+ResHill <- merge(ResHill,coord_depth, by="row.names",all.x=T)
+
+a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
+  geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Dissimiliarity composition")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
+  geom_errorbar(aes(ymin=taxo_entro_m-taxo_entro_sd, ymax=taxo_entro_m+taxo_entro_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Dissimiliarity structure")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_errorbar(aes(ymin=fct_rich_m-fct_rich_sd, ymax=fct_rich_m+fct_rich_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab("Functional")+xlab("Difference Depth (m)")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_errorbar(aes(ymin=fct_entro_m-fct_entro_sd, ymax=fct_entro_m+fct_entro_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab("")+xlab("Difference Depth (m)")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+#title <- textGrob("Depth Decay",
+#                 gp=gpar(fontsize=20,fontface=2))
+grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
 
 

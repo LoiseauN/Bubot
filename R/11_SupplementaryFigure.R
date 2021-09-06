@@ -288,3 +288,217 @@ d <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_fonct_entropy)) +
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
 grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
+
+
+
+
+###SUPPLEMENTARY DECAY
+coord_depth <- species.site.matrix$site.data[,c(2,5,7,8)]
+coord_depth<- aggregate(. ~ Sample.code, data = coord_depth, mean)
+rownames(coord_depth) <- coord_depth[,1]
+
+coord_depth <- coord_depth[rownames(coord_depth) %in% rownames(alpha_div_all),]
+#coord_depth <- coord_depth
+From1to20depth <- subset(coord_depth, coord_depth$depth<=20)
+From20toInfdepth <- subset(coord_depth, coord_depth$depth>20)
+
+ResHill_sensibility <- matrix(NA,nrow(From20toInfdepth),12)
+rownames(ResHill_sensibility) <- rownames(From20toInfdepth) 
+colnames(ResHill_sensibility) <- c("taxo_rich_m","taxo_rich_sd",
+                       "taxo_entro_m","taxo_entro_sd",
+                       "fct_rich_m","fct_rich_sd",
+                       "fct_entro_m","fct_entro_sd",
+                       "phylo_rich_m","phylo_rich_sd",
+                       "phylo_entro_m","phylo_entro_sd")
+
+biomass_mat_sensibility <- biomass_mat_sensibility[apply(biomass_mat_sensibility,1,sum)>4,]
+biomass_mat_sensibility <- biomass_mat_sensibility[,apply(biomass_mat_sensibility,1,sum)>0]
+trait.dist_mat <-as.matrix(sp_dist_traits)
+
+for(j in 1:nrow(From20toInfdepth)){
+  print(j)
+  
+  biomasscompa <- biomass_mat_sensibility[rownames(biomass_mat_sensibility) %in% c(rownames(From20toInfdepth[j,]) , rownames(From1to20depth)),]
+  biomasscompa <- biomasscompa[,apply(biomasscompa,2,sum) > 0]
+  biomasscompa <- as.matrix(biomasscompa[,colnames(biomasscompa) %in% rownames(trait.dist_mat)])
+  trait.dist_matcompa <- trait.dist_mat[,colnames(trait.dist_mat) %in% colnames(biomasscompa)]
+  trait.dist_matcompa <- trait.dist_matcompa[rownames(trait.dist_matcompa) %in% colnames(biomasscompa),]
+  
+  biomasscompa0_1 <- biomasscompa
+  biomasscompa0_1[biomasscompa0_1>0] <- 1
+  
+  #biomass_compa_phylo <- biomasscompa[,colnames(biomasscompa) %in% names(tree_phylog$leaves)]
+  #biomass_compa_phylo <- biomass_compa_phylo/apply(biomass_compa_phylo,1,sum)
+  
+  #if(sum(is.na(biomass_compa_phylo))>0) {next}
+  
+  
+  #Compute HILL
+  #beta_hill_phylo <- chao_alpha_beta(matrix = biomass_compa_phylo,q=c(0,1,2), tree_phylog = tree_phylog)
+  
+  #beta_hill_phylo_richess <- as.matrix(beta_hill_phylo$beta_phylo$q0)
+  
+  #beta_hill_phylo_entropy <- as.matrix(beta_hill_phylo$beta_phylo$q1)
+  
+  beta_hill_taxo_richess  <- as.matrix(mFD::beta.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility0_1),
+                                                          sp_dist  = sp_dist_traits,
+                                                          q        = 0,
+                                                          tau      = "min",
+                                                          beta_type = "Jaccard")$beta_fd_q$q0)
+  
+  beta_hill_taxo_entropy  <- as.matrix(mFD::beta.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility),
+                                                          sp_dist  = sp_dist_traits,
+                                                          q        = 1,
+                                                          tau      = "min",
+                                                          beta_type = "Jaccard")$beta_fd_q$q1)
+  
+  beta_hill_fonct_richess <- as.matrix(mFD::beta.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility0_1),
+                                                          sp_dist  = sp_dist_traits,
+                                                          q        = 0,
+                                                          tau      = "mean",
+                                                          beta_type = "Jaccard")$beta_fd_q$q0)
+  
+  beta_hill_fonct_entropy <- as.matrix(mFD::beta.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility),
+                                                          sp_dist  = sp_dist_traits,
+                                                          q        = 1,
+                                                          tau      = "mean",
+                                                          beta_type = "Jaccard")$beta_fd_q$q1)
+  
+  
+  ResHill_sensibility[j,1] <- mean(beta_hill_taxo_richess[rownames(beta_hill_taxo_richess) %in% rownames(From20toInfdepth[j,]),
+                                              colnames(beta_hill_taxo_richess) %notin% rownames(From20toInfdepth[j,])])
+  
+  ResHill_sensibility[j,2] <- sd(beta_hill_taxo_richess[rownames(beta_hill_taxo_richess) %in% rownames(From20toInfdepth[j,]),
+                                            colnames(beta_hill_taxo_richess) %notin% rownames(From20toInfdepth[j,])])
+  
+  ResHill_sensibility[j,3] <- mean(beta_hill_taxo_entropy[rownames(beta_hill_taxo_entropy) %in% rownames(From20toInfdepth[j,]),
+                                              colnames(beta_hill_taxo_entropy) %notin% rownames(From20toInfdepth[j,])])
+  
+  ResHill_sensibility[j,4] <- sd(beta_hill_taxo_entropy[rownames(beta_hill_taxo_entropy) %in% rownames(From20toInfdepth[j,]),
+                                            colnames(beta_hill_taxo_entropy) %notin% rownames(From20toInfdepth[j,])])
+  
+  ResHill_sensibility[j,5] <- mean(beta_hill_fonct_richess[rownames(beta_hill_fonct_richess) %in% rownames(From20toInfdepth[j,]),
+                                               colnames(beta_hill_fonct_richess) %notin% rownames(From20toInfdepth[j,])])
+  
+  ResHill_sensibility[j,6] <- sd(beta_hill_fonct_richess[rownames(beta_hill_fonct_richess) %in% rownames(From20toInfdepth[j,]),
+                                             colnames(beta_hill_fonct_richess) %notin% rownames(From20toInfdepth[j,])])
+  
+  ResHill_sensibility[j,7] <- mean(beta_hill_fonct_entropy[rownames(beta_hill_fonct_entropy) %in% rownames(From20toInfdepth[j,]),
+                                               colnames(beta_hill_fonct_entropy) %notin% rownames(From20toInfdepth[j,])])
+  
+  ResHill_sensibility[j,8] <- sd(beta_hill_fonct_entropy[rownames(beta_hill_fonct_entropy) %in% rownames(From20toInfdepth[j,]),
+                                             colnames(beta_hill_fonct_entropy) %notin% rownames(From20toInfdepth[j,])])
+  
+}
+Decay_Hill_20toInfdepth_sensibility <- ResHill_sensibility
+save(Decay_Hill_20toInfdepth_sensibility,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/Decay_Hill_20toInfdepth_sensibility.RData")
+
+###PLot Distance decay
+ResHill<- ResHill_sensibility
+ResHill <- as.data.frame(ResHill)
+ResHill <- merge(ResHill,coord_depth, by="row.names",all.x=T)
+
+a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
+  geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Dissimiliarity composition")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
+  geom_errorbar(aes(ymin=taxo_entro_m-taxo_entro_sd, ymax=taxo_entro_m+taxo_entro_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Dissimiliarity structure")+
+  theme(plot.title = element_text(hjust = 0.5))+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_errorbar(aes(ymin=fct_rich_m-fct_rich_sd, ymax=fct_rich_m+fct_rich_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab("Functional")+xlab("Difference Depth (m)")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) + 
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_errorbar(aes(ymin=fct_entro_m-fct_entro_sd, ymax=fct_entro_m+fct_entro_sd), width=.2,
+                position=position_dodge(0.05),color ="cadetblue3")+
+  theme_bw()+ylab("")+xlab("Difference Depth (m)")+
+  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+
+#title <- textGrob("Depth Decay",
+#                 gp=gpar(fontsize=20,fontface=2))
+grid.arrange(a,b,c,d,ncol=2)#,top = title)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+beta_hill_taxo_richess_sensibility  <- mFD::beta.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility0_1),
+                                              sp_dist  = sp_dist_traits,
+                                              q        = 0,
+                                              tau      = "min",
+                                              beta_type = "Jaccard")
+
+beta_hill_taxo_entropy_sensibility  <- mFD::beta.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility),
+                                              sp_dist  = sp_dist_traits,
+                                              q        = 1,
+                                              tau      = "min",
+                                              beta_type = "Jaccard")
+
+beta_hill_fonct_richess_sensibility <- mFD::beta.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility0_1),
+                                              sp_dist  = sp_dist_traits,
+                                              q        = 0,
+                                              tau      = "mean",
+                                              beta_type = "Jaccard")
+
+beta_hill_fonct_entropy_sensibility <- mFD::beta.fd.hill (asb_sp_w = as.matrix(biomass_mat_sensibility),
+                                              sp_dist  = sp_dist_traits,
+                                              q        = 1,
+                                              tau      = "mean",
+                                              beta_type = "Jaccard")
+
+
+beta_hill_taxo_richess_t_sensibility <- reshape::melt(as.matrix(beta_hill_taxo_richess_sensibility$beta_fd_q$q0))[melt(upper.tri(as.matrix(beta_hill_taxo_richess_sensibility$beta_fd_q$q0)))$value,]
+beta_hill_taxo_entropy_t_sensibility <- reshape::melt(as.matrix(beta_hill_taxo_entropy_sensibility$beta_fd_q$q1))[melt(upper.tri(as.matrix(beta_hill_taxo_entropy_sensibility$beta_fd_q$q1)))$value,]
+beta_hill_fonct_richess_t_sensibility <- reshape::melt(as.matrix(beta_hill_fonct_richess_sensibility$beta_fd_q$q0))[melt(upper.tri(as.matrix(beta_hill_fonct_richess_sensibility$beta_fd_q$q0)))$value,]
+beta_hill_fonct_entropy_t_sensibility <- reshape::melt(as.matrix(beta_hill_fonct_entropy_sensibility$beta_fd_q$q1))[melt(upper.tri(as.matrix(beta_hill_fonct_entropy_sensibility$beta_fd_q$q1)))$value,]
+
+beta_hill_sensibility <- data.frame(site1 = beta_hill_taxo_richess_t_sensibility[,1],
+                        site2 = beta_hill_taxo_richess_t_sensibility[,2],
+                        beta_hill_taxo_richess = beta_hill_taxo_richess_t_sensibility[,3],
+                        beta_hill_taxo_entropy = beta_hill_taxo_entropy_t_sensibility[,3],
+                        beta_hill_fonct_richess = beta_hill_fonct_richess_t_sensibility[,3],
+                        beta_hill_fonct_entropy = beta_hill_fonct_entropy_t_sensibility[,3],
+                        pairsID = paste0(beta_hill_taxo_richess_t_sensibility[,1], "__",
+                                         beta_hill_taxo_richess_t_sensibility[,2]))
+
+
+diff_depth <- data.frame(row.names = rownames(alpha_div_all),
+                         depth=alpha_div_all$depth)
+
+
+diff_depth  <- dist(diff_depth, method = "euclidean")                        
+diff_depth <- reshape2::melt(as.matrix(diff_depth))[melt(upper.tri(as.matrix(diff_depth)))$value,]
+
+diff_depth$pairsID <- paste0(diff_depth[,1], "__",
+                             diff_depth[,2])          
+diff_depth <- diff_depth[,-c(1,2)]     
+beta_hill_sensibility <- merge(beta_hill_sensibility,diff_depth,by="pairsID",all.x = T)
+rownames(beta_hill_sensibility) <- beta_hill_sensibility[,1]
+beta_hill_sensibility <- beta_hill_sensibility[,-c(1)]
+colnames(beta_hill_sensibility)[7] <- "diff_depth"
+save(beta_hill_sensibility,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/beta_hill_sensibility.RData")
+
