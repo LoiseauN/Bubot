@@ -233,6 +233,7 @@ hab_selec<-cbind(rownames(hab_pc_site_scale),hab_pc_site_scale[,c("PC1","PC2","P
 
 colnames(hab_selec)<-c("site","PC1","PC2","PC3","PC4","depth","Lat", "Long")
 
+hab_selec <- na.omit(hab_selec)
 GDM_results<-matrix(NA,4,6)
 rownames(GDM_results)<-c("beta_hill_taxo_richess","beta_hill_taxo_entropy",
                          "beta_hill_fonct_richess","beta_hill_fonct_entropy")
@@ -248,6 +249,9 @@ for(i in 1:4){ #nrow(GDM_results)
   if(i == 4) { mat = as.matrix(beta_hill_fonct_entropy$beta_fd_q$q1)}
 
   dissim <-  as.data.frame(mat)
+  dissim <- dissim[rownames(dissim) %in% rownames(hab_selec),]
+  dissim <- dissim[,colnames(dissim) %in% rownames(hab_selec)]
+  
   site<- as.factor(rownames(dissim))
   dissim<- cbind(site, dissim)
   exFormat3 <- formatsitepair(dissim, 

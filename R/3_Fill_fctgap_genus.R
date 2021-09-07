@@ -9,7 +9,10 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 #Fill gap ---
 #####################
-tab <- merge(species_video_scale,hab_pc_video_scale[,c(1,2,8:12)],by.x="row.names",by.y="Row.names")#
+tab <- merge(species_video_scale,hab_pc_video_scale[,c("Sample.code","Row.names",
+                                                    "depth", "temperature", "classDepth",
+                                                    "island","Site")],by.x="row.names",by.y="Row.names")
+                                                    
 rownames(tab) <- tab[,1]
 
 dat_complet<-reshape2::melt(tab, id.vars = c(1,320:325))

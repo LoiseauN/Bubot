@@ -48,6 +48,12 @@ biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=(biomass))) +
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab("Biomass (g/m2)")+xlab("Depth (m)")+
   geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Figure2.png", 
+       plot = biom_plot, 
+       width = 4, 
+       height = 4, 
+       units = "in",
+       dpi=300)
 
 
 a <- ggplot(alpha_div_all, aes(x=depth, y=sp_richn)) + 
@@ -74,9 +80,14 @@ d <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_entropy)) +
 
 #title <- textGrob("Alpha Hill",
 #                  gp=gpar(fontsize=20,fontface=2))
-grid.arrange(a,b,c,d,ncol=2)#,top = title)
+alpha_plot <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
-
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure3.png", 
+       plot = alpha_plot, 
+       width = 8, 
+       height = 8, 
+       units = "in",
+       dpi=300)
 
 
 ###PLot Distance decay
@@ -116,9 +127,14 @@ d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) +
 
 #title <- textGrob("Depth Decay",
  #                 gp=gpar(fontsize=20,fontface=2))
-grid.arrange(a,b,c,d,ncol=2)#,top = title)
+decayplot <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
-
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure4.png", 
+       plot = decayplot, 
+       width = 8, 
+       height = 8, 
+       units = "in",
+       dpi=300)
 
 
 
@@ -165,7 +181,7 @@ sp_dist_traits <-  mFD::funct.dist(sp_tr         = trait_mat,
 #Traits space quality    #4 dimension
 fspaces_quality <- mFD::quality.fspaces(sp_dist             = sp_dist_traits,
                                         maxdim_pcoa         = 10,
-                                        deviation_weighting = "absolute",
+                                        deviation_weighting = "squared",
                                         fdist_scaling       = FALSE,
                                         fdendro             = "average")
 
@@ -320,7 +336,12 @@ for (z in 1:length(pairs_axes))
   
 }# end of axes_id
 FD_xy
-
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure5.png", 
+       plot = FD_xy, 
+       width = 8, 
+       height = 8, 
+       units = "in",
+       dpi=300)
 
 
 

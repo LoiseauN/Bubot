@@ -224,10 +224,6 @@ habitat[,1] <- as.factor(as.character(habitat[,1]))
 habitat[,4] <- as.factor(as.character(habitat[,4]))
 habitat[,5] <- as.factor(as.character(habitat[,5]))
 
-new_DF <- habitat[rowSums(is.infinite(habitat)) > 0,]
-habitat[habitat=='NA'] <- NA
-habitat[!complete.cases(habitat), ]
-
 # give the row name
 row.names(habitat)=species.site.matrix$site.data$Sample.name
 
@@ -257,11 +253,17 @@ plot(habit.mca$ind$coord[,1],species.site.matrix$site.data$depth)
 
 
 
-
-# give the row name
+# collect the habitat data
+habitat=species.site.matrix$site.data[,c(11:18)]
 row.names(habitat)=species.site.matrix$site.data$Sample.name
+habitat[,1] <- as.factor(as.character(habitat[,1]))
+habitat[,4] <- as.factor(as.character(habitat[,4]))
+habitat[,5] <- as.factor(as.character(habitat[,5]))
 
 habitat <- na.omit(habitat)
+# give the row name
+
+
 res.famd <- FAMD(habitat, graph = FALSE)
 fviz_famd_var(res.famd, "quanti.var", col.var = "contrib", 
               gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
