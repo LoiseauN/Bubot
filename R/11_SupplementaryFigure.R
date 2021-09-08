@@ -31,22 +31,50 @@ grid.arrange(a,b,c,d,ncol=2,top = title)
 a <- ggplot(beta_hill, aes(x=diff_depth, y=beta_hill_taxo_richess)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(beta_hill$diff_depth))+
   theme_bw()+ylab("Beta-richness taxo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
+
 
 b <- ggplot(beta_hill, aes(x=diff_depth, y=beta_hill_taxo_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(beta_hill$diff_depth))+
   theme_bw()+ylab("Beta-entropy taxo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
+
 
 c <- ggplot(beta_hill, aes(x=diff_depth, y=beta_hill_fonct_richess)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(beta_hill$diff_depth))+
   theme_bw()+ylab("Beta-richness taxo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
+
 
 d <- ggplot(beta_hill, aes(x=diff_depth, y=beta_hill_fonct_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(beta_hill$diff_depth))+
   theme_bw()+ylab("Beta-entropy taxo")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
+
 
 title <- textGrob("Beta Hill",
                   gp=gpar(fontsize=20,fontface=2))
@@ -269,24 +297,58 @@ a <- ggplot(alpha_div_sensibility, aes(x=depth, y=sp_richn)) +
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
   theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")+
   theme(plot.title = element_text(hjust = 0.5))+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+
 
 b <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_taxo_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
   theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Structure")+
   theme(plot.title = element_text(hjust = 0.5))+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+
 
 c <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_fonct_richess)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
   theme_bw()+ylab("Functional")+xlab("Depth (m)")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+
 
 d <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_fonct_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
   theme_bw()+ylab("")+xlab("Depth (m)")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
-grid.arrange(a,b,c,d,ncol=2)#,top = title)
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+
+alpha_plot_sensi <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS4.png", 
+       plot = decayplot_sensi, 
+       width = 8, 
+       height = 8, 
+       units = "in",
+       dpi=300)
 
 
 
@@ -404,7 +466,13 @@ a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) +
                 position=position_dodge(0.05),color ="cadetblue3")+
   theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Dissimiliarity composition")+
   theme(plot.title = element_text(hjust = 0.5))+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
 
 b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
@@ -412,27 +480,54 @@ b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) +
                 position=position_dodge(0.05),color ="cadetblue3")+
   theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Dissimiliarity structure")+
   theme(plot.title = element_text(hjust = 0.5))+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
 
 c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=fct_rich_m-fct_rich_sd, ymax=fct_rich_m+fct_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
   theme_bw()+ylab("Functional")+xlab("Difference Depth (m)")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
 
 d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=fct_entro_m-fct_entro_sd, ymax=fct_entro_m+fct_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
   theme_bw()+ylab("")+xlab("Difference Depth (m)")+
-  geom_smooth(method = lm,formula = y ~ splines::bs(x, 2),colour="orange",fill="orange")
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
 
 #title <- textGrob("Depth Decay",
 #                 gp=gpar(fontsize=20,fontface=2))
 grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
 
+#                 gp=gpar(fontsize=20,fontface=2))
+decayplot_sensi <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
+
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS4.png", 
+       plot = decayplot_sensi, 
+       width = 8, 
+       height = 8, 
+       units = "in",
+       dpi=300)
 
 
 
