@@ -343,8 +343,8 @@ d <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_fonct_entropy)) +
                           geom = "text", label.x = 75, label.y = 0, hjust = 1)
 
 alpha_plot_sensi <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS4.png", 
-       plot = decayplot_sensi, 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS3.png", 
+       plot = alpha_plot_sensi, 
        width = 8, 
        height = 8, 
        units = "in",

@@ -13,7 +13,7 @@ for(j in 1:length(var)){
     geom_point(size=2, show.legend = TRUE)+
     scale_color_manual(values=c("chartreuse3","gold","blue","red","brown4","gray46","black"))+
     #scale_color_hp(discrete = TRUE, option = "LunaLovegood", name = "Depth",direction = -1) +
-    geom_smooth(method = "loess")+
+    geom_smooth(method = lm,formula = y ~ x)+
     theme_bw()+ 
     labs(colour = var[j]) + 
     ylim(0,200000)+
