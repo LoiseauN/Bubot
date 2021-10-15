@@ -456,7 +456,7 @@ Decay_Hill_20toInfdepth_sensibility <- ResHill_sensibility
 save(Decay_Hill_20toInfdepth_sensibility,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/Decay_Hill_20toInfdepth_sensibility.RData")
 
 ###PLot Distance decay
-ResHill<- ResHill_sensibility
+ResHill<- Decay_Hill_20toInfdepth_sensibility
 ResHill <- as.data.frame(ResHill)
 ResHill <- merge(ResHill,coord_depth, by="row.names",all.x=T)
 
@@ -478,7 +478,7 @@ b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) +
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
   geom_errorbar(aes(ymin=taxo_entro_m-taxo_entro_sd, ymax=taxo_entro_m+taxo_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Dissimiliarity structure")+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Dissimiliarity entropy")+
   theme(plot.title = element_text(hjust = 0.5))+
   geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
   ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
@@ -492,7 +492,7 @@ c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) +
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=fct_rich_m-fct_rich_sd, ymax=fct_rich_m+fct_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("Functional")+xlab("Difference Depth (m)")+
+  theme_bw()+ylab("Functional")+xlab("Difference in Depth (m)")+
   geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
   ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
                                              after_stat(f.value.label),
@@ -505,7 +505,7 @@ d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) +
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
   geom_errorbar(aes(ymin=fct_entro_m-fct_entro_sd, ymax=fct_entro_m+fct_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
-  theme_bw()+ylab("")+xlab("Difference Depth (m)")+
+  theme_bw()+ylab("")+xlab("Difference in Depth (m)")+
   geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
   ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
                                              after_stat(f.value.label),
