@@ -308,7 +308,7 @@ a <- ggplot(alpha_div_sensibility, aes(x=depth, y=sp_richn)) +
 
 b <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_taxo_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_sensibility$depth))+
-  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Structure")+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Entropy")+
   theme(plot.title = element_text(hjust = 0.5))+
   geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
   ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
