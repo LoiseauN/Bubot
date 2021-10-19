@@ -13,8 +13,6 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
                              control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                                    optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
  
-      
- 
         #mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
         performance::check_normality(mod_biomass)
         performance::check_heteroscedasticity(mod_biomass)
@@ -35,6 +33,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
                            control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                                  optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
         relativ_import_alphaS <- MuMIn::r.squaredGLMM(mod_alphaS)
+   
         
         mod_alphaentro = lmer(alpha_hill_taxo_entropy~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
                            control = lmerControl(optimizer = "optimx", calc.derivs = T,
@@ -420,36 +419,45 @@ grid.arrange(GDM_beta_hill_taxo_richess_plot,
              GDM_beta_hill_fonct_entropy_plot,
              nrow=2)
 
-#To make a table summarizing all models for supplementary
-aov_cluster_table_df <- rbind(aov_logNC, aov_PropSin,aov_PropC1)
-aov_cluster_table_df <- data.frame(Variables = c(rep("Number of Cluster (log)",5),rep("% uniques",5)
-                                                 ,rep("% Cluster #1",5)),aov_cluster_table_df)
 
-#aov_cluster_table_df[aov_cluster_table_df$Term=="log(Number of Species)",]$Term <- "Number of Species (log)"
-#aov_cluster_table_df[aov_cluster_table_df$Term=="log(Number of Traits)",]$Term <- "Number of Traits (log)"
-#aov_cluster_table_df[aov_cluster_table_df$Term=="Percentage of NA",]$Term <- "% of Missing Values"
-#aov_cluster_table_df[aov_cluster_table_df$Term=="Correlation",]$Term <- "Mean Correlation"
+AOVmod_betaS <- anova(mod_betaS)
+AOVmod_betaentro<- anova(mod_betaentro)
+AOVmod_betaFct<- anova(mod_betaFct)
+AOVmod_betaFct_entro<- anova(mod_betaFct_entro)
 
-#aov_cluster_table_df <- aov_cluster_table_df %>% dplyr::mutate_at(vars("Sum.Sq","F.statistic","P.value",), dplyr::funs(round(., 3)))
-
-#for(i in 1:nrow(aov_cluster_table_df)){ 
-#  if(aov_cluster_table_df[i, 5]<0.001 )    { 
-#    aov_cluster_table_df[i, 5] <- "<0.001"
-#    aov_cluster_table_df[i, 5] <- kableExtra::cell_spec(aov_cluster_table_df[i, 5],  bold = T)
-#  } 
-
-#  if(aov_cluster_table_df[i, 5]<0.05 & aov_cluster_table_df[i, 5]>0.001)     {  
-#    aov_cluster_table_df[i, 5] <- kableExtra::cell_spec(aov_cluster_table_df[i, 5],  bold = T)
-#  } 
+aov_beta_table_df <- rbind(AOVmod_betaS, AOVmod_betaentro,AOVmod_betaFct,AOVmod_betaFct_entro)
+aov_beta_table_df <- cbind(Variables = rep(c("depth","PC1_hab","PC2_hab","PC3_hab","PC4_hab"),4),aov_beta_table_df)
+aov_beta_table_df <- cbind(Indice = c(rep("Taxonomic Richness",5),rep("Taxonomic Entropy",5),
+                                      rep("Functional Richness",5),rep("Functional Entropy",5)),aov_beta_table_df)
 
 
-#}
+aov_beta_table_df <- aov_beta_table_df[,c(1,2,3,7,8)]
 
-#table_cluster_aov<-pixiedust::dust(aov_cluster_table_df) %>% 
-#  kableExtra::kable( booktabs = T, escape = F)%>% 
-#  kableExtra::kable_styling()%>% 
-#  kableExtra::collapse_rows()
-#table_cluster_aov
+colnames(aov_beta_table_df) <- c("Indices", "Term", "Sum.Sq", "F-statistic", "P.value")
+
+
+
+aov_beta_table_df <- aov_beta_table_df %>% dplyr::mutate_at(vars("Sum.Sq","F-statistic","P.value",), dplyr::funs(round(., 3)))
+
+
+for(i in 1:nrow(aov_beta_table_df)){ 
+  if(aov_beta_table_df[i, 5]<=0.001 )    { 
+    aov_beta_table_df[i, 5] <- "<0.001"
+    aov_beta_table_df[i, 5] <- kableExtra::cell_spec(aov_beta_table_df[i, 5],  bold = T)
+  } 
+  
+  if(aov_beta_table_df[i, 5]<0.05 & aov_beta_table_df[i, 5]>0.001)     {  
+    aov_beta_table_df[i, 5] <- kableExtra::cell_spec(aov_beta_table_df[i, 5],  bold = T)
+  } 
+  
+  
+}
+
+table_beta_aov<-pixiedust::dust(aov_beta_table_df) %>% 
+  kableExtra::kable( booktabs = T, escape = F)%>% 
+  kableExtra::kable_styling()%>% 
+  kableExtra::collapse_rows()
+table_beta_aov
   
 ####################HILL SUGGESTION SEB
 #Pour chaque video "profonde de D mètres" (D>20m), tu calcules ses beta avec toutes les vidéos "surfaces" (D<10m).
@@ -597,6 +605,12 @@ d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) +
 #title <- textGrob("Depth Decay",
 #                 gp=gpar(fontsize=20,fontface=2))
 grid.arrange(a,b,c,d,ncol=2)#,top = title)
+
+
+
+
+
+
 
 
 

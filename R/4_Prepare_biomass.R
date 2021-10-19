@@ -100,6 +100,7 @@ load(file= file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 load(file= file.path(outputs_dir,"sizeRLS_clean.RData"))
 
 dat_complet$size <- NA
+dat_complet$sizeINBUBOT <- NA
 
 for (i in 1:nrow(dat_complet)){
   
@@ -107,7 +108,7 @@ for (i in 1:nrow(dat_complet)){
   
   #Species in bubot
   if(dat_complet$species[i] %in%  sizeBUBOT_clean$species){
-    
+    dat_complet$sizeINBUBOT[i] <- 1
     dat_complet$size[i] <- mean(sizeBUBOT_clean[sizeBUBOT_clean$species %in% dat_complet$species[i],]$size, na.rm = T)
     
     if(is.na(dat_complet$a[i])){
