@@ -13,6 +13,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
                              control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                                    optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
  
+        MuMIn::r.squaredGLMM(mod_biomass)
         #mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
         performance::check_normality(mod_biomass)
         performance::check_heteroscedasticity(mod_biomass)
@@ -352,9 +353,9 @@ GDM_beta_hill_taxo_richess_plot <- GDM_beta_hill_taxo_richess %>%
     panel.grid.major.y = element_blank(),
     legend.position="none"
   ) +
-  xlab("Contribution") +
-  ylab("Variables")+
-  ggtitle("Beta Taxonomic Richness")
+  ylab("") +
+  xlab("Taxonomic")+
+  ggtitle("Dissimilarity composition")
 
 
 GDM_beta_hill_taxo_entropy_plot <- GDM_beta_hill_taxo_entropy %>%
@@ -372,8 +373,8 @@ GDM_beta_hill_taxo_entropy_plot <- GDM_beta_hill_taxo_entropy %>%
     legend.position="none"
   ) +
   xlab("") +
-  ylab("Contribution")+
-  ggtitle("Beta Taxonomic Entropy")
+  ylab("")+
+  ggtitle("Dissimilarity structure")
 
 
 GDM_beta_hill_fonct_richess_plot <- GDM_beta_hill_fonct_richess %>%
@@ -390,9 +391,9 @@ GDM_beta_hill_fonct_richess_plot <- GDM_beta_hill_fonct_richess %>%
     panel.grid.major.y = element_blank(),
     legend.position="none"
   ) +
-  xlab("") +
-  ylab("Contribution")+
-  ggtitle("Beta Functional Richness")
+  ylab("Contribution") +
+  xlab("Functional")+
+  ggtitle("")
 
 
 GDM_beta_hill_fonct_entropy_plot <- GDM_beta_hill_fonct_entropy %>%
@@ -409,9 +410,9 @@ GDM_beta_hill_fonct_entropy_plot <- GDM_beta_hill_fonct_entropy %>%
     panel.grid.major.y = element_blank(),
     legend.position="none"
   ) +
-  xlab("") +
-  ylab("Contribution")+
-  ggtitle("Beta Functional Entropy")
+  ylab("Contribution") +
+  xlab("")+
+  ggtitle("")
 
 grid.arrange(GDM_beta_hill_taxo_richess_plot,
              GDM_beta_hill_taxo_entropy_plot,
