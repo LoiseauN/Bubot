@@ -106,7 +106,7 @@ a <- visreg::visreg(mod_alphaS, "depth", gg=TRUE, overlay=T, line=list(col="oran
 
 b <- visreg::visreg(mod_alphaentro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
-  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Structure")+
+  theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Entropy")+
   scale_color_manual(values=c("orange")) 
 
 c <- visreg::visreg(mod_alphaFct, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
@@ -120,7 +120,13 @@ d <- visreg::visreg(mod_alphaFct_entro, "depth", gg=TRUE, overlay=T, line=list(c
   scale_color_manual(values=c("orange")) 
 
 
-grid.arrange(a,b,c,d,ncol=2)
+visreg <- grid.arrange(a,b,c,d,ncol=2)
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS5.png", 
+       plot = visreg, 
+       width = 8, 
+       height = 8, 
+       units = "in",
+       dpi=300)
 
 
 
@@ -414,12 +420,17 @@ GDM_beta_hill_fonct_entropy_plot <- GDM_beta_hill_fonct_entropy %>%
   xlab("")+
   ggtitle("")
 
-grid.arrange(GDM_beta_hill_taxo_richess_plot,
+GDM_plot <- grid.arrange(GDM_beta_hill_taxo_richess_plot,
              GDM_beta_hill_taxo_entropy_plot,
              GDM_beta_hill_fonct_richess_plot,
              GDM_beta_hill_fonct_entropy_plot,
              nrow=2)
-
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS6.png", 
+       plot = GDM_plot, 
+       width = 8, 
+       height = 8, 
+       units = "in",
+       dpi=300)
 
 AOVmod_betaS <- anova(mod_betaS)
 AOVmod_betaentro<- anova(mod_betaentro)
