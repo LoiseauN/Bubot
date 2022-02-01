@@ -5,7 +5,8 @@
 
 #  library 
 pkgs <- c('rfishbase','leaflet','pbmcapply','parallel','tidyverse','plyr',
-          'effects','lme4','lmerTest','broom','broom.mixed','cowplot','gridExtra','ade4','ggplot2','vegan','DBI','dplyr','RMySQL')
+          'effects','lme4','lmerTest','broom','broom.mixed','cowplot','gridExtra','ade4','ggplot2','vegan','DBI','dplyr','RMySQL',
+          'FactoMineR',"factoextra")
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
