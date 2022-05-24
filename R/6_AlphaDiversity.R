@@ -70,6 +70,20 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
                                                      fdist_scaling       = FALSE,
                                                      fdendro             = "average")
       
+      #Compute percentage explained
+      pcoa_trdist <- ape::pcoa(sp_dist_traits)
+      eigen <- pcoa_trdist$values$Eigenvalues
+      #Keep positive eigenvalue
+      eigen <- eigen[eigen>0]
+      
+      #Compute relative eigenvalue
+      rel_eigen<- eigen/sum(eigen)
+    
+      
+      
+   
+      
+      
       mFD::quality.fspaces.plot(fspaces_quality            = fspaces_quality,
                                 quality_metric             = "mad",
                                 fspaces_plot               = c("tree_average", "pcoa_2d", "pcoa_3d", "pcoa_4d", "pcoa_5d", "pcoa_6d"),
