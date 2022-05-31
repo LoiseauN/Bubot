@@ -70,7 +70,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 #Model Functional : ---------------
-      mod_alphaFct = lmer(alpha_hill_fonct_richess~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab +  (1|Site) + (1|Date),data = alpha_div_all,
+      mod_alphaFct = lmer(alpha_hill_fonct_richess~ depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab +  (1|Site) + (1|Date),data = alpha_div_all,
                         control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                               optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
       
@@ -135,7 +135,48 @@ ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure
        units = "in",
        dpi=300)
 
+####---- TABLE 
+AOVmod_alphaS <- anova(mod_alphaS)
+AOVmod_alphaentro<- anova(mod_alphaentro)
+AOVmod_alphaFct<- anova(mod_alphaFct)
+AOVmod_alphaFct_entro<- anova(mod_alphaFct_entro)
 
+aov_alpha_table_df <- rbind(AOVmod_alphaS, AOVmod_alphaentro,AOVmod_alphaFct,AOVmod_alphaFct_entro)
+aov_alpha_table_df <- cbind(Variables = rep(c("depth","PC1_hab","PC2_hab","PC3_hab","PC4_hab"),4),aov_alpha_table_df)
+aov_alpha_table_df <- cbind(Indice = c(rep("Taxonomic Richness",5),rep("Taxonomic Entropy",5),
+                                      rep("Functional Richness",5),rep("Functional Entropy",5)),aov_alpha_table_df)
+
+
+aov_alpha_table_df[,3] <-  round(aov_alpha_table_df[,3],1)
+aov_alpha_table_df[,7] <-  round(aov_alpha_table_df[,7],1)
+  
+aov_alpha_table_df <- aov_alpha_table_df[,c(1,2,3,7,8)]
+
+colnames(aov_alpha_table_df) <- c("Indices", "Term", "Sum.Sq", "F-statistic", "P.value")
+
+
+
+aov_alpha_table_df <- aov_alpha_table_df %>% dplyr::mutate_at(vars("Sum.Sq","F-statistic","P.value",), dplyr::funs(round(., 3)))
+
+
+for(i in 1:nrow(aov_alpha_table_df)){ 
+  if(aov_alpha_table_df[i, 5]<=0.001 )    { 
+    aov_alpha_table_df[i, 5] <- "<0.001"
+    aov_alpha_table_df[i, 5] <- kableExtra::cell_spec(aov_alpha_table_df[i, 5],  bold = T)
+  } 
+  
+  if(aov_alpha_table_df[i, 5]<0.05 & aov_alpha_table_df[i, 5]>0.001)     {  
+    aov_alpha_table_df[i, 5] <- kableExtra::cell_spec(aov_alpha_table_df[i, 5],  bold = T)
+  } 
+  
+  
+}
+
+table_alpha_aov<-pixiedust::dust(aov_alpha_table_df) %>% 
+  kableExtra::kable( booktabs = T, escape = F)%>% 
+  kableExtra::kable_styling()%>% 
+  kableExtra::collapse_rows(columns = 1)
+table_alpha_aov
 
 ##Plot relative importance
 relativ_import_alphaS <- data.frame(indice = as.factor(rep("Taxonomic richness",5)), 

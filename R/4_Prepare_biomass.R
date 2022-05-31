@@ -96,9 +96,21 @@ for (i in 1: nrow(sizeBUBOT_clean)){
 
 save(sizeBUBOT_clean,file=file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 
+
+#CHECK THE RELATIONSHIP BETWEEN BUBOT AND RLS SIZE
+
+
+
+
 load(file= file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 load(file= file.path(outputs_dir,"sizeRLS_clean.RData"))
+df_size_BUBOT <- sizeBUBOT_clean[,c("species","size")]
+df_size_RLS <- data.frame(species = sizeRLS_clean$species,
+                          size_RLS = sizeRLS_clean$size)
 
+df_check <- merge(df_size_BUBOT,df_size_RLS,by="species")
+
+# add size and replace by RLS size if missing for BUBOT
 dat_complet$size <- NA
 dat_complet$sizeINBUBOT <- NA
 
