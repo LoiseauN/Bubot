@@ -1,5 +1,5 @@
 
-pkgs <- c('forestmodel','gdm','relaimpo','visreg')
+pkgs <- c('forestmodel','gdm','relaimpo','visreg','lme4')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
@@ -7,11 +7,18 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
  load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div_all.RData")
 
+#Join to have date : ---------------
+        date <- unique(data.frame(Sample.code = species.site.matrix$site.data$Sample.code,Date = species.site.matrix$site.data$Date))
+        alpha_div_all <- merge(alpha_div_all,date, by.x="row.names",by.y="Sample.code", all.x = T) 
+        rownames(alpha_div_all) <- alpha_div_all[,1]
+        alpha_div_all <- alpha_div_all[,-1]
+        
 #Model Biomass : ---------------
- anova(mod_biomass)
-        mod_biomass = lmer(biomass~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
+        mod_biomass = lmer(biomass~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab +  (1|Site) + (1|Date),data = alpha_div_all,
                              control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                                    optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
+ 
+        anova(mod_biomass)
  
         MuMIn::r.squaredGLMM(mod_biomass)
         #mod_biomass <- glm(biomass ~  depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab , data = alpha_div_all)
@@ -30,13 +37,13 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
         scale_color_manual(values=c("orange")) 
 
 #Model Taxonomic : ---------------
-        mod_alphaS = lmer(sp_richn~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
+        mod_alphaS = lmer(sp_richn~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site) + (1|Date),data = alpha_div_all,
                            control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                                  optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
         relativ_import_alphaS <- MuMIn::r.squaredGLMM(mod_alphaS)
    
         
-        mod_alphaentro = lmer(alpha_hill_taxo_entropy~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
+        mod_alphaentro = lmer(alpha_hill_taxo_entropy~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab +  (1|Site) + (1|Date),data = alpha_div_all,
                            control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                                  optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
         relativ_import_alphaentro <- MuMIn::r.squaredGLMM(mod_alphaentro)
@@ -63,11 +70,11 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 #Model Functional : ---------------
-      mod_alphaFct = lmer(alpha_hill_fonct_richess~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
+      mod_alphaFct = lmer(alpha_hill_fonct_richess~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab +  (1|Site) + (1|Date),data = alpha_div_all,
                         control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                               optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
       
-      mod_alphaFct_entro = lmer(alpha_hill_fonct_entropy~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab + (1|Site),data = alpha_div_all,
+      mod_alphaFct_entro = lmer(alpha_hill_fonct_entropy~depth + PC1_hab + PC2_hab + PC3_hab + PC4_hab +  (1|Site) + (1|Date),data = alpha_div_all,
                           control = lmerControl(optimizer = "optimx", calc.derivs = T,
                                                 optCtrl = list(method = "nlminb", starttests = FALSE, kkt = FALSE)))
       
