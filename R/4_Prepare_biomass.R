@@ -108,8 +108,24 @@ df_size_BUBOT <- sizeBUBOT_clean[,c("species","size")]
 df_size_RLS <- data.frame(species = sizeRLS_clean$species,
                           size_RLS = sizeRLS_clean$size)
 
-df_check <- merge(df_size_BUBOT,df_size_RLS,by="species")
+df_size_BUBOT_mean <- aggregate(. ~ species, data = df_size_BUBOT, mean)
+df_size_RLS_mean <-  aggregate(. ~ species, data = df_size_RLS, mean)
+df_check <- merge(df_size_BUBOT_mean,df_size_RLS_mean,by="species")
 
+plot(df_check$size,df_check$size_RLS)
+
+ggplot(df_check, aes(x=size_RLS, y=size)) + 
+  geom_point(fill ="cadetblue3",pch=21)+
+  ylim(min(c(df_check$size_RLS,df_check$size)),max(c(df_check$size_RLS,df_check$size)))+
+  xlim(min(c(df_check$size_RLS,df_check$size)),max(c(df_check$size_RLS,df_check$size)))+
+  theme_bw()+ylab("Size BUBOT")+xlab("Size RLS")+
+  geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
+  ggpmisc::stat_poly_eq(aes(label =  paste(after_stat(rr.label),
+                                             after_stat(f.value.label),
+                                             after_stat(p.value.label),
+                                             sep = "*\", \"*")),
+                          formula = y ~ x,
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
 # add size and replace by RLS size if missing for BUBOT
 dat_complet$size <- NA
 dat_complet$sizeINBUBOT <- NA
