@@ -265,3 +265,4 @@ colnames(plotPCOA_2)<-c("axis1","axis2")
 FunctSpace + geom_point(data = plotPCOA_2, aes(x = axis1, y = axis2),size=1,color="grey",alpha=0.2) +
   ggpubr::stat_chull(data = plotPCOA_2,aes(x = axis1, y = axis2), 
                      alpha = 0.1, geom = "polygon")
+

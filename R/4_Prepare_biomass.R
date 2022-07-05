@@ -104,6 +104,7 @@ save(sizeBUBOT_clean,file=file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 
 load(file= file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 load(file= file.path(outputs_dir,"sizeRLS_clean.RData"))
+
 df_size_BUBOT <- sizeBUBOT_clean[,c("species","size")]
 df_size_RLS <- data.frame(species = sizeRLS_clean$species,
                           size_RLS = sizeRLS_clean$size)
@@ -206,3 +207,4 @@ dat_complet <- dat_complet[!is.na(dat_complet$diet),]
 
 save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
+dat_complet_sentivitysize 
