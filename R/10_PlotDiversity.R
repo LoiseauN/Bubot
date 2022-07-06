@@ -56,7 +56,7 @@ p1 <- p + geom_text(x = 25, y = 300, label = lm_eqn(df), parse = TRUE)
 
 biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=(biomass))) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
-  theme_bw()+ylab("Biomass (g/m2)")+xlab("Depth (m)")+
+  theme_bw()+ylab(bquote("Biomass"~g/m^2))+xlab("Depth (m)")+#ylab("Biomass (g/m2)")
   geom_smooth(method = lm,formula = y ~ x,colour="orange",fill="orange")+
   ggpmisc::  stat_poly_eq(aes(label =  paste(after_stat(rr.label),
                                              after_stat(f.value.label),

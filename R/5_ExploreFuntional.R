@@ -18,7 +18,7 @@ for(j in 1:length(var)){
     labs(colour = var[j]) + 
     ylim(0,200000)+
     #theme(legend.position = "right")+
-    labs(x="Depth",y="biomass (g/m2)")+
+    labs(x="Depth",y=bquote("Biomass"~g/m^2))+
     geom_vline(xintercept=20,  linetype="dotted",size=1)+
     geom_vline(xintercept=40,  linetype="dotted",size=1)+
     geom_vline(xintercept=60,  linetype="dotted",size=1)+

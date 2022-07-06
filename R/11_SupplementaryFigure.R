@@ -2,8 +2,6 @@
 ##Supplementary
 
 
-
-
 a <- ggplot(alpha_div_sensibility_all, aes(x=classDepth, y=sp_richn)) + 
   geom_boxplot(fill ="cadetblue3",pch=21)+
   theme_bw()+ylab("Alpha-richness taxo")+ geom_jitter(width = 0.1, size = 0.5)
@@ -289,6 +287,17 @@ rownames(alpha_div_sensibility) <- alpha_div_sensibility[,1]
 alpha_div_sensibility <- alpha_div_sensibility[,-c(1)]
 
 colnames(alpha_div_all)[c(15:19)] <- c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","PC5_hab")
+
+
+
+
+
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Figure2.png", 
+       plot = biom_plot, 
+       width = 4, 
+       height = 4, 
+       units = "in",
+       dpi=300)
 
 
 
