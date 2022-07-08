@@ -140,29 +140,15 @@ for (i in 1:nrow(pl)) {
 
 
  
- 
- ######
- 
- 
- dat_complet$Indweigth_SensiB <- dat_complet$a * dat_complet$maxLengthTL_Fishbase^dat_complet$b 
- dat_complet$Groupweigth_SensiB <- dat_complet$Indweigth_SensiB * dat_complet$abundance
- 
- #Biomass matrix
- biomass_mat = reshape2::melt(dat_complet , id.vars = c( "site" , "species" ) , measure.vars = "Groupweigth")
- biomass_mat = reshape2::dcast( biomass_mat , site~species,sum,na.rm=T)
- rownames(biomass_mat) <- biomass_mat[,1]
- biomass_mat <- biomass_mat[,-1]
- 
- 
- #Biomass matrix sensibility
- biomass_mat_sensi = reshape2::melt(dat_complet , id.vars = c( "site" , "species" ) , measure.vars = "Groupweigth_SensiB")
- biomass_mat_sensi = reshape2::dcast( biomass_mat_sensi , site~species,sum,na.rm=T)
- rownames(biomass_mat_sensi) <- biomass_mat_sensi[,1]
- biomass_mat_sensi <- biomass_mat_sensi[,-1]
- 
- plot(apply(biomass_mat,1,mean),apply(biomass_mat_sensi,1,mean))
- 
+ ### COMPARISON SIZE BUBOT AND SIZE RLS
 
+ sizeBUBOT_mean <- sizeBUBOT %>% select(Species, Size) 
+ sizeBUBOT_mean <- aggregate(. ~ Species, data = sizeBUBOT_mean, mean)
  
+ 
+ sizeRLS_mean <- sizeRLS %>% select(species, size) 
+ sizeRLS_mean <- aggregate(. ~ species, data = sizeRLS_mean, mean)
+ 
+ comparison <- merge(sizeBUBOT_mean, sizeRLS_mean, by.x= "Species", by.y = "species")
  
  
