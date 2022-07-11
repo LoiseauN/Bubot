@@ -272,7 +272,7 @@ grid.arrange(relativ_import_alphaS,relativ_import_alphaentro,relativ_import_alph
 
 
 ##GDM
-
+#/beta_hill
 hab_pc_site_scale <- merge(hab_pc_site_scale,species.site.matrix$site.data[,c(2,7:8)],by.x="row.names",
                            by.y="Sample.code",all.x=T)
 
