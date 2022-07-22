@@ -33,7 +33,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
         plot_biomass <- visreg::visreg(mod_biomass, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
           geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
-          theme_bw()+ylab("Biomass")+xlab("Depth (m)")+
+          theme_bw()+ylab(bquote("Biomass"~g/m^2))+xlab("Depth (m)")+
         scale_color_manual(values=c("orange")) 
 
 #Model Taxonomic : ---------------

@@ -75,13 +75,17 @@ load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_co
       eigen <- pcoa_trdist$values$Eigenvalues
       #Keep positive eigenvalue
       eigen <- eigen[eigen>0]
-      
+  
       #Compute relative eigenvalue
-      rel_eigen<- eigen/sum(eigen)
-    
-      
-      
+      rel_eigen<- eigen/pcoa_trdist$trace
    
+      pcoa_trdist$trace
+      df <- data.frame(Eigenvalues = paste0('E',seq(1:8)),
+                       Value = pcoa_trdist$values$Relative_eig[1:8])
+
+      hist_eigen <- ggplot(data=df, aes(x=Eigenvalues, y=Value)) + geom_bar(stat="identity",fill="steelblue")+
+        geom_text(aes(label=round(Value,digits=2)), vjust=1.6, color="white", size=3.5)+
+        theme_minimal()
       
       
       mFD::quality.fspaces.plot(fspaces_quality            = fspaces_quality,
