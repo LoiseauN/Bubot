@@ -2,6 +2,7 @@ pkgs <- c('reshape2','mFD','viridis','data.table','ggplot2','grid')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
+load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div_all.RData")
 
 
 #Some values
@@ -73,6 +74,8 @@ ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Figure
        units = "in",
        dpi=300)
 
+grob <- grobTree(textGrob("A", x=0.03,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 
 a <- ggplot(alpha_div_all, aes(x=depth, y=sp_richn)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
@@ -84,8 +87,12 @@ a <- ggplot(alpha_div_all, aes(x=depth, y=sp_richn)) +
                                              after_stat(p.value.label),
                                              sep = "*\", \"*")),
                           formula = y ~ x,
-                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)+
+  annotation_custom(grob)
  
+
+grob <- grobTree(textGrob("B", x=0.03,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 b <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_taxo_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Entropy")+
@@ -96,8 +103,11 @@ b <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_taxo_entropy)) +
                                              after_stat(p.value.label),
                                              sep = "*\", \"*")),
                           formula = y ~ x,
-                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)+
+  annotation_custom(grob)
 
+grob <- grobTree(textGrob("C", x=0.03,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 c <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_richess)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab("Functional")+xlab("Depth (m)")+
@@ -107,8 +117,11 @@ c <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_richess)) +
                                              after_stat(p.value.label),
                                              sep = "*\", \"*")),
                           formula = y ~ x,
-                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)+
+  annotation_custom(grob)
 
+grob <- grobTree(textGrob("D", x=0.03,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 d <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_entropy)) + 
   geom_point(fill ="cadetblue3",pch=21)+xlim(0,max(alpha_div_all$depth))+
   theme_bw()+ylab("")+xlab("Depth (m)")+
@@ -118,7 +131,8 @@ d <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_entropy)) +
                                              after_stat(p.value.label),
                                              sep = "*\", \"*")),
                           formula = y ~ x,
-                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)+
+  annotation_custom(grob)
 
 #title <- textGrob("Alpha Hill",
 #                  gp=gpar(fontsize=20,fontface=2))
@@ -137,6 +151,9 @@ ResHill<- Decay_Hill_20toInfdepth
 ResHill <- as.data.frame(ResHill)
 ResHill <- merge(ResHill,coord_depth, by="row.names",all.x=T)
 
+
+grob <- grobTree(textGrob("A", x=0.03,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
   geom_errorbar(aes(ymin=taxo_rich_m-taxo_rich_sd, ymax=taxo_rich_m+taxo_rich_sd), width=.2,
@@ -149,8 +166,12 @@ a <- ggplot(ResHill, aes(x=depth, y=taxo_rich_m)) +
                                              after_stat(p.value.label),
                                              sep = "*\", \"*")),
                           formula = y ~ x,
-                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)+
+  annotation_custom(grob)
 
+
+grob <- grobTree(textGrob("B", x=0.03,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) + 
   geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
   geom_errorbar(aes(ymin=taxo_entro_m-taxo_entro_sd, ymax=taxo_entro_m+taxo_entro_sd), width=.2,
@@ -163,10 +184,14 @@ b <- ggplot(ResHill, aes(x=depth, y=taxo_entro_m)) +
                                              after_stat(p.value.label),
                                              sep = "*\", \"*")),
                           formula = y ~ x,
-                          geom = "text", label.x = 75, label.y = 0, hjust = 1)
+                          geom = "text", label.x = 75, label.y = 0, hjust = 1)+
+  annotation_custom(grob)
 
+
+grob <- grobTree(textGrob("C", x=0.03,  y=0.06, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
   geom_errorbar(aes(ymin=fct_rich_m-fct_rich_sd, ymax=fct_rich_m+fct_rich_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
   theme_bw()+ylab("Functional")+xlab("Difference in Depth (m)")+
@@ -176,10 +201,14 @@ c <- ggplot(ResHill, aes(x=depth, y=fct_rich_m)) +
                                              after_stat(p.value.label),
                                              sep = "*\", \"*")),
                           formula = y ~ x,
-                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)+
+  annotation_custom(grob)
 
+
+grob <- grobTree(textGrob("D", x=0.03,  y=0.06, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) + 
-  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(alpha_div$depth))+
+  geom_point(fill ="cadetblue3",pch=21)+ylim(0,1)+xlim(0,max(ResHill$depth))+
   geom_errorbar(aes(ymin=fct_entro_m-fct_entro_sd, ymax=fct_entro_m+fct_entro_sd), width=.2,
                 position=position_dodge(0.05),color ="cadetblue3")+
   theme_bw()+ylab("")+xlab("Difference in Depth (m)")+
@@ -189,7 +218,8 @@ d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) +
                                              after_stat(p.value.label),
                                              sep = "*\", \"*")),
                           formula = y ~ x,
-                          geom = "text", label.x = 75, label.y = 1, hjust = 1)
+                          geom = "text", label.x = 75, label.y = 1, hjust = 1)+
+  annotation_custom(grob)
 
 #title <- textGrob("Depth Decay",
  #                 gp=gpar(fontsize=20,fontface=2))
@@ -410,4 +440,24 @@ ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure
        dpi=300)
 
 
+# accumulation curve
+accum=specaccum(preabs_mat,"random")
+data <- data.frame(time = accum$sites,
+                   richness = accum$richness,
+                   sd = accum$sd) 
+accum_plot <- ggplot(data = data, aes(x = time)) + 
+  geom_line(aes(y = richness), size = 1,color ="orange") + 
+  geom_ribbon(aes(y = richness, ymin = richness - sd, ymax = richness + sd), alpha = .2,fill ="cadetblue3") +
+  xlab("Minutes") + ylab("Number of Species")+
+  theme_bw() +  
+  theme(legend.key = element_blank()) + 
+  theme(plot.margin=unit(c(1,3,1,1),"cm"))+
+  theme(legend.position = c(1.1,.6), legend.direction = "vertical") +
+  theme(legend.title = element_blank())
 
+ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/accumu_curve.png", 
+       plot = accum_plot, 
+       width = 10, 
+       height = 8, 
+       units = "in",
+       dpi=300)

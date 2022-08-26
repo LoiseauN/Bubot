@@ -60,7 +60,7 @@ pl <- lapply(1:length(unique(sizeBUBOT_clean$species)), function(x) {
   
   df <- subset(sizeBUBOT_clean,sizeBUBOT_clean$species==unique(sizeBUBOT_clean$species)[x])
   
-  #Wilxcox test 
+  #kolmo test 
   sub30 <- df[df$depth < 30,]
   over30<- df[df$depth > 30,]
   if (nrow(sub30) == 0 || nrow(over30) == 0){kolmo_res = NA}
@@ -117,10 +117,10 @@ for (i in 1:nrow(pl)) {
 
 
  ggplot(pl, aes(x = pvalue, y = type, fill = factor(stat(quantile))) ) +
-   stat_density_ridges( geom = "density_ridges_gradient",
+   ggridges::stat_density_ridges( geom = "density_ridges_gradient",
                         calc_ecdf = TRUE, quantiles = c( 0.28),from = 0, to = 1,
                         scale = 20) +
-  geom_vline(xintercept = 0.05)+
+  geom_vline(xintercept = 0.05)+ylab("Density")+
    #geom_vline(xintercept=c(0.05), linetype="dotted")+
             scale_fill_manual(
               name = "p-value",
@@ -136,7 +136,7 @@ for (i in 1:nrow(pl)) {
     theme_bw()+
    theme(
          axis.ticks.y = element_blank(),
-         axis.text.y = element_blank())+ylab("")
+         axis.text.y = element_blank())
 
 
  

@@ -136,14 +136,15 @@ ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure
        dpi=300)
 
 ####---- TABLE 
+AOVmod_biomass <- anova(mod_biomass)
 AOVmod_alphaS <- anova(mod_alphaS)
 AOVmod_alphaentro<- anova(mod_alphaentro)
 AOVmod_alphaFct<- anova(mod_alphaFct)
 AOVmod_alphaFct_entro<- anova(mod_alphaFct_entro)
 
-aov_alpha_table_df <- rbind(AOVmod_alphaS, AOVmod_alphaentro,AOVmod_alphaFct,AOVmod_alphaFct_entro)
-aov_alpha_table_df <- cbind(Variables = rep(c("depth","PC1_hab","PC2_hab","PC3_hab","PC4_hab"),4),aov_alpha_table_df)
-aov_alpha_table_df <- cbind(Indice = c(rep("Taxonomic Richness",5),rep("Taxonomic Entropy",5),
+aov_alpha_table_df <- rbind(AOVmod_biomass,AOVmod_alphaS, AOVmod_alphaentro,AOVmod_alphaFct,AOVmod_alphaFct_entro)
+aov_alpha_table_df <- cbind(Variables = rep(c("depth","PC1_hab","PC2_hab","PC3_hab","PC4_hab"),5),aov_alpha_table_df)
+aov_alpha_table_df <- cbind(Indice = c(rep("Biomass",5),rep("Taxonomic Richness",5),rep("Taxonomic Entropy",5),
                                       rep("Functional Richness",5),rep("Functional Entropy",5)),aov_alpha_table_df)
 
 
