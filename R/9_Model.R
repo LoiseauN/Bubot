@@ -106,25 +106,33 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
 #PLot Visreg
+grob <- grobTree(textGrob("A", x=0.95,  y=0.95, hjust=0,
+                                  gp=gpar(fontsize=13, fontface="bold")))
 a <- visreg::visreg(mod_alphaS, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
-  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")
-  scale_color_manual(values=c("orange")) 
+  theme_bw()+ylab("Taxonomic")+xlab("")+ggtitle("Richness")+
+  scale_color_manual(values=c("orange"))+  annotation_custom(grob)
 
+grob <- grobTree(textGrob("B", x=0.95,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 b <- visreg::visreg(mod_alphaentro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
   theme_bw()+ylab(" ")+xlab(" ")+ggtitle("Entropy")+
-  scale_color_manual(values=c("orange")) 
+  scale_color_manual(values=c("orange")) +  annotation_custom(grob)
 
+grob <- grobTree(textGrob("C", x=0.95,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 c <- visreg::visreg(mod_alphaFct, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
   theme_bw()+ylab("Functional")+xlab("Depth (m)")+
-  scale_color_manual(values=c("orange")) 
+  scale_color_manual(values=c("orange")) +  annotation_custom(grob)
 
+grob <- grobTree(textGrob("D", x=0.95,  y=0.95, hjust=0,
+                          gp=gpar(fontsize=13, fontface="bold")))
 d <- visreg::visreg(mod_alphaFct_entro, "depth", gg=TRUE, overlay=T, line=list(col="orange")) + 
   geom_point(fill ="cadetblue3",pch=21) +  theme_bw()+
   theme_bw()+ylab("")+xlab("Depth (m)")+
-  scale_color_manual(values=c("orange")) 
+  scale_color_manual(values=c("orange")) +  annotation_custom(grob)
 
 
 visreg <- grid.arrange(a,b,c,d,ncol=2)

@@ -266,3 +266,23 @@ FunctSpace + geom_point(data = plotPCOA_2, aes(x = axis1, y = axis2),size=1,colo
   ggpubr::stat_chull(data = plotPCOA_2,aes(x = axis1, y = axis2), 
                      alpha = 0.1, geom = "polygon")
 
+
+
+
+#piscivorous and mobile fishes within reefs
+dat_complet <- dat_complet[dat_complet$site %in% rownames(alpha_div_all),]
+sub_pisci <- dat_complet[dat_complet$mobility == "mobile_within_a_reef",]
+sub_pisci <- sub_pisci[sub_pisci$diet == "piscivorous",]
+sub_pisci <- data.frame(classDepth = sub_pisci$classDepth,
+                       biomass = sub_pisci$Groupweigth)
+Compute_sub_pisci <- aggregate(. ~ classDepth, data=sub_pisci,sd)
+
+dat_complet <- dat_complet[dat_complet$site %in% rownames(alpha_div_all),]
+sub_pisci <- dat_complet[dat_complet$family == "Serranidae",]
+sub_pisci <- data.frame(classDepth = sub_pisci$classDepth,
+                        biomass = sub_pisci$Groupweigth)
+Compute_sub_pisci <- aggregate(. ~ classDepth, data=sub_pisci,mean)
+
+
+
+
