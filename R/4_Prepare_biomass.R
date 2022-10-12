@@ -2,10 +2,10 @@ library(reshape2)
 library(stringr)
 
 
-sizeBUBOT <- read.table("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/extraction_tailles.txt",sep="\t",header=T)
-load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/sizeRLS.RData")
-load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Size/coefRLS.RData")
-load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+sizeBUBOT <- read.table(here::here("data/Size/extraction_tailles.txt"),sep="\t",header=T)
+load(here::here("data/Size/sizeRLS.RData"))
+load(here::here("data/Size/coefRLS.RData"))
+load(here::here("data/Data_dump/dat_complet.RData"))
 
 #same format species
 sizeRLS$species <-  gsub(" ", "_", sizeRLS$species )
@@ -66,7 +66,7 @@ for (i in 1:nrow(sizeRLS)){
 }
 }
 sizeRLS_clean <- sizeRLS 
-save(sizeRLS_clean,file="sizeRLS_clean.RData")
+save(sizeRLS_clean,file=here::here("data/sizeRLS_clean.RData"))
 
 sizeBUBOT$a <- NA
 sizeBUBOT$b <- NA
@@ -94,7 +94,7 @@ for (i in 1: nrow(sizeBUBOT_clean)){
   
 }
 
-save(sizeBUBOT_clean,file=file.path(outputs_dir,"sizeBUBOT_clean.RData"))
+save(sizeBUBOT_clean,file=here::here("outputs/sizeBUBOT_clean.RData"))
 
 
 #CHECK THE RELATIONSHIP BETWEEN BUBOT AND RLS SIZE
@@ -102,8 +102,8 @@ save(sizeBUBOT_clean,file=file.path(outputs_dir,"sizeBUBOT_clean.RData"))
 
 
 
-load(file= file.path(outputs_dir,"sizeBUBOT_clean.RData"))
-load(file= file.path(outputs_dir,"sizeRLS_clean.RData"))
+load(file= here::here("outputs/sizeBUBOT_clean.RData"))
+load(file= here::here("outputs/sizeRLS_clean.RData"))
 
 df_size_BUBOT <- sizeBUBOT_clean[,c("species","size")]
 df_size_RLS <- data.frame(species = sizeRLS_clean$species,
@@ -205,6 +205,6 @@ dat_complet<- dat_complet[dat_complet$island=="Mayotte",]
 
 dat_complet <- dat_complet[!is.na(dat_complet$diet),]
 
-save(dat_complet,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+save(dat_complet,file=here::here("data/Data_dump/dat_complet.RData"))
 
-dat_complet_sentivitysize 
+

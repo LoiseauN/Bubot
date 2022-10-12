@@ -1,4 +1,4 @@
-load(file.path("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData"))
+load(here::here("data/Data_dump/dat_complet.RData"))
 
 var <- c("reef_associated","mobility","activity","schooling","position","diet","clean_diet",
          "trophic.level","maxLengthTL_Fishbase")
@@ -35,7 +35,7 @@ figS2 <- grid.arrange(main.plot1,
              main.plot2,
              main.plot3,
              main.plot4,ncol= 2)
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS2.png", 
+ggsave(filename=here::here("fig/figureS2.png"), 
        plot = figS2, 
        width = 8, 
        height = 8, 
@@ -44,7 +44,7 @@ ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure
 
 figS2bis <-grid.arrange(main.plot5,
              main.plot6,ncol= 2,nrow=2)
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS2_bis.png", 
+ggsave(filename=here::here("fig/figureS2_bis.png"), 
        plot = figS2bis, 
        width = 8, 
        height = 8, 
@@ -193,37 +193,37 @@ for(j in 1:length(var)){
 
 
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Activity.png", 
+ggsave(filename=here::here("fig/Activity.png"), 
        plot = main.plot1, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Schooling.png", 
+ggsave(filename=here::here("fig/Schooling.png"), 
        plot = main.plot2, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Position.png", 
+ggsave(filename=here::here("fig/Position.png"), 
        plot = main.plot3, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/clean_diet.png", 
+ggsave(filename=here::here("fig/clean_diet.png"), 
        plot = main.plot4, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Size.png", 
+ggsave(filename=here::here("fig/fig/Size.png"), 
        plot = main.plot5, 
        width = 297, 
        height = 210, 
        units = "mm")
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Diet.png", 
+ggsave(filename=here::here("fig/fig/Diet.png"), 
        plot = main.plot6, 
        width = 297, 
        height = 210, 

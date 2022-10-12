@@ -31,7 +31,9 @@ colnames(habit.score) <- c("PC1","PC2","PC3","PC4","PC5")
 famd_plot <- grid.arrange(a,
              b,
              c,d,nrow=2)
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/famd_plot.png", 
+
+
+ggsave(filename=here::here("fig/famd_plot.png"), 
        plot = famd_plot, 
        width = 8, 
        height = 8, 

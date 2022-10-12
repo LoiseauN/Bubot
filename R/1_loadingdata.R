@@ -18,7 +18,7 @@ ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 # first set a working directory. whatch out a new folder "Data_dump" will be created 
 # to save locally the table from the MySQL database
-work.folder="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data"
+work.folder= here::here("data") 
 #If working from home
 #work.folder="~/Documents/Bubot/Bubot_Analyse/Bubot/data"
 
@@ -90,20 +90,6 @@ boxplot(number.ind.carang[island.name=="Juan_de_nova"]~depth.class[island.name==
 ##################################### get the functional traits ###########################################
 ###########################################################################################################
 
-
-
-# load MySQL drivers
-drv=dbDriver("MySQL")
-
-# get connection to the database
-con = dbConnect(drv, user="UVC.reader", dbname="Underwater Visual Census",password="Mayfish976",host="162.38.198.139")
-
-# just check tables availables
-dbListTables(con)
-
-# load the table
-Species_info=dbReadTable(con, "Species_info")
-
 # set working directory
 setwd(work.folder)
 
@@ -126,88 +112,6 @@ fish_traits <- Species_info[,colnames(Species_info) %in% c(
 "Position","Diet","Trophic.level_Fishbase","Trophic.level_Fishbase","BodyShape_Fishbase","MaxLengthTL_Fishbase",
 "Trophic.level_Fishbase","BodyShape_Fishbase","a","b"),]
 colnames(fish_traits)[1] <- "Species"
-
-
-################################################################################
-#' Extract Trait in Rfishbase
-#' 
-#' Authors: ---------
-#' 
-#' @function  TODO 
-#' 
-#' @param sp_distrib a data frame with lat, lot and presence absence of species
-#' Data from OBIS extracted by Albouy, Camille, et al. "The marine fish food web is globally connected." Nature ecology & evolution 3.8 (2019): 1153-1161.
-#' @param cores number of core to use to decrease computing time
-#'              
-#'@param 
-#' 
-#' @return a list of dataframe with species in element  and a data fra
-#' 
-#################################################################################
-
-#nb_cores <- 2
-#trait_fishbase <- do.call(rbind,pbmclapply(1:nrow(Species_info), function(i){   #
-  
-  #sp <- "Abudefduf sparoides"
-  #sp<-as.character(gsub("_", " ", sp))
- # sp<-as.character(gsub("_", " ", Species_info$Genus_species[i]))
-  #Loading growth data from Fishbase
- # estimate_growth_data <- estimate(sp) %>%
-    #Selecting the column that are of interest
- #   select(c("Species",'MaxLengthTL','Troph','DepthMax',"a","b",
-#           'K','TempPrefMin', 'TempPrefMean', 'TempPrefMax')) 
-
-
-  #species_info <- species(sp) %>%
-  #Selecting the column that are of interest
-  # select(c("Species","BodyShapeI"))
-
-  #INFO VRAIMENT PAS TERRIBLE DES ZERO PARTOUT, -1 QUAND Y A UNE INFO??
-  #traits_level <- ecology(sp) %>%
-    #Selecting the column that are of interest
-   # select(c("Species","FeedingType","FoodTroph","Schooling","Solitary","Shoaling",
-    #         "Benthic","Sessile","Mobile","Demersal","Endofauna","Pelagic","Megabenthos",
-    #         "Level")) 
-  
-  #average variables and select the most frequent item
-  #traits_level <-  data.frame(
-  #  t(data.frame(sapply(c("Species","FeedingType"), function(i)
-  #  names(sort(table(traits_level[,i]),decreasing = TRUE)[1])))),
-  #t(data.frame(apply(traits_level[,-c(1,2)],2,min,na.rm=T))))
-  
- # diet_data <- fooditems(sp)%>%
-    #Selecting the column that are of interest
-   #   select(c("FoodI","FoodII","FoodIII"))
-  
-  #if(nrow(diet_data)==1) { diet_data <- data.frame(Species = sp,diet_data) 
-  
- # }else{ 
-    
-    #choose the most frequent item
- # diet_data <- data.frame(Species=sp,t(data.frame(sapply(c("FoodI","FoodII","FoodIII"), function(i)
- #   names(sort(table(diet_data[,i]),decreasing = TRUE)[1])))))
- # }
-  
- # swim_data  <-  data.frame(swimming(sp))%>%
-    #Selecting the column that are of interest
- #   select(c("Species","AdultType"))%>%
- #   dplyr::rename(swimtype="AdultType")
-  
-  #taxonomy <- taxize::tax_name(query = sp, get = c("genus","family"), db = "ncbi")  %>%
-  #Selecting the column that are of interest
-  # select(c("query","genus","family"))
-  #colnames(taxonomy)[1] <- "Species"
-  
-  #data <- plyr::join_all(list(species_info,diet_data,swim_data, estimate_growth_data), by = 'Species', type = 'full')
-  
- # return(data)
-  
-#},mc.cores = nb_cores))
-
-#trait_fishbase$Species <- as.character(gsub(" ", "_", trait_fishbase$Species))
-
-#fish_traits <- merge(fish_traits,trait_fishbase,by.x="row.names",by.y="Species",all.x=T)
-#colnames(fish_traits)[1] <- "Species"
 
 
 
