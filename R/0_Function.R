@@ -57,7 +57,7 @@
 
 
 # create a function to return event code when given measurement method and island
-Event.list=function(DB.connection="yes",
+Event.list=function(DB.connection="no",
                     work.folder,measurement.method=c("webfish","wave"),
                     island=c("Mayotte","Europa","Juan_de_Nova")) {
   
@@ -72,8 +72,6 @@ Event.list=function(DB.connection="yes",
     # load MySQL drivers
     drv=dbDriver("MySQL")
     
-    # get connection to the database
-    con = dbConnect(drv, user="UVC.reader", dbname="Underwater Visual Census",password="Mayfish976",host="162.38.198.139")
     
     # load the tables
     RUV_data=dbReadTable(con, "RUV_data")
@@ -209,9 +207,7 @@ MaxN.calculation=function(DB.connection="yes",work.folder,selected.event,max.dis
     # load MySQL drivers
     drv=dbDriver("MySQL")
     
-    # get connection to the database
-    con = dbConnect(drv, user="UVC.reader", dbname="Underwater Visual Census",password="Mayfish976",host="162.38.198.139")
-    
+   
     # collect the different table available
     Table.name=dbListTables(con)
     
@@ -513,8 +509,6 @@ species.matrix=function(DB.connection="yes",work.folder,Max.N,biomass.calc="no")
     # load MySQL drivers
     drv=dbDriver("MySQL")
     
-    # get connection to the database
-    con = dbConnect(drv, user="UVC.reader", dbname="Underwater Visual Census",password="Mayfish976",host="162.38.198.139")
     
     # collect the different table available
     Table.name=dbListTables(con)
@@ -811,8 +805,7 @@ sample.summary=function(connect.DB=TRUE,work.folder,max.distance=500) {
     # load MySQL drivers
     drv=dbDriver("MySQL")
     
-    # get connection to the database
-    con = dbConnect(drv, user="UVC.reader", dbname="Underwater Visual Census",password="Mayfish976",host="162.38.198.139")
+
     
     # collect the different table available
     Table.name=dbListTables(con)
