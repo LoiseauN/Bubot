@@ -42,7 +42,7 @@ pl <- lapply(1:length(unique(sizeBUBOT_clean$species)), function(x) {
 
 plots <- marrangeGrob(pl, nrow = 5, ncol = 5)
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Sensi_size.pdf", 
+ggsave(filename=here::here("fig/Sensi_size.pdf"), 
        plot = plots, 
        width = 8, 
        height = 8, 
@@ -85,7 +85,7 @@ pl <- lapply(1:length(unique(sizeBUBOT_clean$species)), function(x) {
 } )
 plots <- marrangeGrob(pl, nrow = 5, ncol = 5)
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Sensi_size.pdf", 
+ggsave(filename=here::here("fig/Sensi_size.pdf"), 
        plot = plots, 
        width = 8, 
        height = 8, 

@@ -292,7 +292,7 @@ colnames(alpha_div_all)[c(15:19)] <- c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","
 
 
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Figure2.png", 
+ggsave(filename=here::here("fig/Figure2.png"), 
        plot = biom_plot, 
        width = 4, 
        height = 4, 
@@ -352,7 +352,7 @@ d <- ggplot(alpha_div_sensibility, aes(x=depth, y=alpha_hill_fonct_entropy)) +
                           geom = "text", label.x = 75, label.y = 0, hjust = 1)
 
 alpha_plot_sensi <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS3.png", 
+ggsave(filename=here::here("fig/figureS3.png"), 
        plot = alpha_plot_sensi, 
        width = 8, 
        height = 8, 
@@ -462,7 +462,7 @@ for(j in 1:nrow(From20toInfdepth)){
   
 }
 Decay_Hill_20toInfdepth_sensibility <- ResHill_sensibility
-save(Decay_Hill_20toInfdepth_sensibility,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/Decay_Hill_20toInfdepth_sensibility.RData")
+save(Decay_Hill_20toInfdepth_sensibility,file=here::here("results/Decay_Hill_20toInfdepth_sensibility.RData"))
 
 ###PLot Distance decay
 ResHill<- Decay_Hill_20toInfdepth_sensibility
@@ -531,7 +531,7 @@ grid.arrange(a,b,c,d,ncol=2)#,top = title)
 #                 gp=gpar(fontsize=20,fontface=2))
 decayplot_sensi <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS4.png", 
+ggsave(filename=here::here("fig/figureS4.png"), 
        plot = decayplot_sensi, 
        width = 8, 
        height = 8, 
