@@ -5,11 +5,8 @@ nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 #Compute all indices
-load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/data/Data_dump/dat_complet.RData")
+load(here::here("data/Data_dump/dat_complet.RData"))
 
-
-
-#load("~/Documents/Bubot/Bubot_Analyse/Bubot/data/Data_dump/dat_complet.RData")
 
 
 
@@ -162,6 +159,5 @@ alpha_div <- merge(alpha_div,hab_pc_site_scale,by = "row.names",
 rownames(alpha_div) <- alpha_div[,1]
 alpha_div <- alpha_div[,-1]
 
-#save(alpha_div,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div.RData")
-
+save(alpha_div,file=here::here("results/alpha_div.RData"))
 

@@ -2,7 +2,7 @@ pkgs <- c('reshape2','mFD','viridis','data.table','ggplot2','grid')
 nip <- pkgs[!(pkgs %in% installed.packages())]
 nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
-load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div_all.RData")
+load(here::here("results/alpha_div_all.RData"))
 
 
 #Some values
@@ -67,7 +67,7 @@ biom_plot <- ggplot(alpha_div_all, aes(x=depth, y=(biomass))) +
                           geom = "text", label.x = 75, label.y = 60000, hjust = 1)
 
 biom_plot
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/Figure2.png", 
+ggsave(filename=here::here("fig/Figure2.png"), 
        plot = biom_plot, 
        width = 4, 
        height = 4, 
@@ -138,7 +138,7 @@ d <- ggplot(alpha_div_all, aes(x=depth, y=alpha_hill_fonct_entropy)) +
 #                  gp=gpar(fontsize=20,fontface=2))
 alpha_plot <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure3.png", 
+ggsave(filename=here::here("fig/figure3.png"), 
        plot = alpha_plot, 
        width = 8, 
        height = 8, 
@@ -225,7 +225,7 @@ d <- ggplot(ResHill, aes(x=depth, y=fct_entro_m)) +
  #                 gp=gpar(fontsize=20,fontface=2))
 decayplot <- grid.arrange(a,b,c,d,ncol=2)#,top = title)
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure4.png", 
+ggsave(filename=here::here("fig/figure4.png"), 
        plot = decayplot, 
        width = 8, 
        height = 8, 
@@ -432,7 +432,7 @@ for (z in 1:length(pairs_axes))
   
 }# end of axes_id
 FD_xy
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figure5.png", 
+ggsave(filename=here::here("fig/figure5.png"), 
        plot = FD_xy, 
        width = 8, 
        height = 8, 
@@ -455,7 +455,7 @@ accum_plot <- ggplot(data = data, aes(x = time)) +
   theme(legend.position = c(1.1,.6), legend.direction = "vertical") +
   theme(legend.title = element_blank())
 
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/accumu_curve.png", 
+ggsave(filename=here::here("fig/accumu_curve.png"), 
        plot = accum_plot, 
        width = 10, 
        height = 8, 

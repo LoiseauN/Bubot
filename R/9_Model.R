@@ -5,7 +5,7 @@ nip <- lapply(nip, install.packages, dependencies = TRUE)
 ip   <- unlist(lapply(pkgs, require, character.only = TRUE, quietly = TRUE))
 
 
- load("~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div_all.RData")
+ load(here::here("results/alpha_div_all.RData"))
 
 #Join to have date : ---------------
         date <- unique(data.frame(Sample.code = species.site.matrix$site.data$Sample.code,Date = species.site.matrix$site.data$Date))
@@ -136,7 +136,7 @@ d <- visreg::visreg(mod_alphaFct_entro, "depth", gg=TRUE, overlay=T, line=list(c
 
 
 visreg <- grid.arrange(a,b,c,d,ncol=2)
-ggsave(filename="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/fig/figureS5.png", 
+ggsave(filename=here::here("fig/figureS5.png"), 
        plot = visreg, 
        width = 8, 
        height = 8, 

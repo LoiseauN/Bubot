@@ -1,6 +1,6 @@
 
 
-tree <- ape::read.tree(file.path(data_dir,"Reef_fish_all.tacted.newick.tre"))
+tree <- ape::read.tree(here::here("data/Data_dump/Reef_fish_all.tacted.newick.tre"))
 set_fish <- ape::drop.tip(tree,tree$tip.label[!is.element(tree$tip.label,as.character(colnames(biomass_mat)))])
 
 
@@ -481,7 +481,7 @@ plot(grobs)
 ## Export Figure ----
 
 ggsave(
-  filename  = "~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/fig/phyl_tree.png",
+  filename  = here::here("fig/phyl_tree.png"),
   plot      = grobs,
   width     = 24,
   height    = 13,

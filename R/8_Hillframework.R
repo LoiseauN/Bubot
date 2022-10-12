@@ -71,7 +71,7 @@ alpha_div_all <- alpha_div_all[,-c(1)]
 colnames(alpha_div_all)[c(15:19)] <- c("PC1_hab","PC2_hab","PC3_hab","PC4_hab","PC5_hab")
 
 
-save(alpha_div_all,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/alpha_div_all.RData")
+save(alpha_div_all,file=here::here("results/alpha_div_all.RData"))
 
 
 #beta
@@ -131,10 +131,9 @@ beta_hill <- merge(beta_hill,diff_depth,by="pairsID",all.x = T)
 rownames(beta_hill) <- beta_hill[,1]
 beta_hill <- beta_hill[,-c(1)]
 colnames(beta_hill)[7] <- "diff_depth"
-save(beta_hill,file="~/Documents/Postdoc MARBEC/BUBOT/Bubot Analyse/Bubot/results/beta_hill.RData")
+save(beta_hill,file=here::here("results/beta_hill.RData"))
 
 
-#alpha_hill_all$classDepth <- as.factor(str_split_fixed(rownames(alpha_hill_all), "_", 2)[,2])
 
 
 
